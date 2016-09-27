@@ -45,13 +45,14 @@ public class IdeaDao {
 		return result;
 	}
 
-	public IdeaVO selectIdea(String IdeaId) {
-		IdeaVO Idea = sqlSession.selectOne("Idea.selectIdea", IdeaId);
+	public IdeaVo selectIdea(String IdeaId) {
+		IdeaVo Idea = sqlSession.selectOne("Idea.selectIdea", IdeaId);
 
 		return Idea;
 	}
 
 	public int countIdea(String startDt, String endDt) {
+
 		Map params = new HashMap();
 		params.put("startDt", startDt);
 		params.put("endDt", endDt);
