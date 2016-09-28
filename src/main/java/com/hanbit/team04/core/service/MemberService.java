@@ -1,4 +1,4 @@
-package com.hanbit.team04.service;
+package com.hanbit.team04.core.service;
 
 import java.util.List;
 

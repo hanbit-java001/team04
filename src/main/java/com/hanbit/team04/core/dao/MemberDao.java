@@ -1,12 +1,11 @@
-package com.hanbit.team04.dao;
+package com.hanbit.team04.core.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-import com.hanbit.team04.core.MemberVo;
+import com.hanbit.team04.core.vo.MemberVo;
 
 public class MemberDao {
 	
