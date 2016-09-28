@@ -1,4 +1,4 @@
-package com.hanbit.team04.service;
+package com.hanbit.team04.core.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.hanbit.team04.core.IdeaVo;
-import com.hanbit.team04.dao.IdeaDao;
+import com.hanbit.team04.core.vo.IdeaVo;
+import com.hanbit.team04.core.dao.IdeaDao;
 
 @Service
 public class IdeaService {
@@ -40,25 +40,5 @@ public class IdeaService {
 	public IdeaVo getDetailBoard(String idxNum) {
 		return ideaDao.selectIdea(idxNum);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	private int addIdea;
-	private  List<IdeaVo> getIdeaList;
-	private  IdeaVo getIdeaone;
-	private  int modifyIdea;
-	private  int deleteIdea;
-	private  List<String> searchIdea;
-
-
-
-
-
 
 }

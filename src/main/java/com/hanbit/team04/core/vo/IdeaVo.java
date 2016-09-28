@@ -1,4 +1,4 @@
-package com.hanbit.team04.core;
+package com.hanbit.team04.core.vo;
 
 public class IdeaVo {
 	private int idxNum; 
