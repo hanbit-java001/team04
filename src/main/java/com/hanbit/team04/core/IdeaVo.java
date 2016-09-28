@@ -1,5 +1,6 @@
 package com.hanbit.team04.core;
 
+
 public class IdeaVo {
 	private int idxNum; 
 	private String userId;
