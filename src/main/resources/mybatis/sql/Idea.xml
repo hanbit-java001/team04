@@ -13,6 +13,7 @@
 	</delete>
 
 	<select id="selectIdeas" parameterType="map" resultType="IdeaVo">
+		
 	</select>
 
 	<select id="selectIdea" parameterType="string" resultType="IdeaVo">

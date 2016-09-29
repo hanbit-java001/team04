@@ -6,9 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.hanbit.team04.core.dao.IdeaDao;
+import com.hanbit.team04.core.dao.IdeaDAO;
 import com.hanbit.team04.core.dao.MemberDAO;
-import com.hanbit.team04.core.vo.IdeaVo;
+import com.hanbit.team04.core.vo.IdeaVO;
 import com.hanbit.team04.core.vo.MemberVo;
 
 public class MemberService {

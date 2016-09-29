@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.hanbit.team04.core.vo.IdeaVo;
-import com.hanbit.team04.core.dao.IdeaDao;
+import com.hanbit.team04.core.vo.IdeaVO;
+import com.hanbit.team04.core.dao.IdeaDAO;
 
 @Service
 public class IdeaService {
@@ -17,38 +17,39 @@ public class IdeaService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(IdeaService.class);
 	
 	@Autowired
-	IdeaDao ideaDao = new IdeaDao();
+	IdeaDAO ideaDAO = new IdeaDAO();
 	
-	public int addIdea(IdeaVo Idea) {
+	public int addIdea(IdeaVO idea) {
 		LOGGER.debug("게시글 추가");
-		return ideaDao.insertIdea(Idea);
+		return ideaDAO.insertIdea(idea);
 	}
 
-	public int modifyIdea(IdeaVo Idea) {
+	public int modifyIdea(IdeaVO idea) {
 		LOGGER.debug("게시글 수정");
-		return ideaDao.updateIdea(Idea);
+		return ideaDAO.updateIdea(idea);
 	}
 
-	public int removeSchedule(String IdeaId) {
+	public int removeIdea(String ideaId) {
 		LOGGER.debug("게시글 삭제");
-		return ideaDao.deleteIdea(IdeaId);
+		return ideaDAO.deleteIdea(ideaId);
 	}
 
-	public List<IdeaVo> listSchedules() {
+	public List<IdeaVO> listIdeas(int pageNum) {
 		LOGGER.debug("게시글 목록보기");
-		List<IdeaVo> lists = new ArrayList<>();
-// 작성중...countIdeas
-		
+		List<IdeaVO> lists = new ArrayList<>();
+		int totalCount = ideaDAO.countIdeas();
+		int tempNum = (totalCount - pageNum*10);
+		// 작성중.. 헷갈림
 		for (int i = 0; i < 10; i++) {
-			lists.addAll(i, ideaDao.selectIdeas());
+			lists.addAll((tempNum+i), ideaDAO.selectIdeas());
 		}
 		
-		return ideaDao.selectIdeas();
+		return ideaDAO.selectIdeas();
 	}
 
-	public IdeaVo getDetailBoard(String idxNum) {
+	public IdeaVO getDetailBoard(String idxNum) {
 		
-		return ideaDao.selectIdea(idxNum);
+		return ideaDAO.selectIdea(idxNum);
 	}
 
 }

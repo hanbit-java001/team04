@@ -1,6 +1,6 @@
 package com.hanbit.team04.core.vo;
 
-public class IdeaVo {
+public class IdeaVO {
 	private int idxNum; 
 	private String userId;
 	private String subject;
@@ -8,6 +8,7 @@ public class IdeaVo {
 	private String confirm;
 	private String date;
 	private int likeCount;
+	
 	public int getIdxNum() {
 		return idxNum;
 	}
