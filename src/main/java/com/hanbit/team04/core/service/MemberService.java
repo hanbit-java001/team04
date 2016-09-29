@@ -11,10 +11,6 @@ import com.hanbit.team04.core.dao.MemberDAO;
 import com.hanbit.team04.core.vo.IdeaVo;
 import com.hanbit.team04.core.vo.MemberVo;
 
-
-
-
-
 public class MemberService {
 
 private static final Logger LOGGER = LoggerFactory.getLogger(IdeaService.class);

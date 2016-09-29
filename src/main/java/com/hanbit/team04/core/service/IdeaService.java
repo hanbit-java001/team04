@@ -1,6 +1,8 @@
 package com.hanbit.team04.core.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +36,18 @@ public class IdeaService {
 
 	public List<IdeaVo> listSchedules() {
 		LOGGER.debug("게시글 목록보기");
+		List<IdeaVo> lists = new ArrayList<>();
+// 작성중...countIdeas
+		
+		for (int i = 0; i < 10; i++) {
+			lists.addAll(i, ideaDao.selectIdeas());
+		}
+		
 		return ideaDao.selectIdeas();
 	}
 
 	public IdeaVo getDetailBoard(String idxNum) {
+		
 		return ideaDao.selectIdea(idxNum);
 	}
 

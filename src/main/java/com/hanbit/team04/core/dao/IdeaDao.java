@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.hanbit.team04.core.vo.IdeaVo;
 
-
 @Repository
 public class IdeaDao {
 
@@ -18,12 +17,11 @@ public class IdeaDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	public int insertIdea(IdeaVo Idea) {
 		LOGGER.debug("게시물 등록");
 
 		int result = sqlSession.insert("Idea.insertIdea", Idea);
-
 		return result;
 	}
 
@@ -44,7 +42,7 @@ public class IdeaDao {
 	public List<IdeaVo> selectIdeas() {
 		LOGGER.debug("게시물 목록보기");
 
-		List<IdeaVo> result = sqlSession.selectList("schedule.selectSchedules");
+		List<IdeaVo> result = sqlSession.selectList("Idea.selectIdeas");
 		return result;
 	}
 
@@ -53,5 +51,11 @@ public class IdeaDao {
 
 		return Idea;
 	}
-	
+
+	public int countIdeas() {
+		int result = sqlSession.selectOne("Idea.countIdea");
+
+		return result;
+
+	}
 }
