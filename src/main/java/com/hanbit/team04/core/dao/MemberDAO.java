@@ -11,30 +11,30 @@ import com.hanbit.team04.core.vo.MemberVo;
 
 @Repository
 public class MemberDAO {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(MemberDAO.class);
-
-	@Autowired
-	private SqlSession sqlSession;
-
-	public static int countMember(String email) {
-
-		return 0;
-	}
-
-	public static int insertMember(MemberVo member) {
-
-		return 0;
-	}
-
-	public String selectPassword(int memberId) {
-
-		return null;
-	}
-
-	public int updateMember(MemberVo member) {
-
-		return 0;
-	}
-
+//
+//	private static final Logger LOGGER = LoggerFactory.getLogger(MemberDAO.class);
+//
+//	@Autowired
+//	private SqlSession sqlSession;
+//
+//	public static int countMember(String email) {
+//
+//		return 0;
+//	}
+//
+//	public static int insertMember(MemberVo member) {
+//
+//		return 0;
+//	}
+//
+//	public String selectPassword(int memberId) {
+//
+//		return null;
+//	}
+//
+//	public int updateMember(MemberVo member) {
+//
+//		return 0;
+//	}
+//
 }

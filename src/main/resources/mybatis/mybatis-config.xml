@@ -6,5 +6,8 @@
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
+<typeAliases>
+		<typeAlias type="com.hanbit.team04.core.vo.IdeaVO" alias="IdeaVO" />
 
+	</typeAliases>
 </configuration>

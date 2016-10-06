@@ -12,15 +12,18 @@ import com.hanbit.team04.core.dao.IdeaDAO;
 
 @Service
 public class IdeaService {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(IdeaService.class);
-	
+
 	@Autowired
 	IdeaDAO ideaDAO = new IdeaDAO();
-	
+
 	public int addIdea(IdeaVO idea) {
 		LOGGER.debug("게시글 추가");
-		return ideaDAO.insertIdea(idea);
+		IdeaVO myIdea= idea;
+		myIdea.setIdxNum(ideaDAO.selectNextIndex());
+		LOGGER.debug("게시글 추가 end");
+		return ideaDAO.insertIdea(myIdea);
 	}
 
 	public int modifyIdea(IdeaVO idea) {
@@ -28,26 +31,25 @@ public class IdeaService {
 		return ideaDAO.updateIdea(idea);
 	}
 
-	public int removeIdea(String ideaId) {
+	public int removeIdea(IdeaVO idea) {
 		LOGGER.debug("게시글 삭제");
-		return ideaDAO.deleteIdea(ideaId);
+		return ideaDAO.deleteIdea(idea);
 	}
 
 	public List<IdeaVO> listIdeas(int pageNum) {
 		LOGGER.debug("게시글 목록보기");
 		List<IdeaVO> lists = new ArrayList<>();
 		int totalCount = ideaDAO.countIdeas();
-		int tempNum = (totalCount - pageNum*10);
-		// 작성중.. 헷갈림
-		for (int i = 0; i < 10; i++) {
-			lists.addAll((tempNum+i), ideaDAO.selectIdeas());
+		if (totalCount < 10) {
+			lists = ideaDAO.selectIdeas();
+		} else {
+			lists = ideaDAO.selectIdeas((pageNum - 1) * 10+1, pageNum * 10 );
 		}
-		
-		return ideaDAO.selectIdeas();
+		return lists;
 	}
 
 	public IdeaVO getDetailBoard(String idxNum) {
-		
+
 		return ideaDAO.selectIdea(idxNum);
 	}
 

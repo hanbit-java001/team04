@@ -1,24 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="member">
+<mapper namespace="Idea">
 
-	<insert id="insertIdea" parameterType="IdeaVo">
+	<insert id="insertIdea" parameterType="IdeaVO">
+		INSERT INTO IDEAS
+		(IDX_NUM,USER_ID,SUBJECT,CONTENT,CONFIRM,REGDATE,LIKE_COUNT)
+		VALUES
+		(#{idxNum}, #{userId}, #{subject}, #{content}, #{confirm}, #{date}, #{likeCount})
 	</insert>
 
-	<update id="updateIdea" parameterType="IdeaVo">
+	<update id="updateIdea" parameterType="IdeaVO">
+		UPDATE IDEAS
+		SET subject =
+		#{subject},
+		content = #{content},
+		confirm = #{confirm}
+		like_count =
+		#{likeCount},
 	</update>
-	
-	<delete id="deleteIdea" parameterType="IdeaVo">
+
+	<delete id="deleteIdea" parameterType="integer">
+		DELETE FROM IDEAS WHERE
+		idx_num = #{idxNum}
 	</delete>
 
-	<select id="selectIdeas" parameterType="map" resultType="IdeaVo">
-		
+	<select id="selectIdeas" resultType="IdeaVO">
+		SELECT
+		idx_num,user_id,subject,content,confirm,REGdate,like_count
+		FROM IDEAS
+		ORDER BY idx_num
 	</select>
 
 	<select id="selectIdea" parameterType="string" resultType="IdeaVo">
+		SELECT idx_num,user_id,subject,content,confirm,REGdate,like_count
+		FROM
+		IDEAS
+		WHERE idx_num=#{idxNum}
+	</select>
+	<select id="selectIdeaPage" parameterType="Map" resultType="IdeaVo">
+	<![CDATA[
+		SELECT idx_num,user_id,subject,content,confirm,REGdate,like_count
+		FROM IDEAS
+		WHERE idx_num>=#{startIndex} AND idx_num<=#{endIndex}
+		ORDER BY idx_num
+		]]>
 	</select>
 
 	<select id="countIdea" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM IDEAS
 	</select>
+
+	<select id="selectNextIndex" resultType="int">
+		SELECT SEQ_IDEA.NEXTVAL
+		FROM DUAL
+	</select>
+
 </mapper>
