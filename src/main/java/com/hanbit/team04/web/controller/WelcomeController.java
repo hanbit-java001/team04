@@ -32,21 +32,21 @@ public class WelcomeController {
 
 		return "list";
 	}
-	
+
 	@RequestMapping("/list2")
 	public String test2(){
-		
+
 		return "/board/board0";
 	}
-	
+
 	@RequestMapping("api/board/start")
 	@ResponseBody
 	public IdeaVO test1(@RequestBody IdeaVO IdeaVo){
-		
+
 		LOGGER.info(IdeaVo.getContent());
-		
+
 		IdeaVo.setContent("ㅇ");
-		
-		return IdeaVo;	
+
+		return IdeaVo;
 	}
 }

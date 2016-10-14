@@ -77,4 +77,12 @@ public class IdeaDAO {
 		LOGGER.debug("index_num adding");
 		return sqlSession.selectOne("Idea.selectNextIndex");
 	}
+
+	public List<Map<String, Object>> getIdeas(int pageNum) {
+		LOGGER.debug("get page");
+		List<Map<String, Object>> result = sqlSession.selectList("Idea.selectPage", pageNum);
+		return result;
+	}
+
+
 }

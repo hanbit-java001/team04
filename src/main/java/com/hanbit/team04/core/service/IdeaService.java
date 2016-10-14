@@ -2,6 +2,7 @@ package com.hanbit.team04.core.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,10 +48,21 @@ public class IdeaService {
 		}
 		return lists;
 	}
+	public List<Map<String, Object>> getIdeas(int pageNum) {
+		LOGGER.debug("게시글 목록보기");
+		List<Map<String, Object>> lists =  ideaDAO.getIdeas(pageNum);
+		return lists;
+	}
 
 	public IdeaVO getDetailBoard(String idxNum) {
 
 		return ideaDAO.selectIdea(idxNum);
 	}
+
+	public int totalPageNum() {
+
+		return ideaDAO.countIdeas();
+	}
+
 
 }
