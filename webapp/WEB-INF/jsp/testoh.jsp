@@ -130,6 +130,11 @@ body::before {
 	line-height: 1.8;
 }
 
+.cd-section:nth-of-type(1) .cd-half-block:first-of-type {
+	background-image:
+		url("/static/plugins/3d-curtain-template/img/img-1.jpg");
+	background-size: cover;
+}
 .cd-section:nth-of-type(2) .cd-half-block:first-of-type {
 	background-image:
 		url("/static/plugins/3d-curtain-template/img/img-1.jpg");
@@ -267,6 +272,7 @@ body::before {
 .page-number div {
 	display: inline-block;
 	width: 14%;
+	float:left;
 	height: 100%;
 	text-align: center;
 	border: 2px solid rgba(256, 256, 256, 0.3);
@@ -275,7 +281,9 @@ body::before {
 	color: white;
 	border-radius: 10px;
 }
-
+.page-number div:first-of-type{
+margin-left: 14%;
+}
 .page-number i {
 	display: inline-block;
 	width: 11%;
@@ -284,6 +292,14 @@ body::before {
 	font-size: 40px;
 	transform: translateY(-10%);
 	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+.fa-arrow-left{
+position: absolute;
+left:0px;
+}
+.fa-arrow-right{
+position : absolute;
+right: 0px;
 }
 .table-container:nth-child(even){
     -webkit-transform: rotate(5deg);
@@ -449,6 +465,7 @@ padding-left: 7%;
 		var defaultPageNum = 1;
 		var totalPage;
 		var currentPage=defaultPageNum;
+		var PageInNum=defaultPageNum;
 
 
 		$(document).ready(function() {
@@ -461,30 +478,39 @@ padding-left: 7%;
 				} else {
 					next();
 				}
+				clickbtn();
 			})
-			$(".page-number div").on('click', function() {
-				console.log($(this).text());
-			})
+			function clickbtn(){
+				$(".page-number div").on('click', function() {
+					console.log($(this).text());
+					$(".cd-section").remove();
+					listLord($(this).text());
+				})
+			}
 
 			function prev() {
 				if ($(".fa").next().text() == 1) {
 					location.href = "/mytestoh";
 				} else {
-					pageNumCreate(currentPage-5);
+					PageInNum-=5;
+					//여기 확인
+					pageNumCreate(PageInNum-1);
 				}
 			}
 			function next() {
-				if ($(this).next().text() == 1) {
-					console.log("뭐라고하지");
+				if (($(".page-number div").last().text())%5 == 0&&totalPage>$(".page-number div").last().text()*15) {
+					PageInNum+=5;
+					pageNumCreate(PageInNum-1);
+					console.log("다음 번호 생성");
 				} else {
-					console.log("이전");
+					console.log("더이상 갈곳이 없어  "+($(".page-number div").last().text())%5);
 				}
 			}
 			function pageNumCreate(pageNum){
 				$(".page-number div").remove();
 
 				var innerhtml="";
-			for(var i=pageNum-pageNum%5+1;(i<pageNum-pageNum%5+6)&&(i<=totalPage/12+1);i++){
+			for(var i=(pageNum-pageNum%5)+1;(i<pageNum-pageNum%5+6)&&(i<=totalPage/12+1);i++){
 				innerhtml+="<div>"+i+"</div>";
 			}
 			console.log("check html : "+innerhtml);
@@ -527,7 +553,10 @@ padding-left: 7%;
 // 					console.log(appendhtml);
 						$(appendhtml).insertBefore(".cd-nav");
 
-						pageNumCreate(currentPage);
+						pageNumCreate(currentPage-1);
+						clickbtn();
+						$(".cd-section").first().addClass('is-visible');
+						$('body,html').animate({scrollTop: $(".is-visible").position().top}, 1000);
 				});
 			}
 

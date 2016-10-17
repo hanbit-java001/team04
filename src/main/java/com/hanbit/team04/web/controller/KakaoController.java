@@ -53,7 +53,7 @@ public class KakaoController {
 	@ResponseBody
 	public Map getList(@PathVariable("pageNum") int pageNum) {
 		LOGGER.info("testController - pageList === " + pageNum);
-//		for (int i = 10; i < 30; i++) {
+//		for (int i = 1; i < 300; i++) {
 //			IdeaVO idea = new IdeaVO();
 //			idea.setIdxNum(i);
 //			idea.setUserId("id"+i);
