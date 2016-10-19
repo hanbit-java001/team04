@@ -1,0 +1,29 @@
+.photos {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 90%;
+	outline-style: none;
+	cursor: pointer;
+}
+.cover {
+	width: 30%;
+}
+img {
+	width: 100%;
+}
+
+#photos-info {
+	display: none;
+	position: absolute;
+	width: 98%;
+	text-align: center;
+	text-shadow: 0 0 15px white;
+	bottom: 25%;
+	position: absolute;
+}
+
+#photos-name {
+	font-size: 200%;
+	font-weight: bold;
+}

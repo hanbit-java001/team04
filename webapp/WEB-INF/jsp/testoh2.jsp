@@ -1,35 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en" class="no-js">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Timed Notifications with CSS Animations</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Timed Notifications with CSS Animations" />
+        <meta name="keywords" content="css3, animations, css, notification, timed, duration, box, overlay" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link rel="stylesheet" type="text/css" href="/static/plugins/CSS3TimedNotifications/css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="/static/plugins/CSS3TimedNotifications/css/style.css" />
+		<link href='http://fonts.googleapis.com/css?family=Alegreya+SC:700,400italic' rel='stylesheet' type='text/css' />
+		<script type="text/javascript" src="/static/plugins/CSS3TimedNotifications/js/modernizr.custom.39460.js"></script>
+    </head>
+    <body>
+        <div class="container">
+			<!-- Codrops top bar -->
+            <div class="codrops-top">
+                <a href="http://tympanus.net/Tutorials/3DHoverEffects/">
+                    <strong>&laquo; Previous Demo: </strong>3D Thumbnail Hover Effects
+                </a>
+                <span class="right">
+                    <a href="http://tympanus.net/codrops/2012/06/25/timed-notifications-with-css-animations/">
+                        <strong>Back to the Codrops article</strong>
+                    </a>
+                </span>
+                <div class="clr"></div>
+            </div><!--/ Codrops top bar -->
+			<header>
+				<span>Tips &amp; Tricks</span>
+				<h1>Timed Notifications <span>with CSS Animations</span></h1>
+				<p>Notification boxes with a duration indicator. <strong>Click the button to start the animations.</strong></p>
 
-	<link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+				<div class="support-note"><!-- let's check browser support with modernizr -->
+					<span class="no-cssanimations">CSS animations are not supported in your browser</span>
+					<span class="no-csstransforms">CSS transforms are not supported in your browser</span>
+					<!--span class="no-csstransforms3d">CSS 3D transforms are not supported in your browser</span-->
+					<!--span class="no-csstransitions">CSS transitions are not supported in your browser</span-->
+					<span class="note-ie">Sorry, only modern browsers.</span>
+				</div>
+			</header>
 
-	<link rel="stylesheet" href="/static/plugins/3d-curtain-template/css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="/static/plugins/3d-curtain-template/css/style.css"> <!-- Resource style -->
-	<script src="/static/plugins/3d-curtain-template/js/modernizr.js"></script> <!-- Modernizr -->
-<style type="text/css">
+			<input type="checkbox" class="fire-check" />
+			<button class="fire">Activate me</button>
 
-</style>
-	<title>3D Curtain Template | Codyhouse</title>
-</head>
-<body>
-	test  중입니다.
-	<div> 뭐라고 쓸까</div>
-<script src="/static/plugins/3d-curtain-template/js/jquery-2.1.1.js"></script>
-<script src="/static/plugins/3d-curtain-template/js/main.js"></script> <!-- Resource jQuery -->
-<script type="text/javascript">
-$(document).ready(function(){
-	var sheet = document.createElement('style')
-	sheet.innerHTML = "div {border: 2px solid black; background-color: red;}";
-	document.body.appendChild(sheet);
-	$("body").append("<div> 뭐라고 쓸까2</div>");
+			<section>
 
-})
-</script>
+	            <div class="tn-box tn-box-color-1">
+					<p>Your settings have been saved successfully!</p>
+					<div class="tn-progress"></div>
+				</div>
 
-</body>
+				<div class="tn-box tn-box-color-2">
+					<p>Yummy! I just ate your settings! They were delicious!</</p>
+					<div class="tn-progress"></div>
+				</div>
+
+				<div class="tn-box tn-box-color-3">
+					<p>Look at me! I take much longer!<p>
+					<div class="tn-progress"></div>
+				</div>
+
+			</section>
+        </div>
+    </body>
 </html>

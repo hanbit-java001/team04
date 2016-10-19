@@ -36,6 +36,11 @@ public class KakaoController {
 		LOGGER.info("testController - test");
 		return "testoh";
 	}
+	@RequestMapping("/board/list_oh")
+	public String listOh() {
+		LOGGER.info("testController - test");
+		return "board_first";
+	}
 
 	@RequestMapping("/mytestoh2")
 	public String testoh2() {
@@ -53,7 +58,7 @@ public class KakaoController {
 	@ResponseBody
 	public Map getList(@PathVariable("pageNum") int pageNum) {
 		LOGGER.info("testController - pageList === " + pageNum);
-//		for (int i = 1; i < 300; i++) {
+//		for (int i = 300; i < 325; i++) {
 //			IdeaVO idea = new IdeaVO();
 //			idea.setIdxNum(i);
 //			idea.setUserId("id"+i);
