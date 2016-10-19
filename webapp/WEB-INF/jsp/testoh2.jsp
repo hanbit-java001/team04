@@ -7,64 +7,579 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Timed Notifications with CSS Animations</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Timed Notifications with CSS Animations" />
-        <meta name="keywords" content="css3, animations, css, notification, timed, duration, box, overlay" />
-        <meta name="author" content="Codrops" />
-        <link rel="shortcut icon" href="../favicon.ico">
-        <link rel="stylesheet" type="text/css" href="/static/plugins/CSS3TimedNotifications/css/demo.css" />
-        <link rel="stylesheet" type="text/css" href="/static/plugins/CSS3TimedNotifications/css/style.css" />
-		<link href='http://fonts.googleapis.com/css?family=Alegreya+SC:700,400italic' rel='stylesheet' type='text/css' />
-		<script type="text/javascript" src="/static/plugins/CSS3TimedNotifications/js/modernizr.custom.39460.js"></script>
+<style type="text/css">
+@import 'compass/reset';
+@import 'compass/css3';
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,300);
+$yellow: #f1c40f;
+$lime: #76c900;
+$navy: #0a4069;
+$cyan: #57caf4;
+$red: #ec008c;
+$white: #fefefe;
+$gray: #444;
+$lightGray: lighten($gray, 30);
+
+body
+{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1em;
+
+    text-align: center;
+
+    color: $gray;
+    background: #d0d0d0;
+}
+h1
+{
+    font-size: 2.5em;
+
+    margin: 2em 0 .5em;
+}
+h2
+{
+    margin-bottom: 3em;
+}
+em,
+strong
+{
+    font-weight: 700;
+}
+input
+{
+    display: none;
+}
+article,
+section
+{
+    position: relative;
+
+    display: block;
+
+    margin-bottom: 2em;
+    padding: 0;
+    &:not(section):last-of-type
+    {
+        margin-bottom: 0;
+    }
+}
+p
+{
+    line-height: 1.5em;
+
+    max-width: 20em;
+    margin: 1.5em auto 2em;
+    padding-bottom: 2em;
+    span
+    {
+        display: block;
+    }
+}
+.content
+{
+    position: absolute;
+
+    overflow: hidden;
+
+    width: 100%;
+    margin: 5em auto 0;
+    article
+    {
+        transition: transform .3s ease-in-out;
+        transform: translateX(100%);
+        p
+        {
+            border-bottom: 1px dotted $gray;   
+        }
+        label
+        {
+            display: inline-block;
+            margin-bottom: 3em;
+            input
+            {
+                display: inline-block;
+            }
+
+        }
+    }
+}
+
+.container
+{
+    z-index: 1;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+/*
+*
+*
+START // CHART'S RULES
+ -> "if you're picking code, don't forget the variables :)"
+*/
+
+.chart
+{
+    font-size: 1.8em;
+
+    display: flex;
+    flex-direction: row;
+
+    height: 12em;
+
+    justify-content: center;
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+}
+
+$faceColor: rgba($white, .8);
+$growColor: rgba($cyan, 1);
+
+@mixin drawSkin($color)
+{
+    &.floor
+    {
+        background-color: darken(rgba($color, .2), 10);
+    }
+    & > .growing-bar
+    {
+        background-color: rgba($color, .8);
+        &:before
+        {
+            color: darken($color, 30);
+            border-top-color: darken($color, 10);
+        }
+    }
+}
+
+.bar
+{
+    font-size: 1em;
+
+    position: relative;
+
+    width: 2em;
+    padding: 1em;
+
+    transition: transform 2s linear;
+    transform: rotateX(-30deg) rotateY(-135deg);
+
+    transform-style: preserve-3d;
+    &.red .face
+    {
+        @include drawSkin($red);
+    }
+    &.cyan .face
+    {
+        @include drawSkin($cyan);
+    }
+    &.navy .face
+    {
+        @include drawSkin($navy);
+    }
+    &.lightGray .face
+    {
+        @include drawSkin($lightGray);
+    }
+    &.yellow .face
+    {
+        @include drawSkin($yellow);
+    }
+    &.lime .face
+    {
+        @include drawSkin($lime);
+    }
+    &.gray .face
+    {
+        @include drawSkin($gray);
+    }
+    .face
+    {
+        position: relative;
+        bottom: 0;
+
+        width: 2em;
+        height: 2em;
+
+        background-position: center center;
+    }
+    .side-0,
+    .side-1
+    {
+        overflow: hidden;
+
+        height: 10em;
+    }
+    .side-0
+    {
+        transform: rotateY(90deg) translateZ(1em);
+
+        background-color: darken($faceColor, 05);
+        .growing-bar
+        {
+            background-color: $growColor;
+        }
+    }
+    .side-1
+    {
+        transform: rotateY(180deg) translateY(-10em) translateZ(1em);
+
+        background-color: darken($faceColor, 15);
+        .growing-bar
+        {
+            background-color: darken($growColor, 15);
+        }
+    }
+    .top
+    {
+        transform: rotateX(90deg) translateZ(21em);
+        text-align: center;
+
+        background-color: $faceColor;
+    }
+    .floor
+    {
+        transform: rotateX(-90deg) translateY(0em) translateZ(-13em) rotate(180deg);
+        text-align: center;
+
+        background-color: transparent;
+        box-shadow: 0 0 .6em rgba(0,0,0,.3), .6em -1em 3em rgba(0,0,0,.3), 1em 1em 10em $faceColor;
+    }
+    .growing-bar
+    {
+        display: inline-block;
+
+        width: 100%;
+        height: 100%;
+
+        transition: all .3s ease-in-out;
+        transform: translateY(100%);
+
+        opacity: 0;
+        &:before
+        {
+            font-family: 'Open Sans', sans-serif;
+            font-size: .6em;
+            font-weight: 700;
+
+            display: inline-block;
+
+            box-sizing: content-box;
+            padding: .8em;
+
+            text-align: center;
+
+            opacity: 1;
+            color: $navy;
+            border-top: 2px dotted $navy;
+        }
+    }
+}
+
+.small-font-size
+{
+    font-size: 1em;
+}
+
+.reglar-font-size
+{
+    font-size: 1.5em;
+}
+
+.big-font-size
+{
+    font-size: 1.8em;
+}
+
+@for $i from 100 to 0
+{
+    .chart .bar-#{$i} .face.side-0,
+    .chart .bar-#{$i} .face.side-1
+    {
+        .growing-bar
+        {
+            transform: translateY(100 - percentage($i/100));
+
+            opacity: .8;
+            &:before
+            {
+                content: '#{$i}';
+            }
+        }
+    }
+}
+
+/*
+END // CHART'S RULES
+*
+*
+*/
+
+.legend
+{
+    z-index: 100;
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+}
+label
+{
+    box-sizing: border-box;
+    padding: 1em;
+
+    cursor: pointer;
+    transition: all .15s ease-in-out;
+
+    color: $navy;
+    border: 1px solid rgba($white, .6);
+    border-radius: 0;
+
+    flex: 0 0 6em;
+    &:first-child
+    {
+        margin-right: 0;
+
+        border-radius: .2em 0 0 .2em;
+    }
+    &:last-child
+    {
+        margin-left: 0;
+
+        border-radius: 0 .2em .2em 0;
+    }
+}
+
+input[name='status']:checked + .content
+{
+    z-index: 10;
+    article
+    {
+        transform: translateX(0);
+        .chart .bar
+        {
+            &.bar-0
+            {
+                @extend .bar-75;
+            }
+            &.bar-1
+            {
+                @extend .bar-25;
+            }
+            &.bar-1-1
+            {
+                @extend .bar-55;
+            }
+            &.bar-2
+            {
+                @extend .bar-45;
+            }
+            &.bar-3
+            {
+                @extend .bar-85;
+            }
+            .growing-bar
+            {
+                transition-delay: .3s;
+                transition-duration: .6s;
+            }
+        }
+    }
+}
+
+input[id='status-1']:checked ~ .legend > label[for='status-1'],
+input[id='status-2']:checked ~ .legend > label[for='status-2'],
+input[id='status-3']:checked ~ .legend > label[for='status-3'],
+input[id='double-size']:checked ~ label[for='double-size']
+{
+    color: $lime;
+    border: 1px solid darken($navy, 15);
+    background-color: $navy;
+}
+input[id='double-size']:checked + .small-font-size
+{
+    font-size: 2em;
+}
+
+input[name='set-value']:checked ~ .content
+{
+    article
+    {
+        label[for='set-value']
+        {
+            color: $lime;
+            border: 1px solid darken($navy, 15);
+            background-color: $navy;
+        }
+        .chart .bar
+        {
+            &.bar-1,
+            &.bar-1-1
+            {
+                .face.side-0 .growing-bar,
+                .face.side-1 .growing-bar
+                {
+                    transform: translateY(100 - percentage(85/100));
+                    &:before
+                    {
+                        content: '85';
+                    }
+                }
+            }
+        }
+    }
+}
+</style>
     </head>
     <body>
-        <div class="container">
-			<!-- Codrops top bar -->
-            <div class="codrops-top">
-                <a href="http://tympanus.net/Tutorials/3DHoverEffects/">
-                    <strong>&laquo; Previous Demo: </strong>3D Thumbnail Hover Effects
-                </a>
-                <span class="right">
-                    <a href="http://tympanus.net/codrops/2012/06/25/timed-notifications-with-css-animations/">
-                        <strong>Back to the Codrops article</strong>
-                    </a>
-                </span>
-                <div class="clr"></div>
-            </div><!--/ Codrops top bar -->
-			<header>
-				<span>Tips &amp; Tricks</span>
-				<h1>Timed Notifications <span>with CSS Animations</span></h1>
-				<p>Notification boxes with a duration indicator. <strong>Click the button to start the animations.</strong></p>
-
-				<div class="support-note"><!-- let's check browser support with modernizr -->
-					<span class="no-cssanimations">CSS animations are not supported in your browser</span>
-					<span class="no-csstransforms">CSS transforms are not supported in your browser</span>
-					<!--span class="no-csstransforms3d">CSS 3D transforms are not supported in your browser</span-->
-					<!--span class="no-csstransitions">CSS transitions are not supported in your browser</span-->
-					<span class="note-ie">Sorry, only modern browsers.</span>
-				</div>
-			</header>
-
-			<input type="checkbox" class="fire-check" />
-			<button class="fire">Activate me</button>
-
-			<section>
-
-	            <div class="tn-box tn-box-color-1">
-					<p>Your settings have been saved successfully!</p>
-					<div class="tn-progress"></div>
-				</div>
-
-				<div class="tn-box tn-box-color-2">
-					<p>Yummy! I just ate your settings! They were delicious!</</p>
-					<div class="tn-progress"></div>
-				</div>
-
-				<div class="tn-box tn-box-color-3">
-					<p>Look at me! I take much longer!<p>
-					<div class="tn-progress"></div>
-				</div>
-
-			</section>
+<div class="container">
+  <header>
+    <h1>Pure <strong>CSS</strong> Bars</h1>
+    <p>...a growing bars chart.</p>
+  </header>
+  <div class="chart small-font-size">
+    <div class="bar bar-60 yellow">
+      <div class="face side-0">
+        <div class="growing-bar"></div>
+      </div>
+      <div class="face side-1">
+        <div class="growing-bar"></div>
+      </div>
+      <div class="face top"></div>
+      <div class="face floor"></div>
+    </div>
+    <div class="bar bar-25 red">
+      <div class="face side-0">
+        <div class="growing-bar"></div>
+      </div>
+      <div class="face side-1">
+        <div class="growing-bar"></div>
+      </div>
+      <div class="face top"></div>
+      <div class="face floor"></div>
+    </div>
+    <div class="bar bar-35 cyan">
+      <div class="face side-0">
+        <div class="growing-bar"></div>
+      </div>
+      <div class="face side-1">
+        <div class="growing-bar"></div>
+      </div>
+      <div class="face top"></div>
+      <div class="face floor"></div>
+    </div>
+    <div class="bar bar-80 lime">
+      <div class="face side-0">
+        <div class="growing-bar"></div>
+      </div>
+      <div class="face side-1">
+        <div class="growing-bar"></div>
+      </div>
+      <div class="face top"></div>
+      <div class="face floor"></div>
+    </div>
+  </div>
+  <p>Enjoy these Pure <em>CSS</em> Bars, crafted with <em>love</em> and 'ready-to-use'.</p>
+  <div>
+    <input type="radio" name="status" id="status-1" checked>
+    <section class="content">
+      <article>
+        <p>The bar dimensions are based on <em>'em' units</em>, you can <em>resize them with a simple 'font-size'</em> property :)</p>
+        <input type="checkbox" id="double-size" />
+        <div class="chart small-font-size">
+          <div class="bar bar-0 yellow">
+            <div class="face side-0">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face side-1">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face top"></div>
+            <div class="face floor"></div>
+          </div>
         </div>
+        <label for="double-size">Double size</label>
+      </article>
+    </section>
+    <input type="checkbox" id="set-value" name="set-value" />
+    <input type="radio" name="status" id="status-2">
+    <section class="content">
+      <article>
+        <p>To set an animated position use the <em>'bar-n' class</em>, setting <em>the 'n' class parameter</em> form 1 to 100 values.</p>
+        <div class="chart small-font-size">
+          <div class="bar bar-1 lime">
+            <div class="face side-0">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face side-1">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face top"></div>
+            <div class="face floor"></div>
+          </div>
+          <div class="bar bar-1-1 cyan">
+            <div class="face side-0">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face side-1">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face top"></div>
+            <div class="face floor"></div>
+          </div>
+        </div>
+        <label for="set-value">Set value '85'</label>
+      </article>
+    </section>
+    <input type="radio" name="status" id="status-3">
+    <section class="content">
+      <article>
+        <p>Each bar is a <em>'flexbox item'</em>, so feel free to add as many as you want. Give them a bit of color too, with the custom color classes.</p>
+        <div class="chart small-font-size">
+          <div class="bar bar-0 lime">
+            <div class="face side-0">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face side-1">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face top"></div>
+            <div class="face floor"></div>
+          </div>
+          <div class="bar bar-2 cyan">
+            <div class="face side-0">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face side-1">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face top"></div>
+            <div class="face floor"></div>
+          </div>
+          <div class="bar bar-1 red">
+            <div class="face side-0">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face side-1">
+              <div class="growing-bar"></div>
+            </div>
+            <div class="face top"></div>
+            <div class="face floor"></div>
+          </div>
+        </div>
+      </article>
+    </section>
+    <nav class="legend">
+      <label for="status-1">Tip 1</label>
+      <label for="status-2">Tip 2</label>
+      <label for="status-3">Tip 3</label>
+    </nav>
+  </div>
+</div> 
     </body>
 </html>
