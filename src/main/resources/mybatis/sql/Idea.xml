@@ -70,7 +70,7 @@
   	</select>
   	<select id="selectTop3" resultType="IdeaVo">
   	<![CDATA[
-		SELECT * FROM (SELECT * FROM IDEA ORDER BY LIKE_COUNT DESC) WHERE ROWNUM<=3
+		SELECT * FROM (SELECT * FROM IDEA_BOARD ORDER BY HITCNT DESC) WHERE ROWNUM<=3
   	]]>
   	</select>
 </mapper>
