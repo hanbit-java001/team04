@@ -62,8 +62,8 @@
 		  FROM (
 			SELECT a.rn, a.id, a.sub, a.con, a.reg
 			  FROM (
-				SELECT ROWNUM rn, USER_ID id, SUBJECT sub, CONTENT con , REGDATE reg
-				  FROM IDEAS) a
+				SELECT ROWNUM rn, USER_ID id, TITLE sub, CONTENT con , REGDATE reg
+				  FROM IDEA_BOARD) a
 			 WHERE rn <= 15 * #{page}) a
 		 WHERE rn > 15 * (#{page} - 1)
   	]]>

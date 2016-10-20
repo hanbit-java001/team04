@@ -27,7 +27,7 @@
 				src="/static/image/to-do-list-icon-buy-this-icon-for--0-48-1.png">
 		</div>
 		<div class="cover">
-			<img class="reflected select-img" data-name="dashboard입니다" data-url=""
+			<img class="reflected select-img" data-name="dashboard입니다" data-url="/list2"
 				src="/static/image/business-intelligence-dashboard-icon_75274.png">
 		</div>
 		<div class="cover">

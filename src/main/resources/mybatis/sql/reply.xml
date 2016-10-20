@@ -9,16 +9,16 @@
 		  FROM (
 			SELECT a.rn, a.userId, a.replyDb, a.replyDate
 			  FROM (
-				SELECT ROWNUM rn, USER_ID userId, REPLY_DB replyDb,
-					   REPLY_DATE replyDate
-				  FROM REPLY) a
+				SELECT ROWNUM rn, USER_ID userId, CONTENTS replyDb,
+					   REGDATE replyDate
+				  FROM IDEA_MINI_BOARD) a
 			 WHERE rn <= 3 * #{page}) a
 		 WHERE rn > 3 * (#{[page]} - 1)
 		]]>
 	</select>
 
 	<select id="selectTotalCount" resultType="int">
-		SELECT COUNT(*) FROM REPLY
+		SELECT COUNT(*) FROM IDEA_MINI_BOARD
 	</select>
 
 </mapper>
