@@ -84,5 +84,12 @@ public class IdeaDAO {
 		return result;
 	}
 
+	public List<IdeaVO> selectTop3() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("Idea.selectTop3");
+	}
+
+
+
 
 }

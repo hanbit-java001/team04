@@ -8,6 +8,8 @@
 	</settings>
 <typeAliases>
 		<typeAlias type="com.hanbit.team04.core.vo.IdeaVO" alias="IdeaVO" />
+		<typeAlias type="com.hanbit.team04.core.vo.ReplyVO" alias="ReplyVO" />
+		<typeAlias type="com.hanbit.team04.core.vo.MemberVo" alias="memberVO" />
 
 	</typeAliases>
 </configuration>

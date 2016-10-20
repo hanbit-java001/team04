@@ -55,7 +55,7 @@
 		SELECT SEQ_IDEA.NEXTVAL
 		FROM DUAL
 	</select>
-	
+
 <select id="selectPage" parameterType="int" resultType="map">
 	<![CDATA[
 		SELECT 	a.rn, a.id, a.sub, a.con, a.reg
@@ -66,6 +66,11 @@
 				  FROM IDEAS) a
 			 WHERE rn <= 15 * #{page}) a
 		 WHERE rn > 15 * (#{page} - 1)
+  	]]>
+  	</select>
+  	<select id="selectTop3" resultType="IdeaVo">
+  	<![CDATA[
+		SELECT * FROM (SELECT * FROM IDEA ORDER BY LIKE_COUNT DESC) WHERE ROWNUM<=3
   	]]>
   	</select>
 </mapper>

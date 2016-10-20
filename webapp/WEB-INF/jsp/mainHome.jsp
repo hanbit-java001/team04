@@ -43,7 +43,7 @@
 				src="/static/image/d14c8c035b3c8f8d7c74085ce761c24e-lg.png">
 		</div>
 		<div class="cover">
-			<img class="reflected select-img" data-name="user입니다" data-url=""
+			<img class="reflected select-img" data-name="user입니다" data-url="/user/create"
 				src="/static/image/KakaoTalk_20161011_215624504.png">
 		</div>
 	</div>

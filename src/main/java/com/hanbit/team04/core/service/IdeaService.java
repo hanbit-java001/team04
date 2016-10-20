@@ -64,5 +64,10 @@ public class IdeaService {
 		return ideaDAO.countIdeas();
 	}
 
+	public List<IdeaVO> getTop3() {
+		// TODO Auto-generated method stub
+		return ideaDAO.selectTop3();
+	}
+
 
 }

@@ -7,7 +7,7 @@
         <title>Shuffle Text Effect with jQuery | Tutorialzine Demo</title>
 
         <!-- Our CSS stylesheet file -->
-        <link rel="stylesheet" href="/static/plugins/jquery.shuffleLetters/assets/css/styles.css" />
+        <link rel="stylesheet" href="/static/plugins/css/createUser.css" />
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" type="text/css" />
         <style type="text/css">
 		.my-progress-container{
@@ -70,7 +70,7 @@
 
 		<script src="/static/plugins/jquery/jquery-3.1.0.min.js"></script>
 		<script src="/static/plugins/jquery.shuffleLetters/assets/js/jquery.shuffleLetters.js"></script>
-        <script src="/static/plugins/jquery.shuffleLetters/assets/js/script.js"></script>
+        <script src="/static/plugins/js/createUser.js"></script>
 
 
     </body>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanbit.team04.core.service.IdeaService;
 import com.hanbit.team04.core.vo.IdeaVO;
+import com.hanbit.team04.core.vo.MemberVo;
 
 @Controller
 public class KakaoController {
@@ -53,6 +54,11 @@ public class KakaoController {
 		LOGGER.info("testController - test");
 		return "mainHome";
 	}
+	@RequestMapping("/user/create")
+	public String createUser() {
+		LOGGER.info("testController - create user");
+		return "createUser";
+	}
 
 	@RequestMapping(value = "/data/list{pageNum}", method = RequestMethod.GET)
 	@ResponseBody
@@ -76,6 +82,13 @@ public class KakaoController {
 		myresult.put("totoalPage", totalPage);
 		LOGGER.info("testController - result" + myresult);
 		return myresult;
+	}
+	@RequestMapping("/api/member/create")
+	@ResponseBody
+	public void modifySchedule(@RequestBody MemberVo createUser) {
+LOGGER.info("check create"+createUser);
+
+
 	}
 
 }

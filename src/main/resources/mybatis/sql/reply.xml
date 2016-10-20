@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+
+<select id="selectReply" parameterType="int" resultType="ReplyVO">
+	<![CDATA[
+		SELECT 	a.rn, a.userId, a.replyDb, a.replyDate
+		  FROM (
+			SELECT a.rn, a.userId, a.replyDb, a.replyDate
+			  FROM (
+				SELECT ROWNUM rn, USER_ID userId, REPLY_DB replyDb,
+					   REPLY_DATE replyDate
+				  FROM REPLY) a
+			 WHERE rn <= 3 * #{page}) a
+		 WHERE rn > 3 * (#{[page]} - 1)
+		]]>
+	</select>
+
+	<select id="selectTotalCount" resultType="int">
+		SELECT COUNT(*) FROM REPLY
+	</select>
+
+</mapper>

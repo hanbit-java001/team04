@@ -1,17 +1,29 @@
 package com.hanbit.team04.core.service;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.hanbit.team04.core.dao.IdeaDAO;
 import com.hanbit.team04.core.dao.MemberDAO;
-import com.hanbit.team04.core.vo.IdeaVO;
 import com.hanbit.team04.core.vo.MemberVo;
 
+
+@Service
 public class MemberService {
+
+	@Autowired
+	private MemberDAO memberDAO;
+
+	public MemberVo getMember(String name, String password) {
+
+		MemberVo member = memberDAO.selectMember(name, password);
+
+		if(member==null){
+			throw new RuntimeException("가입되지 않은 이메일입니다.");
+		}
+
+		return member;
+
+	}
 //
 //private static final Logger LOGGER = LoggerFactory.getLogger(IdeaService.class);
 //
