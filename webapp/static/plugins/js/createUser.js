@@ -40,7 +40,7 @@ $(function(){
 				userAge:$(".userAge").text()
 		}
 		$.ajax({
-			url: "/api/member/create",
+			url: "/api/Create/user",
 			method: "POST",
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",

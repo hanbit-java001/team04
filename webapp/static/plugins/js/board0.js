@@ -20,9 +20,9 @@
 							top3:result[2].userId
 						};
 						top3Num ={
-								top1:result[0].likeCount,
-								top2:result[1].likeCount,
-								top3:result[2].likeCount
+								top1:result[0].hitCnt,
+								top2:result[1].hitCnt,
+								top3:result[2].hitCnt
 						};
 						drawDonutGraph(top3Num , top3Name);
 						drawBarGraph(top3Num ,top3Name)
@@ -83,10 +83,10 @@
 
 						for(var i =0 ; i<result.replyLists.length; i++){
 							var reply = result.replyLists[i];
-							var replyDb = reply.replyDb;
+							var replyDb = reply.contents;
 							var userId=	reply.userId;
-							var replyDate = reply.replyDate;
-
+							var replyDate = reply.regDate;
+							console.log(reply);
 							addReply(userId,replyDb,replyDate);
 						}
 						var totalCount = result.totalCount;

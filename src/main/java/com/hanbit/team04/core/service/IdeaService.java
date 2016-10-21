@@ -22,7 +22,7 @@ public class IdeaService {
 	public int addIdea(IdeaVO idea) {
 		LOGGER.debug("게시글 추가");
 		IdeaVO myIdea= idea;
-		myIdea.setIdxNum(ideaDAO.selectNextIndex());
+		myIdea.setBoardIdx(ideaDAO.selectNextIndex());
 		LOGGER.debug("게시글 추가 end");
 		return ideaDAO.insertIdea(myIdea);
 	}

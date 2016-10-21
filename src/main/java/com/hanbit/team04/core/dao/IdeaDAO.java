@@ -36,7 +36,7 @@ public class IdeaDAO {
 
 	public int deleteIdea(IdeaVO idea) {
 		LOGGER.debug("게시물 삭제");
-		int result = sqlSession.delete("Idea.deleteIdea", idea.getIdxNum());
+		int result = sqlSession.delete("Idea.deleteIdea", idea.getBoardIdx());
 
 		return result;
 	}

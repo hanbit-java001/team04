@@ -17,7 +17,7 @@ public class SessionAspect {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SessionAspect.class);
 
-	@Around("@annotation(com.hanbit.tutor.core.session.LoginRequired)")
+	@Around("@annotation(com.hanbit.team04.core.session.LoginRequired)")
 	public Object checkLogin(ProceedingJoinPoint pjp) throws Throwable {
 		Session session = SessionHelpler.getSession();
 

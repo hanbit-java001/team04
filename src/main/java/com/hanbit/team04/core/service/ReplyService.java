@@ -14,24 +14,28 @@ import com.hanbit.team04.core.vo.ReplyVO;
 @Service
 public class ReplyService {
 
-@Autowired
-private ReplyDAO replyDao;
+	@Autowired
+	private ReplyDAO replyDao;
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ReplyService.class);
 
-	private static final Logger LOGGER  = LoggerFactory.getLogger(ReplyService.class);
-
-
-	public  List<ReplyVO> getReply(int page){
+	public List<ReplyVO> getReply(int page) {
 
 		return replyDao.selectReply(page);
 	}
-
 
 	public int getTotalCount() {
 
 		return replyDao.selectTotalCount();
 	}
 
+	public int getIndex() {
+		return replyDao.selectNextIndex();
+	}
 
+	public int addMiniBoard(ReplyVO replyVO) {
+		replyVO.setMinSeq(getIndex());
+		return replyDao.insertBoard(replyVO);
+	}
 
 }

@@ -3,14 +3,15 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reply">
 
-<select id="selectReply" parameterType="int" resultType="ReplyVO">
+	<select id="selectReply" parameterType="int" resultType="ReplyVO">
 	<![CDATA[
-		SELECT 	a.rn, a.userId, a.replyDb, a.replyDate
+
+		SELECT 	a.rn, a.userId, a.contents, a.regDate
 		  FROM (
-			SELECT a.rn, a.userId, a.replyDb, a.replyDate
+			SELECT a.rn, a.userId, a.contents, a.regDate
 			  FROM (
-				SELECT ROWNUM rn, USER_ID userId, CONTENTS replyDb,
-					   REGDATE replyDate
+				SELECT ROWNUM rn, USER_ID userId, CONTENTS contents,
+					   REGDATE regDate
 				  FROM IDEA_MINI_BOARD) a
 			 WHERE rn <= 3 * #{page}) a
 		 WHERE rn > 3 * (#{[page]} - 1)
@@ -18,7 +19,17 @@
 	</select>
 
 	<select id="selectTotalCount" resultType="int">
-		SELECT COUNT(*) FROM IDEA_MINI_BOARD
+		SELECT COUNT(*) FROM
+		IDEA_MINI_BOARD
+	</select>
+	<select id="selectNextIndex" resultType="int">
+		SELECT SEQ_IDX.NEXTVAL
+		FROM DUAL
 	</select>
 
+	<insert id="insertmini" parameterType="ReplyVo">
+		INSERT INTO
+		IDEA_MINI_BOARD (MIN_SEQ, USER_ID, CONTENTS, REGDATE)VALUES
+		(#{minSeq},#{userId},#{contents},#{regDate})
+	</insert>
 </mapper>

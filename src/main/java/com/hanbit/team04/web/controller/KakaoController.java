@@ -1,6 +1,7 @@
 package com.hanbit.team04.web.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,15 +17,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
+import com.hanbit.team04.core.service.ReplyService;
+import com.hanbit.team04.core.vo.IdeaMemberVO;
 import com.hanbit.team04.core.vo.IdeaVO;
 import com.hanbit.team04.core.vo.MemberVo;
+import com.hanbit.team04.core.vo.ReplyVO;
 
 @Controller
 public class KakaoController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WelcomeController.class);
 	@Autowired
-	IdeaService ideaService;
+	private IdeaService ideaService;
+	@Autowired
+	private ReplyService replyService;
+	@Autowired
+	private IdeaMemberService ideaMemberService;
 
 	@RequestMapping("/kakao")
 	public String list() {
@@ -37,11 +46,6 @@ public class KakaoController {
 		LOGGER.info("testController - test");
 		return "testoh";
 	}
-	@RequestMapping("/board/list_oh")
-	public String listOh() {
-		LOGGER.info("testController - test");
-		return "board_first";
-	}
 
 	@RequestMapping("/mytestoh2")
 	public String testoh2() {
@@ -49,46 +53,71 @@ public class KakaoController {
 		return "testoh2";
 	}
 
+	@RequestMapping("/board/list_oh")
+	public String listOh() {
+		LOGGER.info("testController - test");
+		return "board_first";
+	}
+
 	@RequestMapping("/Home")
 	public String mainPage() {
 		LOGGER.info("testController - test");
+		// Date date = new Date();
+		// for(int i=0;i<200;i++){
+		// IdeaVO ideaVO = new IdeaVO(0, "title"+i, date.toString(),
+		// "contents"+i, "userId"+i, date.toString(), 'N', 1, "NULL");
+		// ideaService.addIdea(ideaVO);
+		// if(i%2==0){
+		// ReplyVO replyVO = new ReplyVO(0, "userId"+i, "contents"+i,
+		// date.toString());
+		// replyService.addMiniBoard(replyVO);
+		// }
+		// }
+
 		return "mainHome";
 	}
+
 	@RequestMapping("/user/create")
 	public String createUser() {
 		LOGGER.info("testController - create user");
 		return "createUser";
 	}
 
+	@RequestMapping("/login")
+	public String loginUser() {
+		LOGGER.info("testController - login user");
+		return "login";
+	}
+
 	@RequestMapping(value = "/data/list{pageNum}", method = RequestMethod.GET)
 	@ResponseBody
 	public Map getList(@PathVariable("pageNum") int pageNum) {
 		LOGGER.info("testController - pageList === " + pageNum);
-//		for (int i = 300; i < 325; i++) {
-//			IdeaVO idea = new IdeaVO();
-//			idea.setIdxNum(i);
-//			idea.setUserId("id"+i);
-//			idea.setConfirm("confirm"+i);
-//			idea.setContent("content"+i);
-//			idea.setDate("date"+i);
-//			idea.setLikeCount(i);
-//			idea.setSubject("subject"+i);
-//			ideaService.addIdea(idea);
-//		}
+
 		Map myresult = new HashMap();
 		List list = ideaService.getIdeas(pageNum);
-		int totalPage= ideaService.totalPageNum();
+		int totalPage = ideaService.totalPageNum();
 		myresult.put("list", list);
 		myresult.put("totoalPage", totalPage);
 		LOGGER.info("testController - result" + myresult);
 		return myresult;
 	}
-	@RequestMapping("/api/member/create")
+
+	@RequestMapping("/api/Create/user")
 	@ResponseBody
-	public void modifySchedule(@RequestBody MemberVo createUser) {
-LOGGER.info("check create"+createUser);
+	public int createLogInfo(@RequestBody IdeaMemberVO createUser) {
+		LOGGER.info("check create" + createUser);
+		int result  = ideaMemberService.createlogInfo(createUser);
+		return result;
+	}
 
-
+	@RequestMapping(value="/api/logInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public int checkLogin(@RequestParam("userId") String userId, @RequestParam("password") String password) {
+		LOGGER.info("check create" + userId + " , " + password);
+		int result = ideaMemberService.checkLogin(userId, password);
+		LOGGER.info("check result : " + result);
+		return result;
 	}
 
 }

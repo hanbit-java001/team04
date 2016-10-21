@@ -2,14 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Idea">
-
+	<!-- BOARD_IDX -->
+	<!-- TITLE -->
+	<!-- REGDATE -->
+	<!-- CONTENTS -->
+	<!-- USER_ID -->
+	<!-- MOD_DATE -->
+	<!-- CONFIRM -->
+	<!-- HITCNT -->
+	<!-- FILE_ID -->
 	<insert id="insertIdea" parameterType="IdeaVO">
-		INSERT INTO IDEAS
-		(IDX_NUM,USER_ID,SUBJECT,CONTENT,CONFIRM,REGDATE,LIKE_COUNT)
+		INSERT INTO IDEA_BOARD
+		(BOARD_IDX,TITLE,REGDATE,CONTENTS,USER_ID,MOD_DATE,CONFIRM,HITCNT,FILE_ID)
 		VALUES
-		(#{idxNum}, #{userId}, #{subject}, #{content}, #{confirm}, #{date}, #{likeCount})
+		(#{boardIdx}, #{title}, #{regDate}, #{contents}, #{userId},
+		#{modDate}, #{confirm}, #{hitCnt}, #{fileId})
 	</insert>
-
 	<update id="updateIdea" parameterType="IdeaVO">
 		UPDATE IDEAS
 		SET subject =
@@ -48,29 +56,30 @@
 	</select>
 
 	<select id="countIdea" parameterType="string" resultType="int">
-		SELECT COUNT(*) FROM IDEAS
+		SELECT
+		COUNT(*) FROM IDEA_BOARD
 	</select>
 
 	<select id="selectNextIndex" resultType="int">
-		SELECT SEQ_IDEA.NEXTVAL
+		SELECT SEQ_IDX.NEXTVAL
 		FROM DUAL
 	</select>
 
-<select id="selectPage" parameterType="int" resultType="map">
+	<select id="selectPage" parameterType="int" resultType="map">
 	<![CDATA[
 		SELECT 	a.rn, a.id, a.sub, a.con, a.reg
 		  FROM (
 			SELECT a.rn, a.id, a.sub, a.con, a.reg
 			  FROM (
-				SELECT ROWNUM rn, USER_ID id, TITLE sub, CONTENT con , REGDATE reg
+				SELECT ROWNUM rn, USER_ID id, TITLE sub, CONTENTS con , REGDATE reg
 				  FROM IDEA_BOARD) a
 			 WHERE rn <= 15 * #{page}) a
 		 WHERE rn > 15 * (#{page} - 1)
   	]]>
-  	</select>
-  	<select id="selectTop3" resultType="IdeaVo">
+	</select>
+	<select id="selectTop3" resultType="IdeaVo">
   	<![CDATA[
 		SELECT * FROM (SELECT * FROM IDEA_BOARD ORDER BY HITCNT DESC) WHERE ROWNUM<=3
   	]]>
-  	</select>
+	</select>
 </mapper>

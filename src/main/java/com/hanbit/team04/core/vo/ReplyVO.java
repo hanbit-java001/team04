@@ -1,37 +1,59 @@
 package com.hanbit.team04.core.vo;
 
 public class ReplyVO {
-
-	private String replyDb;
+	private int minSeq;
 	private String userId;
-	private String replyDate;
+	private String contents;
+	private String regDate;
 
-	public String getReplyDb() {
-		return replyDb;
+	public int getMinSeq() {
+		return minSeq;
 	}
-	public void setReplyDb(String replyDb) {
-		this.replyDb = replyDb;
-	}
+
 	public String getUserId() {
 		return userId;
 	}
+
+	public String getContents() {
+		return contents;
+	}
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setMinSeq(int minSeq) {
+		this.minSeq = minSeq;
+	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getReplyDate() {
-		return replyDate;
+
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
-	public void setReplyDate(String replyDate) {
-		this.replyDate = replyDate;
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
+
 	@Override
 	public String toString() {
-		return "ReplyVO [replyDb=" + replyDb + ", userId=" + userId + ", replyDate=" + replyDate + "]";
+		return "ReplyVO [minSeq=" + minSeq + ", userId=" + userId + ", contents=" + contents + ", regDate=" + regDate
+				+ "]";
 	}
 
+	public ReplyVO(int minSeq, String userId, String contents, String regDate) {
+		super();
+		this.minSeq = minSeq;
+		this.userId = userId;
+		this.contents = contents;
+		this.regDate = regDate;
+	}
 
-
-
-
+	public ReplyVO() {
+		super();
+	}
 
 }

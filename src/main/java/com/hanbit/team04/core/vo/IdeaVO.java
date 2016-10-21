@@ -1,74 +1,109 @@
 package com.hanbit.team04.core.vo;
 
 public class IdeaVO {
-	private int idxNum;
+	private int boardIdx;
+	private String title;
+	private String regDate;
+	private String contents;
 	private String userId;
-	private String subject;
-	private String content;
-	private String confirm;
-	private String date;
-	private int likeCount;
+	private String modDate;
+	private char confirm;
+	private int hitCnt;
+	private String fileId;
 
-	@Override
-	public String toString() {
-		return "IdeaVO [idxNum=" + idxNum + ", userId=" + userId + ", subject=" + subject + ", content=" + content
-				+ ", confirm=" + confirm + ", date=" + date + ", likeCount=" + likeCount + "]";
+	public int getBoardIdx() {
+		return boardIdx;
 	}
 
-	public int getIdxNum() {
-		return idxNum;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setIdxNum(int idxNum) {
-		this.idxNum = idxNum;
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public String getContents() {
+		return contents;
 	}
 
 	public String getUserId() {
 		return userId;
 	}
 
+	public String getModDate() {
+		return modDate;
+	}
+
+	public char getConfirm() {
+		return confirm;
+	}
+
+	public int getHitCnt() {
+		return hitCnt;
+	}
+
+	public String getFileId() {
+		return fileId;
+	}
+
+	public void setBoardIdx(int boardIdx) {
+		this.boardIdx = boardIdx;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public String getSubject() {
-		return subject;
+	public void setModDate(String modDate) {
+		this.modDate = modDate;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getConfirm() {
-		return confirm;
-	}
-
-	public void setConfirm(String confirm) {
+	public void setConfirm(char confirm) {
 		this.confirm = confirm;
 	}
 
-	public String getDate() {
-		return date;
+	public void setHitCnt(int hitCnt) {
+		this.hitCnt = hitCnt;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
 	}
 
-	public int getLikeCount() {
-		return likeCount;
+	@Override
+	public String toString() {
+		return "IdeaVO [boardIdx=" + boardIdx + ", title=" + title + ", regDate=" + regDate + ", contents=" + contents
+				+ ", userId=" + userId + ", modDate=" + modDate + ", confirm=" + confirm + ", hitCnt=" + hitCnt
+				+ ", fileId=" + fileId + "]";
 	}
 
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
+	public IdeaVO(int boardIdx, String title, String regDate, String contents, String userId, String modDate,
+			char confirm, int hitCnt, String fileId) {
+		this.boardIdx = boardIdx;
+		this.title = title;
+		this.regDate = regDate;
+		this.contents = contents;
+		this.userId = userId;
+		this.modDate = modDate;
+		this.confirm = confirm;
+		this.hitCnt = hitCnt;
+		this.fileId = fileId;
+	}
+
+	public IdeaVO() {
 	}
 
 }

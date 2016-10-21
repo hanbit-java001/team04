@@ -32,6 +32,14 @@ int result =Sqlsession.selectOne("reply.selectTotalCount");
 LOGGER.debug("result int: "+result);
 	return result;
 }
+public int selectNextIndex() {
+	LOGGER.debug("index_num adding");
+	return Sqlsession.selectOne("reply.selectNextIndex");
+}
 
+
+public int insertBoard(ReplyVO replyVO) {
+	return Sqlsession.insert("reply.insertmini", replyVO);
+}
 
 }
