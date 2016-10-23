@@ -178,7 +178,7 @@
 	<div class="pojoro">●</div>
 		<div class="form-group inlogin-panel">
 		<span class="label label-default">이름</span>
-		<input type="text" class="form-control" placeholder="이름" id="submitname">
+		<input type="text" class="form-control" placeholder="ID" id="submitId">
 		</div>
 		<div class="form-group inlogin-panel">
 		<span class="label label-default">비밀번호</span>

@@ -21,8 +21,8 @@ import com.hanbit.team04.core.service.MemberService;
 import com.hanbit.team04.core.service.ReplyService;
 import com.hanbit.team04.core.session.Session;
 import com.hanbit.team04.core.session.SessionHelpler;
+import com.hanbit.team04.core.vo.IdeaMemberVO;
 import com.hanbit.team04.core.vo.IdeaVO;
-import com.hanbit.team04.core.vo.MemberVo;
 import com.hanbit.team04.core.vo.ReplyVO;
 
 @Controller
@@ -91,29 +91,29 @@ public class BoardController {
 		 Map result = new HashMap<>();
 
 		 if(!session.isLoggedIn()){
-			 result.put("name", "");
+			 result.put("userId", "");
 		 }
 		 else{
-			 result.put("name", session.getName());
+			 result.put("userId", session.getUserId());
 		 }
 
-		 LOGGER.debug("이름은:"+result.get("name"));
+		 LOGGER.debug("유저아이디:"+result.get("userId"));
 
 		 return result;
 	 }
 
 	 @RequestMapping("/api/board/gologin")
 	 @ResponseBody
-	 public Map gologin(@RequestParam("name")String name , @RequestParam("password")String password){
+	 public Map gologin(@RequestParam("userId")String userId , @RequestParam("password")String password){
 
 		 Map result = new HashMap<>();
-		 MemberVo member = memberService.getMember(name,password);
+		 IdeaMemberVO member = memberService.getMember(userId,password);
 		 Session session = SessionHelpler.getSession();
 
 		session.setLoggedIn(true);
-		session.setName(member.getName());
+		session.setUserId(member.getUserId());
 
-		 result.put("name", member.getName());
+		 result.put("userId", member.getUserId());
 
 		 return result;
 

@@ -1,16 +1,13 @@
 package com.hanbit.team04.core.dao;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hanbit.team04.core.vo.MemberVo;
+import com.hanbit.team04.core.vo.IdeaMemberVO;
 
 
 @Repository
@@ -19,13 +16,13 @@ public class MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public MemberVo selectMember(String name, String password) {
+	public IdeaMemberVO selectMember(String name, String password) {
 
 		Map param = new HashMap<>();
 		param.put("name", name);
 		param.put("password", password);
 
-		return sqlSession.selectOne("member.selectMember",param);
+		return sqlSession.selectOne("IdeaMemberVO.selectMember",param);
 
 	}
 //

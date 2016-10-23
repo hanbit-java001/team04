@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hanbit.team04.core.dao.MemberDAO;
-import com.hanbit.team04.core.vo.MemberVo;
+import com.hanbit.team04.core.vo.IdeaMemberVO;
 
 
 @Service
@@ -13,9 +13,9 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 
-	public MemberVo getMember(String name, String password) {
+	public IdeaMemberVO getMember(String userId, String password) {
 
-		MemberVo member = memberDAO.selectMember(name, password);
+		IdeaMemberVO member = memberDAO.selectMember(userId, password);
 
 		if(member==null){
 			throw new RuntimeException("가입되지 않은 이메일입니다.");

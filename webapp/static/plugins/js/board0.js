@@ -225,10 +225,10 @@
 		});
 
 		$(".loginbtn").on("click",function(){
-			var name= $("#submitname").val();
+			var userId= $("#submitId").val();
 			var password=$("#submitpassword").val();
 
-			if(name==""){
+			if(userId==""){
 				alert('이름 마저 채워');
 			}
 			else if(password==""){
@@ -238,12 +238,12 @@
 			$.ajax({
 				url:"/api/board/gologin",
 				data:{
-					name:name,
+					userId:userId,
 					password:password
 				}
 			}).done(function(result){
-				alert('환영합니다: '+name+"님");
-				$("#submitname").val("");
+				alert('환영합니다: '+userId+"님");
+				$("#submitId").val("");
 				$("#submitpassword").val("");
 				hideLoginPanel();
 				showUserMenu(true);
@@ -263,7 +263,7 @@
 			url:"/api/isLogin",
 			method:"POST",
 		}).done(function(result){
-			if(result.name==""){
+			if(result.userId==""){
 				showUserMenu(false);
 			}
 			else {

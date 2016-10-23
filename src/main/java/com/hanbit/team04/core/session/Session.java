@@ -8,42 +8,39 @@ import org.springframework.stereotype.Component;
 public class Session {
 
 	private boolean loggedIn;
-	private int memberId;
-	private String email;
-	private String name;
+	private String userId;
+	private int age;
 
 	public void logout() {
 		loggedIn = false;
-		memberId = 0;
-		email = null;
-		name = null;
+		userId = "";
+		age = -1;
 	}
 
 	public boolean isLoggedIn() {
 		return loggedIn;
 	}
+
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+
+	public String getUserId() {
+		return userId;
 	}
 
-	public int getMemberId() {
-		return memberId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
+	public int getAge() {
+		return age;
 	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	
 
 }

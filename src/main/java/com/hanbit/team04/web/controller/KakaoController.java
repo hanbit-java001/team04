@@ -1,7 +1,5 @@
 package com.hanbit.team04.web.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +19,6 @@ import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
 import com.hanbit.team04.core.service.ReplyService;
 import com.hanbit.team04.core.vo.IdeaMemberVO;
-import com.hanbit.team04.core.vo.IdeaVO;
-import com.hanbit.team04.core.vo.MemberVo;
-import com.hanbit.team04.core.vo.ReplyVO;
 
 @Controller
 public class KakaoController {
