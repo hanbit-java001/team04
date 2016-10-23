@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
-import com.hanbit.team04.core.service.MemberService;
 import com.hanbit.team04.core.service.ReplyService;
 import com.hanbit.team04.core.session.Session;
 import com.hanbit.team04.core.session.SessionHelpler;
@@ -38,7 +38,7 @@ public class BoardController {
 	private ReplyService replyService;
 
 	@Autowired
-	private MemberService memberService;
+	private IdeaMemberService ideaMemberService;
 
 	@RequestMapping("/list2")
 	public String test2() {
@@ -107,7 +107,7 @@ public class BoardController {
 	 public Map gologin(@RequestParam("userId")String userId , @RequestParam("password")String password){
 
 		 Map result = new HashMap<>();
-		 IdeaMemberVO member = memberService.getMember(userId,password);
+		 IdeaMemberVO member = ideaMemberService.getMember(userId,password);
 		 Session session = SessionHelpler.getSession();
 
 		session.setLoggedIn(true);

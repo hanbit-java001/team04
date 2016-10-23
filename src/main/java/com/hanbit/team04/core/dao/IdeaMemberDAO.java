@@ -32,7 +32,7 @@ public class IdeaMemberDAO {
 		param.put("userId", userId);
 		param.put("password", password);
 
-		return sqlSession.selectOne("IdeaMemberVO.selectMember",param);
+		return sqlSession.selectOne("IdeaMember.selectMember",param);
 
 	}
 }

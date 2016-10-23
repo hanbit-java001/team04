@@ -242,7 +242,7 @@
 					password:password
 				}
 			}).done(function(result){
-				alert('환영합니다: '+userId+"님");
+				alert('환영합니다: '+result.userId+"님");
 				$("#submitId").val("");
 				$("#submitpassword").val("");
 				hideLoginPanel();

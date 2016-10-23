@@ -17,5 +17,10 @@
 		VALUES
 		(#{userId}, #{password}, #{age}, #{name})
 	</insert>
+	
+	<select id="selectMember" resultType="IdeaMemberVO">
+		SELECT USER_ID userId , PASSWORD password FROM IDEA_MEMBER WHERE USER_ID=#{userId} and PASSWORD=#{password}
+	</select>
+	
 
 </mapper>
