@@ -1,5 +1,6 @@
 package com.hanbit.team04.core.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,5 +24,18 @@ public class IdeaMemberDAO {
 		int result= sqlSession.insert("IdeaMember.createLogInfo", createUser);
 		LOGGER.debug("check create info "+result);
 		return result ;
+	}
+	public String checking(String checkingId) {
+		LOGGER.debug("checking id ");
+		return sqlSession.selectOne("IdeaMember.checking", checkingId);
+	}
+	public IdeaMemberVO selectMember(String userId, String password) {
+
+		Map param = new HashMap<>();
+		param.put("userId", userId);
+		param.put("password", password);
+
+		return sqlSession.selectOne("IdeaMember.selectMember",param);
+
 	}
 }

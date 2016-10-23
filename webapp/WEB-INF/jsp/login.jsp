@@ -30,7 +30,7 @@ body {
 		<div class="card"></div>
 		<div class="card">
 			<h1 class="title">Login</h1>
-			<form>
+			<form class="front-form">
 				<div class="input-container">
 					<input type="text" id="UserId" required="required" /> <label
 						for="UserId">UserId</label>
@@ -91,7 +91,7 @@ body {
 
 	<script type="text/javascript">
 	var userTextMsg=["아이디는 이메일 형태로 작성해주세요","비밀번호는 숫자 1개 + 7글자 이상","이름은 한글또는 영어만","나이는 숫자로"];
-	var createState=["fail","fail","fail","fail"];
+	var createState=["fail","fail","fail","fail","fail"];
 		$('.toggle').on('click', function() {
 			$('.container').stop().addClass('active');
 		});
@@ -99,6 +99,14 @@ body {
 		$('.close').on('click', function() {
 			$('.container').stop().removeClass('active');
 		});
+		$(".front-form div input").on("focusout",function(){
+			console.log("input check log"+$("#UserId").val());
+			if(validateEmail($("#UserId").val())&&validatePassword($("#Password").val())){
+				console.log("check log");
+				$(".front button").attr("type","button");
+			}
+			
+		})
 		$(".front").on(
 				"click",
 				function() {
@@ -121,7 +129,7 @@ body {
 								location.reload();
 							} else {
 								alert("누구세요");
-								location.href = "/#";
+								location.href = "/login";
 							}
 						});
 					}
@@ -147,10 +155,7 @@ body {
 							if (result == 1) {
 								alert($("#CreateUserId").val() + "님 반갑습니다");
 								location.href = "/list2";
-							} else {
-								alert("누구세요");
-// 								location.href = "/#";
-							}
+							} 
 						}).fail(function() {
 						});
 
@@ -177,7 +182,8 @@ body {
 				}
 				function seccesOrfail(that,textMsg,color){
 					$(that).next("label").fadeOut().text(textMsg).css({"font-size":"24px", "color":color}).fadeIn();
-					createState[$(".backend-form .input-container").index($(that).parent())]=textMsg;
+					if(textMsg=="success"||textMsg=="fail"){
+					createState[$(".backend-form .input-container").index($(that).parent())]=textMsg;}
 				}
 				function checkState(){
 					for( var i=0;i<createState.length;i++){
@@ -197,6 +203,21 @@ body {
 				}).on("focusout",function(){
 					if($(this).attr("id")=="CreateUserId"&&validateEmail($(this).val())){
 						seccesOrfail(this,"success","#ffffff");
+						$.ajax({
+							url : "/api/CheckId",
+							method: "GET",
+							data: {checkingId:$(this).val()}
+						}).done(function(result) {
+							if (result == 1) {
+								seccesOrfail(this,"중복된 id가 있어요","#ffffff");
+								createState[4]="fail";
+								$(".backend button").attr("disabled","ture");
+							} else {
+								seccesOrfail(this,"success","#ffffff");
+								createState[4]="success";
+								$(".backend button").attr("disabled","false");
+							}
+						});
 					}
 					else if($(this).attr("id")=="CreatePassword"&&validatePassword($(this).val())){
 						seccesOrfail(this,"success","#ffffff");

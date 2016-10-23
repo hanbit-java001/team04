@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.hanbit.team04.core.dao.IdeaMemberDAO;
 import com.hanbit.team04.core.vo.IdeaMemberVO;
-import com.hanbit.team04.web.controller.WelcomeController;
 
 @Service
 public class IdeaMemberService {
@@ -33,5 +32,26 @@ public class IdeaMemberService {
 	public int createlogInfo(IdeaMemberVO createUser) {
 		return ideaMemberDAO.createLogInfo(createUser);
 	}
+	
+	
 
+	public IdeaMemberVO getMember(String userId, String password) {
+
+		IdeaMemberVO member = ideaMemberDAO.selectMember(userId, password);
+
+		if(member==null){
+			throw new RuntimeException("가입되지 않은 이메일입니다.");
+		}
+
+		return member;
+
+	}
+
+	public int checking(String checkingId) {
+		int result=0;
+		if(ideaMemberDAO.checking(checkingId)!=null)
+			result=1;
+		return result;
+	}
+	
 }
