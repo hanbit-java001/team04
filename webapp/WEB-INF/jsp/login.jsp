@@ -32,12 +32,12 @@ body {
 			<h1 class="title">Login</h1>
 			<form class="front-form">
 				<div class="input-container">
-					<input type="text" id="UserId" required="required" /> <label
+					<input type="text" id="UserId" class="login_input" required="required" /> <label
 						for="UserId">UserId</label>
 					<div class="bar"></div>
 				</div>
 				<div class="input-container">
-					<input type="password" id="Password" required="required" /> <label
+					<input type="password" id="Password" class="login_input" required="required" /> <label
 						for="Password">Password</label>
 					<div class="bar"></div>
 				</div>
@@ -99,42 +99,24 @@ body {
 		$('.close').on('click', function() {
 			$('.container').stop().removeClass('active');
 		});
-		$(".front-form div input").on("focusout",function(){
-			console.log("input check log"+$("#UserId").val());
-			if(validateEmail($("#UserId").val())&&validatePassword($("#Password").val())){
-				console.log("check log");
-				$(".front button").attr("type","button");
-			}
+// 		$(".front-form div input").on("focusout",function(){
+// 			console.log("input check log"+$("#UserId").val());
+// 			if(validateEmail($("#UserId").val())&&validatePassword($("#Password").val())){
+// 				console.log("check log");
+// 				$(".front button").attr("type","button");
+// 			}
 			
-		})
-		$(".front").on(
-				"click",
-				function() {
-
-					if (($("#UserId").val().trim() != "")
-							&& ($("#Password").val().trim() != "")) {
-						console.log("보낼거야" + $("#UserId").val() + " , "
-								+ $("#Password").val());
-						var date = {
-							userId : $("#UserId").val(),
-							password : $("#Password").val()
-						};
-						$.ajax({
-							url : "/api/logInfo",
-							method : "POST",
-							data : date
-						}).done(function(result) {
-							if (result == 1) {
-								alert($("#UserId").val() + "님 반갑습니다");
-								location.reload();
-							} else {
-								alert("누구세요");
-								location.href = "/login";
-							}
-						});
-					}
-				})
-		$(".backend").on("click",function() {
+// 		})
+		$(".login_input").bind("keypress",function(e){
+			if(e.keyCode == 13&&$(this).attr("id")=="Password"){
+				$(".front button").attr("type","button");
+				submit_login();
+			}
+		});
+		
+		$(".front button").on("mousedown",submit_login());
+		
+		$(".backend").on("mousedown",function() {
 					var createUser = {
 						userId : $("#CreateUserId").val(),
 						password : $("#CreatePassword").val(),
@@ -193,7 +175,7 @@ body {
 					}
 					return true;
 				}
-				$(".backend-form div input").one("focus",function(){
+				$(".backend-form div input").one("mousedown",function(){
 					if($(this).attr("id")=="CreatePassword"){
 						changeText(this,"17px");
 					}
@@ -230,13 +212,18 @@ body {
 					}else{
 						seccesOrfail(this,"fail","#660066");
 					}
-					if(checkState()){
-						$(".backend button").attr("type","button");
-						console.log("all check");
-					}
+					
 					console.log(createState);
 				
 				})
+				$("#CreateAge").bind("keypress",function(e){
+					if(e.keyCode == 13){
+						$(".backend button").attr("type","button");
+					}
+				});
+				
+				
+				
 				
 				$(".backend-form div input").bind('keypress',function(e){
 					console.log("check index : "+$(".backend-form .input-container").index($(this).parent()));
@@ -251,6 +238,29 @@ body {
 						console.log("check html"+$(this).next("label").text());
 					}
 					})
+					
+	function submit_login() {
+		var date = {
+			userId : $("#UserId").val(),
+			password : $("#Password").val()
+		};
+		if (($("#UserId").val().trim() != "") && ($("#Password").val().trim() != "")) {
+			console.log("보낼거야" + $("#UserId").val() + " , " + $("#Password").val());
+			$.ajax({
+				url : "/api/logInfo",
+				method : "POST",
+				data : date
+				}).done(function(result) {
+					if (result == 1) {
+						alert($("#UserId").val() + "님 반갑습니다");
+						location.reload();
+					} else {
+						alert("누구세요");
+						location.href = "/login";
+					}
+				});
+		}
+	}
 		
 	</script>
 

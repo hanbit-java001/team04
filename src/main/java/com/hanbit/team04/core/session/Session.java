@@ -10,11 +10,13 @@ public class Session {
 	private boolean loggedIn;
 	private String userId;
 	private int age;
+	private String name;
 
 	public void logout() {
 		loggedIn = false;
 		userId = "";
 		age = -1;
+		name="";
 	}
 
 	public boolean isLoggedIn() {
@@ -39,6 +41,14 @@ public class Session {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	

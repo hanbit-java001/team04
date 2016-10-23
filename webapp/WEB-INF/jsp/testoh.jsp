@@ -12,36 +12,24 @@
 <title>Rounded Animated Navigation | CodyHouse</title>
 </head>
 <body>
-<form class="backend-form">
-				<div class="input-container">
-					<input type="text" id="CreateUserId" required="required" /> <label
-						for="UserId">UserId</label>
-					<div class="bar"></div>
-				</div>
-				<div class="input-container">
-					<input type="password" id="CreatePassword" required="required" />
-					<label for="Password">Password</label>
-					<div class="bar"></div>
-				</div>
-				<div class="input-container">
-					<input type="text" id="CreateUserName" required="required" /> <label
-						for="UserName">UserName</label>
-					<div class="bar"></div>
-				</div>
-				<div class="input-container">
-					<input type="text" id="CreateAge" required="required" /> <label
-						for="Age">Age</label>
-					<div class="bar"></div>
-				</div>
-				<div class="backend">
-<!-- 				<div class="backend"> -->
-					<button type="button">
-						<span>Next</span>
-					</button>
-					<button>
-						<span>뭐라고할까</span>
-					</button>
-				</div>
-			</form>
+<form action=""><input class="mytext" type="text" style="width: 200px"/>
+
+<button class="mybutton" type="button">button</button>
+</form>
 </body>
+<script src='/static/plugins/jquery/jquery-3.1.0.min.js'></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".mytext").focusOut(
+		function(){
+			console.log("focusout");
+		}
+	})
+	$(".mybutton").on("click",function(){
+		console.log("click");
+	})
+})
+
+
+</script>
 </html>

@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
 import com.hanbit.team04.core.service.ReplyService;
+import com.hanbit.team04.core.session.LoginRequired;
+import com.hanbit.team04.core.session.Session;
+import com.hanbit.team04.core.session.SessionHelpler;
 import com.hanbit.team04.core.vo.IdeaMemberVO;
 
 @Controller
@@ -47,7 +50,7 @@ public class KakaoController {
 		LOGGER.info("testController - test");
 		return "testoh2";
 	}
-
+	@LoginRequired
 	@RequestMapping("/board/list_oh")
 	public String listOh() {
 		LOGGER.info("testController - test");
@@ -113,6 +116,14 @@ public class KakaoController {
 		LOGGER.info("check create" + userId + " , " + password);
 		int result = ideaMemberService.checkLogin(userId, password);
 		LOGGER.info("check result : " + result);
+		if(result==1){
+			IdeaMemberVO ideaMemberVO = ideaMemberService.getMember(userId, password);
+		Session session = SessionHelpler.getSession();
+		session.setLoggedIn(true);
+		session.setUserId(ideaMemberVO.getUserId());
+		session.setAge(ideaMemberVO.getAge());
+		session.setName(ideaMemberVO.getname());
+		}
 		return result;
 	}
 	

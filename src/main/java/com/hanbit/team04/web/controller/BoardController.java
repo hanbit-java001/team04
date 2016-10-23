@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
 import com.hanbit.team04.core.service.ReplyService;
+import com.hanbit.team04.core.session.LoginRequired;
 import com.hanbit.team04.core.session.Session;
 import com.hanbit.team04.core.session.SessionHelpler;
 import com.hanbit.team04.core.vo.IdeaMemberVO;
@@ -39,7 +40,7 @@ public class BoardController {
 
 	@Autowired
 	private IdeaMemberService ideaMemberService;
-
+	@LoginRequired
 	@RequestMapping("/list2")
 	public String test2() {
 
