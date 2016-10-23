@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ideaBoard">
+
+	<select id="selectSysdate" resultType="map">
+		SELECT SYSDATE
+		  FROM DUAL
+	</select>
+	
+	<select id="selectBoards" resultType="IdeaBoardVO">
+		SELECT USER_ID, CONTENTS, TITLE FROM PJ_BOARD
+	</select>
+	
+	<select id="selectTotCnt" resultType="int">
+		SELECT COUNT(IDX) FROM PJ_BOARD
+	</select>
+	
+	<select id="selectBoards2" parameterType="int" resultType="IdeaBoardVO">
+	<![CDATA[
+	SELECT 	a.rn, a.userId, a.title, a.contents, a.articleDate
+		  FROM (
+			SELECT a.rn, a.userId, a.title, a.contents, a.articleDate
+			  FROM (
+				SELECT ROWNUM rn, USER_ID userId, TITLE title,
+					   CONTENTS contents, ARTICLE_DATE articleDate
+				  FROM PJ_BOARD) a
+			 WHERE rn <= 10 * #{pageNum}) a
+		 WHERE rn > 10 * (#{pageNum} - 1)
+		  	]]>
+	</select>
+	
+</mapper>

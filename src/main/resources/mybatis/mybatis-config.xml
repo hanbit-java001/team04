@@ -10,5 +10,6 @@
 		<typeAlias type="com.hanbit.team04.core.vo.IdeaVO" alias="IdeaVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.ReplyVO" alias="ReplyVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.IdeaMemberVO" alias="IdeaMemberVO" />
+		<typeAlias type="com.hanbit.team04.core.vo.IdeaBoardVO" alias="IdeaBoardVO" />
 	</typeAliases>
 </configuration>
