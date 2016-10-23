@@ -412,7 +412,7 @@ body {
 }
 
 .card.alt .toggle:before {
-	content: '\f040';
+	content: '\f044';
 	display: inline-block;
 	font: normal normal normal 14px/1 FontAwesome;
 	font-size: inherit;
@@ -490,10 +490,10 @@ body {
 	background: rgba(255, 255, 255, 0.9);
 }
 
-.card.alt .button-container button:active:before, .card.alt .button-container button:focus:before
-	{
-	display: none;
-}
+/* .card.alt .button-container button:active:before, .card.alt .button-container button:focus:before */
+/* 	{ */
+/* 	display: none; */
+/* } */
 
 /* Keyframes */
 @

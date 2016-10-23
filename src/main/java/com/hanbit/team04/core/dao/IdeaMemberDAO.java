@@ -15,7 +15,7 @@ public class IdeaMemberDAO {
 	private static final Logger LOGGER = LoggerFactory.getLogger(IdeaMemberDAO.class);
 	@Autowired
 	private SqlSession sqlSession;
-	public int checkLogin(Map logInfo) {
+	public String checkLogin(Map<String,String> logInfo) {
 		LOGGER.debug("check loginfo"+logInfo);
 		return sqlSession.selectOne("IdeaMember.checkloInfo", logInfo);
 	}

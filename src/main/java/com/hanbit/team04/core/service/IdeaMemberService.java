@@ -19,10 +19,14 @@ public class IdeaMemberService {
 	private IdeaMemberDAO ideaMemberDAO;
 
 	public int checkLogin(String userId, String password) {
-		Map logInfo = new HashMap<>();
+		Map<String,String> logInfo = new HashMap<>();
 		logInfo.put("userId", userId);
 		logInfo.put("password", password);
-		int result = ideaMemberDAO.checkLogin(logInfo);
+		int result; 
+		if(ideaMemberDAO.checkLogin(logInfo)!=null)
+			result=1;
+		else
+			result=0;
 		return result;
 	}
 

@@ -109,6 +109,7 @@ public class KakaoController {
 		LOGGER.info("check create" + createUser);
 		int result  = ideaMemberService.createlogInfo(createUser);
 		return result;
+//		return 0;
 	}
 
 	@RequestMapping(value="/api/logInfo", method=RequestMethod.POST)
