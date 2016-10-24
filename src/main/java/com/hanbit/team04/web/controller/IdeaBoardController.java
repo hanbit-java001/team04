@@ -14,17 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanbit.team04.core.service.IdeaBoardService;
+import com.hanbit.team04.core.session.LoginRequired;
 import com.hanbit.team04.core.vo.IdeaBoardVO;
 
 
 @Controller
 public class IdeaBoardController {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(IdeaBoardController.class);
-	
+
 	@Autowired
 	private IdeaBoardService ideaBoardService;
-	
+
+//	@LoginRequired
+//	aop 입니다.
 	@RequestMapping("/hyundo/board")
 	public String IdeaBoards(){
 		return "idea_board";
@@ -33,29 +36,29 @@ public class IdeaBoardController {
 	@RequestMapping("/api/data")
 	@ResponseBody
 	public List<IdeaBoardVO> getIdeaBoards(){
-		List<IdeaBoardVO> voList = ideaBoardService.getIdeaBoards(); 
-		
+		List<IdeaBoardVO> voList = ideaBoardService.getIdeaBoards();
+
 		return voList;
 	}
-	
+
 	@RequestMapping("/api/totCnt")
 	@ResponseBody
 	public int getTotalCnt(){
 		int totCnt = ideaBoardService.getTotCnt();
 		return totCnt;
 	}
-	
+
 	@RequestMapping(value="/api/datas",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> IdeaBoards(@RequestParam("pageNum") int pageNum){
 		Map<String, Object> result = new HashMap<>();
 		List<IdeaBoardVO> voList = ideaBoardService.getIdeaBoards2(pageNum);
 		int totalCount = ideaBoardService.getTotCnt();
-		
+
 		result.put("totCnt", totalCount);
 		result.put("list", voList);
-		
+
 		return result;
 	}
-	
+
 }

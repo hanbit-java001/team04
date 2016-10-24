@@ -50,7 +50,8 @@ public class KakaoController {
 		LOGGER.info("testController - test");
 		return "testoh2";
 	}
-	@LoginRequired
+//	@LoginRequired
+//	aop 입니다.
 	@RequestMapping("/board/list_oh")
 	public String listOh() {
 		LOGGER.info("testController - test");
@@ -126,7 +127,7 @@ public class KakaoController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping(value="/api/CheckId", method=RequestMethod.GET)
 	@ResponseBody
 	public int getSchedule(@RequestParam("checkingId") String checkingId) {

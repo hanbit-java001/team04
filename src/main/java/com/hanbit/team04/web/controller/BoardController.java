@@ -40,7 +40,8 @@ public class BoardController {
 
 	@Autowired
 	private IdeaMemberService ideaMemberService;
-	@LoginRequired
+//	@LoginRequired
+//	aop 입니다.
 	@RequestMapping("/list2")
 	public String test2() {
 
