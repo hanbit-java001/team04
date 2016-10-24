@@ -20,7 +20,26 @@
 
 <script src="/static/plugins/rounded-ani/js/modernizr.js"></script>
 <!-- Modernizr -->
+<style type="text/css">
+.addContent{
+position: fixed;
+top: 18px;
+  right: 12%;
+  height: 44px;
+  width: 44px;
+  font-size: 100%;
+/*   z-index: 5; */
+/*   /* image replacement */ */
+/*   overflow: hidden; */
+/*   text-indent: 100%; */
+/*   white-space: nowrap; */
 
+}
+.addContent img{
+height: 100%;
+width: 100%;
+}
+</style>
 <title>Rounded Animated Navigation | CodyHouse</title>
 </head>
 <body>
@@ -69,6 +88,7 @@
 		<i class="fa fa-arrow-right" aria-hidden="true" text="right"></i>
 	</div>
 	<!-- cd-overlay-content -->
+	<div class ="addContent"><img src="/static/image/add-create-new-plus-icon-20.png"></div>
 
 	<a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
 	<script src="/static/plugins/rounded-ani/js/jquery-2.1.1.js"></script>
