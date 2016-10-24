@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.min.css">
 <!-- css font -->
 <link  href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 <!-- Resource style -->
 <link rel="stylesheet" href="/static/plugins/css/board_first.css">
 
@@ -24,10 +25,11 @@
 .addContent{
 position: fixed;
 top: 18px;
-  right: 12%;
-  height: 44px;
-  width: 44px;
+  right: 11%;
+  height: 43px;
+  width: 43px;
   font-size: 100%;
+  cursor: pointer;
 /*   z-index: 5; */
 /*   /* image replacement */ */
 /*   overflow: hidden; */
@@ -38,6 +40,25 @@ top: 18px;
 .addContent img{
 height: 100%;
 width: 100%;
+}
+.like-font{
+  text-align: center;
+  background-color: #87c057;
+  font-family: Lato, sans-serif;
+  font-weight: 100;
+  font-size: 20px;
+}
+.add-list{
+position: fixed;
+width: 30%;
+height: 40%;
+text-align: center;
+background-color: #001F3F;
+color: white;
+z-index: 50;
+top: 20%;
+margin-left: 35%;
+margin-right: 35%;
 }
 </style>
 <title>Rounded Animated Navigation | CodyHouse</title>
@@ -88,7 +109,8 @@ width: 100%;
 		<i class="fa fa-arrow-right" aria-hidden="true" text="right"></i>
 	</div>
 	<!-- cd-overlay-content -->
-	<div class ="addContent"><img src="/static/image/add-create-new-plus-icon-20.png"></div>
+	<div class ="addContent"><img src="/static/image/create.png"></div>
+	<div class="add-list like-font">글을 작성해 보자 <h2>add to list</h2></div>
 
 	<a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
 	<script src="/static/plugins/rounded-ani/js/jquery-2.1.1.js"></script>
