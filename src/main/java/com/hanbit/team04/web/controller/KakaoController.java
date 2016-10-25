@@ -1,9 +1,12 @@
 package com.hanbit.team04.web.controller;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
@@ -21,6 +26,8 @@ import com.hanbit.team04.core.service.ReplyService;
 import com.hanbit.team04.core.session.LoginRequired;
 import com.hanbit.team04.core.session.Session;
 import com.hanbit.team04.core.session.SessionHelpler;
+import com.hanbit.team04.core.vo.FileVO;
+import com.hanbit.team04.core.vo.IdeaBoardVO;
 import com.hanbit.team04.core.vo.IdeaMemberVO;
 
 @Controller
@@ -61,17 +68,19 @@ public class KakaoController {
 	@RequestMapping("/Home")
 	public String mainPage() {
 		LOGGER.info("testController - test");
-		// Date date = new Date();
-		// for(int i=0;i<200;i++){
-		// IdeaVO ideaVO = new IdeaVO(0, "title"+i, date.toString(),
-		// "contents"+i, "userId"+i, date.toString(), 'N', 1, "NULL");
-		// ideaService.addIdea(ideaVO);
-		// if(i%2==0){
-		// ReplyVO replyVO = new ReplyVO(0, "userId"+i, "contents"+i,
-		// date.toString());
-		// replyService.addMiniBoard(replyVO);
-		// }
-		// }
+		 Date date = new Date();
+//		 for(int i=0;i<32;i++){
+//			 IdeaBoardVO BVO = new IdeaBoardVO();
+//					  BVO.setTitle("hyundo_title_"+i);
+////					  BVO.setRegDate(date.toString());
+////					  BVO.setModDate(date.toString());
+//					  BVO.setContents("hyundo_contents_"+i);
+//					  BVO.setUserId("hyundo_userId_"+i);
+//					int result=  ideaService.insertboard(BVO);
+//					if(result==0){
+//						LOGGER.info("testController - insert board error");
+//					}
+//		 }
 
 		return "mainHome";
 	}
@@ -134,5 +143,54 @@ public class KakaoController {
 		LOGGER.info("checking id" +checkingId);
 		return ideaMemberService.checking(checkingId);
 	}
+	@RequestMapping(value="/api/board/add", method=RequestMethod.POST)
+	@ResponseBody
+	public Map doJoin(MultipartHttpServletRequest request) throws Exception {
 
+		String title = request.getParameter("title");
+		String contents = request.getParameter("contents");
+		String fileId = "";
+
+		Iterator<String> paramNames = request.getFileNames();
+
+		if (paramNames.hasNext()) {
+			String paramName = paramNames.next();
+
+			MultipartFile file = request.getFile(paramName);
+
+			FileVO fileVO = new FileVO();
+			fileVO.setContentType(file.getContentType());
+			fileVO.setFileSize(file.getSize());
+			fileVO.setFileName(file.getName());
+			fileVO.setFileData(file.getBytes());
+
+			fileId = fileService.storeFile(fileVO);
+		}
+		try {
+			IdeaBoardVO ideaBoardVO = new IdeaBoardVO();
+			ideaBoardVO.setTitle(title);
+			ideaBoardVO.setContents(contents);
+			ideaBoardVO.setFileId(fileId);
+			Session session = SessionHelpler.getSession();
+			if(session.isLoggedIn()){
+			ideaBoardVO.setUserId(session.getUserId());}
+			else{
+				ideaBoardVO.setUserId("누구세요");
+			}
+			ideaService.insertboard(ideaBoardVO);
+
+			memberService.joinMember(member);
+		}
+		catch (Exception e) {
+			if (StringUtils.isNotBlank(fileId)) {
+				fileService.removeFile(fileId);
+			}
+
+			throw new RuntimeException(e.getMessage(), e);
+		}
+
+		Map result = new HashMap();
+		result.put("name", name);
+
+		return result;
 }

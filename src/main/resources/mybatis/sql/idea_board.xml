@@ -7,15 +7,15 @@
 		SELECT SYSDATE
 		  FROM DUAL
 	</select>
-	
+
 	<select id="selectBoards" resultType="IdeaBoardVO">
 		SELECT USER_ID, CONTENTS, TITLE FROM PJ_BOARD
 	</select>
-	
+
 	<select id="selectTotCnt" resultType="int">
 		SELECT COUNT(IDX) FROM PJ_BOARD
 	</select>
-	
+
 	<select id="selectBoards2" parameterType="int" resultType="IdeaBoardVO">
 	<![CDATA[
 	SELECT 	a.rn, a.userId, a.title, a.contents, a.articleDate
@@ -29,5 +29,15 @@
 		 WHERE rn > 10 * (#{pageNum} - 1)
 		  	]]>
 	</select>
-	
+	<select id="selectNextIndex" resultType="int">
+		SELECT SEQ_IDX.NEXTVAL
+		FROM DUAL
+	</select>
+	<insert id="insertIdea" parameterType="IdeaBoardVO">
+		INSERT INTO IDEA_BOARD
+		(BOARD_IDX,TITLE,REGDATE,CONTENTS,USER_ID,MOD_DATE,CONFIRM,HITCNT,FILE_ID)
+		VALUES
+		(#{boardIdx}, #{title}, #{regDate}, #{contents}, #{userId},
+		#{modDate}, #{confirm}, #{hitCnt}, #{fileId})
+	</insert>
 </mapper>

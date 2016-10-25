@@ -26,15 +26,37 @@
 position: fixed;
 top: 18px;
   right: 11%;
-  height: 43px;
-  width: 43px;
+  height: 44px;
+  width: 44px;
   font-size: 100%;
   cursor: pointer;
+  background-color: #091d23;
+  border-radius: 50%;
 /*   z-index: 5; */
 /*   /* image replacement */ */
 /*   overflow: hidden; */
 /*   text-indent: 100%; */
 /*   white-space: nowrap; */
+
+}
+.addDiv{
+position: absolute;
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    display: inline-block;
+    background-color: #ffffff;
+    z-index: 10;
+    transform: translateX(-50%) translateY(-50%);
+}
+.plus1{
+	width: 20px;
+	height: 5px;
+}
+.plus2{
+	width: 5px;
+	height: 20px;
 
 }
 .addContent img{
@@ -50,15 +72,81 @@ width: 100%;
 }
 .add-list{
 position: fixed;
-width: 30%;
-height: 40%;
+width: 50%;
+height: 50%;
 text-align: center;
 background-color: #001F3F;
 color: white;
 z-index: 50;
 top: 20%;
-margin-left: 35%;
-margin-right: 35%;
+margin-left: 25%;
+margin-right: 25%;
+display: none;
+padding-top: 2%;
+}
+.rotate {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    /*transform: rotate(180deg);*/
+    transition: .3s;
+    background-color: #ffb441;
+}
+.rotate-reset {
+    transform: rotate(0deg);
+    -webkit-transform: rotate( 0deg);
+    -moz-transform: rotate( 0deg);
+    -o-transform: rotate( 0deg);
+    -ms-transform: rotate( 0deg);
+    transform: rotate( 0deg);
+    transition: .3s;
+}
+input[type=text] {
+display: inline-block;
+    border: 5px solid white;
+    -webkit-box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    -moz-box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    padding: 15px;
+    background: rgba(255,255,255,0.5);
+    margin: 0 5% 10px 5%;
+
+    width: 60%;
+    right: 0%;
+}
+input[type=text]:focus {
+    border: 3px solid #555;
+}
+input[type=button]{
+	border: 5px solid white;
+    -webkit-box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    -moz-box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+    padding: 15px;
+    background: rgba(255,255,255,0.5);
+    margin: 0 5% 10px 5%;
+
+    width: 30%;
+}
+.add-list label{
+display: inline-block;
+width: 25%;
+margin-left: 4%;
 }
 </style>
 <title>Rounded Animated Navigation | CodyHouse</title>
@@ -109,8 +197,23 @@ margin-right: 35%;
 		<i class="fa fa-arrow-right" aria-hidden="true" text="right"></i>
 	</div>
 	<!-- cd-overlay-content -->
-	<div class ="addContent"><img src="/static/image/create.png"></div>
-	<div class="add-list like-font">글을 작성해 보자 <h2>add to list</h2></div>
+	<div class ="addContent"><div class="addDiv plus1"></div><div class="addDiv plus2"></div></div>
+	<div class="add-list like-font"><form action="#">
+
+    <label for="title">title</label>
+    <input type="text" id="title" >
+
+    <label for="content">content</label>
+    <input type="text" id="content" >
+
+    <label for="mname">First Name</label>
+    <input type="text" id="lname" name="firstname">
+
+    <label for="nname">Last Name</label>
+    <input type="text" id="nname" name="lastname">
+
+    <input type="button" value="Submit">
+  </form> </div>
 
 	<a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
 	<script src="/static/plugins/rounded-ani/js/jquery-2.1.1.js"></script>
@@ -120,6 +223,19 @@ margin-right: 35%;
 	<!-- Resource jQuery -->
 	<script src="/static/plugins/3d-curtain-template/js/main.js"></script>
 	<script type="text/javascript">
+		$(".addContent").on("click",function(){
+			if($(this).hasClass("rotate")){
+				$(this).removeClass("rotate");
+				$(this).addClass("rotate-reset");
+				$(".add-list").fadeOut("slow");
+
+			}else{
+				$(this).removeClass("rotate-reset");
+				$(this).addClass("rotate");
+				$(".add-list").fadeIn("slow");
+			}
+		})
+
 		// 	$(document).ready(function(){
 		// 		setTimeout(function(){
 		// 			 $('body,html').animate({scrollTop: $(".is-visible").next().position().top}, 800);
