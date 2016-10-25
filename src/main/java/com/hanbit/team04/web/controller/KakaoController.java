@@ -164,7 +164,7 @@ public class KakaoController {
 			fileVO.setFileName(file.getName());
 			fileVO.setFileData(file.getBytes());
 
-			fileId = fileService.storeFile(fileVO);
+//			fileId = fileService.storeFile(fileVO);
 		}
 		try {
 			IdeaBoardVO ideaBoardVO = new IdeaBoardVO();
@@ -179,18 +179,18 @@ public class KakaoController {
 			}
 			ideaService.insertboard(ideaBoardVO);
 
-			memberService.joinMember(member);
+//			memberService.joinMember(member);
 		}
 		catch (Exception e) {
 			if (StringUtils.isNotBlank(fileId)) {
-				fileService.removeFile(fileId);
+//				fileService.removeFile(fileId);
 			}
 
 			throw new RuntimeException(e.getMessage(), e);
 		}
 
 		Map result = new HashMap();
-		result.put("name", name);
+//		result.put("name", name);
 
-		return result;
+		return result;}
 }

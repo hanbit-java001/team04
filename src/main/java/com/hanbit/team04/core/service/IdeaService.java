@@ -83,9 +83,8 @@ public class IdeaService {
 		bVO.setRegDate(sysdateget());
 		bVO.setBoardIdx(ideaDAO.selectNextIndex());
 		bVO.setConfirm("N");
-
+		bVO.setHitCnt(1);
 		if(bVO.getFileId()==null)
-
 		bVO.setFileId("NULL");
 		LOGGER.debug("board check : "+bVO);
 		return ideaBoardDAO.insertBoard(bVO);

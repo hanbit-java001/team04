@@ -59,7 +59,7 @@ public class BoardController {
 
 		List<IdeaVO> result = new ArrayList<>();
 		result = ideaService.getTop3();
-
+LOGGER.debug("check result ahn : "+result);
 		return result;
 	}
 
@@ -128,6 +128,23 @@ public class BoardController {
 		 session.logout();
 
 		 response.sendRedirect("/list2");
+	 }
+
+	 @RequestMapping("/api/board/chatinsert")
+	 @ResponseBody
+	 public Map chatInsert(@RequestParam int page){
+
+
+		 Map result = new HashMap<>();
+
+//		LOGGER.info("댓글달기 시작");
+
+		List<ReplyVO> reply = replyService.getReply(page);
+
+		 result.put("page", 1);
+
+//		 LOGGER.info("댓글달기 종료");
+		 return result;
 	 }
 
 }
