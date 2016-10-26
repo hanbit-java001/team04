@@ -30,7 +30,7 @@ public class IdeaBoardController {
 //	aop 입니다.
 	@RequestMapping("/hyundo/board")
 	public String IdeaBoards(){
-		return "idea_board";
+		return "idea_board2";
 	}
 
 	@RequestMapping("/api/data")

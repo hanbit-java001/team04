@@ -9,11 +9,11 @@
 	</select>
 	
 	<select id="selectBoards" resultType="IdeaBoardVO">
-		SELECT USER_ID, CONTENTS, TITLE FROM PJ_BOARD
+		SELECT USER_ID, CONTENTS, TITLE FROM IDEA_BOARD
 	</select>
 	
 	<select id="selectTotCnt" resultType="int">
-		SELECT COUNT(IDX) FROM PJ_BOARD
+		SELECT COUNT(*) FROM IDEA_BOARD
 	</select>
 	
 	<select id="selectBoards2" parameterType="int" resultType="IdeaBoardVO">
@@ -23,10 +23,10 @@
 			SELECT a.rn, a.userId, a.title, a.contents, a.articleDate
 			  FROM (
 				SELECT ROWNUM rn, USER_ID userId, TITLE title,
-					   CONTENTS contents, ARTICLE_DATE articleDate
-				  FROM PJ_BOARD) a
-			 WHERE rn <= 10 * #{pageNum}) a
-		 WHERE rn > 10 * (#{pageNum} - 1)
+					   CONTENTS contents, REGDATE articleDate
+				  FROM IDEA_BOARD) a
+			 WHERE rn <= 9 * #{pageNum}) a
+		 WHERE rn > 9 * (#{pageNum} - 1)
 		  	]]>
 	</select>
 	
