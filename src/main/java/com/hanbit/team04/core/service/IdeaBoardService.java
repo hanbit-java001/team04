@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.hanbit.team04.core.dao.IdeaBoardDAO;
 import com.hanbit.team04.core.vo.IdeaBoardVO;
 
-
 @Service
 public class IdeaBoardService {
 
