@@ -161,7 +161,7 @@
 				</div>
 			</div>
 
-			<div class="panel-footer col-lg-9">
+			<div class="panel-footer col-lg-12">
 					<div class="input-group">
 						<input id="btn-input" type="text" class="form-control input-sm"	placeholder="Type your message here..." />
 						<span class="input-group-btn">
@@ -182,7 +182,7 @@
 		</div>
 		<div class="form-group inlogin-panel">
 		<span class="label label-default">비밀번호</span>
-		<input type="text" class="form-control" id="submitpassword" placeholder="비밀번호">
+		<input type="password" class="form-control" id="submitpassword" placeholder="비밀번호">
 		</div>
 		<div class="btn-line">
 			<button class="btn btn-primary loginbtn">전송</button>

@@ -1,6 +1,7 @@
 package com.hanbit.team04.core.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -9,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hanbit.team04.core.vo.IdeaBoardVO;
+import com.hanbit.team04.core.vo.IdeaVO;
 
 
 @Repository
 public class IdeaBoardDAO {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(IdeaBoardDAO.class);
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -29,6 +31,14 @@ public class IdeaBoardDAO {
 
 	public List<IdeaBoardVO> selectBoards2(int pageNum) {
 		return sqlSession.selectList("ideaBoard.selectBoards2", pageNum);
+	}
+
+	public Map selectSysDate() {
+		return sqlSession.selectOne("ideaBoard.selectSysdate");
+	}
+
+	public int insertBoard(IdeaBoardVO bVO) {
+		return sqlSession.insert("ideaBoard.insertIdea",bVO);
 	}
 
 }

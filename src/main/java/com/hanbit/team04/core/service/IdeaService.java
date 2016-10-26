@@ -8,7 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.hanbit.team04.core.vo.IdeaBoardVO;
 import com.hanbit.team04.core.vo.IdeaVO;
+import com.hanbit.team04.core.dao.IdeaBoardDAO;
 import com.hanbit.team04.core.dao.IdeaDAO;
 
 @Service
@@ -17,7 +20,9 @@ public class IdeaService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(IdeaService.class);
 
 	@Autowired
-	IdeaDAO ideaDAO = new IdeaDAO();
+	IdeaDAO ideaDAO;
+	@Autowired
+	IdeaBoardDAO ideaBoardDAO;
 
 	public int addIdea(IdeaVO idea) {
 		LOGGER.debug("게시글 추가");
@@ -67,6 +72,22 @@ public class IdeaService {
 	public List<IdeaVO> getTop3() {
 		// TODO Auto-generated method stub
 		return ideaDAO.selectTop3();
+	}
+	public String sysdateget(){
+		String result = ideaBoardDAO.selectSysDate().get("SYSDATE").toString();
+		return result;
+	}
+	public int insertboard(IdeaBoardVO bVO) {
+
+		bVO.setModDate(sysdateget());
+		bVO.setRegDate(sysdateget());
+		bVO.setBoardIdx(ideaDAO.selectNextIndex());
+		bVO.setConfirm("N");
+		bVO.setHitCnt(1);
+		if(bVO.getFileId()==null)
+		bVO.setFileId("NULL");
+		LOGGER.debug("board check : "+bVO);
+		return ideaBoardDAO.insertBoard(bVO);
 	}
 
 

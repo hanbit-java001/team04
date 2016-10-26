@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hanbit.team04.core.vo.IdeaBoardVO;
 import com.hanbit.team04.core.vo.IdeaVO;
 
 @Repository
@@ -88,6 +89,12 @@ public class IdeaDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Idea.selectTop3");
 	}
+
+	public Map selectSysDate() {
+		return sqlSession.selectOne("Idea.selectSysdate");
+	}
+
+
 
 
 

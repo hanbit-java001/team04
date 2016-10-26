@@ -24,6 +24,7 @@
 								top2:result[1].hitCnt,
 								top3:result[2].hitCnt
 						};
+						console.log("check ing : "+top3Num.top1+" , "+top3Num.top2+" , "+top3Num.top3+" check ing : "+top3Name.top1,+" , "+top3Name.top2+" , "+top3Name.top3);
 						drawDonutGraph(top3Num , top3Name);
 						drawBarGraph(top3Num ,top3Name)
 					}).fail(function() {
@@ -60,12 +61,20 @@
 				}
 
 			$("#btn-chat").on("click", function(){
+
+				alert(currentPage);
+
 				$.ajax({
 
-				}).done(function(){
-
+					url:"/api/board/chatinsert",
+					method:"POST",
+					data:{
+						page:currentPage
+					}
+				}).done(function(result){
+					alert(result.page);
 				}).fail(function(){
-					alert('망')
+					alert('망');
 				});
 
 				})

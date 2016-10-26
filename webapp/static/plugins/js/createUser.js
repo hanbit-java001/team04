@@ -144,7 +144,12 @@ $(function(){
 		});
 //		container.empty();
 		userText.val("input yours").fadeIn();
+		setTimeout(function(){
+			userText.click().focus();
+		},1000);
+
 	},2000);
+
 
 });
 

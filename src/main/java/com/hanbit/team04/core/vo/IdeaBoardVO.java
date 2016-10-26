@@ -11,8 +11,8 @@ public class IdeaBoardVO {
 	private String confirm;
 	private int hitCnt;
 	private String fileId;
-	
-	
+
+
 	@Override
 	public String toString() {
 		return "IdeaBoardVO [boardIdx=" + boardIdx + ", title=" + title + ", regDate=" + regDate + ", contents="
@@ -73,5 +73,22 @@ public class IdeaBoardVO {
 	public void setFileId(String fileId) {
 		this.fileId = fileId;
 	}
-	
+	public IdeaBoardVO() {
+		super();
+	}
+	public IdeaBoardVO(int boardIdx, String title, String regDate, String contents, String userId, String modDate,
+			String confirm, int hitCnt, String fileId) {
+		super();
+		this.boardIdx = boardIdx;
+		this.title = title;
+		this.regDate = regDate;
+		this.contents = contents;
+		this.userId = userId;
+		this.modDate = modDate;
+		this.confirm = confirm;
+		this.hitCnt = hitCnt;
+		this.fileId = fileId;
+	}
+
+
 }
