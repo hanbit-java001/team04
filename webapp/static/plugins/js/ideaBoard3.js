@@ -2,16 +2,16 @@ $(function() {
 
 	var totCnt;
 	var CrntPageNum = 1;
-	
+	var checkOne= true;
 	var EndBtnNum = ((((CrntPageNum-1)/3)+1)*3)+1;
 	//////////////////////////////////
-	
+
 	//
 	//
 //	 $('.cd-3d-portfolio').click(function(){
 //	        $('.cd-3d-portfolio')[0].reset();
 //	  });
-	
+
 
 		// / 총 숫자 가져오는 애
 	function getTotalCnt() {
@@ -23,8 +23,8 @@ $(function() {
 
 		})
 	}
-	
-	
+
+
 	var totPageNum = totCnt / 9;
 	////////////////////////////////////
 	// 버튼 그려주는 애
@@ -37,9 +37,9 @@ $(function() {
 		$(".PgThree").text("PAGE"+PgThree);
 //		Btns(CrntPageNum);
 	}
-	
+
 	function Btns(CrntPageNum){
-		
+
 	}
 	////////////////////////////////
 	$(".prevBtn").on("click", function(){
@@ -50,22 +50,23 @@ $(function() {
 		$(".ex li a").removeClass("selected");
 		$(".ex li a").first().addClass("selected");
 	});
-	
+
 	$(".aftBtn").on("click", function(){
+		$(".ex li a").last().click();
 		CrntPageNum++;
 		console.log("aftBtn :"+CrntPageNum);
-		$(".front-face").addClass("selected");
+//		$(".front-face").addClass("selected");
 		makeBtn(CrntPageNum);
 		makeView(CrntPageNum);
 		$(".ex li a").removeClass("selected");
 //		$(".cd-wrapper .ex li a").first().addClass("selected");
-		$(".ex li a").first().click();
+		setTimeout(function(){$(".ex li a").first().click()}, 1000);
 	});
-	
-	
+
+
 		/////////////////////////////////////////////////////////
 	// left - front - right
-	
+
 	// vo 9개 가져와서 그려주는 애
 	function makeView(CrntPageNum){
 	$.ajax({
@@ -75,13 +76,13 @@ $(function() {
 					pageNum : CrntPageNum
 				}
 			}).done(function(result) {
-				
+
 				var loop = [1,4,7,2,5,8,3,6,9];
-				
+
 				var PgOne = (CrntPageNum-1)*3+1;
 				var PgTwo = PgOne+1;
 				var PgThree = PgTwo+1;
-				
+
 				for(var i = 0; i<=8; i++){
 //					console.log("length : "+result.list.length+","+i);
 //					console.log("loop : "+loop+","+i);
@@ -97,36 +98,39 @@ $(function() {
 					$(".PgOne").text("PAGE"+PgOne);
 					$(".PgTwo").text("PAGE"+PgTwo);
 					$(".PgThree").text("PAGE"+PgThree);
-					
+
 				}
 //				$(".row .selected").removeClass("selected");
 //				$(".front-face").addClass("selected");
-//						
+//
 //						$("li .selected").parent().click();
 //						console.log($("li .selected").parent().html());
+				if(checkOne){
 				mainjs();
-				$(".row .selected").removeClass("right-face").addClass("front-face");
+				checkOne=false;
+				}
+//				$(".row .selected").removeClass("right-face").addClass("front-face");
 					})
 //					Btns(CrntPageNum);
 	}
-	
+
 	////////////////////////////////////////
 	// 버튼 이벤트
 
-	
+
 //	pointer-events: none;
 	function removeClick(){
 //		$( "[disabled='disabled']" ).css({"opacity":"0.3"}).parent().css({"pointer-events":"none"}).parent().parent().attr("disabled",true).off("click");
 		$( "[disabled='disabled']" ).parent().css({"pointer-events":"none"}).parent().parent().attr("disabled",true).off("click");
 //		console.log($( "[disabled='disabled']" ).css({"opacity":"0.3"}).parent().parent().parent().parent().html());
 	}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 원래 있던 js 불러주는 애
 	function mainjs() {
-		
+
 		var isPreserve3DSupported = ($('.preserve3d').length > 0), isTransitionSupported = ($('.csstransitions').length > 0), backToTopBtn = $('.cd-top');
-		
+
 
 		function Portfolio3D(element) {
 			// define a Portfolio3D object
@@ -385,8 +389,8 @@ $(function() {
 			});
 		});
 	}
-	
-	
+
+
 	getTotalCnt();
 	makeView(CrntPageNum);
 //	Btns(CrntPageNum);
