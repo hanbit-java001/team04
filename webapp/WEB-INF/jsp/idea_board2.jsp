@@ -4,9 +4,9 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="static/js/modernizr.js"></script>
-	<link rel="stylesheet" href="static/css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="static/css/style.css"> <!-- Resource style -->
+	<script src="/static/plugins/hyundo/js/modernizr.js"></script>
+	<link rel="stylesheet" href="/static/plugins/hyundo/css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="/static/plugins/hyundo/css/style.css"> <!-- Resource style -->
 	<link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>보드</title>
@@ -28,8 +28,8 @@
 				</div>
 			</ul>
 		</div>
-	</nav> 
-	
+	</nav>
+
 	<div class="projects">
 		<ul class="row">
 			<li class="front-face selected project-1">
@@ -92,7 +92,7 @@
 				</div> <!-- .project-wrapper -->
 			</li>
 		</ul> <!-- .row -->
-	
+
 		<ul class="row">
 			<li class="front-face selected project-4">
 				<div class="project-wrapper">
@@ -155,7 +155,7 @@
 				</div> <!-- .project-wrapper -->
 			</li>
 		</ul> <!-- .row -->
-	
+
 		<ul class="row">
 			<li class="front-face selected project-7">
 				<div class="project-wrapper">
@@ -225,8 +225,8 @@
 	<a href="#0" class="cd-top">Top</a>
 </div>
 
-	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<script type="text/javascript" src="static/js/ideaBoard3.js"></script>
+
+<script type="text/javascript" src="/static/plugins/hyundo/js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/static/plugins/js/ideaBoard3.js"></script>
 </body>
 </html>
