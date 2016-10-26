@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cusBoard">
+
+	<select id="selectSysdate" resultType="map">
+		SELECT SYSDATE
+		  FROM DUAL
+	</select>
+
+	<select id="selectNextIndex" resultType="int">
+		SELECT SEQ_IDX.NEXTVAL
+		FROM DUAL
+	</select>
+	insertCus  작서
+	<insert id="insertCus" parameterType="IdeaCusBoardVO">
+		INSERT INTO IDEA_CUS_BOARD
+		(CUS_IDX,TITLE,REGDATE,CONTENTS,HITCNT,AGE_GROUP,FILE_ID)
+		VALUES
+		(#{cusIDX}, #{title}, #{regDate}, #{contents}, #{ageGroup}, #{hitCnt}, #{fileId})
+	</insert>
+
+</mapper>

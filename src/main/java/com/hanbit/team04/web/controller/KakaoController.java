@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.hanbit.team04.core.service.FileService;
+import com.hanbit.team04.core.service.IdeaCusBoardService;
 import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
 import com.hanbit.team04.core.service.ReplyService;
@@ -28,6 +30,7 @@ import com.hanbit.team04.core.session.Session;
 import com.hanbit.team04.core.session.SessionHelpler;
 import com.hanbit.team04.core.vo.FileVO;
 import com.hanbit.team04.core.vo.IdeaBoardVO;
+import com.hanbit.team04.core.vo.IdeaCusBoardVO;
 import com.hanbit.team04.core.vo.IdeaMemberVO;
 
 @Controller
@@ -39,6 +42,10 @@ public class KakaoController {
 	private ReplyService replyService;
 	@Autowired
 	private IdeaMemberService ideaMemberService;
+	@Autowired
+	private IdeaCusBoardService ideaCusBoardService;
+	@Autowired
+	private FileService fileService;
 
 	@RequestMapping("/kakao")
 	public String list() {
@@ -149,10 +156,11 @@ public class KakaoController {
 
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
+		String age_group = request.getParameter("ageGroup");
 		String fileId = "";
 
 		Iterator<String> paramNames = request.getFileNames();
-
+		LOGGER.info("checking FILE" +title+ " , "+contents +" , "+paramNames);
 		if (paramNames.hasNext()) {
 			String paramName = paramNames.next();
 
@@ -163,20 +171,16 @@ public class KakaoController {
 			fileVO.setFileSize(file.getSize());
 			fileVO.setFileName(file.getName());
 			fileVO.setFileData(file.getBytes());
-
-//			fileId = fileService.storeFile(fileVO);
+			LOGGER.info("checking FILE 2 : "+fileVO.getFileName());
+			fileId = fileService.storeFile(fileVO);
 		}
 		try {
-			IdeaBoardVO ideaBoardVO = new IdeaBoardVO();
-			ideaBoardVO.setTitle(title);
-			ideaBoardVO.setContents(contents);
-			ideaBoardVO.setFileId(fileId);
+			IdeaCusBoardVO ideaCusBoardVO = new IdeaCusBoardVO();
+			ideaCusBoardVO.setTitle(title);
+			ideaCusBoardVO.setContents(contents);
+			ideaCusBoardVO.setFileId(fileId);
 			Session session = SessionHelpler.getSession();
-			if(session.isLoggedIn()){
-			ideaBoardVO.setUserId(session.getUserId());}
-			else{
-				ideaBoardVO.setUserId("누구세요");
-			}
+			IdeaCusBoardService.insertBoard(ideaCusBoardVO);
 			ideaService.insertboard(ideaBoardVO);
 
 //			memberService.joinMember(member);
@@ -189,8 +193,10 @@ public class KakaoController {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 
-		Map result = new HashMap();
-//		result.put("name", name);
-
-		return result;}
+//		Map result = new HashMap();
+////		result.put("name", name);
+//
+//		return result;
+		return null;
+		}
 }

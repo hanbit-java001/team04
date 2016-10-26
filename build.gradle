@@ -12,7 +12,7 @@ version = '1.0.0'
 
 war {
     manifest {
-        attributes 'Implementation-Title': 'Hanbit Scheduler',
+        attributes 'Implementation-Title': 'team04',
                    'Implementation-Version': version
     }
 }

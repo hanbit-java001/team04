@@ -106,7 +106,8 @@ padding-top: 2%;
 }
 input[type=text] {
 display: inline-block;
-    border: 5px solid white;
+    border-bottom: 2px solid white;
+
     -webkit-box-shadow:
       inset 0 0 8px  rgba(0,0,0,0.1),
             0 0 16px rgba(0,0,0,0.1);
@@ -117,13 +118,14 @@ display: inline-block;
       inset 0 0 8px  rgba(0,0,0,0.1),
             0 0 16px rgba(0,0,0,0.1);
     padding: 15px;
-    background: rgba(255,255,255,0.5);
+    background: #001f3f;
     margin: 0 5% 10px 5%;
 
     width: 60%;
     right: 0%;
 }
 input[type=text]:focus {
+background: rgba(255,255,255,0.8);
     border: 3px solid #555;
 }
 input[type=button]{
@@ -140,13 +142,28 @@ input[type=button]{
     padding: 15px;
     background: rgba(255,255,255,0.5);
     margin: 0 5% 10px 5%;
-
-    width: 30%;
+    width: 25%;
+	bottom: 5%;
+	margin-right: auto;
+	position: absolute;
 }
 .add-list label{
 display: inline-block;
 width: 25%;
 margin-left: 4%;
+}
+#dropbox {
+    width: 35%;
+    height: 40%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+    color: gray;
+    margin-top:5%;
+    margin-left: 10%;
+}
+#status{
+
 }
 </style>
 <title>Rounded Animated Navigation | CodyHouse</title>
@@ -206,14 +223,12 @@ margin-left: 4%;
     <label for="content">content</label>
     <input type="text" id="content" >
 
-    <label for="mname">First Name</label>
-    <input type="text" id="lname" name="firstname">
 
-    <label for="nname">Last Name</label>
-    <input type="text" id="nname" name="lastname">
 
-    <input type="button" value="Submit">
-  </form> </div>
+  </form><div id="dropbox">Drag and drop a file here...</div>
+        <div id="status"></div>
+    <input type="button" value="글쓰기" class="createContent">
+  </div>
 
 	<a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
 	<script src="/static/plugins/rounded-ani/js/jquery-2.1.1.js"></script>
@@ -223,6 +238,7 @@ margin-left: 4%;
 	<!-- Resource jQuery -->
 	<script src="/static/plugins/3d-curtain-template/js/main.js"></script>
 	<script type="text/javascript">
+	var imgfile;
 		$(".addContent").on("click",function(){
 			if($(this).hasClass("rotate")){
 				$(this).removeClass("rotate");
@@ -233,8 +249,65 @@ margin-left: 4%;
 				$(this).removeClass("rotate-reset");
 				$(this).addClass("rotate");
 				$(".add-list").fadeIn("slow");
+				dropBoxMaker();
 			}
 		})
+		$(".createContent").on("click",function(){
+			upload(imgfile)
+
+			})
+function dropBoxMaker() {
+    var dropbox = document.getElementById("dropbox");
+    dropbox.addEventListener("dragenter", noop, false);
+    dropbox.addEventListener("dragexit", noop, false);
+    dropbox.addEventListener("dragover", noop, false);
+    dropbox.addEventListener("drop", dropUpload, false);
+}
+
+function noop(event) {
+    event.stopPropagation();
+    event.preventDefault();
+}
+
+function dropUpload(event) {
+    noop(event);
+    imgfile = event.dataTransfer.files;
+console.log("drop up");
+
+}
+
+function upload(file) {
+    document.getElementById("status").innerHTML = "Uploading " + file.name;
+
+    var data = new FormData();
+    data.append("title", $("#title").val());
+	data.append("contents", $("#content").val());
+	for (var i=0;i<file.length;i++) {
+		data.append("Contents-img", file[i]);
+	}
+    $.ajax({
+		url: "/api/board/add",
+		method: "POST",
+		data: data,
+		contentType: false,
+		processData: false
+	}).done(function(result) {
+		var name = result.name;
+
+		alert(name + "님 환영합니다.");
+
+	});
+}
+
+function uploadProgress(event) {
+    // Note: doesn't work with async=false.
+    var progress = Math.round(event.loaded / event.total * 100);
+    document.getElementById("status").innerHTML = "Progress " + progress + "%";
+}
+
+function uploadComplete(event) {
+    document.getElementById("status").innerHTML = event.target.responseText;
+}
 
 		// 	$(document).ready(function(){
 		// 		setTimeout(function(){
