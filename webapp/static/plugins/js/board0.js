@@ -2,8 +2,7 @@
 
 //		$("time.timeago").timeago();
 //		$(".timeago").attr("datetime","2008-07-13");
-		var top3Name;
-		var top3Num;
+
 		console.log();
 
 //		$("#beforeLogin").hide();
@@ -14,17 +13,17 @@
 					method : "POST",
 					dataType : "json"
 					}).done(function(result) {
-						top3Name = {
+					var top3Name = {
 							top1:result[0].userId,
 							top2:result[1].userId,
 							top3:result[2].userId
 						};
-						top3Num ={
+					var top3Num ={
 								top1:result[0].hitCnt,
 								top2:result[1].hitCnt,
 								top3:result[2].hitCnt
 						};
-						console.log("check ing : "+top3Num.top1+" , "+top3Num.top2+" , "+top3Num.top3+" check ing : "+top3Name.top1,+" , "+top3Name.top2+" , "+top3Name.top3);
+						console.log("check ing : "+top3Num.top1+" , "+top3Num.top2+" , "+top3Num.top3+" check ing : "+top3Name.top1+" , "+top3Name.top2+" , "+top3Name.top3);
 						drawDonutGraph(top3Num , top3Name);
 						drawBarGraph(top3Num ,top3Name)
 					}).fail(function() {
@@ -33,14 +32,14 @@
 
 				//////// 그래프 끝  //////////////////////////////
 
-		function drawBarGraph(top3Num){
+		function drawBarGraph(top3Num , top3Name){
 
 			Morris.Bar({
 				element: 'bar chart',     // bar를 넣을 div의 아이디를 적어주세요.
 				data: [                                // bar를 넣을 x축과 y축의 데이터를 적어줍니다.
-				{ y: top3Name.top1, a: top3Num.top1},
-				{ y: top3Name.top2, a: top3Num.top2},
-				{ y: top3Name.top3, a: top3Num.top3}
+				{ y: top3Name.top1, a:top3Num.top1},
+				{ y: top3Name.top2, a:top3Num.top2},
+				{ y: top3Name.top3, a:top3Num.top3}
 				],
 				xkey: 'y',                          //x축에 들어갈 이름을 넣은 data이름을 넣어줍니다
 				ykeys: ['a'],                //y축에 들어갈 이름을 넣은 data이름을 넣어줍니다
@@ -49,7 +48,7 @@
 
 				}
 
-				function drawDonutGraph(top3Num) {
+				function drawDonutGraph(top3Num , top3Name) {
 					Morris.Donut({
 						  element: 'pie-chart',
 						  data: [
@@ -60,34 +59,39 @@
 						});
 				}
 
+				//실시간 반응 댓글 추가~~~~~~~~~~~~~~~~~~~~~?//////////////////
 			$("#btn-chat").on("click", function(){
 
-				alert(currentPage);
+				var contents = $("#btn-input").val();
 
 				$.ajax({
 
 					url:"/api/board/chatinsert",
 					method:"POST",
 					data:{
+						contents:contents,
 						page:currentPage
 					}
 				}).done(function(result){
-					alert(result.page);
+					if(result.success==1){
+						getReply(result.success);
+						$("#btn-input").val("");
+					}
 				}).fail(function(){
 					alert('망');
 				});
 
 				})
 
+				//댓글생성 해줌 /////////////
 				function getReply(pageNum){
-					$.ajax({
+				$.ajax({
 						url:"/api/board/replyinsert",
 							method:"POST",
 						data:{
 							page:pageNum
 						}
 					}).done(function(result){
-						console.log(currentPage);
 						$(".replyBody").empty();
 
 						for(var i =0 ; i<result.replyLists.length; i++){
@@ -95,7 +99,6 @@
 							var replyDb = reply.contents;
 							var userId=	reply.userId;
 							var replyDate = reply.regDate;
-							console.log(reply);
 							addReply(userId,replyDb,replyDate);
 						}
 						var totalCount = result.totalCount;
@@ -118,7 +121,7 @@
 					ReplyHtml+="<strong class='primary-font'>"+userId+"</strong>";
 					ReplyHtml+="<small class='pull-right text-muted'>";
 					ReplyHtml+="<i class='fa fa-clock-o fa-fw'></i>";
-					ReplyHtml+="<time class='timeago' datatime='2016-10-14T17:24:17Z'></time>";
+					ReplyHtml+="<time class='timeago' datatime="+replyDate+"></time>";
 					ReplyHtml+="</small>";
 					ReplyHtml+="</div>";
 					ReplyHtml+="<div>"+replyDb+"</div>";

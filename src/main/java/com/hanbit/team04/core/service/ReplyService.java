@@ -1,5 +1,6 @@
 package com.hanbit.team04.core.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,10 @@ public class ReplyService {
 
 	public int addMiniBoard(ReplyVO replyVO) {
 		replyVO.setMinSeq(getIndex());
+		LOGGER.debug("CHECK SEQ : "+replyVO.getMinSeq());
+		replyVO.setRegDate(new Date().toString());
 		return replyDao.insertBoard(replyVO);
 	}
+
 
 }

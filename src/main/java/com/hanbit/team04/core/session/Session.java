@@ -51,6 +51,13 @@ public class Session {
 		this.name = name;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Session [loggedIn=" + loggedIn + ", userId=" + userId + ", age=" + age + ", name=" + name + "]";
+	}
+
+
+
+
 
 }

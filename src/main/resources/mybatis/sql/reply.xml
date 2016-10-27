@@ -5,18 +5,32 @@
 
 	<select id="selectReply" parameterType="int" resultType="ReplyVO">
 	<![CDATA[
-
-		SELECT 	a.rn, a.userId, a.contents, a.regDate
+	 SELECT a.rn, a.seq ,a.contents,a.userId,a.regDate
 		  FROM (
-			SELECT a.rn, a.userId, a.contents, a.regDate
+			SELECT ROWNUM rn, a.seq, a.contents,a.userId,a.regDate
 			  FROM (
-				SELECT ROWNUM rn, USER_ID userId, CONTENTS contents,
-					   REGDATE regDate
-				  FROM IDEA_MINI_BOARD) a
-			 WHERE rn <= 3 * #{page}) a
-		 WHERE rn > 3 * (#{[page]} - 1)
-		]]>
+				SELECT MIN_SEQ seq,CONTENTS contents, USER_ID userId, REGDATE regDate
+				  FROM IDEA_MINI_BOARD ORDER BY MIN_SEQ DESC) a
+			 WHERE ROWNUM<=3 * #{page}) a
+		 WHERE rn > 3 * (#{page} - 1)
+		 	]]>
 	</select>
+
+<!-- 		SELECT 	a.rn, a.userId, a.contents, a.regDate -->
+<!-- 		  FROM ( -->
+<!-- 			SELECT a.rn, a.userId, a.contents, a.regDate -->
+<!-- 			  FROM ( -->
+<!-- 				SELECT ROWNUM rn, USER_ID userId, CONTENTS contents, -->
+<!-- 					   REGDATE regDate -->
+<!-- 				  FROM IDEA_MINI_BOARD ORDER BY MIN_SEQ DESC) a -->
+<!-- 			 WHERE rn <= 3 * #{page}) a -->
+<!-- 		 WHERE rn > 3 * (#{[page]} - 1) -->
+<!-- SELECT rownum , USER_ID userId, CONTENTS contents, -->
+<!-- 					   REGDATE regDate FROM IDEA_MINI_BOARD -->
+<!-- 				  WHERE rownum <= 3 * #{page} and	 rownum > 3 * (#{page}-1) ORDER BY MIN_SEQ DESC -->
+
+
+
 
 	<select id="selectTotalCount" resultType="int">
 		SELECT COUNT(*) FROM
@@ -32,4 +46,5 @@
 		IDEA_MINI_BOARD (MIN_SEQ, USER_ID, CONTENTS, REGDATE)VALUES
 		(#{minSeq},#{userId},#{contents},#{regDate})
 	</insert>
+
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hanbit.team04.core.vo.IdeaBoardVO;
+import com.hanbit.team04.core.vo.IdeaMemberVO;
 import com.hanbit.team04.core.vo.IdeaVO;
 
 
@@ -39,6 +40,14 @@ public class IdeaBoardDAO {
 
 	public int insertBoard(IdeaBoardVO bVO) {
 		return sqlSession.insert("ideaBoard.insertIdea",bVO);
+	}
+
+	public int selectConfirmCount(String userId) {
+		return sqlSession.selectOne("ideaBoard.selectConfirmCount", userId);
+	}
+
+	public int selectWriteCount(String userId) {
+		return sqlSession.selectOne("ideaBoard.selectWriteCount", userId);
 	}
 
 }

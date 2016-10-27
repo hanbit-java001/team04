@@ -35,13 +35,13 @@
 		<div>
 		<ul class="nav navbar-top-links navbar-right">
 			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw fa-2x"></i>
 					<i class="fa fa-caret-down"></i>
 					</a>
 				<ul class="dropdown-menu dropdown-user">
 					<li class="beforeLogin"><i class="fa fa-user fa-fw"></i>Login</li>
-					<li class="afterLogin"><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a></li>
-					<li class="afterLogin"><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+					<li class="afterLogin"><a href="/board/userDetail"><i class="fa fa-user fa-fw"></i>User Profile</a></li>
+					<li class="afterLogin"><a href="/board/userDetail1"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
 					<li class="afterLogin logout"><a href="#"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
 				</ul>
 			</li>
@@ -135,26 +135,27 @@
 					<div class="panel-body">
 						<div class="row">
 								<div class="col-sm-6 text-center">
-									<label class="label label-success">Highest Ranker Top3</label>
+									<label class="label label-success">좋아요 Ranker Top3</label>
 									<div id="bar chart"></div>
 								</div>
 								<div class="col-sm-6 text-center">
-									<label class="label label-success">Highest Ranker Top3</label>
+									<label class="label label-success">좋아요 Ranker Top3</label>
 									<div id="pie-chart"></div>
 								</div>
 							</div>
 					</div>
 
 					<!-- 하단  시작 ----------------------------------------------------------------------------------------------------------------------->
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<i class="fa fa-clock-o fa-fw"></i> 실시간 반응
-						</div>
-					</div>
+
 
 				</div>
 			</div>
 			<div class="col-lg-12">
+				<div class="panel panel-default">
+						<div class="panel-heading">
+							<i class="fa fa-clock-o fa-fw"></i> 실시간 반응
+						</div>
+				</div>
 				<div class="panel-body replyBody">
 				</div>
 				<div class="page">

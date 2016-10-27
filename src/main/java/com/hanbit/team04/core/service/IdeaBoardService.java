@@ -14,7 +14,7 @@ import com.hanbit.team04.core.vo.IdeaBoardVO;
 public class IdeaBoardService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(IdeaBoardService.class);
-	
+
 	@Autowired
 	private IdeaBoardDAO ideaBoardDAO;
 
@@ -29,5 +29,12 @@ public class IdeaBoardService {
 	public List<IdeaBoardVO> getIdeaBoards2(int pageNum) {
 		return ideaBoardDAO.selectBoards2(pageNum);
 	}
-	
+	public int getConfirmCount(String userId) {
+
+		return ideaBoardDAO.selectConfirmCount(userId);
+	}
+
+	public int getWriteCount(String userId) {
+		return ideaBoardDAO.selectWriteCount(userId);
+	}
 }

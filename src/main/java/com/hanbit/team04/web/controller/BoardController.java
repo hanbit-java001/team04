@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hanbit.team04.core.service.IdeaBoardService;
 import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
 import com.hanbit.team04.core.service.ReplyService;
@@ -40,6 +41,10 @@ public class BoardController {
 
 	@Autowired
 	private IdeaMemberService ideaMemberService;
+
+	@Autowired
+	private IdeaBoardService ideaBoardService;
+//	aop 입니다.
 	@LoginRequired
 	@RequestMapping("/list2")
 	public String test2() {
@@ -58,7 +63,9 @@ public class BoardController {
 
 		List<IdeaVO> result = new ArrayList<>();
 		result = ideaService.getTop3();
-LOGGER.debug("check result ahn : "+result);
+
+		System.out.println("top3 데이터지:::::"+result.toString());
+
 		return result;
 	}
 
@@ -131,19 +138,75 @@ LOGGER.debug("check result ahn : "+result);
 
 	 @RequestMapping("/api/board/chatinsert")
 	 @ResponseBody
-	 public Map chatInsert(@RequestParam int page){
+	 public Map chatInsert(@RequestParam int page ,@RequestParam("contents")String contents){
 
+		 LOGGER.info("댓글달기 시작");
 
 		 Map result = new HashMap<>();
 
-//		LOGGER.info("댓글달기 시작");
 
-		List<ReplyVO> reply = replyService.getReply(page);
+		 Session session = SessionHelpler.getSession();
 
-		 result.put("page", 1);
+		 String userId = session.getUserId();
 
-//		 LOGGER.info("댓글달기 종료");
+		 ReplyVO replyVO = new ReplyVO();
+
+		 replyVO.setUserId(userId);
+		 replyVO.setContents(contents);
+
+		int success = replyService.addMiniBoard(replyVO);
+
+		result.put("success", success);
+
+//		 result.put("page", 1);
+//		 result.put("contents", contents);
+
+		 LOGGER.info("댓글달기 종료");
 		 return result;
 	 }
+
+	 @RequestMapping("/board/userDetail1")
+	public String name() {
+		LOGGER.info(">>>>>>>>>> BoardController :: userDetail :: start");
+
+
+
+		LOGGER.info(">>>>>>>>>> BoardController :: userDetail :: end");
+		return "board/userDetail1";
+	}
+
+	 @RequestMapping("/board/userDetail")
+	 public String userDetail1(){
+
+		 return "/board/userDetail";
+	 }
+
+	 @RequestMapping("/api/board/userDetail")
+	 @ResponseBody
+	 public Map userDetail(){
+
+	 Session session = SessionHelpler.getSession();
+
+	 int age= session.getAge();
+	 String name = session.getName();
+	 String userId = session.getUserId();
+
+
+	int confirmCount = ideaBoardService.getConfirmCount(userId);
+	int writeCount = ideaBoardService.getWriteCount(userId);
+
+//	 LOGGER.info("시작!!!!!!!!!:"+confirmCount);
+
+
+	 Map result = new HashMap<>();
+
+	 result.put("name", name);
+	 result.put("age", age);
+	 result.put("userId", userId);
+	 result.put("confirmCount", confirmCount);
+	 result.put("writeCount", writeCount);
+
+	 return result;
+ }
 
 }

@@ -42,4 +42,5 @@ public int insertBoard(ReplyVO replyVO) {
 	return Sqlsession.insert("reply.insertmini", replyVO);
 }
 
+
 }

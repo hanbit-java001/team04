@@ -1,0 +1,85 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link href="/static/plugins/startbootstrap/vendor/bootstrap/css/bootstrap.min.css" 	rel="stylesheet">
+<link href="/static/plugins/startbootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/static/plugins/css/userDetail.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12 container">
+    	 <div class="well profile">
+            <div class="col-sm-12">
+                <div class="col-xs-12 col-sm-12 div-top">
+                   <div class="name-top col-sm-12">
+                    <div>Name:</div>
+                    <div>Web Designer / UI.</div>
+                   </div>
+                    <div class="user-age">
+                    	<div class="user-age-title">Age:</div>
+                    	<div class="user-ages">
+	                        <span class="tags">10s</span>
+	                        <span class="tags">20s</span>
+	                        <span class="tags">30s</span>
+	                        <span class="tags">40s</span>
+	                        <span class="tags">50s</span>
+	                        <span class="tags">60s</span>
+	                        <span class="tags">70s</span>
+	                        <span class="tags">80s</span>
+	                    </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <figure>
+                        <img src="/static/image/No.png" alt="" class="img-circle img-responsive">
+                        <figcaption class="ratings">
+                            <p>Ratings
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                 <span class="fa fa-star-o"></span>
+                            </a>
+                            </p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="col-xs-12 divider text-center">
+                <div class="col-xs-12 col-sm-4 emphasis emp1">
+                    <div><h2>20,7K</h2></div>
+                    <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span>   작성한 글</button>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis emp2">
+                    <div><h2>245</h2></div>
+                    <button class="btn btn-info btn-block"><span class="fa fa-user"></span>   Confirm 완료된 문서 </button>
+                </div>
+               <div class="col-xs-12 col-sm-4 emphasis emp3">
+                    <button class="btn btn-primary btn-block btn-home"><span class="fa fa-home" aria-hidden="true"></span>   Home </button>
+               </div>
+            </div>
+    	 </div>
+		</div>
+	</div>
+</div>
+<script src="/static/plugins/startbootstrap/vendor/jquery/jquery.min.js"></script>
+		<script src="/static/plugins/startbootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/static/plugins/js/userDetail.js"></script>
+</body>
+</html>
