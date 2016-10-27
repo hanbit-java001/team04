@@ -12,12 +12,12 @@
 		SELECT SEQ_IDX.NEXTVAL
 		FROM DUAL
 	</select>
-	insertCus  작서
+
 	<insert id="insertCus" parameterType="IdeaCusBoardVO">
 		INSERT INTO IDEA_CUS_BOARD
 		(CUS_IDX,TITLE,REGDATE,CONTENTS,HITCNT,AGE_GROUP,FILE_ID)
 		VALUES
-		(#{cusIDX}, #{title}, #{regDate}, #{contents}, #{ageGroup}, #{hitCnt}, #{fileId})
+		(#{cusIDX}, #{title}, #{regDate}, #{contents}, #{hitcnt}, #{ageGroup}, #{fileId})
 	</insert>
 
 </mapper>

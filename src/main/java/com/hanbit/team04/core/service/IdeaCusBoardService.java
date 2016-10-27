@@ -12,10 +12,11 @@ import com.hanbit.team04.core.vo.IdeaCusBoardVO;
 public class IdeaCusBoardService {
 @Autowired
 private IdeaCusBoardDAO cusBoardDAO;
-	public void insertBoard(IdeaCusBoardVO ideaCusBoardVO) {
+	public int insertBoard(IdeaCusBoardVO ideaCusBoardVO) {
 		ideaCusBoardVO.setRegDate(getSysdate().get("SYSDATE").toString());
 		ideaCusBoardVO.setCusIDX(getIDX());
-		cusBoardDAO.insertCusBoard(ideaCusBoardVO);
+		ideaCusBoardVO.setHitcnt(1);
+		return cusBoardDAO.insertCusBoard(ideaCusBoardVO);
 
 	}
 	public Map getSysdate(){

@@ -23,9 +23,8 @@ public class IdeaCusBoardDAO {
 		// TODO Auto-generated method stub
 		return Sqlsession.selectOne("cusBoard.selectNextIndex");
 	}
-	public void insertCusBoard(IdeaCusBoardVO ideaCusBoardVO) {
-		// TODO Auto-generated method stub
-		Sqlsession.insert("cusBoard.insertCus",ideaCusBoardVO);
+	public int insertCusBoard(IdeaCusBoardVO ideaCusBoardVO) {
+		return Sqlsession.insert("cusBoard.insertCus",ideaCusBoardVO);
 	}
 
 }

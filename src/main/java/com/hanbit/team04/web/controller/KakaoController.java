@@ -179,24 +179,23 @@ public class KakaoController {
 			ideaCusBoardVO.setTitle(title);
 			ideaCusBoardVO.setContents(contents);
 			ideaCusBoardVO.setFileId(fileId);
-			Session session = SessionHelpler.getSession();
-			IdeaCusBoardService.insertBoard(ideaCusBoardVO);
-			ideaService.insertboard(ideaBoardVO);
+			if(ideaCusBoardService.insertBoard(ideaCusBoardVO)==1){
+				LOGGER.info("checking insert: 잘들어가는군");
+			}
 
-//			memberService.joinMember(member);
 		}
 		catch (Exception e) {
 			if (StringUtils.isNotBlank(fileId)) {
-//				fileService.removeFile(fileId);
+				fileService.removeFile(fileId);
 			}
 
 			throw new RuntimeException(e.getMessage(), e);
 		}
 
-//		Map result = new HashMap();
-////		result.put("name", name);
-//
-//		return result;
-		return null;
+		Map result = new HashMap();
+		result.put("check", "잘들어감");
+
+		return result;
+//		return null;
 		}
 }

@@ -222,6 +222,13 @@ margin-left: 4%;
 
     <label for="content">content</label>
     <input type="text" id="content" >
+ <select name="age" id="age">
+    <option value="10">10대</option>
+    <option value="20">20대</option>
+    <option value="30">30대</option>
+    <option value="40">40대</option>
+    <option value="50">50대</option>
+  </select>
 
 
 
@@ -272,31 +279,35 @@ function noop(event) {
 function dropUpload(event) {
     noop(event);
     imgfile = event.dataTransfer.files;
-console.log("drop up");
+    $("#dropbox").text("Uploading " + imgfile[0].name);
+console.log("img file name "+imgfile[0].name);
 
 }
 
 function upload(file) {
-    document.getElementById("status").innerHTML = "Uploading " + file.name;
-
+//     document.getElementById("status").innerHTML = "Uploading " + file.name;
     var data = new FormData();
     data.append("title", $("#title").val());
 	data.append("contents", $("#content").val());
+	date.append("age",$("#age").val());
+	console.log("age : "+$("#age").val());
 	for (var i=0;i<file.length;i++) {
-		data.append("Contents-img", file[i]);
+		data.append("Contents_img", file[i]);
 	}
-    $.ajax({
-		url: "/api/board/add",
-		method: "POST",
-		data: data,
-		contentType: false,
-		processData: false
-	}).done(function(result) {
-		var name = result.name;
+//     $.ajax({
+// 		url: "/api/board/add",
+// 		method: "POST",
+// 		data: data,
+// 		contentType: false,
+// // 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+// 		dataType: "json",
+// 		processData: false
+// 	}).done(function(result) {
+// 		var name = result.name;
 
-		alert(name + "님 환영합니다.");
+// 		alert(name + "님 환영합니다.");
 
-	});
+// 	});
 }
 
 function uploadProgress(event) {
