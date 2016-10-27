@@ -42,9 +42,10 @@ body {
 					<div class="bar"></div>
 				</div>
 				<div class="button-container front">
-					<button>
+					<button type="button" >
 						<span>Go</span>
 					</button>
+
 				</div>
 				<div class="footer">
 					<a href="#">Forgot your password?</a>
@@ -54,7 +55,7 @@ body {
 		<div class="card alt">
 			<div class="toggle"></div>
 			<h1 class="title">
-				Register 
+				Register
 				<div class="close"></div>
 			</h1>
 			<form class="backend-form">
@@ -105,7 +106,7 @@ body {
 // 				console.log("check log");
 // 				$(".front button").attr("type","button");
 // 			}
-			
+
 // 		})
 		$(".login_input").bind("keypress",function(e){
 			if(e.keyCode == 13&&$(this).attr("id")=="Password"){
@@ -113,9 +114,9 @@ body {
 				submit_login();
 			}
 		});
-		
-		$(".front button").on("mousedown",submit_login());
-		
+
+		$(".front button").on("click",function(){submit_login()});
+
 		$(".backend").on("mousedown",function() {
 					var createUser = {
 						userId : $("#CreateUserId").val(),
@@ -137,7 +138,7 @@ body {
 							if (result == 1) {
 								alert($("#CreateUserId").val() + "님 반갑습니다");
 								location.href = "/list2";
-							} 
+							}
 						}).fail(function() {
 						});
 
@@ -212,19 +213,19 @@ body {
 					}else{
 						seccesOrfail(this,"fail","#660066");
 					}
-					
+
 					console.log(createState);
-				
+
 				})
 				$("#CreateAge").bind("keypress",function(e){
 					if(e.keyCode == 13){
 						$(".backend button").attr("type","button");
 					}
 				});
-				
-				
-				
-				
+
+
+
+
 				$(".backend-form div input").bind('keypress',function(e){
 					console.log("check index : "+$(".backend-form .input-container").index($(this).parent()));
 					if(e.keyCode == 13){
@@ -238,8 +239,9 @@ body {
 						console.log("check html"+$(this).next("label").text());
 					}
 					})
-					
+
 	function submit_login() {
+					console.log("check login submit");
 		var date = {
 			userId : $("#UserId").val(),
 			password : $("#Password").val()
@@ -261,7 +263,7 @@ body {
 				});
 		}
 	}
-		
+
 	</script>
 
 

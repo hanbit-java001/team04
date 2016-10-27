@@ -82,7 +82,7 @@ public class IdeaService {
 		bVO.setModDate(sysdateget());
 		bVO.setRegDate(sysdateget());
 		bVO.setBoardIdx(ideaDAO.selectNextIndex());
-		bVO.setConfirm("N");
+		bVO.setConfirm("Y");
 		bVO.setHitCnt(1);
 		if(bVO.getFileId()==null)
 		bVO.setFileId("NULL");

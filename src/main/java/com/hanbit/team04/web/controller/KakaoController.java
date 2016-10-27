@@ -76,14 +76,20 @@ public class KakaoController {
 	public String mainPage() {
 		LOGGER.info("testController - test");
 		 Date date = new Date();
-//		 for(int i=0;i<32;i++){
-//			 IdeaBoardVO BVO = new IdeaBoardVO();
-//					  BVO.setTitle("hyundo_title_"+i);
-////					  BVO.setRegDate(date.toString());
-////					  BVO.setModDate(date.toString());
-//					  BVO.setContents("hyundo_contents_"+i);
-//					  BVO.setUserId("hyundo_userId_"+i);
-//					int result=  ideaService.insertboard(BVO);
+//		 for(int i=0;i<50;i++){
+////			 IdeaBoardVO BVO = new IdeaBoardVO();
+////					  BVO.setTitle("hyundo_title_"+"dd@test.com");
+//////					  BVO.setRegDate(date.toString());
+//////					  BVO.setModDate(date.toString());
+////					  BVO.setContents("hyundo_contents_"+"dd@test.com");
+////					  BVO.setUserId("dd@test.com");
+//			 IdeaCusBoardVO CVO = new IdeaCusBoardVO();
+//			 CVO.setAgeGroup(i+1);
+//			 CVO.setContents("contents"+i);
+//			 CVO.setFileId("null");
+//			 CVO.setHitcnt(1);
+//			 CVO.setTitle("title"+i);
+//			 int result=ideaCusBoardService.insertBoard(CVO);
 //					if(result==0){
 //						LOGGER.info("testController - insert board error");
 //					}
@@ -110,8 +116,12 @@ public class KakaoController {
 		LOGGER.info("testController - pageList === " + pageNum);
 
 		Map myresult = new HashMap();
-		List list = ideaService.getIdeas(pageNum);
-		int totalPage = ideaService.totalPageNum();
+		Session session = SessionHelpler.getSession();
+		if(!session.isLoggedIn()){
+			session.setAge(20);
+		}
+		List list = ideaCusBoardService.getIdeas(pageNum,session.getAge());
+		int totalPage = ideaCusBoardService.totalPageNum(session.getAge());
 		myresult.put("list", list);
 		myresult.put("totoalPage", totalPage);
 		LOGGER.info("testController - result" + myresult);
@@ -150,13 +160,19 @@ public class KakaoController {
 		LOGGER.info("checking id" +checkingId);
 		return ideaMemberService.checking(checkingId);
 	}
+	@RequestMapping(value="/api/check/admin", method=RequestMethod.GET)
+	@ResponseBody
+	public boolean getCheckAdmin() {
+		LOGGER.info("checking admin");
+		return ideaMemberService.checkAdmin();
+	}
 	@RequestMapping(value="/api/board/add", method=RequestMethod.POST)
 	@ResponseBody
 	public Map doJoin(MultipartHttpServletRequest request) throws Exception {
 
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
-		String age_group = request.getParameter("ageGroup");
+		int age_group = Integer.parseInt((String)request.getParameter("age"));
 		String fileId = "";
 
 		Iterator<String> paramNames = request.getFileNames();
@@ -178,6 +194,7 @@ public class KakaoController {
 			IdeaCusBoardVO ideaCusBoardVO = new IdeaCusBoardVO();
 			ideaCusBoardVO.setTitle(title);
 			ideaCusBoardVO.setContents(contents);
+			ideaCusBoardVO.setAgeGroup(age_group);
 			ideaCusBoardVO.setFileId(fileId);
 			if(ideaCusBoardService.insertBoard(ideaCusBoardVO)==1){
 				LOGGER.info("checking insert: 잘들어가는군");

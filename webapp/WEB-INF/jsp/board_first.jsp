@@ -159,12 +159,19 @@ margin-left: 4%;
     border-radius: 5px;
     padding: 5px;
     color: gray;
-    margin-top:5%;
+    margin-top:3%;
     margin-left: 10%;
 }
-#status{
-
+select {
+    width: 85%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    margin-left: 10%;
+	font-size: 24px;
 }
+
 </style>
 <title>Rounded Animated Navigation | CodyHouse</title>
 </head>
@@ -233,7 +240,6 @@ margin-left: 4%;
 
 
   </form><div id="dropbox">Drag and drop a file here...</div>
-        <div id="status"></div>
     <input type="button" value="글쓰기" class="createContent">
   </div>
 
@@ -245,19 +251,36 @@ margin-left: 4%;
 	<!-- Resource jQuery -->
 	<script src="/static/plugins/3d-curtain-template/js/main.js"></script>
 	<script type="text/javascript">
-	var imgfile;
+	var imgfile=null;
 		$(".addContent").on("click",function(){
-			if($(this).hasClass("rotate")){
-				$(this).removeClass("rotate");
-				$(this).addClass("rotate-reset");
-				$(".add-list").fadeOut("slow");
+			 $.ajax({
+					url: "/api/check/admin",
+					method: "GET"
+				}).done(function(result) {
 
-			}else{
-				$(this).removeClass("rotate-reset");
-				$(this).addClass("rotate");
-				$(".add-list").fadeIn("slow");
-				dropBoxMaker();
-			}
+					console.log( + "님 환영합니다.");
+					if(result){
+					if($(this).hasClass("rotate")){
+						$(this).removeClass("rotate");
+						$(this).addClass("rotate-reset");
+						$(".add-list").fadeOut("slow");
+						$("#title").val("");
+						$("#content").val("");
+						$("#age").val($("#age option:first").val());
+						$("#dropbox").html("Drag and drop a file here...");
+						imgfile=null;
+
+					}else{
+						$(this).removeClass("rotate-reset");
+						$(this).addClass("rotate");
+						$(".add-list").fadeIn("slow");
+						dropBoxMaker();
+					}}else{
+						alert("글작성은 관리자만 가능합니다.");
+						$(".addContent").fadeOut();
+					}
+				});
+
 		})
 		$(".createContent").on("click",function(){
 			upload(imgfile)
@@ -284,30 +307,32 @@ console.log("img file name "+imgfile[0].name);
 
 }
 
-function upload(file) {
-//     document.getElementById("status").innerHTML = "Uploading " + file.name;
+function upload(myFile) {
     var data = new FormData();
     data.append("title", $("#title").val());
 	data.append("contents", $("#content").val());
-	date.append("age",$("#age").val());
+	data.append("age",$("#age").val());
 	console.log("age : "+$("#age").val());
-	for (var i=0;i<file.length;i++) {
-		data.append("Contents_img", file[i]);
-	}
-//     $.ajax({
-// 		url: "/api/board/add",
-// 		method: "POST",
-// 		data: data,
-// 		contentType: false,
-// // 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-// 		dataType: "json",
-// 		processData: false
-// 	}).done(function(result) {
-// 		var name = result.name;
+	if(myFile!=null){
+	for (var i=0;i<myFile.length;i++) {
+		data.append("Contents_img", myFile[i]);
+		var progress = Math.round(i / myFile.length * 100);
+		$("#dropbox").html("Progress " + progress + "%");
+	}}
+    $.ajax({
+		url: "/api/board/add",
+		method: "POST",
+		data: data,
+		contentType: false,
+		dataType: "json",
+		processData: false
+	}).done(function(result) {
 
-// 		alert(name + "님 환영합니다.");
+		console.log( + "님 환영합니다.");
+		$("#dropbox").html("Complete");
+		setTimeout(function(){ $(".addContent").click(); }, 1000);
 
-// 	});
+	});
 }
 
 function uploadProgress(event) {

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hanbit.team04.core.dao.IdeaMemberDAO;
+import com.hanbit.team04.core.session.Session;
+import com.hanbit.team04.core.session.SessionHelpler;
 import com.hanbit.team04.core.vo.IdeaMemberVO;
 
 @Service
@@ -21,7 +23,7 @@ public class IdeaMemberService {
 		Map<String,String> logInfo = new HashMap<>();
 		logInfo.put("userId", userId);
 		logInfo.put("password", password);
-		int result; 
+		int result;
 		if(ideaMemberDAO.checkLogin(logInfo)!=null)
 			result=1;
 		else
@@ -32,8 +34,8 @@ public class IdeaMemberService {
 	public int createlogInfo(IdeaMemberVO createUser) {
 		return ideaMemberDAO.createLogInfo(createUser);
 	}
-	
-	
+
+
 
 	public IdeaMemberVO getMember(String userId, String password) {
 
@@ -53,5 +55,15 @@ public class IdeaMemberService {
 			result=1;
 		return result;
 	}
-	
+
+	public boolean checkAdmin() {
+		Session session =SessionHelpler.getSession();
+		LOGGER.debug("check admin service : "+session.getUserId());
+		boolean result=false;
+		if(session.getUserId()!=null&&session.getUserId().compareTo("admin")==0)
+			{result=true;}
+		LOGGER.debug("check admin service : "+result);
+		return result;
+	}
+
 }

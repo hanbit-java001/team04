@@ -12,6 +12,11 @@
 		SELECT SEQ_IDX.NEXTVAL
 		FROM DUAL
 	</select>
+	<select id="selectPageNum" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) FROM IDEA_CUS_BOARD WHERE AGE_GROUP>#{age} AND AGE_GROUP<=(#{age}+10)
+				  ]]>
+	</select>
 
 	<insert id="insertCus" parameterType="IdeaCusBoardVO">
 		INSERT INTO IDEA_CUS_BOARD
@@ -19,5 +24,16 @@
 		VALUES
 		(#{cusIDX}, #{title}, #{regDate}, #{contents}, #{hitcnt}, #{ageGroup}, #{fileId})
 	</insert>
-
+	<select id="selectPage" parameterType="int" resultType="map">
+	<![CDATA[
+		 SELECT 	a.rn, a.sub, a.con, a.reg ,a.ag
+		  FROM (
+			SELECT a.rn, a.sub, a.con, a.reg,a.ag
+			  FROM (
+				SELECT ROWNUM rn, TITLE sub, CONTENTS con , REGDATE reg ,AGE_GROUP ag
+				  FROM IDEA_CUS_BOARD WHERE AGE_GROUP>#{age} AND AGE_GROUP<=(#{age}+10)) a
+			  WHERE rn <= 15 * #{pageNum}) a
+		 WHERE rn > 15 * (#{pageNum} - 1)
+  	]]>
+	</select>
 </mapper>

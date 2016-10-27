@@ -78,8 +78,8 @@
 									"<ul>"+
 										"<li>"+result[i].SUB+"</li>"+
 										"<li>"+result[i].CON+"</li>"+
-										"<li>"+result[i].ID+"</li>"+
-										"<li>"+result[i].REG+"</li>"+
+										"<li>"+result[i].reg+"</li>"+
+										"<li>"+result[i].ag+"</li>"+
 									"</ul>"+
 								"</div>";
 

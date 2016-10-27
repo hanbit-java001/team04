@@ -1,5 +1,7 @@
 package com.hanbit.team04.core.dao;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,6 +27,18 @@ public class IdeaCusBoardDAO {
 	}
 	public int insertCusBoard(IdeaCusBoardVO ideaCusBoardVO) {
 		return Sqlsession.insert("cusBoard.insertCus",ideaCusBoardVO);
+	}
+	public List<Map<String, Object>> getIdeas(int pageNum, int age) {
+		LOGGER.debug("get page");
+		Map map =new HashMap<>();
+		map.put("pageNum", pageNum);
+		map.put("age", age);
+		List<Map<String, Object>> result = Sqlsession.selectList("cusBoard.selectPage", map);
+		return result;
+	}
+	public int getCusNum(int age) {
+
+		return Sqlsession.selectOne("cusBoard.selectPageNum", age);
 	}
 
 }
