@@ -7,10 +7,10 @@
 <title>Rank Board</title>
 <!-- <link rel="shortcut icon" href="../favicon.ico"> -->
 <link rel="stylesheet" type="text/css" href="/static/plugins/hyundo/hyundo_rank/css/demo.css" />
-<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/static/plugins/hyundo/hyundo_rank/css/style.css" />
 <link href='http://fonts.googleapis.com/css?family=Kelly+Slab' rel='stylesheet' type='text/css' />
-<script type="text/javascript" src="/static/js/modernizr.js"></script>
-<script type="text/javascript" src="/static/js/modernizr.custom.11333.js"></script>
+<script type="text/javascript" src="/static/plugins/hyundo/hyundo_rank/js/modernizr.js"></script>
+<script type="text/javascript" src="/static/plugins/hyundo/hyundo_rank/js/modernizr.custom.11333.js"></script>
 
 </head>
 <body>
@@ -73,9 +73,9 @@
 
 <!-- 		<script type="text/javascript" src="/static/js/main.js"></script> -->
 <!-- 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
-		<script type="text/javascript" src="/static/js/jquery-3.1.0.min.js"></script>
-		<script type="text/javascript" src="/static/js/rankboard.js"></script>
-		<script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="/static/plugins/hyundo/hyundo_rank/js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="/static/plugins/hyundo/hyundo_rank/js/rankboard.js"></script>
+		<script type="text/javascript" src="/static/plugins/hyundo/hyundo_rank/js/jquery.easing.1.3.js"></script>
 
 </body>
 </html>

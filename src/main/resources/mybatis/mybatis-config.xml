@@ -13,5 +13,6 @@
 		<typeAlias type="com.hanbit.team04.core.vo.IdeaCusBoardVO" alias="IdeaCusBoardVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.IdeaBoardVO" alias="IdeaBoardVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.FileVO" alias="FileVO" />
+		<typeAlias type="com.hanbit.team04.core.vo.RankBoardVO" alias="RankBoardVO" />
 	</typeAliases>
 </configuration>
