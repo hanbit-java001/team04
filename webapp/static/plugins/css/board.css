@@ -48,6 +48,23 @@
 	padding-left: 10%;
 }
 
+.top-div{
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.fa-font-awesome{
+
+	color:#337ab7;
+}
+
+.page-header{
+
+	color:burlywood;
+	text-align: center;
+}
+
+
 .circle {
 	background: rgb(255,255,255);
 	border-radius: 100%;

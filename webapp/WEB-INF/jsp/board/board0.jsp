@@ -30,7 +30,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<li class="navbar-brand">Dash Board</li>
+			<div class="top-div"><i class="fa fa-font-awesome fa-2x" aria-hidden="true"></i>   Dash Board</div>
 		</div>
 		<div>
 		<ul class="nav navbar-top-links navbar-right">
@@ -56,7 +56,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header"><i class="fa fa-area-chart" aria-hidden="true"></i>  Ranking Board</h1>
+					<h1 class="page-header"><img alt="nopic" src="/static/plugins/icon/png64/Signal-Medium.png"> Ranking Board</h1>
 				</div>
 			</div>
 		<div class="row">

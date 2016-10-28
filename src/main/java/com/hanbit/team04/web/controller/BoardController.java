@@ -209,4 +209,10 @@ public class BoardController {
 	 return result;
  }
 
+	 @RequestMapping("tests")
+	 public String aa(){
+
+		 return "/board/boardHover";
+	 }
+
 }
