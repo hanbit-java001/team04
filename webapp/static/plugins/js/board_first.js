@@ -78,8 +78,8 @@
 									"<ul>"+
 										"<li>"+result[i].SUB+"</li>"+
 										"<li>"+result[i].CON+"</li>"+
-										"<li>"+result[i].reg+"</li>"+
-										"<li>"+result[i].ag+"</li>"+
+										"<li>"+result[i].REG+"</li>"+
+										"<li>"+result[i].AG+"</li>"+
 									"</ul>"+
 								"</div>";
 
@@ -96,6 +96,11 @@
 						$(".cd-section").first().addClass('is-visible');
 						$('section').fadeIn(1000);
 						$('body,html').animate({scrollTop: $(".is-visible").position().top}, 1000);
+						$(".table-container").on("click",function(){
+							console.log("table-container");
+							$(".detail-view").show("slow");
+							console.log("table-container???");
+							});
 				});
 			}
 

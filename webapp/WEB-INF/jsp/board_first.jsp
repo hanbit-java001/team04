@@ -171,6 +171,30 @@ select {
     margin-left: 10%;
 	font-size: 24px;
 }
+.detail-view{
+ position:fixed;
+ width: 50%;
+ height: 100%;
+ left: 0%;
+ top:0%;
+ background-color: red;
+/*   display: none; */
+ z-index: 100;
+
+/* position: fixed; */
+/* width: 50%; */
+/* height: 50%; */
+/* text-align: center; */
+/* background-color: #001F3F; */
+/* color: white; */
+/* z-index: 500; */
+/* top: 20%; */
+/* margin-left: 25%; */
+/* margin-right: 25%; */
+/* /* display: none; */ */
+/* padding-top: 2%; */
+}
+
 
 </style>
 <title>Rounded Animated Navigation | CodyHouse</title>
@@ -242,7 +266,7 @@ select {
   </form><div id="dropbox">Drag and drop a file here...</div>
     <input type="button" value="글쓰기" class="createContent">
   </div>
-
+<div class="detail-view"></div>
 	<a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
 	<script src="/static/plugins/rounded-ani/js/jquery-2.1.1.js"></script>
 	<script src="/static/plugins/js/board_first.js"></script>
