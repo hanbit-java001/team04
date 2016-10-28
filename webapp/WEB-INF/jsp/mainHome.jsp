@@ -18,6 +18,9 @@
 <!-- Coverflow -->
 <script src="/static/plugins/coverflow/jquery.coverflow.js"></script>
 <link rel="stylesheet" href="/static/plugins/css/mainHome.css">
+<style type="text/css">
+
+</style>
 
 </head>
 <body>
@@ -39,8 +42,8 @@
 				src="/static/image/logo-square-letter.png">
 		</div>
 		<div class="cover">
-			<img class="reflected select-img" data-name="LG입니다" data-url=""
-				src="/static/image/d14c8c035b3c8f8d7c74085ce761c24e-lg.png">
+			<img class="reflected select-img" data-name="ranking board입니다" data-url="/hyundo_rank"
+				src="/static/image/Ranking_icon_m.png">
 		</div>
 		<div class="cover">
 			<img class="reflected select-img" data-name="user입니다" data-url="/user/create"
