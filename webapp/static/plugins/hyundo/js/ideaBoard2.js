@@ -1,23 +1,33 @@
 $(function() {
 
-	var totCnt;
+	var totCnt=0;
 	var CrntPageNum = 1;
+	var totPageNum;
 	//////////////////////////////////
-	
+	var dbtitle;
+	var dbcontents;
+	///////////////////////////
+	var modalTrigger = $('.cd-modal-trigger'),
+	transitionLayer = $('.cd-transition-layer'),
+	transitionBackground = transitionLayer.children(),
+	modalWindow = $('.cd-modal');
 	
 	/// 총 숫자 가져오는 애
 	function getTotalCnt(){
 	$.ajax({
 		url : "/api/totCnt",
-		method : "POST",
-	}).done(function(totCnt){
-		totCnt = totCnt;
-		
-	})
+		method : "POST"
+		}).done(function(totalCnt){
+			totCnt = totalCnt;
+			totPageNum = totCnt/9==0?totCnt/9 : Math.floor(totCnt/9)+1;
+			console.log(totPageNum+" : "+totCnt);
+		});
 	}
 	
 	
-	var totPageNum = totCnt / 9;
+	
+	
+	
 	////////////////////////////////////
 	// 버튼 그려주는 애
 	function makeBtn(CrntPageNum){
@@ -27,35 +37,21 @@ $(function() {
 		var PgThree = PgTwo+1;
 		
 		var wrapperHTML = "";
+		    wrapperHTML += "<div class='cd-3d-portfolio-navigation'>";
+		    wrapperHTML +="<div class='cd-wrapper'>";
 			wrapperHTML += "<h1>IDEA BOARDS</h1>";
+			wrapperHTML += "<ul class='ex'>";
 			wrapperHTML += "<div class='prevBtn'><<</div>";
-			wrapperHTML += "<ul>";
-			wrapperHTML += "<a href='#0' class='selected'> PAGE "+PgOne+" </a>";
-			wrapperHTML += "<a href='#0'>PAGE "+PgTwo+"</a>";
-			wrapperHTML += "<a href='#0'>PAGE "+PgThree+"</a>";
-			wrapperHTML += "</ul>";
+			wrapperHTML += "<li><a href='#0' class='selected'> PAGE "+PgOne+" </a></li>";
+			wrapperHTML += "<li><a href='#0'>PAGE "+PgTwo+"</a></li>";
+			wrapperHTML += "<li><a href='#0'>PAGE "+PgThree+"</a></li>";
 			wrapperHTML += "<div class='aftBtn'>>></div>";
-	
-		$(".cd-wrapper").append(wrapperHTML);
-		
-		$(".prevBtn").on("click", function(){
-			CrntPageNum--;
-			$(".cd-wrapper").empty();
-			$(".projects").empty();
-			makeBtn(CrntPageNum);
-			makeView(CrntPageNum);
-		})
-		
-		$(".aftBtn").on("click", function(){
-			CrntPageNum++;
-			$(".cd-wrapper").empty();
-			$(".projects").empty();
-			makeBtn(CrntPageNum);
-			makeView(CrntPageNum);
-		})
+			wrapperHTML += "</ul>";
+			wrapperHTML += "</div>";
+			wrapperHTML += "</div>";
+		$(".cd-3d-portfolio").append(wrapperHTML);
+		mainjs();
 	}
-	////////////////////////////////
-	
 	
 	
 		/////////////////////////////////////////////////////////
@@ -68,7 +64,8 @@ $(function() {
 					pageNum : CrntPageNum
 				}
 			}).done(function(result) {
-//						alert(result.list[1].userId);
+//						alert(result.list.length);
+				
 						var rowHTML = "";
 						var cls = [
 								"<li class='front-face selected project-1'>",
@@ -81,24 +78,37 @@ $(function() {
 								"<li class='right-face project-8'>",
 								"<li class='right-face project-9'>" 
 								];
+						
 						var k = 0;
+						rowHTML += "<div class='projects'>"
+							
 						for (var i = 1; i < 4; i++) {
+							console.log((result.list.length));
+							
 							rowHTML += "<ul class='row'>"
 							for (var j = 1; j < 4; j++) {
 								var trnsNum = ((j - 1) * 3 + i) - 1;
 
+								if(result.list.length > trnsNum){
+									dbtitle = result.list[trnsNum].title;
+									dbcontents = result.list[trnsNum].contents;
+								}else{
+									dbtitle = "default";
+									dbcontents = "default";
+								}
+								
 								rowHTML += cls[k];
 								rowHTML += "<div class='project-wrapper'>";
 								rowHTML += "<div class='project-image'>";
 								rowHTML += "<div class='project-title'>";
 								rowHTML += "<h2>title :  "
-										+ result.list[trnsNum].title + "</h2>";
+										+ dbtitle + "</h2>";
 								rowHTML += "</div>";
 								rowHTML += "</div>";
 								rowHTML += "<div class='project-content'>";
 								rowHTML += "<div>";
 								rowHTML += "<p> contents : "
-										+ result.list[trnsNum].contents + "</p>";
+										+ dbcontents + "</p>";
 								rowHTML += "</div>";
 								rowHTML += "</div>";
 								rowHTML += "<a href='#0' class='close-project'>Close</a>";
@@ -108,18 +118,41 @@ $(function() {
 							}
 							rowHTML += "</ul>";
 						}
-						$(".projects").append(rowHTML);
+						rowHTML += "</div>"
+						$(".cd-3d-portfolio").append(rowHTML);
+						Btnmovement();
 						mainjs();
+						$("body").fadeIn("slow");
 					})
 	}
 	
-	
-	
-	////////////////////////////////////////
-	// 버튼 이벤트
-
-	
-	
+	// 버튼이벤트
+	function Btnmovement(){
+	$(".aftBtn").on("click", function(){
+		if(CrntPageNum == totPageNum){
+			$(this).off();
+		}else{
+			CrntPageNum++;
+			$(".cd-3d-portfolio").fadeOut("slow",function(){
+				$(this).html("");
+				makeView(CrntPageNum);
+				makeBtn(CrntPageNum);
+		}).fadeIn("slow");
+		}
+	})
+	$(".prevBtn").on("click", function(){
+		if(CrntPageNum==1){
+			$(this).off();
+		}else{
+		CrntPageNum--;
+		$(".cd-3d-portfolio").fadeOut("slow",function(){
+			$(this).html("");
+			makeView(CrntPageNum);
+			makeBtn(CrntPageNum);
+		}).fadeIn("slow");
+		}
+	})
+	}
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,11 +186,12 @@ $(function() {
 				if (!self.animating) {
 					self.animating = true;
 					var index = $(this).parent('li').index();
+					console.log("check index : "+ index);
 					// update filter
 					$(this).addClass('selected').parent('li').siblings('li')
 							.find('.selected').removeClass('selected');
 					// show new projects
-					self.showNewContent(index);
+					self.showNewContent(index-1);
 				}
 			});
 
@@ -385,7 +419,36 @@ $(function() {
 	}
 	
 	
-	makeBtn(CrntPageNum);
+	// 글쓰기 부분
+//	alert("1919");
+	
+	$(".insertBtn").on("click", function(){
+		
+		$(".insertPanel").css("display","inherit");
+		event.preventDefault();
+		transitionLayer.addClass('visible opening');
+		var delay = ( $('.no-cssanimations').length > 0 ) ? 0 : 600;
+		setTimeout(function(){
+			modalWindow.addClass('visible');
+		}, delay);
+		
+		modalWindow.on('click', '.modal-close', function(event){
+			event.preventDefault();
+			transitionLayer.addClass('closing');
+			modalWindow.removeClass('visible');
+			transitionBackground.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(){
+				transitionLayer.removeClass('closing opening visible');
+				transitionBackground.off('webkitAnimationEnd oanimationend msAnimationEnd animationend');
+			});
+		});
+		
+		
+	})
+	
+	
+	
+	
 	getTotalCnt();
+	makeBtn(CrntPageNum);
 	makeView(CrntPageNum);
 });
