@@ -7,15 +7,15 @@
 		SELECT SYSDATE
 		  FROM DUAL
 	</select>
-	
+
 	<select id="selectBoards" resultType="IdeaBoardVO">
 		SELECT USER_ID, CONTENTS, TITLE FROM IDEA_BOARD
 	</select>
-	
+
 	<select id="selectTotCnt" resultType="int">
 		SELECT COUNT(*) FROM IDEA_BOARD
 	</select>
-	
+
 	<select id="selectBoards2" parameterType="int" resultType="IdeaBoardVO">
 	<![CDATA[
 	SELECT 	a.rn, a.userId, a.title, a.contents, a.articleDate
@@ -29,5 +29,22 @@
 		 WHERE rn > 9 * (#{pageNum} - 1)
 		  	]]>
 	</select>
-	
+
+	<insert id="insertIdea" parameterType="IdeaBoardVO">
+ 		INSERT INTO IDEA_BOARD
+ 		(BOARD_IDX,TITLE,REGDATE,CONTENTS,USER_ID,MOD_DATE,CONFIRM,HITCNT,FILE_ID)
+ 		VALUES
+  		(#{boardIdx}, #{title}, #{regDate}, #{contents}, #{userId},
+  		#{modDate}, #{confirm}, #{hitCnt}, #{fileId})
+  	</insert>
+
+
+ 	<select id="selectConfirmCount" parameterType="string" resultType="int">
+ 		SELECT COUNT(CONFIRM) FROM IDEA_BOARD WHERE USER_ID=#{userId} AND CONFIRM='Y'
+ 	</select>
+
+ 	<select id="selectWriteCount" resultType="int">
+ 		SELECT COUNT(BOARD_IDX) FROM IDEA_BOARD WHERE USER_ID=#{userId}
+ 	</select>
+
 </mapper>
