@@ -55,6 +55,8 @@ $(".btn-writeList").on("click", function(){
 		console.log(boardIdx);
 		
 		$(".write-container>h2").text(userId+"님의 작성문서")
+	
+		
 		$(".write-container-body td:nth-child(1)").text(boardIdx);
 		
 	}).fail(function(){
