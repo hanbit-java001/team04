@@ -33,5 +33,34 @@ $.ajax({
 	alert('실패');
 });
 
+$(".btn-writeList").on("click", function(){
+	$(".write-container").show();
+
+	var boardIdx="";
+	var boardTitle="";
+	var boardContents="";
+	var boardRegdate="";
+	
+	$.ajax({
+		url:"/api/userDetail/writeContents",
+		method:"POST",
+	}).done(function(result){
+		for(var i = 0; i< result.board_idx.length; i++){
+			boardIdx =result.board_idx[i].boardIdx;
+			boardTitle = result.board_idx[i].title;
+			boardContents = result.board_idx[i].contents;
+			boardRegdate = result.board_idx[i].regDate;
+		}
+		
+		console.log(boardIdx);
+		
+		$(".write-container>h2").text(userId+"님의 작성문서")
+		$(".write-container-body td:nth-child(1)").text(boardIdx);
+		
+	}).fail(function(){
+		alert('너실패');
+	});
+})
+
 
 });

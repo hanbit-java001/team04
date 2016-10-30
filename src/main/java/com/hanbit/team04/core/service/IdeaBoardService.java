@@ -43,4 +43,8 @@ public class IdeaBoardService {
 		// TODO Auto-generated method stub
 		return ideaBoardDAO.insertIdea(param);
 	}
+
+	public List<IdeaBoardVO> getUserDetail(String userId) {
+		return ideaBoardDAO.selectUserDetail(userId);
+	}
 }

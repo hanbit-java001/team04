@@ -7,16 +7,6 @@
 <link href="/static/plugins/startbootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/static/plugins/css/userDetail.css" rel="stylesheet">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-<!-- <link rel="stylesheet" type="text/css" href="/static/plugins/HoverEffect/css/set2.css" /> -->
-
-<!-- 		<title>Hover Effect Ideas | Set 2</title> -->
-<!-- 		<meta name="description" content="Hover Effect Ideas: Inspiration for subtle hover effects" /> -->
-<!-- 		<meta name="keywords" content="hover effect, inspiration, grid, thumbnail, transition, subtle, web design" /> -->
-<!-- 		<meta name="author" content="Codrops" /> -->
-<!-- 		<link rel="shortcut icon" href="../favicon.ico"> -->
-<!-- 		<link href='http://fonts.googleapis.com/css?family=Raleway:400,800,500,600' rel='stylesheet' type='text/css'> -->
-<!-- 		<link rel="stylesheet" type="text/css" href="/static/plugins/HoverEffect/css/normalize.css" /> -->
-<!-- 		<link rel="stylesheet" type="text/css" href="/static/plugins/HoverEffect/css/demo.css" /> -->
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -83,7 +73,7 @@
             <div class="col-xs-12 divider text-center">
                 <div class="col-xs-12 col-sm-4 emphasis emp1">
                     <div><h2>20,7K</h2></div>
-                    <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span>   작성한 글 보기</button>
+                    <button class="btn btn-success btn-block btn-writeList	"><span class="fa fa-plus-circle"></span>   작성한 글 보기</button>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis emp2">
                     <div><h2>245</h2></div>
@@ -98,6 +88,51 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="write-container">
+  <h2>Hover Rows</h2>
+  <p>아이디어 게시판에 작성한 글</p>
+  <table class="table table-hover">
+    <thead class="write-container-head">
+      <tr>
+        <th>IdxNumber</th>
+        <th>Title</th>
+        <th>Contents</th>
+        <th>RegDate</th>
+      </tr>
+    </thead>
+    <tbody class="write-container-body">
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+        <td>july@example.com</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+        <td>john@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
 <script src="/static/plugins/startbootstrap/vendor/jquery/jquery.min.js"></script>
 		<script src="/static/plugins/startbootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script src="/static/plugins/js/userDetail.js"></script>

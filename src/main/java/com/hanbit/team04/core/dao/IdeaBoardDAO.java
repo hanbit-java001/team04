@@ -55,4 +55,8 @@ public class IdeaBoardDAO {
 		return sqlSession.insert("ideaBoard.insertIdeas", param);
 	}
 
+	public List<IdeaBoardVO> selectUserDetail(String userId) {
+		return sqlSession.selectList("ideaBoard.selectUserDetail", userId);
+	}
+
 }

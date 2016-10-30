@@ -53,5 +53,9 @@
  		 VALUES (SEQ_IDX.NEXTVAL,#{userId}, #{title}, #{contents}, SYSDATE, SYSDATE)
  	
  	</insert>
+ 	
+ 	<select id="selectUserDetail" parameterType="string" resultType="IdeaBoardVO">
+ 	SELECT BOARD_IDX , TITLE , CONTENTS , REGDATE FROM IDEA_BOARD WHERE USER_ID=#{userId} ORDER BY BOARD_IDX ASC
+ 	</select>
 
 </mapper>

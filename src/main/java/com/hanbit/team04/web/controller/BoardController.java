@@ -23,6 +23,7 @@ import com.hanbit.team04.core.service.ReplyService;
 import com.hanbit.team04.core.session.LoginRequired;
 import com.hanbit.team04.core.session.Session;
 import com.hanbit.team04.core.session.SessionHelpler;
+import com.hanbit.team04.core.vo.IdeaBoardVO;
 import com.hanbit.team04.core.vo.IdeaMemberVO;
 import com.hanbit.team04.core.vo.IdeaVO;
 import com.hanbit.team04.core.vo.ReplyVO;
@@ -213,6 +214,29 @@ public class BoardController {
 	 public String aa(){
 
 		 return "/board/boardHover";
+	 }
+	 
+	 @RequestMapping("/api/userDetail/writeContents")
+	 @ResponseBody
+	 public Map getdata(){
+		 
+		 Map result = new HashMap<>();
+		 
+		 List<IdeaBoardVO> BoList = new ArrayList<>();
+		 
+		 Session session = SessionHelpler.getSession();
+		 
+		 String userId = session.getUserId();
+		 
+		 BoList = ideaBoardService.getUserDetail(userId);
+		 
+		 LOGGER.debug(BoList.toString());
+		 
+		 result.put("board_idx" , BoList);
+		 result.put("userId", userId);
+		 
+		 
+		 return result;
 	 }
 
 }
