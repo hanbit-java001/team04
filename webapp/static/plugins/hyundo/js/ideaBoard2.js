@@ -7,6 +7,8 @@ $(function() {
 	var dbtitle;
 	var dbcontents;
 	///////////////////////////
+	var imgfile=null;
+	/////
 	var modalTrigger = $('.cd-modal-trigger'),
 	transitionLayer = $('.cd-transition-layer'),
 	transitionBackground = transitionLayer.children(),
@@ -464,17 +466,43 @@ $(function() {
 			}
 		}).done(function(result){
 			if(result > 0){
-				alert("sucsex");
+				alert("success");
+				$(".modal-close").click();
 			}else{
 				alert("fuck");
 			}
 		})
 	})
-		
 	
 	$(".IdeaCancelBtn").on("click", function(){
 		$(".modal-close").click();
 	})
+	
+	// 파일업로드
+	///////////////////////////////////////////////////
+	
+	function dropBoxMaker() {
+    var dropbox = document.getElementById("dropbox");
+    dropbox.addEventListener("dragenter", noop, false);
+    dropbox.addEventListener("dragexit", noop, false);
+    dropbox.addEventListener("dragover", noop, false);
+    dropbox.addEventListener("drop", dropUpload, false);
+}
+
+function noop(event) {
+    event.stopPropagation();
+    event.preventDefault();
+}
+
+function dropUpload(event) {
+    noop(event);
+    imgfile = event.dataTransfer.files;
+    $("#dropbox").text("Uploading " + imgfile[0].name);
+console.log("img file name "+imgfile[0].name);
+
+}
+/////////////////////////////////////////////////////	
+	
 	
 	
 	getTotalCnt();
