@@ -46,5 +46,12 @@
  	<select id="selectWriteCount" resultType="int">
  		SELECT COUNT(BOARD_IDX) FROM IDEA_BOARD WHERE USER_ID=#{userId}
  	</select>
+ 	
+ 	
+ 	<insert id="insertIdeas" parameterType="map">
+ 		INSERT INTO IDEA_BOARD (BOARD_IDX, USER_ID, TITLE, CONTENTS, REGDATE, MOD_DATE) 
+ 		 VALUES (SEQ_IDX.NEXTVAL,#{userId}, #{title}, #{contents}, SYSDATE, SYSDATE)
+ 	
+ 	</insert>
 
 </mapper>

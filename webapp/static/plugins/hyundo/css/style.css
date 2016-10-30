@@ -48,11 +48,12 @@
 }
 .IdeaInsertBtn, .IdeaCancelBtn{
 /* 	display: inline-block; */
-float:right;
+	float:right;
 	border: 2px solid #ccc;
 	margin-left:5%;
 	width: 40%;
 	text-align: center; 
+	cursor: pointer;
 }
 @media (min-width: 1200px) {
   #contact-area .IdeaBtns {
@@ -69,8 +70,7 @@ label {
 }
 
 
-/**/
-.
+
 /* private */
 .input-title{
 	width : 50%;

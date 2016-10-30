@@ -1,5 +1,6 @@
 package com.hanbit.team04.core.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,10 @@ public class IdeaBoardDAO {
 
 	public int selectWriteCount(String userId) {
 		return sqlSession.selectOne("ideaBoard.selectWriteCount", userId);
+	}
+
+	public int insertIdea(Map param) {
+		return sqlSession.insert("ideaBoard.insertIdeas", param);
 	}
 
 }

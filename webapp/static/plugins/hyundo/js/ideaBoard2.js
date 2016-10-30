@@ -12,7 +12,7 @@ $(function() {
 	transitionBackground = transitionLayer.children(),
 	modalWindow = $('.cd-modal');
 	
-	/// 총 숫자 가져오는 애
+	/// 珥� �닽�옄 媛��졇�삤�뒗 �븷
 	function getTotalCnt(){
 	$.ajax({
 		url : "/api/totCnt",
@@ -29,7 +29,7 @@ $(function() {
 	
 	
 	////////////////////////////////////
-	// 버튼 그려주는 애
+	// 踰꾪듉 洹몃젮二쇰뒗 �븷
 	function makeBtn(CrntPageNum){
 	
 		var PgOne = (CrntPageNum-1)*3+1;
@@ -55,7 +55,7 @@ $(function() {
 	
 	
 		/////////////////////////////////////////////////////////
-	// vo 9개 가져와서 그려주는 애
+	// vo 9媛� 媛��졇���꽌 洹몃젮二쇰뒗 �븷
 	function makeView(CrntPageNum){
 	$.ajax({
 				url : "/api/datas",
@@ -126,7 +126,7 @@ $(function() {
 					})
 	}
 	
-	// 버튼이벤트
+	// 踰꾪듉�씠踰ㅽ듃
 	function Btnmovement(){
 	$(".aftBtn").on("click", function(){
 		if(CrntPageNum == totPageNum){
@@ -156,7 +156,7 @@ $(function() {
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// 원래 있던 js 불러주는 애
+	// �썝�옒 �엳�뜕 js 遺덈윭二쇰뒗 �븷
 	function mainjs() {
 		var isPreserve3DSupported = ($('.preserve3d').length > 0), isTransitionSupported = ($('.csstransitions').length > 0), backToTopBtn = $('.cd-top');
 
@@ -419,7 +419,7 @@ $(function() {
 	}
 	
 	
-	// 글쓰기 부분
+	// 湲��벐湲� 遺�遺�
 //	alert("1919");
 	
 	$(".insertBtn").on("click", function(){
@@ -445,7 +445,36 @@ $(function() {
 		
 	})
 	
+	//////////////////////////////////////////////
+	//인서트 버튼
 	
+	$(".IdeaInsertBtn").on("click", function(){
+		
+		var userId = $("#userId").val();
+		var title = $("#title").val();
+		var contents = $("#contents").val();
+		
+		$.ajax({
+			url : "/api/IdeaBoard/insert",
+			method : "POST",
+			data : {
+				userId : userId,
+				title : title,
+				contents : contents
+			}
+		}).done(function(result){
+			if(result > 0){
+				alert("sucsex");
+			}else{
+				alert("fuck");
+			}
+		})
+	})
+		
+	
+	$(".IdeaCancelBtn").on("click", function(){
+		$(".modal-close").click();
+	})
 	
 	
 	getTotalCnt();

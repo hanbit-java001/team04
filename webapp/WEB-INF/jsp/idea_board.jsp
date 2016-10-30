@@ -45,8 +45,8 @@
 				<label for="contents">CONTENTS:</label><br />
 				<div class="textAndbut"><textarea name="contents" rows="20" cols="20" id="contents"></textarea>
 				<div class="IdeaBtns">
-					<div class=IdeaInsertBtn>승인승인</div>
-					<div class=IdeaCancelBtn>취소취소</div>
+					<div class=IdeaInsertBtn>승인</div>
+					<div class=IdeaCancelBtn>취소</div>
 				</div></div>
 			</form>
 			

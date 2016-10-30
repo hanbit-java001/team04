@@ -1,6 +1,7 @@
 package com.hanbit.team04.core.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,5 +37,10 @@ public class IdeaBoardService {
 
 	public int getWriteCount(String userId) {
 		return ideaBoardDAO.selectWriteCount(userId);
+	}
+
+	public int putIdea(Map param) {
+		// TODO Auto-generated method stub
+		return ideaBoardDAO.insertIdea(param);
 	}
 }

@@ -27,7 +27,7 @@ public class IdeaBoardController {
 	private IdeaBoardService ideaBoardService;
 
 //	@LoginRequired
-//	aop 입니다.
+//	aop �엯�땲�떎.
 	@RequestMapping("/hyundo/board")
 	public String IdeaBoards(){
 		return "idea_board";
@@ -61,4 +61,20 @@ public class IdeaBoardController {
 		return result;
 	}
 
+	
+	@RequestMapping("/api/IdeaBoard/insert")
+	@ResponseBody
+	public int insertIdea(@RequestParam("userId") String userId, @RequestParam("title") String title, @RequestParam("contents") String contents){
+		
+		Map param = new HashMap<>();
+		
+		param.put("userId", userId);
+		param.put("title", title);
+		param.put("contents", contents);
+		
+		int result = ideaBoardService.putIdea(param);
+		
+		return result;
+		
+	}
 }
