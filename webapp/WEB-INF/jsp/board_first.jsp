@@ -291,9 +291,6 @@ select {
 .detail-round div {
 	width: 100%;
 	height: 50%;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	font-size: 100%;
 }
 </style>
