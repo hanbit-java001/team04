@@ -7,70 +7,58 @@
         <title>Shuffle Text Effect with jQuery | Tutorialzine Demo</title>
 
         <!-- Our CSS stylesheet file -->
-        <link rel="stylesheet" href="/static/plugins/jquery.shuffleLetters/assets/css/styles.css" />
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" type="text/css" />
-        <style type="text/css">
-		.my-progress-container{
-		margin-top: 5%;
-		}
-		.progress{
-
-		 border: 2px solid #a1a1a1;
-		border-radius: 10px;
-		background-color: #f5f5f5;
-		}
-		.mybar{
-		 border: none;
-		border-radius: 10px;
-		display: list-item;
-		back
-		}
-		.barstateNum{
-		display: inline-block;
-		}
-		.barstate{
-		margin-top:1%;
-		text-align: center;
-		}
-		.afterState{
-		border : 5px solid #9494b8;
-		color:#e4e4e4;
-		background-color: #9494b8;
-		width: 15%;
-		margin-top:1%;
-		margin-left: auto;
-		margin-right: auto;
-		cursor: pointer;
-		}
-        </style>
+       <style>
+.kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+}
+.kv-avatar .file-input {
+    display: table-cell;
+    max-width: 220px;
+}
+</style>
     </head>
 
     <body>
 
-		<div id="container">
+		<div id="kv-avatar-errors-1" class="center-block" style="width:800px;display:none"></div>
+<form class="text-center" action="/avatar_upload.php" method="post" enctype="multipart/form-data">
+    <div class="kv-avatar center-block" style="width:200px">
+        <input id="avatar-1" name="avatar-1" type="file" class="file-loading">
+    </div>
+    <!-- include other inputs if needed and include a form submit (save) button -->
+</form>
+<!-- your server code `avatar_upload.php` will receive `$_FILES['avatar']` on form submission -->
 
-		<div class="userId"></div>
-		<div class="userName"></div>
-		<div class="userPassword"></div>
-		<div class="userAge"></div>
+<!-- the fileinput plugin initialization -->
+<script src="/static/plugins/jquery/jquery-3.1.0.min.js"></script>
+<script>
+var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' +
+    'onclick="alert(\'Call your custom code here.\')">' +
+    '<i class="glyphicon glyphicon-tag"></i>' +
+    '</button>';
+$("#avatar-1").fileinput({
+    overwriteInitial: true,
+    maxFileSize: 1500,
+    showClose: false,
+    showCaption: false,
+    browseLabel: '',
+    removeLabel: '',
+    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+    removeTitle: 'Cancel or reset changes',
+    elErrorContainer: '#kv-avatar-errors-1',
+    msgErrorClass: 'alert alert-block alert-danger',
+    defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar" style="width:160px">',
+    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+    allowedFileExtensions: ["jpg", "png", "gif"]
+});
+</script>
 
-		Create your account!!</div>
-		<div class="textMsg"></div>
-		<input type="text" id="userText" />
 
-		<div class="my-progress-container">
-		  <div class="progress">
-		    <div class="mybar" style="width:0%;background-color: #ff3333">
-		    </div>
-		  </div>
-		  <div class="barstate">lording <div class="barstateNum">0</div> %</div>
-		</div>
-
-        <!-- JavaScript includes -->
-
-		<script src="/static/plugins/jquery/jquery-3.1.0.min.js"></script>
-		<script src="/static/plugins/jquery.shuffleLetters/assets/js/jquery.shuffleLetters.js"></script>
-        <script src="/static/plugins/jquery.shuffleLetters/assets/js/script.js"></script>
 
 
     </body>
