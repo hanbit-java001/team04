@@ -19,6 +19,15 @@
 body {
 	padding-top: 2%;
 }
+.profile-img{
+width: 20vw;
+height: 20vw;
+position: fixed;
+top: 50%;
+left: 20%;
+background-color: aqua;
+z-index: 1;
+}
 </style>
 </head>
 
@@ -85,9 +94,11 @@ body {
 						<span>Next</span>
 					</button>
 				</div>
+				<div class="profile-img"></div>
 			</form>
 		</div>
 	</div>
+	
 	<script src='/static/plugins/jquery/jquery-3.1.0.min.js'></script>
 
 	<script type="text/javascript">
