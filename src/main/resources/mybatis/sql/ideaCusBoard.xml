@@ -22,7 +22,7 @@
 		INSERT INTO IDEA_CUS_BOARD
 		(CUS_IDX,TITLE,REGDATE,CONTENTS,HITCNT,AGE_GROUP,FILE_ID)
 		VALUES
-		(#{cusIDX}, #{title}, #{regDate}, #{contents}, #{hitcnt}, #{ageGroup}, #{fileId})
+		(SEQ_IDX.NEXTVAL, #{title}, SYSDATE, #{contents}, #{hitCnt}, #{ageGroup}, #{fileId})
 	</insert>
 	<select id="selectPage" parameterType="int" resultType="map">
 	<![CDATA[

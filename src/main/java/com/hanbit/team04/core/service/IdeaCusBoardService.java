@@ -17,8 +17,6 @@ public class IdeaCusBoardService {
 @Autowired
 private IdeaCusBoardDAO cusBoardDAO;
 	public int insertBoard(IdeaCusBoardVO ideaCusBoardVO) {
-		ideaCusBoardVO.setRegDate(getSysdate().get("SYSDATE").toString());
-		ideaCusBoardVO.setCusIDX(getIDX());
 		return cusBoardDAO.insertCusBoard(ideaCusBoardVO);
 
 	}

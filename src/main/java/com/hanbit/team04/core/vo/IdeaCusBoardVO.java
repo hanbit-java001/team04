@@ -5,7 +5,7 @@ public class IdeaCusBoardVO {
 	private String title;
 	private String regDate;
 	private String contents;
-	private int hitcnt;
+	private int hitCnt;
 	private int ageGroup;
 	private String fileId;
 	public int getCusIDX() {
@@ -20,8 +20,8 @@ public class IdeaCusBoardVO {
 	public String getContents() {
 		return contents;
 	}
-	public int getHitcnt() {
-		return hitcnt;
+	public int gethitCnt() {
+		return hitCnt;
 	}
 	public int getAgeGroup() {
 		return ageGroup;
@@ -41,8 +41,8 @@ public class IdeaCusBoardVO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public void setHitcnt(int hitcnt) {
-		this.hitcnt = hitcnt;
+	public void sethitCnt(int hitCnt) {
+		this.hitCnt = hitCnt;
 	}
 	public void setAgeGroup(int ageGroup) {
 		this.ageGroup = ageGroup;
@@ -53,19 +53,19 @@ public class IdeaCusBoardVO {
 	@Override
 	public String toString() {
 		return "IdeaCusBoardVO [cusIDX=" + cusIDX + ", title=" + title + ", regDate=" + regDate + ", contents="
-				+ contents + ", hitcnt=" + hitcnt + ", ageGroup=" + ageGroup + ", fileId=" + fileId + "]";
+				+ contents + ", hitCnt=" + hitCnt + ", ageGroup=" + ageGroup + ", fileId=" + fileId + "]";
 	}
 	public IdeaCusBoardVO() {
 		super();
 	}
-	public IdeaCusBoardVO(int cusIDX, String title, String regDate, String contents, int hitcnt, int ageGroup,
+	public IdeaCusBoardVO(int cusIDX, String title, String regDate, String contents, int hitCnt, int ageGroup,
 			String fileId) {
 		super();
 		this.cusIDX = cusIDX;
 		this.title = title;
 		this.regDate = regDate;
 		this.contents = contents;
-		this.hitcnt = hitcnt;
+		this.hitCnt = hitCnt;
 		this.ageGroup = ageGroup;
 		this.fileId = fileId;
 	}

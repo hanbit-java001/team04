@@ -21,7 +21,7 @@ public class WelcomeController {
 
 	@RequestMapping("/")
 	public String welcome() {
-		return "index";
+		return "mainHome";
 	}
 
 	@RequestMapping("/list")

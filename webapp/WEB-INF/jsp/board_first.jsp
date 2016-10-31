@@ -185,13 +185,18 @@ select {
 	position: fixed;
 	width: 50%;
 	height: 100%;
-	left: 0%;
 	top: 0%;
 	background-color: #ffb441;
 	display: none;
 	z-index: 100;
 	padding: 5%;
 	z-index: 100;
+}
+.detail-view-left{
+left: 0%;
+}
+.detail-view-right{
+right:0%;
 }
 
 .detail-view form {
@@ -264,7 +269,7 @@ select {
 	box-shadow: none;
 	border-radius: 0;
 	background-image: none;
-/* 	cursor: none; */
+	/* 	cursor: none; */
 }
 
 .detail-round {
@@ -297,11 +302,43 @@ select {
 	position: relative;
 	padding-top: 15%;
 }
-.detail-gallery{
-width: 100%;
-height: 40%;
-background-color: #ffe0b3;
+
+.detail-gallery {
+	width: 100%;
+	height: 40%;
+	background-color: #ffe0b3;
+	padding: 2%;
 }
+
+.detail-gallery img {
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.img-text {
+	font-size: 300%;
+	text-align: center;
+	line-height: 200px;
+}
+.tooltiptext {
+    visibility: hidden;
+    width: 30%;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.detail-view:hover .tooltiptext {
+    visibility: visible;
+}
+
 </style>
 <title>Rounded Animated Navigation | CodyHouse</title>
 </head>
@@ -358,7 +395,7 @@ background-color: #ffe0b3;
 	<div class="add-list like-font">
 		<form action="#">
 
-			<label for="title" >Title</label> <input type="text" id="title">
+			<label for="title">Title</label> <input type="text" id="title">
 
 			<label for="content">content</label> <input type="text" id="content">
 			<select name="age" id="age">
@@ -375,7 +412,8 @@ background-color: #ffe0b3;
 		<div id="dropbox">Drag and drop a file here...</div>
 		<input type="button" value="글쓰기" class="createContent">
 	</div>
-	<div class="detail-view">
+	<div class="detail-view detail-view-left">
+	<div class="tooltiptext">한번더 누르면 사라집니다.</div>
 		<form>
 
 			<div class="detail-title">Title</div>
@@ -387,7 +425,10 @@ background-color: #ffe0b3;
 				<label>내용</label>
 			</div>
 
-			<div class="detail-gallery"></div>
+			<div class="detail-gallery">
+				<img alt="test" src="">
+				<div class="img-text"></div>
+			</div>
 			<button type="submit" class="mui-btn mui-btn--raised">Submit</button>
 		</form>
 		<div class="detail-round">

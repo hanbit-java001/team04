@@ -24,8 +24,9 @@
 			}
 
 			function prev() {
-				if ($(".fa").next().text() == 1) {
-					location.href = "/mytestoh";
+				if ($(".fa-arrow-left").next().text() == 1) {
+//					location.href = "/mytestoh";
+					$(".fa-arrow-left").fadeOut("slow");
 				} else {
 					PageInNum-=5;
 					pageNumCreate(PageInNum-1);
@@ -41,7 +42,7 @@
 					clickbtn();
 				} else {
 					console.log("더이상 갈곳이 없어  "+($(".page-number div").last().text())%5+" Page : "+PageInNum );
-					$(".fa-arrow-right").fadeOut(1000);
+					$(".fa-arrow-right").fadeOut("slow");
 				}
 			}
 			function pageNumCreate(pageNum){
@@ -77,10 +78,10 @@
 						appendhtml+= "<div class='table-container'>"+
 								"<div class='round-clip'></div>"+
 									"<ul>"+
-										"<li>"+result[i].SUB+"</li>"+
-										"<li>"+result[i].CON+"</li>"+
-										"<li>"+result[i].REG+"</li>"+
-										"<li>"+result[i].AG+"</li>"+
+										"<li>"+result[i].TITLE+"</li>"+
+										"<li>"+result[i].CONTENTS+"</li>"+
+										"<li>"+result[i].REGDATE+"</li>"+
+										"<li>"+result[i].AGE_GROUP+"</li>"+
 									"</ul>"+
 								"</div>";
 
@@ -98,13 +99,42 @@
 						$('section').fadeIn(1000);
 						$('body,html').animate({scrollTop: $(".is-visible").position().top}, 1000);
 						$(".table-container").on("click",function(){
-							$(".detail-view").show("slow");
+							if($( ".cd-section" ).index( $(this).parent().parent().parent() )%2<1){
+								$(".detail-view").removeClass("detail-view-left");
+								$(".detail-view").addClass("detail-view-right");
+							}else{
+								$(".detail-view").removeClass("detail-view-right");
+								$(".detail-view").addClass("detail-view-left");
+							}
+							if($(".detail-view").css("display")!="none"){
+								$(".detail-view").fadeOut("fast");
+							}
 
-							$(".detail-title").text("Title / "+result_list[$( ".table-container" ).index( this )].SUB);
-							$(".detail-regdate input").val(result_list[$( ".table-container" ).index( this )].REG);
-							$(".detail-contents textarea").text(result_list[$( ".table-container" ).index( this )].CON);
-							console.log($( ".table-container" ).index( this ) + " , "+result_list[$( ".table-container" ).index( this )].SUB);
+
+
+							if(result_list[$( ".table-container" ).index( this )].FILE_ID=="null"||result_list[$( ".table-container" ).index( this )].FILE_ID===undefined){
+								$(".detail-gallery img").hide();
+								$(".img-text").text("no-picture");
+							}else{
+								console.log(result_list[$( ".table-container" ).index( this )].FILE_ID);
+								$(".detail-gallery img").attr("src","http://localhost:8180/file/"+result_list[$( '.table-container' ).index( this )].FILE_ID);
+								$(".detail-gallery img").show();
+							}
+							$(".detail-title").text("Title / "+result_list[$( ".table-container" ).index( this )].TITLE);
+							$(".detail-regdate input").val(result_list[$( ".table-container" ).index( this )].REGDATE);
+							$(".detail-contents textarea").text(result_list[$( ".table-container" ).index( this )].CONTENTS);
+							$(".detail-ageGroup").text(result_list[$( ".table-container" ).index( this )].AGE_GROUP+" 대");
+							$(".detail-hitCnt").text("조회수 : "+result_list[$( ".table-container" ).index( this )].HITCNT);
+							$(".detail-view").fadeIn("slow");
+							$(".detail-view").on("click",function(){
+								console.log("check body click");
+								$(".detail-view").fadeOut("fast");
+							})
+							$( window ).scroll(function() {
+								$(".detail-view").fadeOut("fast");
+								});
 							});
+
 				});
 			}
 
