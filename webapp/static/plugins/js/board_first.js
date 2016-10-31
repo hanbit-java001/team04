@@ -2,7 +2,7 @@
 		var totalPage;
 		var currentPage=defaultPageNum;
 		var PageInNum=defaultPageNum;
-
+		var result_list;
 
 		$(document).ready(function() {
 			listLord(defaultPageNum);
@@ -63,6 +63,7 @@
 				}).done(function(myresult) {
 // 					console.log(myresult);
 					var result= myresult.list;
+					result_list=result;
 					totalPage=myresult.totoalPage;
 					var appendhtml="";
 					if(pageNum==1){
@@ -97,9 +98,12 @@
 						$('section').fadeIn(1000);
 						$('body,html').animate({scrollTop: $(".is-visible").position().top}, 1000);
 						$(".table-container").on("click",function(){
-							console.log("table-container");
 							$(".detail-view").show("slow");
-							console.log("table-container???");
+
+							$(".detail-title").text("Title / "+result_list[$( ".table-container" ).index( this )].SUB);
+							$(".detail-regdate input").val(result_list[$( ".table-container" ).index( this )].REG);
+							$(".detail-contents textarea").text(result_list[$( ".table-container" ).index( this )].CON);
+							console.log($( ".table-container" ).index( this ) + " , "+result_list[$( ".table-container" ).index( this )].SUB);
 							});
 				});
 			}

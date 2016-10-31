@@ -26,11 +26,11 @@
 	</insert>
 	<select id="selectPage" parameterType="int" resultType="map">
 	<![CDATA[
-		 SELECT 	a.rn, a.sub, a.con, a.reg ,a.ag
+		  SELECT 	a.*
 		  FROM (
-			SELECT a.rn, a.sub, a.con, a.reg,a.ag
+			SELECT a.*
 			  FROM (
-				SELECT ROWNUM rn, TITLE sub, CONTENTS con , REGDATE reg ,AGE_GROUP ag
+				SELECT ROWNUM rn, IDEA_CUS_BOARD.*
 				  FROM IDEA_CUS_BOARD WHERE AGE_GROUP>#{age} AND AGE_GROUP<=(#{age}+10)) a
 			  WHERE rn <= 15 * #{pageNum}) a
 		 WHERE rn > 15 * (#{pageNum} - 1)

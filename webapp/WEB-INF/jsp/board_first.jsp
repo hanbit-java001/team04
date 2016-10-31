@@ -188,7 +188,7 @@ select {
 	left: 0%;
 	top: 0%;
 	background-color: #ffb441;
-	/* 	display: none; */
+	display: none;
 	z-index: 100;
 	padding: 5%;
 	z-index: 100;
@@ -228,7 +228,7 @@ select {
 .detail-regdate input {
 	display: block;
 	background-color: transparent;
-	color: rgba(0, 0, 0, .87);
+	color: #ffb441;
 	border: none;
 	border-bottom: 1px solid #ffb441;
 	outline: 0;
@@ -254,7 +254,7 @@ select {
 .detail-contents textarea {
 	display: block;
 	background-color: transparent;
-	color: rgba(0, 0, 0, .87);
+	color: #ffb441;
 	border: none;
 	border-bottom: 1px solid #ffb441;
 	outline: 0;
@@ -264,7 +264,7 @@ select {
 	box-shadow: none;
 	border-radius: 0;
 	background-image: none;
-	cursor: none;
+/* 	cursor: none; */
 }
 
 .detail-round {
@@ -291,7 +291,16 @@ select {
 .detail-round div {
 	width: 100%;
 	height: 50%;
-	font-size: 100%;
+	font-size: 130%;
+	text-align: center;
+	vertical-align: middle;
+	position: relative;
+	padding-top: 15%;
+}
+.detail-gallery{
+width: 100%;
+height: 40%;
+background-color: #ffe0b3;
 }
 </style>
 <title>Rounded Animated Navigation | CodyHouse</title>
@@ -349,7 +358,7 @@ select {
 	<div class="add-list like-font">
 		<form action="#">
 
-			<label for="title">title</label> <input type="text" id="title">
+			<label for="title" >Title</label> <input type="text" id="title">
 
 			<label for="content">content</label> <input type="text" id="content">
 			<select name="age" id="age">
@@ -374,7 +383,7 @@ select {
 				<input type="text" disabled> <label>등록일</label>
 			</div>
 			<div class="detail-contents">
-				<textarea disabled rows="5" cols="100%">내용입니다</textarea>
+				<textarea disabled rows="10" cols="100%">내용입니다</textarea>
 				<label>내용</label>
 			</div>
 
