@@ -22,15 +22,24 @@ body {
 
 .profile-img {
 
-    width: 20vw;
-    height: 20vw;
-    position: fixed;
+    width: 15vw;
+    height: 15vw;
+    position: absolute;
     top: 45%;
     left: 39%;
     transform: translate(-50%, -50%);
     background-color: aqua;
     z-index: -1;
     
+}
+.add-profile{
+cursor: pointer;
+    position: absolute;
+    right: 120px;
+    display: inline;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 400;
 }
 </style>
 </head>
@@ -69,6 +78,7 @@ body {
 			<div class="toggle"></div>
 			<h1 class="title">
 				Register
+				<i class="fa fa-plus add-profile" aria-hidden="true"></i>
 				<div class="close"></div>
 			</h1>
 			<form class="backend-form">
