@@ -83,25 +83,33 @@ $(function() {
 						
 						var k = 0;
 						rowHTML += "<div class='projects'>"
-							
-						for (var i = 1; i < 4; i++) {
+							var not_default=[];
+						for (var i = 1, innerNum=1; i < 4; i++) {
 							console.log((result.list.length));
-							
 							rowHTML += "<ul class='row'>"
-							for (var j = 1; j < 4; j++) {
+							for (var j = 1; j < 4; j++,innerNum++) {
 								var trnsNum = ((j - 1) * 3 + i) - 1;
 
 								if(result.list.length > trnsNum){
 									dbtitle = result.list[trnsNum].title;
 									dbcontents = result.list[trnsNum].contents;
+									dbfileId = result.list[trnsNum].fileId;
+									if(dbfileId==null||dbfileId=="NULL"||dbfileId==undefined){
+										not_default.push("default");
+									}else{
+										not_default.push(trnsNum);
+									}
+									
 								}else{
 									dbtitle = "default";
 									dbcontents = "default";
+									not_default.push("default");
+									$(".cd-3d-portfolio .projects .row > li.project-"+innerNum+" .project-image::before ").css("background-image","url(../images/photo-"+innerNum+".jpg)");
 								}
 								
 								rowHTML += cls[k];
 								rowHTML += "<div class='project-wrapper'>";
-								rowHTML += "<div class='project-image'>";
+								rowHTML += "<div class='project-image'>"; // style='background-image:+"dbfileId"+ '
 								rowHTML += "<div class='project-title'>";
 								rowHTML += "<h2>title :  "
 										+ dbtitle + "</h2>";
@@ -117,11 +125,25 @@ $(function() {
 								rowHTML += "</div> ";
 								rowHTML += "</li>";
 								k++;
+								
+								
 							}
 							rowHTML += "</ul>";
 						}
 						rowHTML += "</div>"
 						$(".cd-3d-portfolio").append(rowHTML);
+						$(".myStyle").text("");
+						for(var i=0;i<not_default.length;i++){
+							if(not_default[i]=="default"){
+								console.log(not_default[i]);
+								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(http://203.236.209.187:8180/static/plugins/hyundo/images/photo-"+(i+1)+".jpg)}");
+							}else{
+								console.log(not_default[i]);
+								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(http://203.236.209.187:8180/file/"+result.list[not_default[i]].fileId+")}");
+//								$(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before").css("background-image","url(http://203.236.209.187:8180/file/"+result.list[not_default[i]].fileId+")");
+							}
+						}
+						console.log(not_default);
 						Btnmovement();
 						mainjs();
 						$("body").fadeIn("slow");

@@ -9,6 +9,36 @@
 	<link rel="stylesheet" href="/static/plugins/hyundo/css/style.css"> <!-- Resource style -->
 	<link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style  class="myStyle"type="text/css">
+.cd-3d-portfolio .projects .row > li.project-1 .project-image::before {
+/*   set project background image */
+  background-image: url(../images/photo-1.jpg);
+}
+.cd-3d-portfolio .projects .row > li.project-2 .project-image::before {
+  background-image: url(../images/photo-2.jpg);
+}
+.cd-3d-portfolio .projects .row > li.project-3 .project-image::before {
+  background-image: url(../images/photo-3.jpg);
+}
+.cd-3d-portfolio .projects .row > li.project-4 .project-image::before {
+  background-image: url(../images/photo-4.jpg);
+}
+.cd-3d-portfolio .projects .row > li.project-5 .project-image::before {
+  background-image: url(../images/photo-5.jpg);
+}
+.cd-3d-portfolio .projects .row > li.project-6 .project-image::before {
+  background-image: url(../images/photo-6.jpg);
+}
+.cd-3d-portfolio .projects .row > li.project-7 .project-image::before {
+  background-image: url(../images/photo-7.jpg);
+}
+.cd-3d-portfolio .projects .row > li.project-8 .project-image::before {
+  background-image: url(../images/photo-8.jpg);
+}
+.cd-3d-portfolio .projects .row > li.project-9 .project-image::before {
+  background-image: url(../images/photo-9.jpg);
+}
+</style>
 <title>보드</title>
 </head>
 <body>
