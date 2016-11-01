@@ -59,4 +59,9 @@ public class IdeaBoardDAO {
 		return sqlSession.selectList("ideaBoard.selectUserDetail", userId);
 	}
 
+	public int insertData(IdeaBoardVO ideaBoardVO) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("ideaBoard.insertData", ideaBoardVO);
+	}
+
 }

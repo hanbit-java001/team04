@@ -39,13 +39,10 @@
 								
 								<div>
 								<label for="file">FILE:</label>
-							<form id="upload" method="post" enctype="multipart/form-data">
+							<form id="upload" method="post">
 								<div id="dropbox">
-								<a>여기</a>
-								
-								<input type="file" name="upl" />
+								<input type="file" id="fileId"/>
 								</div>
-
 								<ul>
 									<!-- The file uploads will be shown here -->
 								</ul>

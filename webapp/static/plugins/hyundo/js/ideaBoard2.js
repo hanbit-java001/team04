@@ -14,7 +14,7 @@ $(function() {
 	transitionBackground = transitionLayer.children(),
 	modalWindow = $('.cd-modal');
 	
-	/// 珥� �닽�옄 媛��졇�삤�뒗 �븷
+	/// 총 숫자 가져오는 애
 	function getTotalCnt(){
 	$.ajax({
 		url : "/api/totCnt",
@@ -31,7 +31,7 @@ $(function() {
 	
 	
 	////////////////////////////////////
-	// 踰꾪듉 洹몃젮二쇰뒗 �븷
+	// 버튼 그려주는애
 	function makeBtn(CrntPageNum){
 	
 		var PgOne = (CrntPageNum-1)*3+1;
@@ -57,7 +57,7 @@ $(function() {
 	
 	
 		/////////////////////////////////////////////////////////
-	// vo 9媛� 媛��졇���꽌 洹몃젮二쇰뒗 �븷
+	// vo 9개 가져와서 그려주는 애
 	function makeView(CrntPageNum){
 	$.ajax({
 				url : "/api/datas",
@@ -128,7 +128,7 @@ $(function() {
 					})
 	}
 	
-	// 踰꾪듉�씠踰ㅽ듃
+	// 버튼 움직이자
 	function Btnmovement(){
 	$(".aftBtn").on("click", function(){
 		if(CrntPageNum == totPageNum){
@@ -158,7 +158,7 @@ $(function() {
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// �썝�옒 �엳�뜕 js 遺덈윭二쇰뒗 �븷
+	// 원래 있던 js 불러주는 애
 	function mainjs() {
 		var isPreserve3DSupported = ($('.preserve3d').length > 0), isTransitionSupported = ($('.csstransitions').length > 0), backToTopBtn = $('.cd-top');
 
@@ -421,9 +421,7 @@ $(function() {
 	}
 	
 	
-	// 湲��벐湲� 遺�遺�
-//	alert("1919");
-	
+// WRITE 버튼잼
 	$(".insertBtn").on("click", function(){
 		
 		$(".insertPanel").css("display","inherit");
@@ -455,24 +453,39 @@ $(function() {
 		var userId = $("#userId").val();
 		var title = $("#title").val();
 		var contents = $("#contents").val();
+		var fileId = $("#fileId").get(0);
 		
+		var data = new FormData();
+		var fileName= fileId.files[0].name;
+		console.log("과연 코알라? "+fileName);
+		
+		data.append("userId",userId)
+		data.append("title",title)
+		data.append("contents",contents)
+		
+		for (var i=0;i<fileId.files.length;i++) {
+			var file = fileId.files[i];
+			data.append(fileName, file);
+		
+		}
+		console.log("뇨내 :");
 		$.ajax({
-			url : "/api/IdeaBoard/insert",
+			url : "/api/IdeaBoard/insert2",
 			method : "POST",
-			data : {
-				userId : userId,
-				title : title,
-				contents : contents
-			}
+			data : data,
+			contentType : false,
+			processData : false
 		}).done(function(result){
 			if(result > 0){
 				alert("success");
 				$(".modal-close").click();
 			}else{
-				alert("fuck");
+				alert("fail");
 			}
 		})
 	})
+	
+	///////////////////////////////////////
 	
 	$(".IdeaCancelBtn").on("click", function(){
 		$(".modal-close").click();
@@ -504,6 +517,14 @@ console.log("img file name "+imgfile[0].name);
 /////////////////////////////////////////////////////	
 	
 	
+
+
+
+
+
+
+
+
 	
 	getTotalCnt();
 	makeBtn(CrntPageNum);

@@ -47,4 +47,9 @@ public class IdeaBoardService {
 	public List<IdeaBoardVO> getUserDetail(String userId) {
 		return ideaBoardDAO.selectUserDetail(userId);
 	}
+
+	public int insertBoard(IdeaBoardVO ideaBoardVO) {
+		// TODO Auto-generated method stub
+		return ideaBoardDAO.insertData(ideaBoardVO);
+	}
 }

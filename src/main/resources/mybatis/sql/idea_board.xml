@@ -37,6 +37,10 @@
   		(#{boardIdx}, #{title}, #{regDate}, #{contents}, #{userId},
   		#{modDate}, #{confirm}, #{hitCnt}, #{fileId})
   	</insert>
+  	<insert id="insertData" parameterType="IdeaBoardVO">
+  		INSERT INTO IDEA_BOARD (BOARD_IDX, USER_ID, TITLE, CONTENTS, REGDATE, MOD_DATE, FILE_ID) 
+ 		 VALUES (SEQ_IDX.NEXTVAL,#{userId}, #{title}, #{contents}, SYSDATE, SYSDATE, #{fileId})
+  	</insert>
 
 
  	<select id="selectConfirmCount" parameterType="string" resultType="int">
