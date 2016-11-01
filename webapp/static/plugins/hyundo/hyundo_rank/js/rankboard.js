@@ -270,9 +270,15 @@ $(function() {
         	  method : "POST"
           }).done(function(rankBoardList){
         	  list=rankBoardList;
+        	  var dbfileId = [];
     			for(var i = 0; i<30; i++) {
     				var lrIdx = Math.floor(Math.random()*2);
     				var lrIdxrev = (Math.abs(lrIdx))-1;
+    				//rankBoardList[i].fileId;
+    				
+    				dbfileId.push(rankBoardList[i].fileId);
+    				console.log(dbfileId);
+    				
     				if(lrIdxrev<0){
     					lrIdxrev=1;
     				}
@@ -300,10 +306,16 @@ $(function() {
     				rankBoardHTML +=               lrHTML[lrIdxrev];
     				rankBoardHTML +=           "</div>"
     				rankBoardHTML +=        "</div>"
-//    				$(".center").text(rankBoardList[i].userId);
-//    				$(".modal-content h1").text(rankBoardList[i].contents);
-//    				$(".modal-content p").text(rankBoardList[i].contents);
     				$(".ss-container").append(rankBoardHTML);
+    			    				
+    			}
+    			for(var i =0; i<30; i++){
+    				if(dbfileId[i]==null||dbfileId[i]==undefined||dbfileId[i]=="NULL"){
+    					
+    				}else{
+    					$(".ss-circle-"+i).css("background-image","url(http://203.236.209.187:8180/file/"+dbfileId[i]+")")
+    					
+    				}
     			}
     			afterClickEvent();
     			start();

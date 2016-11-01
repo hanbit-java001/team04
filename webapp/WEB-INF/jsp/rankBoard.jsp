@@ -57,6 +57,7 @@
 						<!-- .cd-main-content -->
 						<div class="modal-content">
 							<h1>My Modal Content</h1>
+							<div class="contents-image">아아아</div>
 							<p>con1</p>
 						</div>
 						<!-- .modal-content -->

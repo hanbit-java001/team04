@@ -5,12 +5,12 @@
 <select id="selectBoards" resultType="RankBoardVO">
 <!-- 	SELECT * FROM PJ_BOARD ORDER BY IDX DESC -->
 <![CDATA[
-SELECT 	a.rn, a.userId, a.title, a.contents, a.regDate
+SELECT 	a.rn, a.userId, a.title, a.contents, a.regDate, a.fileId
 		  FROM (
-			SELECT a.rn, a.userId, a.title, a.contents, a.regDate
+			SELECT a.rn, a.userId, a.title, a.contents, a.regDate, a.fileId
 			  FROM (
 				SELECT ROWNUM rn, USER_ID userId, TITLE title,
-					   CONTENTS contents, REGDATE regDate
+					   CONTENTS contents, REGDATE regDate, FILE_ID fileId
 				  FROM IDEA_BOARD) a
 			 WHERE rn <= 30 * 1) a
 		 WHERE rn > 30 * (1 - 1)
