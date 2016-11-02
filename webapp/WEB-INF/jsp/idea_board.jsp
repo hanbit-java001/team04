@@ -63,10 +63,10 @@
 						<div id="contact-area">
 <!-- 							<form method="post" action="contactengine.php"> -->
 								<label for="userId">USER_ID:</label>
-								<input type="text"	name="userId" id="userId" />
+								<input type="text"	name="userId" id="userId" disabled="disabled" />
 								<label for="title">TITLE:</label>
 								<input type="text" name="title" id="title" />
-								
+
 								<div>
 								<label for="file">FILE:</label>
 							<form id="upload" method="post">

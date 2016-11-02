@@ -21,25 +21,106 @@ body {
 }
 
 .profile-img {
-
-    width: 15vw;
-    height: 15vw;
-    position: absolute;
-    top: 45%;
-    left: 39%;
-    transform: translate(-50%, -50%);
-    background-color: aqua;
-    z-index: -1;
-    
+	width: 15vw;
+	height: 15vw;
+	position: absolute;
+	top: 50%;
+	left: 15%;
+	transform: translate(-50%, -50%);
+	background-color: aqua;
+	z-index: -1;
+	position: fixed;
+	display: none;
 }
-.add-profile{
-cursor: pointer;
-    position: absolute;
-    right: 120px;
-    display: inline;
-    color: #ffffff;
-    font-size: 40px;
-    font-weight: 400;
+
+.add-profile {
+	cursor: pointer;
+	position: absolute;
+	right: 120px;
+	display: inline;
+	color: #ffffff;
+	font-size: 40px;
+	font-weight: 400;
+}
+/* .add-profile .add-tooltip:before { */
+/*   bottom: -20px; */
+/*   content: " "; */
+/*   display: block; */
+/*   height: 20px; */
+/*   left: 0; */
+/*   position: absolute; */
+/*   width: 100%; */
+/* } */
+
+/* CSS Triangles - see Trevor's post */
+.add-profile .add-tooltip:after {
+	border-left: solid transparent 10px;
+	border-right: solid transparent 10px;
+	border-top: solid #1496bb 10px;
+	bottom: -10px;
+	content: " ";
+	height: 0;
+	left: 50%;
+	margin-left: -13px;
+	position: absolute;
+	width: 0;
+}
+.add-tooltip {
+	background: #1496bb;
+	bottom: 100%;
+	color: #fff;
+	display: block;
+	left: -64px;
+	margin-bottom: 15px;
+	opacity: 0;
+	padding: 15px;
+	pointer-events: none;
+	position: absolute;
+	width: 100%;
+	font-size: 15px;
+	-webkit-transform: translateY(10px);
+	-moz-transform: translateY(10px);
+	-ms-transform: translateY(10px);
+	-o-transform: translateY(10px);
+	transform: translateY(10px);
+	-webkit-transition: all .25s ease-out;
+	-moz-transition: all .25s ease-out;
+	-ms-transition: all .25s ease-out;
+	-o-transition: all .25s ease-out;
+	transition: all .25s ease-out;
+	-webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+	-moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+	-ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+	-o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+	-webkit-transform: translateY(10px);
+}
+
+.filebox label {
+	display: inline-block;
+	padding: 1%;
+	color: #999;
+	font-size: 90%;
+	/*   line-height: normal; */
+	/*   vertical-align: middle; */
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	top: 0;
+	margin-top: 10px;
+}
+
+.filebox input[type="file"] { /* 파일 필드 숨기기 */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
 }
 </style>
 </head>
@@ -78,7 +159,11 @@ cursor: pointer;
 			<div class="toggle"></div>
 			<h1 class="title">
 				Register
-				<i class="fa fa-plus add-profile" aria-hidden="true"></i>
+				<div class="filebox">
+					<label for="ex_file" class="add-profile" id="dropbox">업로드</label>
+					<div class="add-tooltip">Add profile img</div>
+					<input type="file" id="ex_file">
+				</div>
 				<div class="close"></div>
 			</h1>
 			<form class="backend-form">
@@ -108,8 +193,8 @@ cursor: pointer;
 						<span>Next</span>
 					</button>
 				</div>
+				<div class="profile-img">프로필추가</div>
 			</form>
-			<div class="profile-img">프로필추가</div>
 		</div>
 	</div>
 
@@ -125,6 +210,7 @@ cursor: pointer;
 
 		$('.close').on('click', function() {
 			$('.container').stop().removeClass('active');
+			$(".profile-img").fadeOut();
 		});
 		// 		$(".front-form div input").on("focusout",function(){
 		// 			console.log("input check log"+$("#UserId").val());
@@ -174,6 +260,11 @@ cursor: pointer;
 
 					}
 				})
+
+		$("#ex_file").change(function() {
+			console.log("click event check");
+			$(".profile-img").fadeIn();
+		});
 		function changeText(that, font_size) {
 			$(that).next("label").fadeOut().text(
 					userTextMsg[$(".backend-form .input-container").index(
@@ -313,6 +404,74 @@ cursor: pointer;
 					}
 				});
 			}
+		}
+		dropBoxMaker();
+		function dropBoxMaker() {
+			var dropbox = document.getElementById("dropbox");
+			dropbox.addEventListener("dragenter", noop, false);
+			dropbox.addEventListener("dragexit", noop, false);
+			dropbox.addEventListener("dragover", noop, false);
+			dropbox.addEventListener("drop", dropUpload, false);
+		}
+
+		function noop(event) {
+			event.stopPropagation();
+			event.preventDefault();
+		}
+
+		function dropUpload(event) {
+			console.log(event.dataTransfer.files[0].name);
+			noop(event);
+			imgfile = event.dataTransfer.files;
+			console.log(event.target.result);
+			$(".profile-img").text("Uploading " + event.dataTransfer.files[0].name);
+			var getImagePath = URL.createObjectURL(imgfile.files[0]);
+	         $(".profile-img").css('background-image', 'url(' + getImagePath + ')');
+			$(".profile-img").fadeIn();
+			console.log("img file name " + imgfile[0].name);
+
+		}
+
+		function upload(myFile) {
+			var data = new FormData();
+			data.append("title", $("#title").val());
+			data.append("contents", $("#content").val());
+			data.append("age", $("#age").val());
+			console.log("age : " + $("#age").val());
+			if (myFile != null) {
+				for (var i = 0; i < myFile.length; i++) {
+					data.append("Contents_img", myFile[i]);
+					var progress = Math.round(i / myFile.length * 100);
+					$("#dropbox").html("Progress " + progress + "%");
+				}
+			}
+			$.ajax({
+				url : "/api/board/add",
+				method : "POST",
+				data : data,
+				contentType : false,
+				dataType : "json",
+				processData : false
+			}).done(function(result) {
+
+				console.log(+"님 환영합니다.");
+				$("#dropbox").html("Complete");
+				setTimeout(function() {
+					$(".addContent").click();
+				}, 1000);
+
+			});
+		}
+
+		function uploadProgress(event) {
+			// Note: doesn't work with async=false.
+			var progress = Math.round(event.loaded / event.total * 100);
+			document.getElementById("status").innerHTML = "Progress "
+					+ progress + "%";
+		}
+
+		function uploadComplete(event) {
+			document.getElementById("status").innerHTML = event.target.responseText;
 		}
 	</script>
 
