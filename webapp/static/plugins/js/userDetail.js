@@ -65,10 +65,12 @@ function writeViewMenu(){
 			+result.board_idx[i].regDate+"</td><td><i class='fa fa-file-o fa-2x' aria-hidden='true'></i>  " +
 					"<i class='fa fa-trash fa-2x' data-num='"+result.board_idx[i].boardIdx+
 					"' aria-hidden='true'></i></td></tr>";
+				if(i%10==0){
+				}
 
-			if(result.board_idx.length==10){
-			}
 		}
+//		console.log(result.board_idx.length%10==0);
+
 		$(".write-container-body").html(innerHtml);
 
 		$(".fa-trash").on("click",function(){
