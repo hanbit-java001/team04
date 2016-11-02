@@ -61,6 +61,15 @@
 
 				//실시간 반응 댓글 추가~~~~~~~~~~~~~~~~~~~~~?//////////////////
 			$("#btn-chat").on("click", function(){
+				chatAction();
+			})
+			$("#btn-input").keypress(function(e){
+				if(e.keyCode==13){
+					chatAction();
+				}
+			})
+
+			function chatAction(){
 
 				var contents = $("#btn-input").val();
 
@@ -80,8 +89,7 @@
 				}).fail(function(){
 					alert('망');
 				});
-
-				})
+			}
 
 				//댓글생성 해줌 /////////////
 				function getReply(pageNum){

@@ -49,7 +49,13 @@ public class IdeaBoardService {
 	}
 
 	public int insertBoard(IdeaBoardVO ideaBoardVO) {
-		// TODO Auto-generated method stub
 		return ideaBoardDAO.insertData(ideaBoardVO);
 	}
+
+	public int deleteData(String userId, int boardNum) {
+
+		return ideaBoardDAO.deleteBoardData(userId,boardNum);
+	}
+
+
 }
