@@ -705,6 +705,8 @@ Portfolio Projects
   width: 100%;
   background: white;
   box-shadow: 0 -5px 0 white;
+    white-space: normal;
+  word-break: break-word; 
 }
 .cd-3d-portfolio .projects .project-content > div {
   opacity: 0;

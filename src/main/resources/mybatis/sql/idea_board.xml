@@ -18,12 +18,12 @@
 
 	<select id="selectBoards2" parameterType="int" resultType="IdeaBoardVO">
 	<![CDATA[
-	SELECT 	a.rn, a.userId, a.title, a.contents, a.articleDate, a.fileId
+	SELECT 	a.rn, a.userId, a.title, a.contents, a.articleDate, a.fileId, a.hitCnt, a.boardIdx
 		  FROM (
-			SELECT a.rn, a.userId, a.title, a.contents, a.articleDate, a.fileId
+			SELECT a.rn, a.userId, a.title, a.contents, a.articleDate, a.fileId, a.hitCnt, boardIdx
 			  FROM (
 				SELECT ROWNUM rn, USER_ID userId, TITLE title,
-					   CONTENTS contents, REGDATE articleDate, FILE_ID fileId
+					   CONTENTS contents, REGDATE articleDate, FILE_ID fileId, HITCNT hitCnt, BOARD_IDX boardIdx
 				  FROM IDEA_BOARD) a
 			 WHERE rn <= 9 * #{pageNum}) a
 		 WHERE rn > 9 * (#{pageNum} - 1)
@@ -65,5 +65,9 @@
  	<delete id="deleteBoardData" parameterType="map">
  	DELETE FROM IDEA_BOARD WHERE BOARD_IDX =#{boardNum} AND USER_ID=#{userId}
  	</delete>
+ 	
+ 	<update id="addHitCnt" parameterType="int">
+ 	UPDATE IDEA_BOARD SET HITCNT=HITCNT+1 WHERE BOARD_IDX = #{IdxNum}
+ 	</update>
 
 </mapper>
