@@ -3,8 +3,9 @@ $(function() {
 	transitionLayer = $('.cd-transition-layer'),
 	transitionBackground = transitionLayer.children(),
 	modalWindow = $('.cd-modal');
+	var dbfileId = [];
 	var list = [];
-			var size = ["small", "medium", "large"];
+	var size = ["small", "medium", "large"];
 			
 		    function rndSize(){
 		    	return size[Math.floor(Math.random()*3)];
@@ -270,20 +271,20 @@ $(function() {
         	  method : "POST"
           }).done(function(rankBoardList){
         	  list=rankBoardList;
-        	  var dbfileId = [];
+        	  
     			for(var i = 0; i<30; i++) {
     				var lrIdx = Math.floor(Math.random()*2);
     				var lrIdxrev = (Math.abs(lrIdx))-1;
     				//rankBoardList[i].fileId;
     				
     				dbfileId.push(rankBoardList[i].fileId);
-    				console.log(dbfileId);
+//    				console.log(dbfileId);
     				
     				if(lrIdxrev<0){
     					lrIdxrev=1;
     				}
     				var lrHTML = ["<a href='#' class='ss-circle ss-circle-"+i+" imgbtn-"+i+"'>"+i+"번그림잼</a>",
-    				          "<h3><span>"+rankBoardList[i].regDate+"</span><a href='#' class='txtbtn-"+i+"'>"+rankBoardList[i].contents+"</a></h3>"];
+    				          "<h3><span>"+rankBoardList[i].regDate+"</span><a href='#' class='txtbtn-"+i+"'>"+rankBoardList[i].title+"</a></h3>"];
     				if(i==0||(i%5==0)){
     					var rankBoardHTMLbar = "";
     	    			rankBoardHTMLbar +=			"<div class='ss-row not-index'>"
@@ -314,7 +315,6 @@ $(function() {
     					
     				}else{
     					$(".ss-circle-"+i).css("background-image","url(http://203.236.209.187:8180/file/"+dbfileId[i]+")")
-    					
     				}
     			}
     			afterClickEvent();
@@ -327,13 +327,21 @@ $(function() {
 			function afterClickEvent(){
 			$(".ss-row div> a, .ss-row div >h3").on("click", 
 			function(){
+				$(".ss-links").hide();
 				console.log("check this : "+$(this).parent().html());
 //				console.log($(".ss-row:not('.not-index')").index($(this).parent().parent()));
 				var rkidx = $(".ss-row:not('.not-index')").index($(this).parent().parent());
 				console.log(rkidx);
 				$(".cd-main-content h1").text(list[rkidx].userId);
 				$(".modal-content h1").text(list[rkidx].title);
-				$(".modal-content p").text(list[rkidx].contents);
+				$(".modal-content .pclass").text(list[rkidx].contents);
+				console.log(dbfileId);
+				if(dbfileId[rkidx]==null||dbfileId[rkidx]=="NULL"||dbfileId[rkidx]==undefined){
+					$(".contents-image").text("등록된 이미지가 없습니다.");
+				}else{
+					$(".contents-image").css({"background-image": "url(http://203.236.209.187:8180/file/"+dbfileId[(rkidx)]+")", "height": "100%"});
+				}
+				
 				
 				event.preventDefault();
 				transitionLayer.addClass('visible opening');
@@ -343,6 +351,9 @@ $(function() {
 				}, delay);
 				
 				modalWindow.on('click', '.modal-close', function(event){
+					$(".ss-links").show();
+					$(".contents-image").text("");
+					$(".contents-image").css({"background-image": "none"})
 					event.preventDefault();
 					transitionLayer.addClass('closing');
 					modalWindow.removeClass('visible');

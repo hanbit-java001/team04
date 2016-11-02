@@ -26,9 +26,6 @@
                 </span>
                 <div class="clr">
 
-
-
-
 			</div>
             </div>
             <h1>여기에 제목을 쓰면 되겠찌 제목제목</h1>
@@ -57,8 +54,8 @@
 						<!-- .cd-main-content -->
 						<div class="modal-content">
 							<h1>My Modal Content</h1>
-							<div class="contents-image">아아아</div>
-							<p>con1</p>
+							<div class="contents-image">이미지</div>
+							<div class="pclass">con1</div>
 						</div>
 						<!-- .modal-content -->
 
