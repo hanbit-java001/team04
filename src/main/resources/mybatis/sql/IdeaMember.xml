@@ -17,7 +17,7 @@
 
 	<insert id="createLogInfo" parameterType="IdeaMemberVO">
 		INSERT INTO IDEA_MEMBER
-		(USER_ID, PASSWORD, AGE, NAME,FILE_ID)
+		(USER_ID, PASSWORD, AGE, NAME, FILE_ID)
 		VALUES
 		(#{userId}, #{password}, #{age}, #{name}, #{fileId})
 	</insert>
