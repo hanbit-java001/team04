@@ -61,10 +61,11 @@ $(function(){
 			    if (innerPer >= 100) {
 			      clearInterval(id);
 					$(".mybar").css({"background-color":"#80bfff","border":"transparent"})
-					$(".barstate").hide().empty().addClass("afterState").text("Successfully").fadeIn("slow").on("click",successCommit());
+					$(".barstate").hide().empty().addClass("afterState").text("Successfully").fadeIn("slow").on("click",function(){successCommit()});
 					$(".barstate").focus();
 					$("#userText").attr("disabled","true");
-
+					$(".profile").fadeIn();
+					dropBoxMaker();
 			    }else if(innerPer>=endPer){
 			    	clearInterval(id);
 			    }
@@ -72,10 +73,61 @@ $(function(){
 			      innerPer++;
 			      bar.width(innerPer + '%');
 			      $(".barstateNum").text(innerPer);
-			      console.log("innerPer"+innerPer);
+//			      console.log("innerPer"+innerPer);
 			    }
 			  }
 	}
+	
+	function dropBoxMaker() {
+		var dropbox = document.getElementById("dropbox");
+		dropbox.addEventListener("dragenter", noop, false);
+		dropbox.addEventListener("dragexit", noop, false);
+		dropbox.addEventListener("dragover", noop, false);
+		dropbox.addEventListener("drop", dropUpload, false);
+	}
+
+	function noop(event) {
+		event.stopPropagation();
+		event.preventDefault();
+	}
+
+	function dropUpload(event) {
+		noop(event);
+		imgfile = event.dataTransfer.files;
+		console.log(imgfile[0].name);
+
+		var file = imgfile[0];
+		var reader = new FileReader();
+		reader.onloadend = function() {
+			$('.profile-img').css('background-image',
+					'url("' + reader.result + '")');
+		}
+		if (file) {
+			reader.readAsDataURL(file);
+		} else {
+		}
+		$(".profile-img-text").text(
+				"Uploading " + imgfile[0].name);
+		$(".profile").fadeIn();
+
+	}
+
+
+	function uploadProgress(event) {
+		// Note: doesn't work with async=false.
+		var progress = Math.round(event.loaded / event.total * 100);
+		document.getElementById("status").innerHTML = "Progress "
+				+ progress + "%";
+	}
+
+	function uploadComplete(event) {
+		document.getElementById("status").innerHTML = event.target.responseText;
+	}
+	
+	$(".profile-img-text").on("click",function(){
+		console.log("check text0000");
+		$(".input-file").click();
+	})
 	// Shuffle the contents of container
 	container.shuffleLetters();
 	$(".textMsg").shuffleLetters({
@@ -101,6 +153,7 @@ $(function(){
 			$("#container div:nth-child("+currentNum+")").css({"color":"#555"});
 			var containerChild=$("#container div:nth-child("+currentNum+")");
 			changeText=userText.val();
+			console.log(changeText);
 			console.log("checkemail : "+validateEmail(userText.val()));
 			if(currentNum==1&&validateEmail(userText.val())){
 				console.log("email success")

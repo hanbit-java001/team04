@@ -492,9 +492,6 @@ body {
 
 		}
 
-		function upload(myFile) {
-
-		}
 
 		function uploadProgress(event) {
 			// Note: doesn't work with async=false.
