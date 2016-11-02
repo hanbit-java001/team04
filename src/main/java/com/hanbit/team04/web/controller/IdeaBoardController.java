@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.hanbit.team04.core.service.FileService;
 import com.hanbit.team04.core.service.IdeaBoardService;
 import com.hanbit.team04.core.session.LoginRequired;
+import com.hanbit.team04.core.session.Session;
+import com.hanbit.team04.core.session.SessionHelpler;
 import com.hanbit.team04.core.vo.FileVO;
 import com.hanbit.team04.core.vo.IdeaBoardVO;
 
@@ -35,8 +37,7 @@ public class IdeaBoardController {
 	@Autowired
 	private FileService fileService;
 
-//	@LoginRequired
-//	aop �엯�땲�떎.
+	@LoginRequired
 	@RequestMapping("/hyundo/board")
 	public String IdeaBoards(){
 		return "idea_board";
@@ -48,6 +49,13 @@ public class IdeaBoardController {
 		List<IdeaBoardVO> voList = ideaBoardService.getIdeaBoards();
 
 		return voList;
+	}
+	@RequestMapping("/api/login/data")
+	@ResponseBody
+	public Session getloginInfo(){
+		Session session = SessionHelpler.getSession();
+		LOGGER.debug("loginfo check : "+session);
+		return session;
 	}
 
 	@RequestMapping("/api/totCnt")
@@ -70,44 +78,44 @@ public class IdeaBoardController {
 		return result;
 	}
 
-	
+
 	@RequestMapping("/api/IdeaBoard/insert")
 	@ResponseBody
 	public int insertIdea(@RequestParam("userId") String userId, @RequestParam("title") String title, @RequestParam("contents") String contents){
-		
+
 		Map param = new HashMap<>();
-		
+
 		param.put("userId", userId);
 		param.put("title", title);
 		param.put("contents", contents);
-		
+
 		int result = ideaBoardService.putIdea(param);
-		
+
 		return result;
 	}
-	
+
 	@RequestMapping(value="/api/IdeaBoard/insert2", method=RequestMethod.POST)
 	@ResponseBody
 	public int insertIdeaData(MultipartHttpServletRequest request) throws IOException{
 		int result = 1;
-		String userId = request.getParameter("userId"); 
+		String userId = request.getParameter("userId");
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
 		String fileId = "";
-		
+
 		Iterator<String> paramNames = request.getFileNames();
-		
+
 		if(paramNames.hasNext()){
 			String paramName = paramNames.next();
 			MultipartFile file = request.getFile(paramName);
-			
+
 			FileVO fileVO = new FileVO();
 			fileVO.setContentType(file.getContentType());
 			fileVO.setFileData(file.getBytes());
 			fileVO.setFileName(file.getName());
 			fileVO.setFileSize(file.getSize());
 			fileId = fileService.storeFile(fileVO);
-			
+
 		}
 		try{
 		IdeaBoardVO ideaBoardVO = new IdeaBoardVO();
@@ -130,9 +138,9 @@ public class IdeaBoardController {
 			}
 			throw new RuntimeException(e.getMessage(), e);
 		}
-		
+
 		return result;
-		
-		
+
+
 	}
 }

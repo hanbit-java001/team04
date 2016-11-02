@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanbit.team04.core.service.RankBoardService;
+import com.hanbit.team04.core.session.LoginRequired;
 import com.hanbit.team04.core.vo.RankBoardVO;
 
 
@@ -21,6 +22,7 @@ public class RankBoardController {
 	@Autowired
 	private RankBoardService rankBoardService;
 
+	@LoginRequired
 	@RequestMapping("/hyundo_rank")
 	public String RankBoard(){
 		return "rankBoard";

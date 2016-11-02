@@ -13,7 +13,7 @@ $(function() {
 	transitionLayer = $('.cd-transition-layer'),
 	transitionBackground = transitionLayer.children(),
 	modalWindow = $('.cd-modal');
-	
+
 	/// 총 숫자 가져오는 애
 	function getTotalCnt(){
 	$.ajax({
@@ -25,19 +25,19 @@ $(function() {
 			console.log(totPageNum+" : "+totCnt);
 		});
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	////////////////////////////////////
 	// 버튼 그려주는애
 	function makeBtn(CrntPageNum){
-	
+
 		var PgOne = (CrntPageNum-1)*3+1;
 		var PgTwo = PgOne+1;
 		var PgThree = PgTwo+1;
-		
+
 		var wrapperHTML = "";
 		    wrapperHTML += "<div class='cd-3d-portfolio-navigation'>";
 		    wrapperHTML +="<div class='cd-wrapper'>";
@@ -54,8 +54,8 @@ $(function() {
 		$(".cd-3d-portfolio").append(wrapperHTML);
 		mainjs();
 	}
-	
-	
+
+
 		/////////////////////////////////////////////////////////
 	// vo 9개 가져와서 그려주는 애
 	function makeView(CrntPageNum){
@@ -67,7 +67,7 @@ $(function() {
 				}
 			}).done(function(result) {
 //						alert(result.list.length);
-				
+
 						var rowHTML = "";
 						var cls = [
 								"<li class='front-face selected project-1'>",
@@ -78,9 +78,9 @@ $(function() {
 								"<li class='right-face project-6'>",
 								"<li class='front-face selected project-7'>",
 								"<li class='right-face project-8'>",
-								"<li class='right-face project-9'>" 
+								"<li class='right-face project-9'>"
 								];
-						
+
 						var k = 0;
 						rowHTML += "<div class='projects'>"
 							var not_default=[];
@@ -99,14 +99,14 @@ $(function() {
 									}else{
 										not_default.push(trnsNum);
 									}
-									
+
 								}else{
 									dbtitle = "default";
 									dbcontents = "default";
 									not_default.push("default");
 									$(".cd-3d-portfolio .projects .row > li.project-"+innerNum+" .project-image::before ").css("background-image","url(../images/photo-"+innerNum+".jpg)");
 								}
-								
+
 								rowHTML += cls[k];
 								rowHTML += "<div class='project-wrapper'>";
 								rowHTML += "<div class='project-image'>"; // style='background-image:+"dbfileId"+ '
@@ -125,8 +125,8 @@ $(function() {
 								rowHTML += "</div> ";
 								rowHTML += "</li>";
 								k++;
-								
-								
+
+
 							}
 							rowHTML += "</ul>";
 						}
@@ -149,7 +149,7 @@ $(function() {
 						$("body").fadeIn("slow");
 					})
 	}
-	
+
 	// 버튼 움직이자
 	function Btnmovement(){
 	$(".aftBtn").on("click", function(){
@@ -177,8 +177,8 @@ $(function() {
 		}
 	})
 	}
-	
-	
+
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 원래 있던 js 불러주는 애
 	function mainjs() {
@@ -441,11 +441,19 @@ $(function() {
 			});
 		});
 	}
-	
-	
+
+
 // WRITE 버튼잼
 	$(".insertBtn").on("click", function(){
-		
+
+//		userId
+		$.ajax({
+			url : "/api/login/data",
+			method : "POST"
+		}).done(function(result){
+			$("#userId").val(result.name);
+		});
+
 		$(".insertPanel").css("display","inherit");
 		event.preventDefault();
 		transitionLayer.addClass('visible opening');
@@ -453,7 +461,7 @@ $(function() {
 		setTimeout(function(){
 			modalWindow.addClass('visible');
 		}, delay);
-		
+
 		modalWindow.on('click', '.modal-close', function(event){
 			event.preventDefault();
 			transitionLayer.addClass('closing');
@@ -463,32 +471,32 @@ $(function() {
 				transitionBackground.off('webkitAnimationEnd oanimationend msAnimationEnd animationend');
 			});
 		});
-		
-		
+
+
 	})
-	
+
 	//////////////////////////////////////////////
 	//인서트 버튼
-	
+
 	$(".IdeaInsertBtn").on("click", function(){
-		
+
 		var userId = $("#userId").val();
 		var title = $("#title").val();
 		var contents = $("#contents").val();
 		var fileId = $("#fileId").get(0);
-		
+
 		var data = new FormData();
 		var fileName= fileId.files[0].name;
 		console.log("과연 코알라? "+fileName);
-		
+
 		data.append("userId",userId)
 		data.append("title",title)
 		data.append("contents",contents)
-		
+
 		for (var i=0;i<fileId.files.length;i++) {
 			var file = fileId.files[i];
 			data.append(fileName, file);
-		
+
 		}
 		console.log("뇨내 :");
 		$.ajax({
@@ -506,16 +514,16 @@ $(function() {
 			}
 		})
 	})
-	
+
 	///////////////////////////////////////
-	
+
 	$(".IdeaCancelBtn").on("click", function(){
 		$(".modal-close").click();
 	})
-	
+
 	// 파일업로드
 	///////////////////////////////////////////////////
-	
+
 	function dropBoxMaker() {
     var dropbox = document.getElementById("dropbox");
     dropbox.addEventListener("dragenter", noop, false);
@@ -536,11 +544,7 @@ function dropUpload(event) {
 console.log("img file name "+imgfile[0].name);
 
 }
-/////////////////////////////////////////////////////	
-	
-	$(".moveBtn").on("click", function(){
-		location.href="/";
-	})
+/////////////////////////////////////////////////////
 
 
 
@@ -549,7 +553,9 @@ console.log("img file name "+imgfile[0].name);
 
 
 
-	
+
+
+
 	getTotalCnt();
 	makeBtn(CrntPageNum);
 	makeView(CrntPageNum);
