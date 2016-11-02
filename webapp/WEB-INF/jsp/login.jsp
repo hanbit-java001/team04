@@ -201,7 +201,7 @@ body {
 				</div>
 				<div class="button-container backend">
 					<!-- 				<div class="backend"> -->
-					<button type="button">
+					<button >
 						<span>Next</span>
 					</button>
 				</div>
