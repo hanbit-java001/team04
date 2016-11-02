@@ -20,17 +20,28 @@ body {
 	padding-top: 2%;
 }
 
-.profile-img {
-	width: 15vw;
-	height: 15vw;
-	position: absolute;
-	top: 50%;
+.profile {
+	width: 20vw;
+	height: 20vw; top : 50%;
 	left: 15%;
 	transform: translate(-50%, -50%);
-	background-color: aqua;
 	z-index: -1;
 	position: fixed;
 	display: none;
+	top: 50%;
+}
+
+.profile-img {
+	width: 80%;
+	height: 80%;
+	background-size: cover;
+	border: 2px solid;
+	border-radius: 50%;
+	padding: 1vw;
+}
+
+.profile-img-text {
+	text-align: center;
 }
 
 .add-profile {
@@ -65,6 +76,7 @@ body {
 	position: absolute;
 	width: 0;
 }
+
 .add-tooltip {
 	background: #1496bb;
 	bottom: 100%;
@@ -193,7 +205,10 @@ body {
 						<span>Next</span>
 					</button>
 				</div>
-				<div class="profile-img">프로필추가</div>
+				<div class="profile">
+					<div class="profile-img"></div>
+					<div class="profile-img-text"></div>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -201,6 +216,7 @@ body {
 	<script src='/static/plugins/jquery/jquery-3.1.0.min.js'></script>
 
 	<script type="text/javascript">
+		var imgfile = null;
 		var userTextMsg = [ "아이디는 이메일 형태로 작성해주세요", "비밀번호는 숫자 1개 + 7글자 이상",
 				"이름은 한글또는 영어만", "나이는 숫자로" ];
 		var createState = [ "fail", "fail", "fail", "fail", "fail" ];
@@ -210,7 +226,7 @@ body {
 
 		$('.close').on('click', function() {
 			$('.container').stop().removeClass('active');
-			$(".profile-img").fadeOut();
+			$(".profile").fadeOut();
 		});
 		// 		$(".front-form div input").on("focusout",function(){
 		// 			console.log("input check log"+$("#UserId").val());
@@ -234,36 +250,56 @@ body {
 		$(".backend").on(
 				"mousedown",
 				function() {
-					var createUser = {
-						userId : $("#CreateUserId").val(),
-						password : $("#CreatePassword").val(),
-						age : $("#CreateAge").val(),
-						name : $("#CreateUserName").val()
-					}
+					console.log("check start");
 					if (($("#CreateUserId").val().trim() != "")
 							&& ($("#CreatePassword").val().trim() != "")
 							&& ($("#CreateAge").val().trim() != "")
 							&& ($("#CreateUserName").val().trim() != "")) {
+
+						var data = new FormData();
+						data.append("userId", $("#CreateUserId").val());
+						data.append("password", $("#CreatePassword").val());
+						data.append("age", $("#CreateAge").val());
+						data.append("name", $("#CreateAge").val());
+						console.log("age : " + $("#CreateUserName").val());
+						if (imgfile != null) {
+							for (var i = 0; i < imgfile.length; i++) {
+								data.append("Contents_img", imgfile[i]);
+							}
+						}
 						$.ajax({
 							url : "/api/Create/user",
 							method : "POST",
-							contentType : "application/json; charset=utf-8",
+							data : data,
+							contentType : false,
 							dataType : "json",
-							data : JSON.stringify(createUser)
+							processData : false
 						}).done(function(result) {
-							if (result == 1) {
-								alert($("#CreateUserId").val() + "님 반갑습니다");
-								location.href = "/list2";
-							}
-						}).fail(function() {
-						});
 
+							console.log(result+"님 환영합니다.");
+							$("#dropbox").html("Complete");
+
+
+						});
 					}
 				})
 
-		$("#ex_file").change(function() {
+		$("#ex_file").change(function(event) {
+			imgfile = event.target.files;
 			console.log("click event check");
-			$(".profile-img").fadeIn();
+			var file = imgfile[0];
+			var reader = new FileReader();
+			reader.onloadend = function() {
+				$('.profile-img').css('background-image',
+						'url("' + reader.result + '")');
+			}
+			if (file) {
+				reader.readAsDataURL(file);
+			} else {
+			}
+			$(".profile-img-text").text(
+					"Uploading " + imgfile[0].name);
+			$(".profile").fadeIn();
 		});
 		function changeText(that, font_size) {
 			$(that).next("label").fadeOut().text(
@@ -423,44 +459,25 @@ body {
 			console.log(event.dataTransfer.files[0].name);
 			noop(event);
 			imgfile = event.dataTransfer.files;
-			console.log(event.target.result);
-			$(".profile-img").text("Uploading " + event.dataTransfer.files[0].name);
-			var getImagePath = URL.createObjectURL(imgfile.files[0]);
-	         $(".profile-img").css('background-image', 'url(' + getImagePath + ')');
-			$(".profile-img").fadeIn();
-			console.log("img file name " + imgfile[0].name);
+
+			var file = imgfile[0];
+			var reader = new FileReader();
+			reader.onloadend = function() {
+				$('.profile-img').css('background-image',
+						'url("' + reader.result + '")');
+			}
+			if (file) {
+				reader.readAsDataURL(file);
+			} else {
+			}
+			$(".profile-img-text").text(
+					"Uploading " + imgfile[0].name);
+			$(".profile").fadeIn();
 
 		}
 
 		function upload(myFile) {
-			var data = new FormData();
-			data.append("title", $("#title").val());
-			data.append("contents", $("#content").val());
-			data.append("age", $("#age").val());
-			console.log("age : " + $("#age").val());
-			if (myFile != null) {
-				for (var i = 0; i < myFile.length; i++) {
-					data.append("Contents_img", myFile[i]);
-					var progress = Math.round(i / myFile.length * 100);
-					$("#dropbox").html("Progress " + progress + "%");
-				}
-			}
-			$.ajax({
-				url : "/api/board/add",
-				method : "POST",
-				data : data,
-				contentType : false,
-				dataType : "json",
-				processData : false
-			}).done(function(result) {
 
-				console.log(+"님 환영합니다.");
-				$("#dropbox").html("Complete");
-				setTimeout(function() {
-					$(".addContent").click();
-				}, 1000);
-
-			});
 		}
 
 		function uploadProgress(event) {

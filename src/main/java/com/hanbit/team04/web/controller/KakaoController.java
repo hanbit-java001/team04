@@ -133,11 +133,49 @@ public class KakaoController {
 		return myresult;
 	}
 
-	@RequestMapping("/api/Create/user")
+	@RequestMapping(value="/api/Create/user" , method=RequestMethod.POST)
 	@ResponseBody
-	public int createLogInfo(@RequestBody IdeaMemberVO createUser) {
+	public int createLogInfo(MultipartHttpServletRequest request) throws Exception {
+		int result=0;
+		IdeaMemberVO createUser = new IdeaMemberVO();
+		createUser.setAge(Integer.parseInt(request.getParameter("age")));
+		createUser.setName(request.getParameter("name"));
+		createUser.setPassword(request.getParameter("password"));
+		createUser.setUserId(request.getParameter("userId"));
+		String fileId = "NULL";
+
+		Iterator<String> paramNames = request.getFileNames();
+		LOGGER.info("checking FILE" +createUser.getFileId()+ " , "+createUser.getName() +" , "+paramNames);
+		if (paramNames.hasNext()) {
+			String paramName = paramNames.next();
+
+			MultipartFile file = request.getFile(paramName);
+
+			FileVO fileVO = new FileVO();
+			fileVO.setContentType(file.getContentType());
+			fileVO.setFileSize(file.getSize());
+			fileVO.setFileName(file.getName());
+			fileVO.setFileData(file.getBytes());
+			LOGGER.info("checking FILE 2 : "+fileVO.getFileName());
+			fileId = fileService.storeFile(fileVO);
+		}
+		try {
+			createUser.setFileId(fileId);
+			if(ideaMemberService.createlogInfo(createUser)==1){
+				LOGGER.info("checking insert: 잘들어가는군");
+			}
+			result=1;
+		}
+		catch (Exception e) {
+			if (StringUtils.isNotBlank(fileId)) {
+				fileService.removeFile(fileId);
+			}
+
+			throw new RuntimeException(e.getMessage(), e);
+		}
+
+
 		LOGGER.info("check create" + createUser);
-		int result  = ideaMemberService.createlogInfo(createUser);
 		return result;
 //		return 0;
 	}
@@ -154,7 +192,7 @@ public class KakaoController {
 		session.setLoggedIn(true);
 		session.setUserId(ideaMemberVO.getUserId());
 		session.setAge(ideaMemberVO.getAge());
-		session.setName(ideaMemberVO.getname());
+		session.setName(ideaMemberVO.getName());
 		}
 		return result;
 	}

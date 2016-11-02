@@ -17,9 +17,9 @@
 
 	<insert id="createLogInfo" parameterType="IdeaMemberVO">
 		INSERT INTO IDEA_MEMBER
-		(USER_ID, PASSWORD, AGE, NAME)
+		(USER_ID, PASSWORD, AGE, NAME,FILE_ID)
 		VALUES
-		(#{userId}, #{password}, #{age}, #{name})
+		(#{userId}, #{password}, #{age}, #{name}, #{fileId})
 	</insert>
 
 	<select id="selectMember" resultType="IdeaMemberVO">
