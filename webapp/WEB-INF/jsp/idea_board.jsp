@@ -44,6 +44,7 @@
 <body>
 	<div class="main-panel">
 		<div class="insertBtn">WRITE</div>
+		<div class="moveBtn">MOVE</div>
 		<div class="cd-3d-portfolio">
 
 			<div class="projects"></div>

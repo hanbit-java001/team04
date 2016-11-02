@@ -538,7 +538,9 @@ console.log("img file name "+imgfile[0].name);
 }
 /////////////////////////////////////////////////////	
 	
-	
+	$(".moveBtn").on("click", function(){
+		location.href="/";
+	})
 
 
 

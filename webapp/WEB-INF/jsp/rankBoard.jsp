@@ -16,12 +16,12 @@
 <body>
 	 <div class="container">
             <div class="header">
-                <a href="http://tympanus.net/Tutorials/TypographyEffects/">
-                    <strong> 랭킹이다 임마들아: </strong>응캬캬캬캬캬캬
+                <a href="/">
+                    <strong> MOVE </strong> to HOME
                 </a>
                 <span class="right">
-                    <a href="http://tympanus.net/codrops/2011/12/05/lateral-on-scroll-sliding-with-jquery/">
-                        <strong>띠로리띠로리띠로리로리</strong>
+                    <a href="/list2">
+                        <strong>MOVE to DASHBOARD</strong>
                     </a>
                 </span>
                 <div class="clr">
