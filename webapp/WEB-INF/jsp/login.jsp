@@ -64,18 +64,18 @@ body {
 /* } */
 
 /* CSS Triangles - see Trevor's post */
-.add-profile .add-tooltip:after {
-	border-left: solid transparent 10px;
-	border-right: solid transparent 10px;
-	border-top: solid #1496bb 10px;
-	bottom: -10px;
-	content: " ";
-	height: 0;
-	left: 50%;
-	margin-left: -13px;
-	position: absolute;
-	width: 0;
-}
+/* .add-profile .add-tooltip:after { */
+/* 	border-left: solid transparent 10px; */
+/* 	border-right: solid transparent 10px; */
+/* 	border-top: solid #1496bb 10px; */
+/* 	bottom: -10px; */
+/* 	content: " "; */
+/* 	height: 0; */
+/* 	left: 50%; */
+/* 	margin-left: -13px; */
+/* 	position: absolute; */
+/* 	width: 0; */
+/* } */
 
 .add-tooltip {
 	background: #1496bb;
@@ -201,7 +201,7 @@ body {
 				</div>
 				<div class="button-container backend">
 					<!-- 				<div class="backend"> -->
-					<button>
+					<button type="button">
 						<span>Next</span>
 					</button>
 				</div>
@@ -248,7 +248,7 @@ body {
 		});
 
 		$(".backend").on(
-				"mousedown",
+				"click",
 				function() {
 					console.log("check start");
 					if (($("#CreateUserId").val().trim() != "")
@@ -260,7 +260,7 @@ body {
 						data.append("userId", $("#CreateUserId").val());
 						data.append("password", $("#CreatePassword").val());
 						data.append("age", $("#CreateAge").val());
-						data.append("name", $("#CreateAge").val());
+						data.append("name", $("#CreateUserName").val());
 						console.log("age : " + $("#CreateUserName").val());
 						if (imgfile != null) {
 							for (var i = 0; i < imgfile.length; i++) {
@@ -349,11 +349,12 @@ body {
 			} else {
 				changeText(this, "20px");
 			}
+
 		}).on(
 				"focusout",
 				function() {
 					if ($(this).attr("id") == "CreateUserId"
-							&& validateEmail($(this).val())) {
+							&& validateEmail($(this).val())&&createState[0]=="fail") {
 						seccesOrfail(this, "success", "#ffffff");
 						$.ajax({
 							url : "/api/CheckId",
@@ -365,7 +366,7 @@ body {
 							if (result == 1) {
 								seccesOrfail(this, "중복된 id가 있어요", "#ffffff");
 								createState[4] = "fail";
-								$(".backend button").attr("disabled", "ture");
+								$(".backend button").attr("disabled", "true");
 							} else {
 								seccesOrfail(this, "success", "#ffffff");
 								createState[4] = "success";
@@ -373,13 +374,13 @@ body {
 							}
 						});
 					} else if ($(this).attr("id") == "CreatePassword"
-							&& validatePassword($(this).val())) {
+							&& validatePassword($(this).val())&&createState[1]=="fail") {
 						seccesOrfail(this, "success", "#ffffff");
 					} else if ($(this).attr("id") == "CreateUserName"
-							&& validateName($(this).val())) {
+							&& validateName($(this).val())&&createState[2]=="fail") {
 						seccesOrfail(this, "success", "#ffffff");
 					} else if ($(this).attr("id") == "CreateAge"
-							&& validateAge($(this).val())) {
+							&& validateAge($(this).val())&&createState[3]=="fail") {
 						seccesOrfail(this, "success", "#ffffff");
 					} else {
 						seccesOrfail(this, "fail", "#660066");
@@ -388,11 +389,16 @@ body {
 					console.log(createState);
 
 				})
-		$("#CreateAge").bind("keypress", function(e) {
-			if (e.keyCode == 13) {
-				$(".backend button").attr("type", "button");
-			}
-		});
+// 		$("#CreateAge").bind("keypress", function(e) {
+// 			if (e.keyCode == 13) {
+// 				$(".backend button").click();
+// 				console.log("check but click");
+// 			}
+// 			if(createState[0]=="success"&&createState[1]=="success"&&createState[2]=="success"&&validateAge($(this).val())){
+// 				$(".backend button").attr("type", "button");
+// 				console.log("check createAge");
+// 			}
+// 		});
 
 		$(".backend-form div input").bind(
 				'keypress',
@@ -413,6 +419,16 @@ body {
 						console
 								.log("check html"
 										+ $(this).next("label").text());
+					}
+					if(createState[0]=="success"&&createState[1]=="success"&&createState[2]=="success"&&validateAge($(this).val())){
+						$(".backend button").attr("type", "button");
+						console.log("check createAge");
+					}
+					if($(this).attr("id")=="CreateAge"){
+					if (e.keyCode == 13) {
+		 				$(".backend >button").click();
+		 				console.log("check but click");
+		 			}
 					}
 				})
 
@@ -456,9 +472,9 @@ body {
 		}
 
 		function dropUpload(event) {
-			console.log(event.dataTransfer.files[0].name);
 			noop(event);
 			imgfile = event.dataTransfer.files;
+			console.log(imgfile[0].name);
 
 			var file = imgfile[0];
 			var reader = new FileReader();
