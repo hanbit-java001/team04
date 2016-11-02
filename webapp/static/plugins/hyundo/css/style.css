@@ -1,4 +1,3 @@
-
 /*form*/
 #page-wrap {
 	width: 80%;
@@ -959,6 +958,11 @@ Back to top
 	cursor: pointer;
 }
 
+.moveBar{
+	display: inline-block;
+	width : 100%;
+}
+
 .insertBtn {
 	margin-top : 10px;
 	margin-left : 20px;
@@ -972,7 +976,24 @@ Back to top
 	-webkit-transition: all .2s;
 	transition: all .2s;
 }
+.moveBtn {
+	margin-top : 10px;
+	margin-right : 20px;
+	float:right;
+	cursor: pointer;
+	font-family: "Lora", serif;
+	font-weight: bold;
+	display: inline-block;
+	color: #edeade;
+	border: 2px solid #391b28;
+	padding: .6em;
+	-webkit-transition: all .2s;
+	transition: all .2s;
+}
 
 .insertBtn:hover{
+	border-color: #72a987;
+}
+.moveBtn:hover{
 	border-color: #72a987;
 }

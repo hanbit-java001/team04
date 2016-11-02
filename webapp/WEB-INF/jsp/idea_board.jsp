@@ -43,7 +43,10 @@
 </head>
 <body>
 	<div class="main-panel">
+	<div class="moveBar">
 		<div class="insertBtn">WRITE</div>
+		<div class="moveBtn">MOVE</div>
+		</div>
 		<div class="cd-3d-portfolio">
 
 			<div class="projects"></div>
