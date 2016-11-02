@@ -15,11 +15,11 @@
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12 container">
+		<div class="container">
     	 <div class="well profile">
-            <div class="col-sm-12">
-                <div class="col-xs-12 col-sm-12 div-top">
-                   <div class="name-top col-sm-12">
+            <div>
+                <div class="col-lg-12 div-top">
+                   <div class="name-top">
                     <div>Name:</div>
                     <div>Web Designer / UI.</div>
                    </div>
@@ -37,7 +37,7 @@
 	                    </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 text-center">
+                <div class="col-lg-12 text-center">
                     <figure class="effect-terry">
                         <img src="/static/image/No.png" alt="" class="img-circle img-responsive">
 <!-- 						<figcaption> -->
@@ -70,16 +70,16 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-xs-12 divider text-center">
-                <div class="col-xs-12 col-sm-4 emphasis emp1">
+            <div class="divider text-center">
+                <div class="col-sm-4 emphasis emp1">
                     <div><h2>20,7K</h2></div>
                     <button class="btn btn-success btn-block btn-writeList	"><span class="fa fa-plus-circle"></span>   작성한 글 보기</button>
                 </div>
-                <div class="col-xs-12 col-sm-4 emphasis emp2">
+                <div class="col-sm-4 emphasis emp2">
                     <div><h2>245</h2></div>
                     <button class="btn btn-info btn-block"><span class="fa fa-user"></span>   Confirm 완료된 문서 </button>
                 </div>
-               <div class="col-xs-12 col-sm-4 emphasis emp3">
+               <div class="col-sm-4 emphasis emp3">
                		 <div><h2>Home</h2></div>
                     <button class="btn btn-primary btn-block btn-home"><span class="fa fa-home" aria-hidden="true"></span>   Home </button>
                </div>
@@ -87,49 +87,48 @@
     	 </div>
 		</div>
 	</div>
-</div>
-
-
-<div class="write-container">
+	<div class="write-container col-lg-12">
   <h2>Hover Rows</h2>
   <p>아이디어 게시판에 작성한 글</p>
-  <table class="table table-hover">
-    <thead class="write-container-head">
-      <tr>
-        <th>IdxNumber</th>
-        <th>Title</th>
-        <th>Contents</th>
-        <th>RegDate</th>
-      </tr>
-    </thead>
-    <tbody class="write-container-body">
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-        <td>july@example.com</td>
-      </tr>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row">
+	  <div class="col-lg-12">
+		  <table class="table table-hover">
+		    <thead class="write-container-head">
+		      <tr>
+		        <th>IdxNumber</th>
+		        <th>Title</th>
+		        <th>Contents</th>
+		        <th>RegDate</th>
+		      </tr>
+		    </thead>
+		    <tbody class="write-container-body">
+		<!--       <tr> -->
+		<!--         <td>Mary</td> -->
+		<!--         <td>Moe</td> -->
+		<!--         <td>mary@example.com</td> -->
+		<!--         <td>mary@example.com</td> -->
+		<!--       </tr> -->
+		<!--       <tr> -->
+		<!--         <td>July</td> -->
+		<!--         <td>Dooley</td> -->
+		<!--         <td>july@example.com</td> -->
+		<!--         <td>july@example.com</td> -->
+		<!--       </tr> -->
+		<!--       <tr> -->
+		<!--         <td>John</td> -->
+		<!--         <td>Doe</td> -->
+		<!--         <td>john@example.com</td> -->
+		<!--         <td>john@example.com</td> -->
+		<!--       </tr> -->
+		    </tbody>
+		  </table>
+		</div>
+	</div>
 </div>
+</div>
+
+
+
 
 
 

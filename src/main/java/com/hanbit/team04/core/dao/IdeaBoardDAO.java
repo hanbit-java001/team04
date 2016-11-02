@@ -64,4 +64,14 @@ public class IdeaBoardDAO {
 		return sqlSession.insert("ideaBoard.insertData", ideaBoardVO);
 	}
 
+	public int deleteBoardData(String userId, int boardNum) {
+		Map param = new HashMap<>();
+		LOGGER.debug("delete start ?: "+userId +" , "+boardNum);
+		param.put("boardNum", boardNum);
+		param.put("userId", userId);
+
+		int result = sqlSession.delete("ideaBoard.deleteBoardData", param);
+		LOGGER.debug("delete number : "+ result);
+		return result;
+	}
 }

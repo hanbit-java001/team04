@@ -12,9 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hanbit.team04.core.service.IdeaBoardService;
 import com.hanbit.team04.core.service.IdeaMemberService;
@@ -215,28 +217,66 @@ public class BoardController {
 
 		 return "/board/boardHover";
 	 }
-	 
+
 	 @RequestMapping("/api/userDetail/writeContents")
 	 @ResponseBody
 	 public Map getdata(){
-		 
+
 		 Map result = new HashMap<>();
-		 
+
 		 List<IdeaBoardVO> BoList = new ArrayList<>();
-		 
+
 		 Session session = SessionHelpler.getSession();
-		 
+
 		 String userId = session.getUserId();
-		 
+
 		 BoList = ideaBoardService.getUserDetail(userId);
-		 
-		 LOGGER.debug(BoList.toString());
-		 
+
+		 LOGGER.debug("여기여:::::"+BoList.get(1).getTitle());
+
 		 result.put("board_idx" , BoList);
 		 result.put("userId", userId);
-		 
-		 
+
 		 return result;
 	 }
 
+//	 @RequestMapping("/api/userDetail/writeContents1")
+//	 @ResponseBody
+//	 public ModelAndView getdata(ModelMap modelMap){
+//
+//		 List<IdeaBoardVO> BoList = new ArrayList<>();
+//
+//		 Session session = SessionHelpler.getSession();
+//
+//		 String userId = session.getUserId();
+//
+//		 BoList = ideaBoardService.getUserDetail(userId);
+//
+//		 LOGGER.debug("여기여:::::"+BoList.get(1).getTitle());
+//
+//		 modelMap.put("board_idx" , BoList);
+//		 modelMap.put("userId", userId);
+//		 return new ModelAndView("/board/listUserDetail", modelMap);
+//	 }
+
+
+	 @RequestMapping("/api/userDetail/deleteIcon")
+	 @ResponseBody
+	 public Map deleteIcon(@RequestParam int boardNum){
+
+		 Map result = new HashMap<>();
+
+		 LOGGER.debug("boardNum"+boardNum);
+		 Session session = SessionHelpler.getSession();
+
+		 String userId = session.getUserId();
+
+		 int success = ideaBoardService.deleteData(userId,boardNum);
+
+		 LOGGER.debug("success : "+success);
+
+		 result.put("success", success);
+
+		 return result;
+	 }
 }

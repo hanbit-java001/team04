@@ -118,9 +118,49 @@ figure{
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    width: 750px;
+    width: 100%;
+   	position: relative;
+   	border: 1px; solid;
 }
 
+.profile{
+	position: relative;
+	border: 1px; solid;
+	width:100%;
+}
 
+.fa-trash{
+	color: gray;
+}
+
+.fa-file-o{
+
+}
+
+.write-container-head th {
+	max-width: 50px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.write-container-body td {
+	max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+}
+
+.write-container-body td:nth-child(5){
+	text-align: center;
+}
+
+.write-container-head th{
+	text-align: center;
+}
+
+.fa-trash{
+	cursor: pointer;
+}
 
 
