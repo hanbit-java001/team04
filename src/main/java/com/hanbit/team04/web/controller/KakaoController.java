@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hanbit.team04.core.service.FileService;
+import com.hanbit.team04.core.service.IdeaBoardService;
 import com.hanbit.team04.core.service.IdeaCusBoardService;
 import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
@@ -38,6 +39,8 @@ public class KakaoController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WelcomeController.class);
 	@Autowired
 	private IdeaService ideaService;
+	@Autowired
+	private IdeaBoardService ideaBoardService;
 	@Autowired
 	private ReplyService replyService;
 	@Autowired
@@ -76,14 +79,16 @@ public class KakaoController {
 	public String mainPage() {
 		LOGGER.info("testController - test");
 		 Date date = new Date();
-//		 for(int i=0;i<50;i++){
-////			 IdeaBoardVO BVO = new IdeaBoardVO();
-////					  BVO.setTitle("hyundo_title_"+"dd@test.com");
-//////					  BVO.setRegDate(date.toString());
-//////					  BVO.setModDate(date.toString());
-////					  BVO.setContents("hyundo_contents_"+"dd@test.com");
-////					  BVO.setUserId("dd@test.com");
-//			 IdeaCusBoardVO CVO = new IdeaCusBoardVO();
+		 for(int i=0;i<50;i++){
+			 IdeaBoardVO BVO = new IdeaBoardVO();
+					  BVO.setTitle("hyundo_title_"+"hundo_"+i);
+//					  BVO.setRegDate(date.toString());
+//					  BVO.setModDate(date.toString());
+					  BVO.setContents("hyundo_contents_"+"hundo_"+i+"contentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontents");
+					  BVO.setUserId("dd@test.com");
+					  BVO.setFileId("NULL");
+					  ideaBoardService.insertBoard(BVO);
+					  //			 IdeaCusBoardVO CVO = new IdeaCusBoardVO();
 //			 CVO.setAgeGroup(i+1);
 //			 CVO.setContents("contents"+i);
 //			 CVO.setFileId("null");
@@ -93,7 +98,7 @@ public class KakaoController {
 //					if(result==0){
 //						LOGGER.info("testController - insert board error");
 //					}
-//		 }
+		 }
 
 		return "mainHome";
 	}
