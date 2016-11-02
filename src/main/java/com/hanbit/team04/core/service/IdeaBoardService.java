@@ -57,5 +57,11 @@ public class IdeaBoardService {
 		return ideaBoardDAO.deleteBoardData(userId,boardNum);
 	}
 
+	public int addHitCnt(int IdxNum) {
+		// TODO Auto-generated method stub
+		return ideaBoardDAO.addHitCnt(IdxNum);
+	}
+
+
 
 }

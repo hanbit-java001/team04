@@ -91,9 +91,11 @@ $(function() {
 								var trnsNum = ((j - 1) * 3 + i) - 1;
 
 								if(result.list.length > trnsNum){
+									dbhitcnt = result.list[trnsNum].hitCnt;
 									dbtitle = result.list[trnsNum].title;
 									dbcontents = result.list[trnsNum].contents;
 									dbfileId = result.list[trnsNum].fileId;
+									dbIdx = result.list[trnsNum].boardIdx;
 									if(dbfileId==null||dbfileId=="NULL"||dbfileId==undefined){
 										not_default.push("default");
 									}else{
@@ -116,7 +118,7 @@ $(function() {
 								rowHTML += "</div>";
 								rowHTML += "</div>";
 								rowHTML += "<div class='project-content'>";
-								rowHTML += "<div>";
+								rowHTML += "<div class='hitdiv' style='color:#999' data-num='"+dbIdx+"'><br></br> &nbsp; HITCNT : "+dbhitcnt+" ";
 								rowHTML += "<p> contents : "
 										+ dbcontents + "</p>";
 								rowHTML += "</div>";
@@ -204,6 +206,7 @@ $(function() {
 		Portfolio3D.prototype.bindEvents = function() {
 			var self = this;
 
+			
 			this.navigation.on('click', 'a:not(.selected)', function(event) {
 				// update visible projects when clicking on the filter
 				event.preventDefault();
@@ -224,7 +227,25 @@ $(function() {
 							'click',
 							'li.selected',
 							function() {
-								// open a new project
+								// open a new project 여기가 그것인거 같다!! 히트카운트!!
+								var IdxNum = Number($(".hitdiv").attr("data-num"));
+								
+								console.log(IdxNum);
+								
+								$.ajax({
+									url : "/api/data/hitcnt",
+									method : "POST",
+									data : {
+										IdxNum : IdxNum
+									}
+								}).done(function(result){
+									if(result>0){
+										console.log("들갔나바");
+									}else{
+										console.log("실패했나바");
+									}
+								})
+								
 								if (!self.animating
 										&& !$(this).hasClass('open')) {
 									self.animating = true;

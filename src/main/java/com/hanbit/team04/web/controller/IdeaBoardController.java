@@ -140,7 +140,15 @@ public class IdeaBoardController {
 		}
 
 		return result;
-
-
 	}
+	
+	@RequestMapping("/api/data/hitcnt")
+	@ResponseBody
+	public int addHitCnt(@RequestParam int IdxNum){
+		System.out.println(IdxNum);
+		int result = ideaBoardService.addHitCnt(IdxNum);
+		return result;
+	}
+	
+	
 }

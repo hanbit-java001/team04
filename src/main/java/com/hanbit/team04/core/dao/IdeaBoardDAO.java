@@ -74,4 +74,9 @@ public class IdeaBoardDAO {
 		LOGGER.debug("delete number : "+ result);
 		return result;
 	}
+
+	public int addHitCnt(int IdxNum) {
+		return sqlSession.update("ideaBoard.addHitCnt", IdxNum);
+	}
+
 }
