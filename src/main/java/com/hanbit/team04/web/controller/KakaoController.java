@@ -79,26 +79,26 @@ public class KakaoController {
 	public String mainPage() {
 		LOGGER.info("testController - test");
 		 Date date = new Date();
-		 for(int i=0;i<50;i++){
-			 IdeaBoardVO BVO = new IdeaBoardVO();
-					  BVO.setTitle("hyundo_title_"+"hundo_"+i);
-//					  BVO.setRegDate(date.toString());
-//					  BVO.setModDate(date.toString());
-					  BVO.setContents("hyundo_contents_"+"hundo_"+i+"contentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontents");
-					  BVO.setUserId("dd@test.com");
-					  BVO.setFileId("NULL");
-					  ideaBoardService.insertBoard(BVO);
-					  //			 IdeaCusBoardVO CVO = new IdeaCusBoardVO();
-//			 CVO.setAgeGroup(i+1);
-//			 CVO.setContents("contents"+i);
-//			 CVO.setFileId("null");
-//			 CVO.setHitcnt(1);
-//			 CVO.setTitle("title"+i);
-//			 int result=ideaCusBoardService.insertBoard(CVO);
-//					if(result==0){
-//						LOGGER.info("testController - insert board error");
-//					}
-		 }
+//		 for(int i=0;i<50;i++){
+//			 IdeaBoardVO BVO = new IdeaBoardVO();
+//					  BVO.setTitle("hyundo_title_"+"hundo_"+i);
+////					  BVO.setRegDate(date.toString());
+////					  BVO.setModDate(date.toString());
+//					  BVO.setContents("hyundo_contents_"+"hundo_"+i+"contentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontentscontents");
+//					  BVO.setUserId("dd@test.com");
+//					  BVO.setFileId("NULL");
+//					  ideaBoardService.insertBoard(BVO);
+//					  //			 IdeaCusBoardVO CVO = new IdeaCusBoardVO();
+////			 CVO.setAgeGroup(i+1);
+////			 CVO.setContents("contents"+i);
+////			 CVO.setFileId("null");
+////			 CVO.setHitcnt(1);
+////			 CVO.setTitle("title"+i);
+////			 int result=ideaCusBoardService.insertBoard(CVO);
+////					if(result==0){
+////						LOGGER.info("testController - insert board error");
+////					}
+//		 }
 
 		return "mainHome";
 	}
