@@ -29,7 +29,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<div class="top-div"><i class="fa fa-font-awesome fa-2x" aria-hidden="true"></i>   Dash Board</div>
+			<div class="top-div">      Dash Board</div>
 		</div>
 		<div>
 		<ul class="nav navbar-top-links navbar-right">
@@ -72,7 +72,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="#">
+						<a href="/hyundo/board">
 							<div class="panel-footer">
 								<span class="pull-left">View Details</span> <span
 									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -94,7 +94,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="#">
+						<a href="/hyundo_rank">
 							<div class="panel-footer">
 								<span class="pull-left">View Details</span> <span
 									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

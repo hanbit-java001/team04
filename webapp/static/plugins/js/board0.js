@@ -195,8 +195,9 @@
 
 						pageNum = currentPage-1;
 
-						if(pageNum<0){
-							return;
+						if(pageNum<=0){
+
+							return; 
 						}
 
 					}else if(pageText=="다음"){

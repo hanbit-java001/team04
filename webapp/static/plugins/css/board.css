@@ -5,6 +5,11 @@
 	width: 42px;
 }
 
+.navbar-top-links{
+	margin-right: 0;
+    margin-top: 1%;
+}
+
 .page-header{
 
 	transform: translateY(-40%);
@@ -49,8 +54,11 @@
 }
 
 .top-div{
-	font-size: 30px;
-	font-weight: bold;
+    padding-left: 4%;
+    padding-top: 4%;
+    font-size: 30px;
+    font-weight: bold;
+    min-width: 500px;
 }
 
 .fa-font-awesome{
