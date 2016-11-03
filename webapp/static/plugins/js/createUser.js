@@ -10,7 +10,7 @@ $(function(){
 	var userTextMsg=["아이디는 이메일 형태로 작성해주세요","이름은 한글과 영어만 가능해요","비밀번호는 숫자는 한개 이상 8글자 이상이요","나이는 숫자로"];
 	var currentNum=1;
 	var checkInvalid=true;
-
+	var imgfile = null;
 	function validateEmail(email) {
 		  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		  return re.test(email);
@@ -32,23 +32,39 @@ $(function(){
 		return checkName.test(Name);
 	}
 	function successCommit(){
-		console.log("안과장"+$(".userId").text());
-		var createUser ={
-				userId:$(".userId").text(),
-				userName:$(".userName").text(),
-				userPassword:$(".userPassword").text(),
-				userAge:$(".userAge").text()
-		}
-		$.ajax({
-			url: "/api/Create/user",
-			method: "POST",
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			data: JSON.stringify(createUser)
-		}).done(function(pagingMembers) {
+		if (($(".userId").text().trim() != "")
+				&& ($(".userPassword").text().trim() != "")
+				&& ($(".userAge").text().trim() != "")
+				&& ($(".userName").text().trim() != "")) {
+
+			var data = new FormData();
+			data.append("userId", $(".userId").text());
+			data.append("password", $(".userPassword").text());
+			data.append("age", $(".userAge").text());
+			data.append("name", $(".userName").text());
+			console.log("age : " + $("#CreateUserName").val());
+			if (imgfile != null) {
+				for (var i = 0; i < imgfile.length; i++) {
+					data.append("Contents_img", imgfile[i]);
+				}
+			}
+			$.ajax({
+				url : "/api/Create/user",
+				method : "POST",
+				data : data,
+				contentType : false,
+				dataType : "json",
+				processData : false
+			}).done(function(result) {
+
+				console.log(result+"님 환영합니다.");
+				$("#dropbox").html("Complete");
+				setTimeout(function(){
+					location.href="/Home";
+				}, 1500);
 
 			});
-	}
+	}}
 	function moveBar(currentNum){
 
 			  var bar = $(".mybar");
@@ -77,7 +93,23 @@ $(function(){
 			    }
 			  }
 	}
-	
+	$(".input-file").change(function(event) {
+		imgfile = event.target.files;
+		console.log("click event check");
+		var file = imgfile[0];
+		var reader = new FileReader();
+		reader.onloadend = function() {
+			$('.profile-img').css('background-image',
+					'url("' + reader.result + '")');
+		}
+		if (file) {
+			reader.readAsDataURL(file);
+		} else {
+		}
+		$(".profile-img-text").text(
+				"Uploading " + imgfile[0].name);
+//		$(".profile").fadeIn();
+	});
 	function dropBoxMaker() {
 		var dropbox = document.getElementById("dropbox");
 		dropbox.addEventListener("dragenter", noop, false);
@@ -108,7 +140,7 @@ $(function(){
 		}
 		$(".profile-img-text").text(
 				"Uploading " + imgfile[0].name);
-		$(".profile").fadeIn();
+//		$(".profile").fadeIn();
 
 	}
 
@@ -123,7 +155,7 @@ $(function(){
 	function uploadComplete(event) {
 		document.getElementById("status").innerHTML = event.target.responseText;
 	}
-	
+
 	$(".profile-img-text").on("click",function(){
 		console.log("check text0000");
 		$(".input-file").click();

@@ -278,7 +278,9 @@ body {
 
 							console.log(result+"님 환영합니다.");
 							$("#dropbox").html("Complete");
-
+							setTimeout(function(){
+								$(".close").click();
+							}, 1000);
 
 						});
 					}
