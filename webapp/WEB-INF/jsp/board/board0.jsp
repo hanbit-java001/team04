@@ -13,6 +13,7 @@
 <link href="/static/plugins/startbootstrap/vendor/metisMenu/metisMenu.min.css" 	rel="stylesheet">
 <link href="/static/plugins/startbootstrap/dist/css/sb-admin-2.css" 	rel="stylesheet">
 <link href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" rel="stylesheet">
+
 <link href="/static/plugins/startbootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/static/plugins/css/board.css" rel="stylesheet">
 <style type="text/css">
@@ -195,21 +196,24 @@ background-color: blue;
 			<button class="btn btn-default canclebtn">취소</button>
 		</div>
 </div>
-<!-- 		<script src="/static/plugins/startbootstrap/vendor/jquery/jquery.min.js"></script> -->
-		<script src="/static/plugins/jquery/jquery-3.1.0.min.js"></script>
+		<script src="/static/plugins/startbootstrap/vendor/jquery/jquery.min.js"></script>
+<!-- 		<script src="/static/plugins/jquery/jquery-3.1.0.min.js"></script> -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+		<script src="/static/plugins/js/timeago.js"></script>
 		<!-- Bootstrap Core JavaScript -->
 		<script src="/static/plugins/startbootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
 		<!-- Metis Menu Plugin JavaScript -->
 		<script src="/static/plugins/startbootstrap/vendor/metisMenu/metisMenu.min.js"></script>
 		<!-- Morris Charts JavaScript -->
-		<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-		<script src="/static/plugins/startbootstrap/data/morris-data.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<!-- 		<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> -->
+<!-- 		<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morriss.min.js"></script> -->
 		<!-- 	<script src="/static/plugins/startbootstrap/vendor/raphael/raphael.min.js"></script> -->
-		<!-- 	<script	src="/static/plugins/startbootstrap/vendor/morrisjs/morris.min.js"></script> -->
+<!-- 			<script	src="/static/plugins/startbootstrap/vendor/morrisjs/morris.min.js"></script> -->
+<!-- 		<script src="/static/plugins/startbootstrap/data/morris-data.js"></script> -->
 		<script src="/static/plugins/startbootstrap/dist/js/sb-admin-2.js"></script>
 		<script src="/static/plugins/momentjs/moment.min.js"></script>
-		<script src="/static/plugins/js/timeago.js"></script>
 		<script src="/static/plugins/js/board0.js"></script>
 </body>
 </html>

@@ -15,6 +15,7 @@
  */
 
 (function (factory) {
+//console.log("여긴 언제"+factory);
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(['jquery'], factory);
