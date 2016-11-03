@@ -37,11 +37,13 @@
 			$(".photos").hover(function() {
 				$("body").animate({'background-color' : 'rgba(0,0,0,0.9)','outline-color' : 'black'}, 'slow');
 				$("#photos-info").fadeIn();
+				$(".dream").css("color","#ffffff");
 			}, function() {
 				$("body").animate({
 					'background-color' : 'rgba(255,255,255,1)',
 					'outline-color' : 'white'
 				}, 'slow');
+				$(".dream").css("color","#000000");
 				$("#photos-info").fadeOut();
 			});
 

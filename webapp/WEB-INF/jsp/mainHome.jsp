@@ -19,7 +19,13 @@
 <script src="/static/plugins/coverflow/jquery.coverflow.js"></script>
 <link rel="stylesheet" href="/static/plugins/css/mainHome.css">
 <style type="text/css">
-
+.dream{
+position: fixed;
+bottom: 13%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 300%;
+}
 </style>
 
 </head>
@@ -53,6 +59,7 @@
 	<div id="photos-info">
 		<div id="photos-name"></div>
 	</div>
+	<div class="dream">당신의 꿈을 평가해주겠어!!!</div>
 	<script src="/static/plugins/js/mainHome.js"></script>
 
 </body>

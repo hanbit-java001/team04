@@ -136,7 +136,7 @@ public class BoardController {
 		 Session session = SessionHelpler.getSession();
 		 session.logout();
 
-		 response.sendRedirect("/list2");
+		 response.sendRedirect("/Home");
 	 }
 
 	 @RequestMapping("/api/board/chatinsert")
