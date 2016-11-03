@@ -2,8 +2,9 @@ $(function() {
 	$(document).click(function(event) {
 	    var text = $(event.target).text();
 	    if($(event.target).hasClass("confirm")){
-	    	console.log("success");
-	    	confirmClick();
+	    	console.log("success1");
+	    	confirmClick($(event.target));
+	    	console.log("success2");
 	    }	    
 	});
 	var totCnt=0;
@@ -177,6 +178,7 @@ $(function() {
 					})
 	}
 
+	
 	// 버튼 움직이자
 	function Btnmovement(){
 	$(".aftBtn").on("click", function(){
@@ -253,11 +255,7 @@ $(function() {
 							'li.selected',
 							function(e) {
 								// open a new project 여기가 그것인거 같다!! 히트카운트!!
-								IdxNum = Number($(".hitdiv").attr("data-num"));
-								if(e.target=$(".confirm")){
-									console.log("뭔가 길어: "+$(this).find(".confirm").hasClass("confirm"));
-									console.log("confirm인가");
-								}
+								IdxNum = Number($(this).find(".confirm").prev().attr("data-num"));
 								
 //								if(dbconfirm=="Y"){
 //									$("#conFirm").css({"color":"red"});
@@ -503,8 +501,7 @@ function getUserId(){
 
 
 //////// 컨펌 바꾸자
-function confirmClick(){
-	$(".confirm").on("click", function(){
+function confirmClick(thisConfirm){
 		console.log("confirmclick");
 		$.ajax({
 			url : "/api/data/confirm",
@@ -514,9 +511,10 @@ function confirmClick(){
 			}
 		}).done(function(result){
 			console.log("컨펌 됨");
+//			thisConfirm.fadeOut();
+			refresh();
 		})
-	})
-}
+	}
 ////////////////////////////////////////////	
 	
 // WRITE 버튼잼
@@ -553,7 +551,7 @@ function confirmClick(){
 		var fileId = $("#fileId").get(0);
 
 		var data = new FormData();
-		var fileName= fileId.files[0].name;
+		
 		console.log("과연 코알라? "+fileName);
 
 		data.append("userId",userId)
@@ -561,6 +559,7 @@ function confirmClick(){
 		data.append("contents",contents)
 
 		for (var i=0;i<fileId.files.length;i++) {
+			var fileName= fileId.files[0].name;
 			var file = fileId.files[i];
 			data.append(fileName, file);
 
@@ -575,6 +574,7 @@ function confirmClick(){
 		}).done(function(result){
 			if(result > 0){
 				alert("success");
+				refresh();
 				$(".modal-close").click();
 			}else{
 				alert("fail");
@@ -634,6 +634,14 @@ function hitCount(){
 	})
 	}
 
+
+////////////////////////////////
+
+function refresh(){
+	$(".cd-3d-portfolio").html("");
+	makeBtn(CrntPageNum);
+	makeView(CrntPageNum);
+}
 
 	getUserId();
 	getTotalCnt();

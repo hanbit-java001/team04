@@ -153,6 +153,7 @@ public class IdeaBoardController {
 	@RequestMapping("/api/data/confirm")
 	@ResponseBody
 	public int confirmClick(@RequestParam int IdxNum){
+		LOGGER.debug("update IdxNUM"+IdxNum);
 		int result = ideaBoardService.confirmClick(IdxNum);
 		return result;
 	}
