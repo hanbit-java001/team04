@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hanbit.team04.core.service.FileService;
 import com.hanbit.team04.core.service.IdeaBoardService;
 import com.hanbit.team04.core.service.IdeaMemberService;
 import com.hanbit.team04.core.service.IdeaService;
@@ -47,6 +48,7 @@ public class BoardController {
 
 	@Autowired
 	private IdeaBoardService ideaBoardService;
+
 //	aop 입니다.
 	@LoginRequired
 	@RequestMapping("/list2")
@@ -197,6 +199,7 @@ public class BoardController {
 
 	int confirmCount = ideaBoardService.getConfirmCount(userId);
 	int writeCount = ideaBoardService.getWriteCount(userId);
+	String fileId = ideaMemberService.getfileId(userId);
 
 //	 LOGGER.info("시작!!!!!!!!!:"+confirmCount);
 
@@ -208,6 +211,7 @@ public class BoardController {
 	 result.put("userId", userId);
 	 result.put("confirmCount", confirmCount);
 	 result.put("writeCount", writeCount);
+	 result.put("fileId", fileId);
 
 	 return result;
  }
@@ -231,6 +235,7 @@ public class BoardController {
 		 String userId = session.getUserId();
 
 		 BoList = ideaBoardService.getUserDetail(userId);
+
 
 		 LOGGER.debug("여기여:::::"+BoList.get(1).getTitle());
 

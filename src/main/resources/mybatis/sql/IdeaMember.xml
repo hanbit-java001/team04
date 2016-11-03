@@ -26,5 +26,8 @@
 		SELECT USER_ID userId , PASSWORD password , AGE age, NAME name FROM IDEA_MEMBER WHERE USER_ID=#{userId} and PASSWORD=#{password}
 	</select>
 
+	<select id="selectFileId" parameterType="string" resultType="string">
+ 	SELECT FILE_ID FROM IDEA_MEMBER WHERE USER_ID=#{userId}
+ 	</select>
 
 </mapper>

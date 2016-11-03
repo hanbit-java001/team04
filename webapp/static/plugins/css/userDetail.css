@@ -162,5 +162,9 @@ figure{
 .fa-trash{
 	cursor: pointer;
 }
-
+.img-responsive{
+	background-size: cover;
+	width: 250px;
+	height: 250px;
+}
 

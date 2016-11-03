@@ -62,6 +62,11 @@ public class IdeaBoardService {
 		return ideaBoardDAO.addHitCnt(IdxNum);
 	}
 
+	public int confirmClick(int IdxNum) {
+		// TODO Auto-generated method stub
+		return ideaBoardDAO.confirmClick(IdxNum);
+	}
+
 
 
 }

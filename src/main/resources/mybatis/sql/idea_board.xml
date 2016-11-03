@@ -22,7 +22,7 @@
 		  FROM (
 			SELECT ROWNUM rn,a.*
 			  FROM (
-				SELECT USER_ID userId, TITLE title,
+				SELECT USER_ID userId, TITLE title, CONFIRM confirm,
 					   CONTENTS contents, REGDATE articleDate, FILE_ID fileId, HITCNT hitCnt, BOARD_IDX boardIdx
 				  FROM IDEA_BOARD ORDER BY BOARD_IDX DESC) a
 			 WHERE ROWNUM <= 9 * #{pageNum}) a
@@ -70,5 +70,9 @@
  	<update id="addHitCnt" parameterType="int">
  	UPDATE IDEA_BOARD SET HITCNT=HITCNT+1 WHERE BOARD_IDX = #{IdxNum}
  	</update>
+
+	<update id="confirmClick" parameterType="int">
+	UPDATE IDEA_BOARD SET CONFIRM='Y' WHERE BOARD_IDX = #{IdxNum}
+	</update>
 
 </mapper>

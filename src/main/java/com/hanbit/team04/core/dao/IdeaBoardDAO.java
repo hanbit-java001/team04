@@ -79,4 +79,9 @@ public class IdeaBoardDAO {
 		return sqlSession.update("ideaBoard.addHitCnt", IdxNum);
 	}
 
+	public int confirmClick(int IdxNum) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ideaBoard.confirmClick", IdxNum);
+	}
+
 }

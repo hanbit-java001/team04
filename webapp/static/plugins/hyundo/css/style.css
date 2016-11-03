@@ -999,3 +999,16 @@ Back to top
 .moveBtn:hover{
 	border-color: #72a987;
 }
+.needconfirm{
+	cursor: pointer;
+	border: 1px solid #999;
+	display: none;
+	font-size: medium;
+	color: blue;
+}
+.confirmed{
+	color : red;
+	border: 1px solid #999;
+	display: none;
+	font-size: medium;
+}

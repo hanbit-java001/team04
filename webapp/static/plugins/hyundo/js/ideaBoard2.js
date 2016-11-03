@@ -1,5 +1,12 @@
 $(function() {
-
+	$(document).click(function(event) {
+	    var text = $(event.target).text();
+	    if($(event.target).hasClass("confirm")){
+	    	console.log("success1");
+	    	confirmClick($(event.target));
+	    	console.log("success2");
+	    }	    
+	});
 	var totCnt=0;
 	var CrntPageNum = 1;
 	var totPageNum;
@@ -11,6 +18,8 @@ $(function() {
 	/////
 	var IdxNum;
 	/////
+	var CrntuserId;
+	//////
 	var modalTrigger = $('.cd-modal-trigger'),
 	transitionLayer = $('.cd-transition-layer'),
 	transitionBackground = transitionLayer.children(),
@@ -86,6 +95,7 @@ $(function() {
 						var k = 0;
 						rowHTML += "<div class='projects'>"
 							var not_default=[];
+						
 						for (var i = 1, innerNum=1; i < 4; i++) {
 							console.log((result.list.length));
 							rowHTML += "<ul class='row'>"
@@ -95,9 +105,11 @@ $(function() {
 								if(result.list.length > trnsNum){
 									dbhitcnt = result.list[trnsNum].hitCnt;
 									dbtitle = result.list[trnsNum].title;
+									dbuserId = result.list[trnsNum].userId;
 									dbcontents = result.list[trnsNum].contents;
 									dbfileId = result.list[trnsNum].fileId;
 									dbIdx = result.list[trnsNum].boardIdx;
+									dbconfirm = result.list[trnsNum].confirm;
 									if(dbfileId==null||dbfileId=="NULL"||dbfileId==undefined){
 										not_default.push("default");
 									}else{
@@ -115,24 +127,34 @@ $(function() {
 								rowHTML += "<div class='project-wrapper'>";
 								rowHTML += "<div class='project-image'>"; // style='background-image:+"dbfileId"+ '
 								rowHTML += "<div class='project-title'>";
-								rowHTML += "<h2>title :  "
-										+ dbtitle + "</h2>";
+								rowHTML += "<h2";
+									if(dbconfirm=="N"&&CrntuserId=="admin"){
+										rowHTML +=  " style='color:gray;' ";
+									}
+										rowHTML += ">  " + dbtitle + "&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp&nbsp&nbsp :: "+dbuserId+"</h2>"
 								rowHTML += "</div>";
 								rowHTML += "</div>";
 								rowHTML += "<div class='project-content'>";
-								rowHTML += "<div class='hitdiv' style='color:#999' data-num='"+dbIdx+"'><br></br> &nbsp; HITCNT : "+dbhitcnt+" ";
+								rowHTML += "<div class='hitdiv' style='color:#999' data-num='"+dbIdx+"'><br></br> &nbsp;&nbsp; HITCNT : "+dbhitcnt+"</div> ";
+								rowHTML += "<div class='confirm ";
+								if(dbconfirm=="Y"){
+									rowHTML +=  "confirmed";
+								}else{
+									rowHTML +=  "needconfirm";
+								}
+								rowHTML += "'> &nbsp;&nbsp;[CONFIRM]&nbsp;&nbsp;</div>"
 								rowHTML += "<p> contents : "
 										+ dbcontents + "</p>";
-								rowHTML += "</div>";
 								rowHTML += "</div>";
 								rowHTML += "<a href='#0' class='close-project'>Close</a>";
 								rowHTML += "</div> ";
 								rowHTML += "</li>";
 								k++;
-
+								
 
 							}
 							rowHTML += "</ul>";
+						
 						}
 						rowHTML += "</div>"
 						$(".cd-3d-portfolio").append(rowHTML);
@@ -147,13 +169,22 @@ $(function() {
 //								$(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before").css("background-image","url(http://203.236.209.187:8180/file/"+result.list[not_default[i]].fileId+")");
 							}
 						}
+						
+						console.log("check : "+CrntuserId);
+//						console.log("confirm check : "+dbconfirm);
+//						console.log(CrntuserId);
 						console.log(not_default);
 						Btnmovement();
 						mainjs();
+						if(CrntuserId=="admin"){
+							$(".confirm").css({"display":"inline-block"});
+							$(".confirmed").css({"display":"none"});
+						}
 						$("body").fadeIn("slow");
 					})
 	}
 
+	
 	// 버튼 움직이자
 	function Btnmovement(){
 	$(".aftBtn").on("click", function(){
@@ -228,11 +259,22 @@ $(function() {
 					.on(
 							'click',
 							'li.selected',
-							function() {
+							function(e) {
 								// open a new project 여기가 그것인거 같다!! 히트카운트!!
-								IdxNum = Number($(".hitdiv").attr("data-num"));
+								IdxNum = Number($(this).find(".confirm").prev().attr("data-num"));
+								
+//								if(dbconfirm=="Y"){
+//									$("#conFirm").css({"color":"red"});
+//									$("#conFirm").text("confirmed");
+//								}
+//								if(CrntuserId=="admin"){
+//									$("#conFirm").css("display","inline-block");
+//								}								
+								
 								
 								console.log(IdxNum);
+								console.log(CrntuserId);
+								
 								if (!self.animating
 										&& !$(this).hasClass('open')) {
 									self.animating = true;
@@ -450,19 +492,39 @@ $(function() {
 			});
 		});
 	}
+//////////////////////////////////////////////////////////////////////////
+	
+// 아이디 가져오는 애
+function getUserId(){
+	$.ajax({
+		url : "/api/login/data",
+		method : "POST"
+	}).done(function(result){
+		CrntuserId = result.userId;
+		$("#userId").val(result.name);
+	});
+}
 
 
+//////// 컨펌 바꾸자
+function confirmClick(thisConfirm){
+		console.log("confirmclick");
+		$.ajax({
+			url : "/api/data/confirm",
+			method : "POST",
+			data : {
+				IdxNum : IdxNum
+			}
+		}).done(function(result){
+			console.log("컨펌 됨");
+			thisConfirm.fadeOut();
+//			refresh();
+		})
+	}
+////////////////////////////////////////////	
+	
 // WRITE 버튼잼
 	$(".insertBtn").on("click", function(){
-
-//		userId
-		$.ajax({
-			url : "/api/login/data",
-			method : "POST"
-		}).done(function(result){
-			$("#userId").val(result.name);
-		});
-
 		$(".insertPanel").css("display","inherit");
 		event.preventDefault();
 		transitionLayer.addClass('visible opening');
@@ -495,7 +557,7 @@ $(function() {
 		var fileId = $("#fileId").get(0);
 
 		var data = new FormData();
-		var fileName= fileId.files[0].name;
+		
 		console.log("과연 코알라? "+fileName);
 
 		data.append("userId",userId)
@@ -503,6 +565,7 @@ $(function() {
 		data.append("contents",contents)
 
 		for (var i=0;i<fileId.files.length;i++) {
+			var fileName= fileId.files[0].name;
 			var file = fileId.files[i];
 			data.append(fileName, file);
 
@@ -517,6 +580,7 @@ $(function() {
 		}).done(function(result){
 			if(result > 0){
 				alert("success");
+				refresh();
 				$(".modal-close").click();
 			}else{
 				alert("fail");
@@ -550,7 +614,7 @@ function dropUpload(event) {
     noop(event);
     imgfile = event.dataTransfer.files;
     $("#dropbox").text("Uploading " + imgfile[0].name);
-console.log("img file name "+imgfile[0].name);
+    console.log("img file name "+imgfile[0].name);
 
 }
 /////////////////////////////////////////////////////
@@ -577,12 +641,15 @@ function hitCount(){
 	}
 
 
+////////////////////////////////
 
+function refresh(){
+	$(".cd-3d-portfolio").html("");
+	makeBtn(CrntPageNum);
+	makeView(CrntPageNum);
+}
 
-
-
-
-
+	getUserId();
 	getTotalCnt();
 	makeBtn(CrntPageNum);
 	makeView(CrntPageNum);

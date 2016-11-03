@@ -26,6 +26,11 @@ $.ajax({
 	age = result.age;
 	confirmCount = result.confirmCount;
 	writeCount = result.writeCount;
+	fileId= result.fileId;
+
+	if(fileId.toUpperCase()!='NULL'){
+		$(".img-responsive").attr("src","http://localhost:8081/file/"+fileId);
+	}
 
 	$(".name-top div:nth-child(2)").text(name).css("font-size", 20);
 	var changeAge = Math.floor(age/10);
@@ -66,7 +71,7 @@ function writeViewMenu(){
 					"<i class='fa fa-trash fa-2x' data-num='"+result.board_idx[i].boardIdx+
 					"' aria-hidden='true'></i></td></tr>";
 				if(i%10==0){
-					
+
 				}
 
 		}

@@ -66,4 +66,9 @@ public class IdeaMemberService {
 		return result;
 	}
 
+	public String getfileId(String userId) {
+		return ideaMemberDAO.selectFileId(userId);
+	}
+
+
 }
