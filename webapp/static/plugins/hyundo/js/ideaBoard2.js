@@ -9,6 +9,8 @@ $(function() {
 	///////////////////////////
 	var imgfile=null;
 	/////
+	var IdxNum;
+	/////
 	var modalTrigger = $('.cd-modal-trigger'),
 	transitionLayer = $('.cd-transition-layer'),
 	transitionBackground = transitionLayer.children(),
@@ -228,24 +230,9 @@ $(function() {
 							'li.selected',
 							function() {
 								// open a new project 여기가 그것인거 같다!! 히트카운트!!
-								var IdxNum = Number($(".hitdiv").attr("data-num"));
+								IdxNum = Number($(".hitdiv").attr("data-num"));
 								
 								console.log(IdxNum);
-								
-								$.ajax({
-									url : "/api/data/hitcnt",
-									method : "POST",
-									data : {
-										IdxNum : IdxNum
-									}
-								}).done(function(result){
-									if(result>0){
-										console.log("들갔나바");
-									}else{
-										console.log("실패했나바");
-									}
-								})
-								
 								if (!self.animating
 										&& !$(this).hasClass('open')) {
 									self.animating = true;
@@ -265,6 +252,7 @@ $(function() {
 														$(this)
 																.off(
 																		'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend');
+														hitCount();
 													});
 
 									if (!isTransitionSupported)
@@ -571,7 +559,22 @@ $(".moveBtn").on("click", function(){
 	location.href="/";
 })
 
-
+//////////////////////////////
+function hitCount(){
+	$.ajax({
+		url : "/api/data/hitcnt",
+		method : "POST",
+		data : {
+			IdxNum : IdxNum
+		}
+	}).done(function(result){
+		if(result>0){
+			console.log("들갔나바");
+		}else{
+			console.log("실패했나바");
+		}
+	})
+	}
 
 
 

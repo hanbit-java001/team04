@@ -18,14 +18,14 @@
 
 	<select id="selectBoards2" parameterType="int" resultType="IdeaBoardVO">
 	<![CDATA[
-	SELECT 	a.rn, a.userId, a.title, a.contents, a.articleDate, a.fileId, a.hitCnt, a.boardIdx
+	SELECT 	*
 		  FROM (
-			SELECT a.rn, a.userId, a.title, a.contents, a.articleDate, a.fileId, a.hitCnt, boardIdx
+			SELECT ROWNUM rn,a.*
 			  FROM (
-				SELECT ROWNUM rn, USER_ID userId, TITLE title,
+				SELECT USER_ID userId, TITLE title,
 					   CONTENTS contents, REGDATE articleDate, FILE_ID fileId, HITCNT hitCnt, BOARD_IDX boardIdx
-				  FROM IDEA_BOARD) a
-			 WHERE rn <= 9 * #{pageNum}) a
+				  FROM IDEA_BOARD ORDER BY BOARD_IDX DESC) a
+			 WHERE ROWNUM <= 9 * #{pageNum}) a
 		 WHERE rn > 9 * (#{pageNum} - 1)
 		  	]]>
 	</select>
@@ -37,6 +37,7 @@
   		(#{boardIdx}, #{title}, #{regDate}, #{contents}, #{userId},
   		#{modDate}, #{confirm}, #{hitCnt}, #{fileId})
   	</insert>
+  	
   	<insert id="insertData" parameterType="IdeaBoardVO">
   		INSERT INTO IDEA_BOARD (BOARD_IDX, USER_ID, TITLE, CONTENTS, REGDATE, MOD_DATE, FILE_ID)
  		 VALUES (SEQ_IDX.NEXTVAL,#{userId}, #{title}, #{contents}, SYSDATE, SYSDATE, #{fileId})
