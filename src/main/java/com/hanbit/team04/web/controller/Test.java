@@ -62,8 +62,8 @@ public class Test {
 	    System.exit(0);
 	  }
 	  private static AccessToken loadAccessToken(int useId){
-	    String token = // load from a persistent store
-	    String tokenSecret = // load from a persistent store
+	    String token =null; // load from a persistent store
+	    String tokenSecret = null;// load from a persistent store
 	    return new AccessToken(token, tokenSecret);
 	  }
 }
