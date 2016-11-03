@@ -10,7 +10,7 @@
 			SELECT ROWNUM rn, a.*
 			  FROM (
 				SELECT  *
-				  FROM IDEA_BOARD ORDER BY BOARD_IDX DESC) a
+				  FROM IDEA_BOARD ORDER BY HITCNT DESC) a
 			 WHERE ROWNUM <= 30 * 1) a
 		 WHERE rn > 30 * (1 - 1)
 		 ]]>
