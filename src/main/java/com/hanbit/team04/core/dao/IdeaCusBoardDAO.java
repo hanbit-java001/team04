@@ -37,7 +37,7 @@ public class IdeaCusBoardDAO {
 		return result;
 	}
 	public int getCusNum(int age) {
-
+		LOGGER.debug("get DAO age : "+age);
 		return Sqlsession.selectOne("cusBoard.selectPageNum", age);
 	}
 	public int uptoHitCnt(int cusIDX, int hitCnt) {

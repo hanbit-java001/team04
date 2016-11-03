@@ -350,12 +350,12 @@ right:0%;
 
 	<nav>
 		<ul class="cd-primary-nav">
-			<li><a href="#0">The team</a></li>
-			<li><a href="#0">Our services</a></li>
-			<li><a href="#0">Our projects</a></li>
-			<li><a href="#0">Start a project</a></li>
-			<li><a href="#0">Join In</a></li>
-			<li><a href="#0">Create an account</a></li>
+			<li><a href="/Home">The Home</a></li>
+			<li><a href="/hyundo_rank">Rank Board</a></li>
+			<li><a href="/hyundo/board">Idea Board</a></li>
+			<li><a href="/list2">Dash Board</a></li>
+			<li><a href="#0">뭐라고 할까</a></li>
+			<li><a href="/user/create">Create an account</a></li>
 		</ul>
 	</nav>
 

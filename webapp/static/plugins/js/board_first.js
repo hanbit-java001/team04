@@ -151,7 +151,7 @@
 							$(".detail-title").text("Title / "+result_list[$( ".table-container" ).index( this )].TITLE);
 							$(".detail-regdate input").val(result_list[$( ".table-container" ).index( this )].REGDATE);
 							$(".detail-contents textarea").text(result_list[$( ".table-container" ).index( this )].CONTENTS);
-							$(".detail-ageGroup").text(result_list[$( ".table-container" ).index( this )].AGE_GROUP+" 대");
+							$(".detail-ageGroup").text(Math.floor(result_list[$( ".table-container" ).index( this )].AGE_GROUP/10)*10+" 대");
 							$(".detail-hitCnt").text("조회수 : "+result_list[$( ".table-container" ).index( this )].HITCNT);
 							$(".detail-view").fadeIn("slow");
 							$(".detail-view").on("click",function(){
