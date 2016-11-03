@@ -272,6 +272,7 @@ $(function() {
           }).done(function(rankBoardList){
         	  list=rankBoardList;
         	  
+        	  
     			for(var i = 0; i<30; i++) {
     				var lrIdx = Math.floor(Math.random()*2);
     				var lrIdxrev = (Math.abs(lrIdx))-1;
