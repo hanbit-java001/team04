@@ -17,6 +17,9 @@
 		SELECT COUNT(*) FROM IDEA_CUS_BOARD WHERE AGE_GROUP>#{age} AND AGE_GROUP<=(#{age}+10)
 				  ]]>
 	</select>
+	<select id="selectHitCnt" resultType="int">
+		SELECT HITCNT FROM IDEA_CUS_BOARD WHERE CUS_IDX=#{cusIDX}
+	</select>
 
 	<insert id="insertCus" parameterType="IdeaCusBoardVO">
 		INSERT INTO IDEA_CUS_BOARD
@@ -36,4 +39,8 @@
 		 WHERE rn > 15 * (#{pageNum} - 1)
   	]]>
 	</select>
+	<update id="updateHitCnt" parameterType="map">
+		UPDATE IDEA_CUS_BOARD
+		   SET HITCNT = HITCNT+1 WHERE CUS_IDX=#{cusIDX} AND HITCNT=#{hitCnt}
+	</update>
 </mapper>

@@ -40,5 +40,18 @@ public class IdeaCusBoardDAO {
 
 		return Sqlsession.selectOne("cusBoard.selectPageNum", age);
 	}
+	public int uptoHitCnt(int cusIDX, int hitCnt) {
+
+		Map parameter =new HashMap<>();
+		parameter.put("cusIDX", cusIDX);
+		parameter.put("hitCnt", hitCnt);
+
+		return Sqlsession.update("cusBoard.updateHitCnt", parameter);
+	}
+	public int selectHitCnt(int cusIDX) {
+		Map parameter =new HashMap<>();
+		parameter.put("cusIDX", cusIDX);
+		return Sqlsession.selectOne("cusBoard.selectHitCnt",parameter);
+	}
 
 }

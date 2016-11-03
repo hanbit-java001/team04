@@ -36,6 +36,15 @@ private IdeaCusBoardDAO cusBoardDAO;
 		int lists =  cusBoardDAO.getCusNum(age);
 		return lists;
 	}
+	public int uptoHitCnt(int cusIDX, int hitCnt) {
+		int result =cusBoardDAO.uptoHitCnt(cusIDX,hitCnt);
+		LOGGER.debug("cusBoard upto : "+result);
+		int return_result =-1;
+		if(result==1){
+			return_result= cusBoardDAO.selectHitCnt(cusIDX);
+		}
+		return return_result;
+	}
 
 
 }

@@ -3,7 +3,7 @@
 		var currentPage=defaultPageNum;
 		var PageInNum=defaultPageNum;
 		var result_list;
-
+		var viewPage=[];
 		$(document).ready(function() {
 			listLord(defaultPageNum);
 
@@ -99,6 +99,34 @@
 						$('section').fadeIn(1000);
 						$('body,html').animate({scrollTop: $(".is-visible").position().top}, 1000);
 						$(".table-container").on("click",function(){
+							var presenThis= $(this);
+
+
+
+							var checkV=true;
+							for(var i=0;i<viewPage.length;i++){
+								if(viewPage[i]==result[$(".table-container").index($(this))].CUS_IDX){
+									checkV=false;
+									break;
+								}
+							}
+							if(checkV){
+								console.log(result);
+								viewPage.push(result[$(".table-container").index(presenThis)].CUS_IDX)
+								$.ajax({
+									url : "/api/update/hitCnt",
+									method : "GET",
+									data : {
+										cusIDX : result[$(".table-container").index(presenThis)].CUS_IDX,
+										hitCnt : result[$(".table-container").index(presenThis)].HITCNT
+									}
+								}).done(function(done_result) {
+									console.log(result[$(".table-container").index(presenThis)]);
+									console.log("현재 hitcnt : "+done_result+" , 과거 hitcnt : "+result[$(".table-container").index(presenThis)].HITCNT);
+								});
+							}
+
+
 							if($( ".cd-section" ).index( $(this).parent().parent().parent() )%2<1){
 								$(".detail-view").removeClass("detail-view-left");
 								$(".detail-view").addClass("detail-view-right");

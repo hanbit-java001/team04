@@ -39,7 +39,7 @@
 		</div>
 		<div class="cover">
 			<img class="reflected select-img" data-name="samsung입니다" data-url="/hyundo/board"
-				src="/static/image/logo-square-letter.png">
+				src="/static/image/PurpleCircle.png">
 		</div>
 		<div class="cover">
 			<img class="reflected select-img" data-name="ranking board입니다" data-url="/hyundo_rank"

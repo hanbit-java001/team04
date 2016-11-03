@@ -429,7 +429,7 @@ right:0%;
 				<img alt="test" src="">
 				<div class="img-text"></div>
 			</div>
-			<button type="submit" class="mui-btn mui-btn--raised">Submit</button>
+<!-- 			<button type="submit" class="mui-btn mui-btn--raised">Submit</button> -->
 		</form>
 		<div class="detail-round">
 			<div class="detail-ageGroup">ageGroup</div>

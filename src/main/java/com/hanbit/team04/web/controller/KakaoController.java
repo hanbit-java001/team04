@@ -203,6 +203,12 @@ public class KakaoController {
 		LOGGER.info("checking id" +checkingId);
 		return ideaMemberService.checking(checkingId);
 	}
+	@RequestMapping(value="/api/update/hitCnt", method=RequestMethod.GET)
+	@ResponseBody
+	public int uptoHitCnt(@RequestParam("cusIDX") int cusIDX, @RequestParam("hitCnt") int hitCnt) {
+		LOGGER.info("checking up to hitcnt :" +cusIDX+" , "+hitCnt);
+		return ideaCusBoardService.uptoHitCnt(cusIDX,hitCnt);
+	}
 	@RequestMapping(value="/api/check/admin", method=RequestMethod.GET)
 	@ResponseBody
 	public boolean getCheckAdmin() {
