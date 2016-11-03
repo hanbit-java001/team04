@@ -1,5 +1,11 @@
 $(function() {
-
+	$(document).click(function(event) {
+	    var text = $(event.target).text();
+	    if($(event.target).hasClass("confirm")){
+	    	console.log("success");
+	    	confirmClick();
+	    }	    
+	});
 	var totCnt=0;
 	var CrntPageNum = 1;
 	var totPageNum;
@@ -11,6 +17,8 @@ $(function() {
 	/////
 	var IdxNum;
 	/////
+	var CrntuserId;
+	//////
 	var modalTrigger = $('.cd-modal-trigger'),
 	transitionLayer = $('.cd-transition-layer'),
 	transitionBackground = transitionLayer.children(),
@@ -86,6 +94,7 @@ $(function() {
 						var k = 0;
 						rowHTML += "<div class='projects'>"
 							var not_default=[];
+						
 						for (var i = 1, innerNum=1; i < 4; i++) {
 							console.log((result.list.length));
 							rowHTML += "<ul class='row'>"
@@ -98,6 +107,7 @@ $(function() {
 									dbcontents = result.list[trnsNum].contents;
 									dbfileId = result.list[trnsNum].fileId;
 									dbIdx = result.list[trnsNum].boardIdx;
+									dbconfirm = result.list[trnsNum].confirm;
 									if(dbfileId==null||dbfileId=="NULL"||dbfileId==undefined){
 										not_default.push("default");
 									}else{
@@ -120,19 +130,24 @@ $(function() {
 								rowHTML += "</div>";
 								rowHTML += "</div>";
 								rowHTML += "<div class='project-content'>";
-								rowHTML += "<div class='hitdiv' style='color:#999' data-num='"+dbIdx+"'><br></br> &nbsp; HITCNT : "+dbhitcnt+" ";
+								rowHTML += "<div class='hitdiv' style='color:#999' data-num='"+dbIdx+"'><br></br> &nbsp; HITCNT : "+dbhitcnt+"</div> ";
+								rowHTML += "<div class='confirm ";
+								if(dbconfirm=="Y"){
+									rowHTML +=  "confirmed";
+								}
+								rowHTML += "'> &nbsp;&nbsp;[CONFIRM]&nbsp;&nbsp;</div>"
 								rowHTML += "<p> contents : "
 										+ dbcontents + "</p>";
-								rowHTML += "</div>";
 								rowHTML += "</div>";
 								rowHTML += "<a href='#0' class='close-project'>Close</a>";
 								rowHTML += "</div> ";
 								rowHTML += "</li>";
 								k++;
-
+								
 
 							}
 							rowHTML += "</ul>";
+						
 						}
 						rowHTML += "</div>"
 						$(".cd-3d-portfolio").append(rowHTML);
@@ -147,9 +162,17 @@ $(function() {
 //								$(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before").css("background-image","url(http://203.236.209.187:8180/file/"+result.list[not_default[i]].fileId+")");
 							}
 						}
+						
+						console.log("check : "+CrntuserId);
+//						console.log("confirm check : "+dbconfirm);
+//						console.log(CrntuserId);
 						console.log(not_default);
 						Btnmovement();
 						mainjs();
+						if(CrntuserId=="admin"){
+							$(".confirm").css({"display":"inline-block"});
+							$(".confirmed").css({"display":"none"});
+						}
 						$("body").fadeIn("slow");
 					})
 	}
@@ -228,11 +251,26 @@ $(function() {
 					.on(
 							'click',
 							'li.selected',
-							function() {
+							function(e) {
 								// open a new project 여기가 그것인거 같다!! 히트카운트!!
 								IdxNum = Number($(".hitdiv").attr("data-num"));
+								if(e.target=$(".confirm")){
+									console.log("뭔가 길어: "+$(this).find(".confirm").hasClass("confirm"));
+									console.log("confirm인가");
+								}
+								
+//								if(dbconfirm=="Y"){
+//									$("#conFirm").css({"color":"red"});
+//									$("#conFirm").text("confirmed");
+//								}
+//								if(CrntuserId=="admin"){
+//									$("#conFirm").css("display","inline-block");
+//								}								
+								
 								
 								console.log(IdxNum);
+								console.log(CrntuserId);
+								
 								if (!self.animating
 										&& !$(this).hasClass('open')) {
 									self.animating = true;
@@ -450,19 +488,39 @@ $(function() {
 			});
 		});
 	}
+//////////////////////////////////////////////////////////////////////////
+	
+// 아이디 가져오는 애
+function getUserId(){
+	$.ajax({
+		url : "/api/login/data",
+		method : "POST"
+	}).done(function(result){
+		CrntuserId = result.userId;
+		$("#userId").val(result.name);
+	});
+}
 
 
+//////// 컨펌 바꾸자
+function confirmClick(){
+	$(".confirm").on("click", function(){
+		console.log("confirmclick");
+		$.ajax({
+			url : "/api/data/confirm",
+			method : "POST",
+			data : {
+				IdxNum : IdxNum
+			}
+		}).done(function(result){
+			console.log("컨펌 됨");
+		})
+	})
+}
+////////////////////////////////////////////	
+	
 // WRITE 버튼잼
 	$(".insertBtn").on("click", function(){
-
-//		userId
-		$.ajax({
-			url : "/api/login/data",
-			method : "POST"
-		}).done(function(result){
-			$("#userId").val(result.name);
-		});
-
 		$(".insertPanel").css("display","inherit");
 		event.preventDefault();
 		transitionLayer.addClass('visible opening');
@@ -550,7 +608,7 @@ function dropUpload(event) {
     noop(event);
     imgfile = event.dataTransfer.files;
     $("#dropbox").text("Uploading " + imgfile[0].name);
-console.log("img file name "+imgfile[0].name);
+    console.log("img file name "+imgfile[0].name);
 
 }
 /////////////////////////////////////////////////////
@@ -577,12 +635,7 @@ function hitCount(){
 	}
 
 
-
-
-
-
-
-
+	getUserId();
 	getTotalCnt();
 	makeBtn(CrntPageNum);
 	makeView(CrntPageNum);

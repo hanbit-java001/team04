@@ -150,5 +150,11 @@ public class IdeaBoardController {
 		return result;
 	}
 	
+	@RequestMapping("/api/data/confirm")
+	@ResponseBody
+	public int confirmClick(@RequestParam int IdxNum){
+		int result = ideaBoardService.confirmClick(IdxNum);
+		return result;
+	}
 	
 }
