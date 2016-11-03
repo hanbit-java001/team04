@@ -26,7 +26,7 @@ public class FileService {
 
 	public String storeFile(FileVO fileVO) {
 		String fileId = generateFileId();
-		String filePath = "/files/" + fileId;
+		String filePath = "http://203.236.209.187/files/" + fileId;
 
 		try {
 			FileUtils.writeByteArrayToFile(new File(filePath), fileVO.getFileData());

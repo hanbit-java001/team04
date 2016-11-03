@@ -74,5 +74,6 @@
 	<update id="confirmClick" parameterType="int">
 	UPDATE IDEA_BOARD SET CONFIRM='Y' WHERE BOARD_IDX = #{IdxNum}
 	</update>
-
+	
+	
 </mapper>

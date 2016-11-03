@@ -572,7 +572,7 @@ function confirmClick(thisConfirm){
 		}
 		console.log("뇨내 :");
 		$.ajax({
-			url : "/api/IdeaBoard/insert2",
+			url : "http://203.236.209.187:8889/api/IdeaBoard/insert2",
 			method : "POST",
 			data : data,
 			contentType : false,
