@@ -272,6 +272,7 @@ $(function() {
           }).done(function(rankBoardList){
         	  list=rankBoardList;
         	  
+        	  
     			for(var i = 0; i<30; i++) {
     				var lrIdx = Math.floor(Math.random()*2);
     				var lrIdxrev = (Math.abs(lrIdx))-1;
@@ -332,11 +333,12 @@ $(function() {
 //				console.log($(".ss-row:not('.not-index')").index($(this).parent().parent()));
 				var rkidx = $(".ss-row:not('.not-index')").index($(this).parent().parent());
 				console.log(rkidx);
-				$(".cd-main-content h1").text(list[rkidx].userId);
-				$(".modal-content h1").text(list[rkidx].title);
+				$(".cd-main-content h1").text(list[rkidx].title);
+				$(".modal-content h1").text(list[rkidx].userId);
 				$(".modal-content .pclass").text(list[rkidx].contents);
 				console.log(dbfileId);
 				if(dbfileId[rkidx]==null||dbfileId[rkidx]=="NULL"||dbfileId[rkidx]==undefined){
+					$(".contents-image").css({"height":"10%"});
 					$(".contents-image").text("등록된 이미지가 없습니다.");
 				}else{
 					$(".contents-image").css({"background-image": "url(http://203.236.209.187:8180/file/"+dbfileId[(rkidx)]+")", "height": "100%"});
