@@ -105,6 +105,7 @@ $(function() {
 								if(result.list.length > trnsNum){
 									dbhitcnt = result.list[trnsNum].hitCnt;
 									dbtitle = result.list[trnsNum].title;
+									dbuserId = result.list[trnsNum].userId;
 									dbcontents = result.list[trnsNum].contents;
 									dbfileId = result.list[trnsNum].fileId;
 									dbIdx = result.list[trnsNum].boardIdx;
@@ -126,15 +127,20 @@ $(function() {
 								rowHTML += "<div class='project-wrapper'>";
 								rowHTML += "<div class='project-image'>"; // style='background-image:+"dbfileId"+ '
 								rowHTML += "<div class='project-title'>";
-								rowHTML += "<h2>title :  "
-										+ dbtitle + "</h2>";
+								rowHTML += "<h2";
+									if(dbconfirm=="N"&&CrntuserId=="admin"){
+										rowHTML +=  " style='color:gray;' ";
+									}
+										rowHTML += ">  " + dbtitle + "&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp&nbsp&nbsp :: "+dbuserId+"</h2>"
 								rowHTML += "</div>";
 								rowHTML += "</div>";
 								rowHTML += "<div class='project-content'>";
-								rowHTML += "<div class='hitdiv' style='color:#999' data-num='"+dbIdx+"'><br></br> &nbsp; HITCNT : "+dbhitcnt+"</div> ";
+								rowHTML += "<div class='hitdiv' style='color:#999' data-num='"+dbIdx+"'><br></br> &nbsp;&nbsp; HITCNT : "+dbhitcnt+"</div> ";
 								rowHTML += "<div class='confirm ";
 								if(dbconfirm=="Y"){
 									rowHTML +=  "confirmed";
+								}else{
+									rowHTML +=  "needconfirm";
 								}
 								rowHTML += "'> &nbsp;&nbsp;[CONFIRM]&nbsp;&nbsp;</div>"
 								rowHTML += "<p> contents : "
@@ -511,8 +517,8 @@ function confirmClick(thisConfirm){
 			}
 		}).done(function(result){
 			console.log("컨펌 됨");
-//			thisConfirm.fadeOut();
-			refresh();
+			thisConfirm.fadeOut();
+//			refresh();
 		})
 	}
 ////////////////////////////////////////////	

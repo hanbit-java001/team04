@@ -999,7 +999,7 @@ Back to top
 .moveBtn:hover{
 	border-color: #72a987;
 }
-.confirm{
+.needconfirm{
 	cursor: pointer;
 	border: 1px solid #999;
 	display: none;
