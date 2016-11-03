@@ -19,7 +19,6 @@
 <style type="text/css">
 .pull-right{
 width: 10%;
-background-color: blue;
 }
 </style>
 </head>

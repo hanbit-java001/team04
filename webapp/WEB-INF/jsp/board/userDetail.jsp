@@ -39,15 +39,7 @@
                 </div>
                 <div class="col-lg-12 text-center">
                     <figure class="effect-terry">
-                        <img src="/static/image/No.png" alt="" class="img-circle img-responsive">
-<!-- 						<figcaption> -->
-<!-- 							<p> -->
-<!-- 								<a href="#"><i class="fa fa-fw fa-download"></i></a> -->
-<!-- 								<a href="#"><i class="fa fa-fw fa-heart"></i></a> -->
-<!-- 								<a href="#"><i class="fa fa-fw fa-share"></i></a> -->
-<!-- 								<a href="#"><i class="fa fa-fw fa-tags"></i></a> -->
-<!-- 							</p> -->
-<!-- 						</figcaption> -->
+                        <img src="/static/image/No.png"  alt="noPic" class="img-circle img-responsive">
                         <figcaption class="ratings">
                             <p>Ratings
                             <a href="#">

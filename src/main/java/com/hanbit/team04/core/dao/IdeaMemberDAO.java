@@ -29,7 +29,7 @@ public class IdeaMemberDAO {
 		LOGGER.debug("checking id ");
 		return sqlSession.selectOne("IdeaMember.checking", checkingId);
 	}
-	
+
 	public IdeaMemberVO selectMember(String userId, String password) {
 
 		Map param = new HashMap<>();
@@ -38,5 +38,9 @@ public class IdeaMemberDAO {
 
 		return sqlSession.selectOne("IdeaMember.selectMember",param);
 
+	}
+
+	public String selectFileId(String userId) {
+		return sqlSession.selectOne("IdeaMember.selectFileId", userId);
 	}
 }
