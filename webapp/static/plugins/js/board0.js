@@ -1,6 +1,6 @@
 	$(document).ready(function() {
 
-		$("time.timeago").timeago();
+//		$("time.timeago").timeago();
 
 //		$("#beforeLogin").hide();
 
@@ -127,30 +127,16 @@
 					ReplyHtml+="<strong class='primary-font'>"+userId+"</strong>";
 					ReplyHtml+="<div class='pull-right text-muted'>";
 					ReplyHtml+="<i class='fa fa-clock-o fa-fw'></i>";
-					ReplyHtml+="<time class='timeago' datatime='"+replyDate+"'>날짜입니다</time>";
-//					ReplyHtml+="<time class='timeago' datatime='"+new Date()+"'>ssdfsdf</time>";
+					ReplyHtml+="<time class='timeago' datetime='"+replyDate+"'>날짜입니다</time>";
 					ReplyHtml+="</div>";
 					ReplyHtml+="</div>";
 					ReplyHtml+="<div>"+replyDb+"</div>";
 					ReplyHtml+="</div>";
 					ReplyHtml+="</li>";
 					ReplyHtml+="</ul>";
-//					console.log("abcdcd22222"+replyDate);
-//					console.log("abcdcdc"+moment().format(replyDate));
-					console.log("time age1 : "+$(".timeago").attr("datatime"));
 					$(".replyBody").append(ReplyHtml);
-					console.log("time age2 : "+$(".timeago").attr("datatime"));
-//					$(".timeago").attr("datatime",new Date());
-					$(".timeago").on("click",function(){
-						console.log("click timeago");
-
-						$(".timeago").timeago();
-						console.log("click timeago after");
-						//////////////////////////존나 안돌아간다
-					})
-
-
-//					console.log($(".timeago").first().text());
+//					$(".timeago").attr("datetime",replyDate);
+					jQuery("time.timeago").timeago();
 				}
 
 				function drawNumber(totalCount){
