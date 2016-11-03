@@ -14,7 +14,7 @@
 	</select>
 	<select id="selectPageNum" resultType="int">
 		<![CDATA[
-		SELECT COUNT(*) FROM IDEA_CUS_BOARD WHERE AGE_GROUP>#{age} AND AGE_GROUP<=(#{age}+10)
+		SELECT COUNT(*) FROM IDEA_CUS_BOARD WHERE AGE_GROUP>=#{age} AND AGE_GROUP<(#{age}+10)
 				  ]]>
 	</select>
 	<select id="selectHitCnt" resultType="int">
@@ -34,7 +34,7 @@
 			SELECT a.*
 			  FROM (
 				SELECT ROWNUM rn, IDEA_CUS_BOARD.*
-				  FROM IDEA_CUS_BOARD WHERE AGE_GROUP>#{age} AND AGE_GROUP<=(#{age}+10)) a
+				  FROM IDEA_CUS_BOARD WHERE AGE_GROUP>=#{age} AND AGE_GROUP<(#{age}+10)) a
 			  WHERE rn <= 15 * #{pageNum}) a
 		 WHERE rn > 15 * (#{pageNum} - 1)
   	]]>
