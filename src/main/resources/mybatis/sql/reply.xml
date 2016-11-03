@@ -44,7 +44,12 @@
 	<insert id="insertmini" parameterType="ReplyVo">
 		INSERT INTO
 		IDEA_MINI_BOARD (MIN_SEQ, USER_ID, CONTENTS, REGDATE)VALUES
-		(#{minSeq},#{userId},#{contents},#{regDate})
+		(SEQ_IDX.NEXTVAL,#{userId},#{contents},#{regDate})
 	</insert>
+
+	<select id="selectSysdate" resultType="map">
+		SELECT SYSDATE
+		  FROM DUAL
+	</select>
 
 </mapper>

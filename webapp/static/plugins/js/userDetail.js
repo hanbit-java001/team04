@@ -66,6 +66,7 @@ function writeViewMenu(){
 					"<i class='fa fa-trash fa-2x' data-num='"+result.board_idx[i].boardIdx+
 					"' aria-hidden='true'></i></td></tr>";
 				if(i%10==0){
+					
 				}
 
 		}

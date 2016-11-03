@@ -43,4 +43,9 @@ public int insertBoard(ReplyVO replyVO) {
 }
 
 
+public Map getTime() {
+	return Sqlsession.selectOne("reply.selectSysdate");
+}
+
+
 }

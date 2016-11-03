@@ -15,7 +15,12 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" rel="stylesheet">
 <link href="/static/plugins/startbootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/static/plugins/css/board.css" rel="stylesheet">
-
+<style type="text/css">
+.pull-right{
+width: 10%;
+background-color: blue;
+}
+</style>
 </head>
 <body>
 
@@ -40,7 +45,7 @@
 				<ul class="dropdown-menu dropdown-user">
 					<li class="beforeLogin"><i class="fa fa-user fa-fw"></i>Login</li>
 					<li class="afterLogin"><a href="/board/userDetail"><i class="fa fa-user fa-fw"></i>User Profile</a></li>
-					<li class="afterLogin"><a href="/board/userDetail1"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+<!-- 					<li class="afterLogin"><a href="/board/userDetail1"><i class="fa fa-gear fa-fw"></i> Settings</a></li> -->
 					<li class="afterLogin logout"><a href="#"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
 				</ul>
 			</li>
@@ -74,9 +79,10 @@
 						</div>
 						<a href="/hyundo/board">
 							<div class="panel-footer">
-								<span class="pull-left">View Details</span> <span
-									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<span class="pull-left">View Details</span>
+								<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 								<div class="clearfix"></div>
+<!-- 								<time class="timeago" datetime="Fri Oct 28 17:31:29 K4T 2016">July 17, 2008</time> -->
 							</div>
 						</a>
 					</div>
@@ -189,7 +195,8 @@
 			<button class="btn btn-default canclebtn">취소</button>
 		</div>
 </div>
-		<script src="/static/plugins/startbootstrap/vendor/jquery/jquery.min.js"></script>
+<!-- 		<script src="/static/plugins/startbootstrap/vendor/jquery/jquery.min.js"></script> -->
+		<script src="/static/plugins/jquery/jquery-3.1.0.min.js"></script>
 		<!-- Bootstrap Core JavaScript -->
 		<script src="/static/plugins/startbootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
 		<!-- Metis Menu Plugin JavaScript -->

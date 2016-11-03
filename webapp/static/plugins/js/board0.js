@@ -1,9 +1,6 @@
 	$(document).ready(function() {
 
-//		$("time.timeago").timeago();
-//		$(".timeago").attr("datetime","2008-07-13");
-
-		console.log();
+		$("time.timeago").timeago();
 
 //		$("#beforeLogin").hide();
 
@@ -106,7 +103,7 @@
 							var reply = result.replyLists[i];
 							var replyDb = reply.contents;
 							var userId=	reply.userId;
-							var replyDate = reply.regDate;
+							var replyDate = moment().format(reply.regDate);
 							addReply(userId,replyDb,replyDate);
 						}
 						var totalCount = result.totalCount;
@@ -117,6 +114,7 @@
 
 				function addReply(userId,replyDb,replyDate){
 
+//					$("time.timeago").timeago();
 					var ReplyHtml = "";
 
 					ReplyHtml+="<ul class='chat'>";
@@ -127,19 +125,32 @@
 					ReplyHtml+="<div class='chat-body clearfix'>";
 					ReplyHtml+="<div class='header'>";
 					ReplyHtml+="<strong class='primary-font'>"+userId+"</strong>";
-					ReplyHtml+="<small class='pull-right text-muted'>";
+					ReplyHtml+="<div class='pull-right text-muted'>";
 					ReplyHtml+="<i class='fa fa-clock-o fa-fw'></i>";
-					ReplyHtml+="<time class='timeago' datatime="+replyDate+"></time>";
-					ReplyHtml+="</small>";
+					ReplyHtml+="<time class='timeago' datatime='"+replyDate+"'>날짜입니다</time>";
+//					ReplyHtml+="<time class='timeago' datatime='"+new Date()+"'>ssdfsdf</time>";
+					ReplyHtml+="</div>";
 					ReplyHtml+="</div>";
 					ReplyHtml+="<div>"+replyDb+"</div>";
 					ReplyHtml+="</div>";
 					ReplyHtml+="</li>";
 					ReplyHtml+="</ul>";
-
+//					console.log("abcdcd22222"+replyDate);
+//					console.log("abcdcdc"+moment().format(replyDate));
+					console.log("time age1 : "+$(".timeago").attr("datatime"));
 					$(".replyBody").append(ReplyHtml);
-//					$("time.timeago").timeago();
-//					console.log($(".timeage").first().text());
+					console.log("time age2 : "+$(".timeago").attr("datatime"));
+//					$(".timeago").attr("datatime",new Date());
+					$(".timeago").on("click",function(){
+						console.log("click timeago");
+
+						$(".timeago").timeago();
+						console.log("click timeago after");
+						//////////////////////////존나 안돌아간다
+					})
+
+
+//					console.log($(".timeago").first().text());
 				}
 
 				function drawNumber(totalCount){
@@ -197,7 +208,7 @@
 
 						if(pageNum<=0){
 
-							return; 
+							return;
 						}
 
 					}else if(pageText=="다음"){

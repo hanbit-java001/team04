@@ -34,10 +34,12 @@ public class ReplyService {
 		return replyDao.selectNextIndex();
 	}
 
+	public Map giveTime(){
+		return replyDao.getTime();
+	}
+
 	public int addMiniBoard(ReplyVO replyVO) {
-		replyVO.setMinSeq(getIndex());
-		LOGGER.debug("CHECK SEQ : "+replyVO.getMinSeq());
-		replyVO.setRegDate(new Date().toString());
+		replyVO.setRegDate(replyDao.getTime().get("SYSDATE").toString());
 		return replyDao.insertBoard(replyVO);
 	}
 
