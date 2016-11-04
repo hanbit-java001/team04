@@ -30,7 +30,6 @@ import com.hanbit.team04.core.vo.IdeaBoardVO;
 
 import twitter4j.TwitterException;
 
-
 @Controller
 public class IdeaBoardController {
 
@@ -45,35 +44,36 @@ public class IdeaBoardController {
 
 	@LoginRequired
 	@RequestMapping("/hyundo/board")
-	public String IdeaBoards(){
+	public String IdeaBoards() {
 		return "idea_board";
 	}
 
 	@RequestMapping("/api/data")
 	@ResponseBody
-	public List<IdeaBoardVO> getIdeaBoards(){
+	public List<IdeaBoardVO> getIdeaBoards() {
 		List<IdeaBoardVO> voList = ideaBoardService.getIdeaBoards();
 
 		return voList;
 	}
+
 	@RequestMapping("/api/login/data")
 	@ResponseBody
-	public Session getloginInfo(){
+	public Session getloginInfo() {
 		Session session = SessionHelpler.getSession();
-		LOGGER.debug("loginfo check : "+session);
+		LOGGER.debug("loginfo check : " + session);
 		return session;
 	}
 
 	@RequestMapping("/api/totCnt")
 	@ResponseBody
-	public int getTotalCnt(){
+	public int getTotalCnt() {
 		int totCnt = ideaBoardService.getTotCnt();
 		return totCnt;
 	}
 
-	@RequestMapping(value="/api/datas",method=RequestMethod.POST)
+	@RequestMapping(value = "/api/datas", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> IdeaBoards(@RequestParam("pageNum") int pageNum){
+	public Map<String, Object> IdeaBoards(@RequestParam("pageNum") int pageNum) {
 		Map<String, Object> result = new HashMap<>();
 		List<IdeaBoardVO> voList = ideaBoardService.getIdeaBoards2(pageNum);
 		int totalCount = ideaBoardService.getTotCnt();
@@ -84,10 +84,10 @@ public class IdeaBoardController {
 		return result;
 	}
 
-
 	@RequestMapping("/api/IdeaBoard/insert")
 	@ResponseBody
-	public int insertIdea(@RequestParam("userId") String userId, @RequestParam("title") String title, @RequestParam("contents") String contents){
+	public int insertIdea(@RequestParam("userId") String userId, @RequestParam("title") String title,
+			@RequestParam("contents") String contents) {
 
 		Map param = new HashMap<>();
 
@@ -100,9 +100,9 @@ public class IdeaBoardController {
 		return result;
 	}
 
-	@RequestMapping(value="/api/IdeaBoard/insert2", method=RequestMethod.POST)
+	@RequestMapping(value = "/api/IdeaBoard/insert2", method = RequestMethod.POST)
 	@ResponseBody
-	public int insertIdeaData(MultipartHttpServletRequest request) throws IOException{
+	public int insertIdeaData(MultipartHttpServletRequest request) throws IOException {
 		int result = 1;
 		String userId = request.getParameter("userId");
 		String title = request.getParameter("title");
@@ -111,7 +111,7 @@ public class IdeaBoardController {
 
 		Iterator<String> paramNames = request.getFileNames();
 
-		if(paramNames.hasNext()){
+		if (paramNames.hasNext()) {
 			String paramName = paramNames.next();
 			MultipartFile file = request.getFile(paramName);
 
@@ -123,16 +123,16 @@ public class IdeaBoardController {
 			fileId = fileService.storeFile(fileVO);
 
 		}
-		try{
-		IdeaBoardVO ideaBoardVO = new IdeaBoardVO();
-		ideaBoardVO.setUserId(userId);
-		ideaBoardVO.setTitle(title);
-		ideaBoardVO.setContents(contents);
-		ideaBoardVO.setFileId(fileId);
-		if(ideaBoardService.insertBoard(ideaBoardVO)==1){
-			LOGGER.info("checking insert: 잘들어가는군");
-		}
-		}catch (Exception e) {
+		try {
+			IdeaBoardVO ideaBoardVO = new IdeaBoardVO();
+			ideaBoardVO.setUserId(userId);
+			ideaBoardVO.setTitle(title);
+			ideaBoardVO.setContents(contents);
+			ideaBoardVO.setFileId(fileId);
+			if (ideaBoardService.insertBoard(ideaBoardVO) == 1) {
+				LOGGER.info("checking insert: 잘들어가는군");
+			}
+		} catch (Exception e) {
 			if (StringUtils.isNotBlank(fileId)) {
 				try {
 					fileService.removeFile(fileId);
@@ -150,7 +150,7 @@ public class IdeaBoardController {
 
 	@RequestMapping("/api/data/hitcnt")
 	@ResponseBody
-	public int addHitCnt(@RequestParam int IdxNum){
+	public int addHitCnt(@RequestParam int IdxNum) {
 		System.out.println(IdxNum);
 		int result = ideaBoardService.addHitCnt(IdxNum);
 		return result;
@@ -158,13 +158,16 @@ public class IdeaBoardController {
 
 	@RequestMapping("/api/data/confirm")
 	@ResponseBody
-	public int confirmClick(@RequestParam int IdxNum) throws TwitterException{
-		LOGGER.debug("update IdxNUM"+IdxNum);
+	public int confirmClick(@RequestParam int IdxNum) throws TwitterException {
+		LOGGER.debug("update IdxNUM" + IdxNum);
+		int result = 0;
 		List<String> list = new ArrayList<>();
 		IdeaBoardVO boardVO = ideaBoardService.getidea(IdxNum);
-		boolean tw_result =tweetService.addTweet(boardVO);
-		int result = ideaBoardService.confirmClick(IdxNum);
-		LOGGER.debug("Tweet result : "+tw_result+" , confirm result : "+result);
+		boolean tw_result = tweetService.addTweet(boardVO);
+		if (tw_result) {
+			result = ideaBoardService.confirmClick(IdxNum);
+		}
+		LOGGER.debug("Tweet result : " + tw_result + " , confirm result : " + result);
 		return result;
 	}
 

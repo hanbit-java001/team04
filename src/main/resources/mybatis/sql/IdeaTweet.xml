@@ -7,7 +7,7 @@
 		INSERT INTO IDEA_TWEET
 			(IDEA_IDX, TWEET_ID, RETWEET, FAVORITE, FILE_ID)
 		VALUES ()
-			(#{ideaIDX}, #{tweetID}, #{reTweet}, #{favorite}, #{fileId})
+			(#{ideaIDX}, #{tweetId}, #{reTweet}, #{favorite}, #{fileId})
 	</insert>
 
 

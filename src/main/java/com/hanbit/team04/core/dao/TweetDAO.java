@@ -15,8 +15,9 @@ public class TweetDAO {
 	private SqlSession sqlSession;
 
 	public int insertTweet(IdeaTweetVO ideaTweet) {
+		LOGGER.debug("tweet DAO : "+ideaTweet);
 
-		return sqlSession.insert("IdeaTweet.insertTweet",ideaTweet);
+		return sqlSession.insert("ideaTweet.insertTweet",ideaTweet);
 	}
 
 }

@@ -14,7 +14,7 @@
 	width: 80%;
 	margin-top: 25px;
 	margin-left: 10%;
-	
+
 }
 
 #contact-area input, #contact-area textarea {
@@ -52,7 +52,7 @@
 	border: 2px solid #ccc;
 	margin-left:5%;
 	width: 40%;
-	text-align: center; 
+	text-align: center;
 	cursor: pointer;
 }
 @media (min-width: 1200px) {
@@ -195,9 +195,9 @@ label {
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Transition Layer 
+Transition Layer
 
 -------------------------------- */
 .cd-transition-layer {
@@ -325,7 +325,7 @@ Transition Layer
 
 
 
-/* -------------------------------- 
+/* --------------------------------
 
 Primary style
 
@@ -360,9 +360,9 @@ a {
   text-decoration: none;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Portfolio Navigation 
+Portfolio Navigation
 
 -------------------------------- */
 .cd-3d-portfolio-navigation {
@@ -426,9 +426,9 @@ Portfolio Navigation
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Portfolio Projects 
+Portfolio Projects
 
 -------------------------------- */
 .cd-3d-portfolio {
@@ -706,7 +706,7 @@ Portfolio Projects
   background: white;
   box-shadow: 0 -5px 0 white;
     white-space: normal;
-  word-break: break-word; 
+  word-break: break-word;
 }
 .cd-3d-portfolio .projects .project-content > div {
   opacity: 0;
@@ -915,9 +915,9 @@ Portfolio Projects
   }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Back to top 
+Back to top
 
 -------------------------------- */
 .cd-top {
@@ -1011,4 +1011,21 @@ Back to top
 	border: 1px solid #999;
 	display: none;
 	font-size: medium;
+}
+.logOutBtn{
+	margin-top: 10px;
+    margin-right: 20px;
+    float: right;
+    cursor: pointer;
+    font-family: "Lora", serif;
+    font-weight: bold;
+    display: inline-block;
+    color: #edeade;
+    border: 2px solid #391b28;
+    padding: .6em;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+.logOutBtn:hover{
+	border-color: #72a987;
 }
