@@ -72,14 +72,14 @@ width: 10%;
 									<i class="fa fa-tag fa-5x" aria-hidden="true"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">26</div>
-									<div>New Comments!</div>
+									<div class="huge" id="huge1"></div>
+									<div>새로운 글</div>
 								</div>
 							</div>
 						</div>
 						<a href="/hyundo/board">
 							<div class="panel-footer">
-								<span class="pull-left">View Details</span>
+								<span class="pull-left">해당 페이지로</span>
 								<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 								<div class="clearfix"></div>
 <!-- 								<time class="timeago" datetime="Fri Oct 28 17:31:29 K4T 2016">July 17, 2008</time> -->
@@ -96,13 +96,13 @@ width: 10%;
 								</div>
 								<div class="col-xs-9 text-right">
 									<div class="huge">12</div>
-									<div>New Tasks!</div>
+									<div>컨펌 대기중!</div>
 								</div>
 							</div>
 						</div>
 						<a href="/hyundo_rank">
 							<div class="panel-footer">
-								<span class="pull-left">View Details</span> <span
+								<span class="pull-left">해당 페이지로</span> <span
 									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 								<div class="clearfix"></div>
 							</div>
@@ -117,7 +117,7 @@ width: 10%;
 									<i class="fa fa-cc-paypal fa-5x" aria-hidden="true"></i></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">13000$</div>
+									<div class="huge" >13000$</div>
 									<div>Total Donation</div>
 								</div>
 							</div>

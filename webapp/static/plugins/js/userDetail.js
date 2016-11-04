@@ -5,6 +5,7 @@ var userId="";
 var age;
 var confirmCount;
 var writeCount;
+var boardNum;
 
 
 //console.log("작성해 보자:"+$(".col-xs-12 p").html());
@@ -63,17 +64,16 @@ function writeViewMenu(){
 		$(".write-container>h2").text(userId+"님의 작성문서");
 
 		$(".write-container-body td:nth-child(1)").text(boardIdx);
-
 		for(var i = 0 ; i< result.board_idx.length; i++){
 			innerHtml+="<tr><td>"+result.board_idx[i].boardIdx+"</td><td><a href='/hyundo/board'>"
-			+result.board_idx[i].title+"</a></td><td>"+result.board_idx[i].contents+"</td><td>"
-			+result.board_idx[i].regDate+"</td><td><i class='fa fa-file-o fa-2x' aria-hidden='true'></i>  " +
+			+result.board_idx[i].title+"</a></td><td class='hideContents'><input type='text' class='form-control'></td><td class='contents'>"+result.board_idx[i].contents+"</td><td>"
+			+result.board_idx[i].regDate+"</td><td><i class='fa fa-file-o fa-2x' aria-hidden='true' data-num='"+i+
+					"'></i>  " +
 					"<i class='fa fa-trash fa-2x' data-num='"+result.board_idx[i].boardIdx+
 					"' aria-hidden='true'></i></td></tr>";
 				if(i%10==0){
 
 				}
-
 		}
 //		console.log(result.board_idx.length%10==0);
 
@@ -81,8 +81,8 @@ function writeViewMenu(){
 
 		$(".fa-trash").on("click",function(){
 
-			var boardNum = Number($(this).attr("data-num"));
-
+			 boardNum = Number($(this).attr("data-num"));
+			 console.log(boardNum);
 				if(confirm("정말 삭제하시겠습니까?")){
 					$.ajax({
 						url:"/api/userDetail/deleteIcon",
@@ -102,6 +102,39 @@ function writeViewMenu(){
 				}
 
 			});
+
+		$(".fa-file-o").on("click", function(){
+
+			boardNum = Number($(this).attr("data-num"));
+
+//			console.log($(this).parent().parent("i").html(""));
+			var michin = $(this).parent().parent("tr").html();
+			console.log(michin);
+
+			$(".write-container-body").html("");
+			$(".write-container-body").html(michin);
+
+//			$(".fa-file-o").toggle();
+
+			$(".contents").hide();
+			$("i").parent("td").html("");
+
+			$(".hideContents").show();
+
+			var Html ="<button class='btn btn-primary'>수정하기</button>     <button class='btn btn-default'>나가기</button>"
+
+			$(".write-container-body td:nth-child(6)").html(Html);
+
+			$(".form-control").val(result.board_idx[1].contents);
+			$(".form-control").focus();
+
+
+
+//			$.ajax({
+//				url:"api/userDetail/modify",
+//
+//			})
+		})
 
 	});
 }

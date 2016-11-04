@@ -290,19 +290,13 @@ public class BoardController {
 	 @ResponseBody
 	 public Map getBoardInfo(){
 
-
 		 Map result = new HashMap<>();
 
+		 int boardCount = ideaBoardService.getDailyCount();
 
-		String DailyTime = replyService.giveTime().get("SYSDATE").toString();
+		 System.out.println(boardCount);
 
-//		 int boardCount = ideaBoardService.getDailyCount(DailyTime);
-
-//		 System.out.println(boardCount);
-
-//		result.put("Time", DailyTime);
-
-//		 result.put("Time", boardCount);
+		result.put("Time", boardCount);
 
 		 return result;
 	 }
