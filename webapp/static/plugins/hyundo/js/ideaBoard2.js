@@ -5,7 +5,7 @@ $(function() {
 	    	console.log("success1");
 	    	confirmClick($(event.target));
 	    	console.log("success2");
-	    }	    
+	    }
 	});
 	var totCnt=0;
 	var CrntPageNum = 1;
@@ -95,7 +95,7 @@ $(function() {
 						var k = 0;
 						rowHTML += "<div class='projects'>"
 							var not_default=[];
-						
+
 						for (var i = 1, innerNum=1; i < 4; i++) {
 							console.log((result.list.length));
 							rowHTML += "<ul class='row'>"
@@ -150,11 +150,11 @@ $(function() {
 								rowHTML += "</div> ";
 								rowHTML += "</li>";
 								k++;
-								
+
 
 							}
 							rowHTML += "</ul>";
-						
+
 						}
 						rowHTML += "</div>"
 						$(".cd-3d-portfolio").append(rowHTML);
@@ -169,7 +169,7 @@ $(function() {
 //								$(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before").css("background-image","url(http://203.236.209.187:8180/file/"+result.list[not_default[i]].fileId+")");
 							}
 						}
-						
+
 						console.log("check : "+CrntuserId);
 //						console.log("confirm check : "+dbconfirm);
 //						console.log(CrntuserId);
@@ -184,7 +184,7 @@ $(function() {
 					})
 	}
 
-	
+
 	// 버튼 움직이자
 	function Btnmovement(){
 	$(".aftBtn").on("click", function(){
@@ -239,7 +239,7 @@ $(function() {
 		Portfolio3D.prototype.bindEvents = function() {
 			var self = this;
 
-			
+
 			this.navigation.on('click', 'a:not(.selected)', function(event) {
 				// update visible projects when clicking on the filter
 				event.preventDefault();
@@ -262,19 +262,19 @@ $(function() {
 							function(e) {
 								// open a new project 여기가 그것인거 같다!! 히트카운트!!
 								IdxNum = Number($(this).find(".confirm").prev().attr("data-num"));
-								
+
 //								if(dbconfirm=="Y"){
 //									$("#conFirm").css({"color":"red"});
 //									$("#conFirm").text("confirmed");
 //								}
 //								if(CrntuserId=="admin"){
 //									$("#conFirm").css("display","inline-block");
-//								}								
-								
-								
+//								}
+
+
 								console.log(IdxNum);
 								console.log(CrntuserId);
-								
+
 								if (!self.animating
 										&& !$(this).hasClass('open')) {
 									self.animating = true;
@@ -493,7 +493,7 @@ $(function() {
 		});
 	}
 //////////////////////////////////////////////////////////////////////////
-	
+
 // 아이디 가져오는 애
 function getUserId(){
 	$.ajax({
@@ -521,8 +521,8 @@ function confirmClick(thisConfirm){
 //			refresh();
 		})
 	}
-////////////////////////////////////////////	
-	
+////////////////////////////////////////////
+
 // WRITE 버튼잼
 	$(".insertBtn").on("click", function(){
 		$(".insertPanel").css("display","inherit");
@@ -557,7 +557,7 @@ function confirmClick(thisConfirm){
 		var fileId = $("#fileId").get(0);
 
 		var data = new FormData();
-		
+
 		console.log("과연 코알라? "+fileName);
 
 		data.append("userId",userId)
@@ -572,7 +572,7 @@ function confirmClick(thisConfirm){
 		}
 		console.log("뇨내 :");
 		$.ajax({
-			url : "http://203.236.209.187:8889/api/IdeaBoard/insert2",
+			url : "/api/IdeaBoard/insert2",
 			method : "POST",
 			data : data,
 			contentType : false,
