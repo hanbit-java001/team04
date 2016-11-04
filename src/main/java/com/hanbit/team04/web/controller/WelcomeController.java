@@ -61,18 +61,18 @@ public class WelcomeController {
 			}
 		}
 		twitter.setOAuthAccessToken(accessToken);
-		// List<Status> statuses = twitter.getHomeTimeline();
-		// System.out.println("Showing home timeline.");
-		// for (Status status : statuses) {
-		// System.out.println(status.getUser().getName() + ":" +
-		// status.getText());
-		// }
-
+		 List<Status> statuses = twitter.getHomeTimeline();
+		 System.out.println("Showing home timeline.");
+		 for (Status status : statuses) {
+		 System.out.println("retweet : "+status.getRetweetCount()+" ,favorite : "+status.getFavoriteCount()+"인데 몇개나 "+status.getUser().getName() + ":" +
+		 status.getText());
+		 }
 		// 향후에 참조용으로 accessToken 을 지속시킨다.
 
 		// Status status = twitter.updateStatus(args[0]);
 		storeAccessToken(twitter.verifyCredentials().getId(), accessToken);
 		Status status = twitter.updateStatus("뭐한거야");
+
 		System.out.println("Successfully updated the status to [" + status.getText() + "].");
 		System.exit(0);
 
