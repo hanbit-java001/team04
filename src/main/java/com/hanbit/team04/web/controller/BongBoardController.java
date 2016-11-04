@@ -1,6 +1,8 @@
 package com.hanbit.team04.web.controller;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,6 +11,8 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +27,7 @@ import com.hanbit.team04.core.vo.BongFileVO;
 
 @Controller
 public class BongBoardController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(BongBoardController.class);
 	@Autowired
 	private BoardService service;
 	public void setService(BoardService service) {
@@ -62,13 +67,14 @@ public class BongBoardController {
 	@RequestMapping("/read.do")
 	public ModelAndView read(int bId, @RequestParam(defaultValue="false")boolean rc){
 		ModelAndView mv = new ModelAndView();
-
+LOGGER.debug("check init :"+bId+" , "+rc);
 		BongBoardVO article = service.readArticle(bId, rc);
 		List<BongBoardVO> currentArticleList = service.makeCurrentArticleList();
 
 		mv.addObject("currentArticleList", currentArticleList);
 		mv.addObject("article", article);
 		mv.setViewName("detail");
+		LOGGER.debug("check Bong read : "+mv.getModel().get("article"));
 		return mv;
 	}
 

@@ -7,7 +7,7 @@
 
 
 <!-- 	<meta  charset="utf-8" /> -->
-<title>Color Admin | Support Forum Front End Theme</title>
+<title>Q&A 게시판</title>
 <style type="text/css">
 .btn pri ico{
 /*  .set.red  */
@@ -41,7 +41,6 @@
 <!-- ================== BEGIN BASE JS ================== -->
 <script src="/static/plugins/jquery/jquery-1.9.1.min.js"></script>
 <script src="/static/plugins/pace/pace.min.js"></script>
-
 <script src="/static/js/board-list.js"></script>
 <!-- ================== END BASE JS ================== -->
 </head>
@@ -82,7 +81,7 @@
 				<li class="active">&nbsp;</li>
 			</ul>
 			<!-- end breadcrumb -->
-			<h1>아이디어 게시판</h1>
+			<h1>질문하세요</h1>
 		</div>
 		<!-- end container -->
 	</div>

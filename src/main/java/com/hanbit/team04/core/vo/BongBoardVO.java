@@ -152,4 +152,13 @@ public class BongBoardVO {
 	public void setLastCommentWriter(String lastCommentWriter) {
 		this.lastCommentWriter = lastCommentWriter;
 	}
+	@Override
+	public String toString() {
+		return "BongBoardVO [bId=" + bId + ", bTitle=" + bTitle + ", bWriter=" + bWriter + ", bContent=" + bContent
+				+ ", bReadCount=" + bReadCount + ", bPassword=" + bPassword + ", bDate=" + bDate + ", bRef=" + bRef
+				+ ", bReStep=" + bReStep + ", bReLevel=" + bReLevel + ", commentList=" + commentList + ", myFiles="
+				+ myFiles + ", fileInfoList=" + fileInfoList + ", commentCount=" + commentCount + ", lastCommentWriter="
+				+ lastCommentWriter + "]";
+	}
+	
 }

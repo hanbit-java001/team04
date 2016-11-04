@@ -57,4 +57,10 @@ public class BongCommentVO {
 		this.bcDate = bcDate;
 	}
 
+	@Override
+	public String toString() {
+		return "BongCommentVO [bcId=" + bcId + ", bId=" + bId + ", bcWriter=" + bcWriter + ", bcContent=" + bcContent
+				+ ", bcDate=" + bcDate + "]";
+	}
+
 }
