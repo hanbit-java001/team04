@@ -30,6 +30,7 @@
 <img id="post-image" src=""/>
 </div>
 <script type='text/javascript'>
+
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
    Kakao.init('648ac95412531a5ffeff344ff4f22b24');

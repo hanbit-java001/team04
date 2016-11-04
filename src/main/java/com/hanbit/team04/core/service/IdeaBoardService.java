@@ -67,6 +67,11 @@ public class IdeaBoardService {
 		return ideaBoardDAO.confirmClick(IdxNum);
 	}
 
+	public IdeaBoardVO getidea(int idxNum) {
+
+		return ideaBoardDAO.selectIdea(idxNum);
+	}
+
 
 
 }
