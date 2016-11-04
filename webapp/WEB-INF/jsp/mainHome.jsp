@@ -55,6 +55,10 @@ font-size: 300%;
 			<img class="reflected select-img" data-name="user입니다" data-url="/user/create"
 				src="/static/image/KakaoTalk_20161011_215624504.png">
 		</div>
+		<div class="cover">
+			<img class="reflected select-img" data-name="Q&A 입니다" data-url="/boardMain.do"
+				src="/static/image/lion.png">
+		</div>
 	</div>
 	<div id="photos-info">
 		<div id="photos-name"></div>
