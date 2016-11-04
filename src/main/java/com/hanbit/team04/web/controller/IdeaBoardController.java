@@ -1,6 +1,7 @@
 package com.hanbit.team04.web.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,11 +21,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hanbit.team04.core.service.FileService;
 import com.hanbit.team04.core.service.IdeaBoardService;
+import com.hanbit.team04.core.service.TweetService;
 import com.hanbit.team04.core.session.LoginRequired;
 import com.hanbit.team04.core.session.Session;
 import com.hanbit.team04.core.session.SessionHelpler;
 import com.hanbit.team04.core.vo.FileVO;
 import com.hanbit.team04.core.vo.IdeaBoardVO;
+
+import twitter4j.TwitterException;
 
 
 @Controller
@@ -36,6 +40,8 @@ public class IdeaBoardController {
 	private IdeaBoardService ideaBoardService;
 	@Autowired
 	private FileService fileService;
+	@Autowired
+	private TweetService tweetService;
 
 	@LoginRequired
 	@RequestMapping("/hyundo/board")
@@ -141,7 +147,7 @@ public class IdeaBoardController {
 
 		return result;
 	}
-	
+
 	@RequestMapping("/api/data/hitcnt")
 	@ResponseBody
 	public int addHitCnt(@RequestParam int IdxNum){
@@ -149,13 +155,17 @@ public class IdeaBoardController {
 		int result = ideaBoardService.addHitCnt(IdxNum);
 		return result;
 	}
-	
+
 	@RequestMapping("/api/data/confirm")
 	@ResponseBody
-	public int confirmClick(@RequestParam int IdxNum){
+	public int confirmClick(@RequestParam int IdxNum) throws TwitterException{
 		LOGGER.debug("update IdxNUM"+IdxNum);
+		List<String> list = new ArrayList<>();
+		IdeaBoardVO boardVO = ideaBoardService.getidea(IdxNum);
+		boolean tw_result =tweetService.addTweet(boardVO);
 		int result = ideaBoardService.confirmClick(IdxNum);
+		LOGGER.debug("Tweet result : "+tw_result+" , confirm result : "+result);
 		return result;
 	}
-	
+
 }
