@@ -123,10 +123,15 @@ function writeViewMenu(){
 
 			var Html ="<button class='btn btn-primary'>수정하기</button>     <button class='btn btn-default'>나가기</button>"
 
+//			input[type:text]
+
 			$(".write-container-body td:nth-child(6)").html(Html);
 
 			$(".form-control").val(result.board_idx[1].contents);
 			$(".form-control").focus();
+			$(".form-control").select();
+
+
 
 
 
