@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hanbit.team04.core.mapper.BongCommentMapper">
+	<insert id="insertComment" parameterType="BongCommentVO">
+		INSERT INTO BONG_COMMENT(BC_ID, B_ID,BC_WRITER,BC_CONTENT,BC_DATE)
+		VALUES(SEQ_BONG_COMMENT_BC_ID.NEXTVAL,#{bId},#{bcWriter},#{bcContent},SYSDATE)
+		<selectKey keyProperty="bcId" resultType="Integer" order="AFTER">
+        	SELECT SEQ_BONG_COMMENT_BC_ID.CURRVAL FROM dual
+    	</selectKey>
+	</insert>
+
+	<select id="selectCommentList" resultMap="commentResultMap" parameterType="Integer">
+		SELECT * FROM BONG_COMMENT WHERE B_ID=#{bId}
+	</select>
+
+	<select id="selectCommentCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM BONG_COMMENT WHERE B_ID=${value}
+	</select>
+
+	<select id="selectLastCommentWriter" parameterType="int" resultType="String">
+		SELECT BC_WRITER FROM
+		(SELECT ROWNUM as rnum, BC_WRITER FROM BONG_COMMENT WHERE B_ID=${value} ORDER BY BC_DATE DESC)
+		WHERE ROWNUM=1
+	</select>
+
+	<resultMap type="BongCommentVO" id="commentResultMap">
+		<result column="BC_ID" property="bcId"/>
+		<result column="B_ID" property="bId"/>
+		<result column="BC_WRITER" property="bcWriter"/>
+		<result column="BC_CONTENT" property="bcContent"/>
+		<result column="BC_DATE" property="bcDate"/>
+	</resultMap>
+</mapper>

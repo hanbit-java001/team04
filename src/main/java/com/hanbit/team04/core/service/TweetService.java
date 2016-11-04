@@ -65,4 +65,7 @@ public class TweetService {
 
 		return map;
 	}
+	public boolean insertTweet(){
+		return false;
+	}
 }

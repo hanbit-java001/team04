@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hanbit.team04.core.mapper.BongBoardMapper">
+	<select id="selectTotalArticleCount" resultType="Integer">
+		SELECT COUNT(*) FROM BONG_BOARD
+	</select>
+
+	<insert id="insert" parameterType="BongBoardVO" useGeneratedKeys="true" keyProperty="bId" keyColumn="B_ID">
+		INSERT INTO BONG_BOARD
+		(B_ID, B_TITLE, B_WRITER, B_CONTENT, B_READCOUNT, B_PASSWORD, B_DATE, B_REF, B_RESTEP, B_RELEVEL)
+		VALUES
+		(SEQ_BONG_BOARD_B_ID.NEXTVAL,#{bTitle},#{bWriter},#{bContent},0,#{bPassword},SYSDATE,#{bRef},#{bReStep},${bReLevel})
+		<selectKey keyProperty="bId" resultType="Integer" order="AFTER">
+        SELECT SEQ_BONG_BOARD_B_ID.CURRVAL FROM dual
+    	</selectKey>
+	</insert>
+
+	<update id="update" parameterType="BongBoardVO">
+		UPDATE BONG_BOARD SET B_TITLE=#{bTitle}, B_CONTENT=#{bContent}
+		WHERE B_ID=#{bId}
+	</update>
+
+	<update id="updateRe" parameterType="BongBoardVO">
+		UPDATE BONG_BOARD SET B_REF=#{bRef}, B_RESTEP=#{bReStep}, B_RELEVEL=#{bReLevel}
+		WHERE B_ID=#{bId}
+	</update>
+
+	<update id="updateReStep" parameterType="BongBoardVO">
+		UPDATE BONG_BOARD SET B_RESTEP=B_RESTEP+1
+		WHERE B_REF=#{bRef} AND B_RESTEP>#{bReStep}
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM BONG_BOARD WHERE B_ID=#{bId}
+	</delete>
+
+	<update id="updateReadCount" parameterType="Integer">
+		UPDATE BONG_BOARD SET B_READCOUNT=B_READCOUNT+1
+		WHERE B_ID=#{bId}
+	</update>
+
+	<select id="select" parameterType="Integer" resultMap="bongBoardMap">
+		SELECT * FROM BONG_BOARD WHERE B_ID=#{bId}
+	</select>
+
+	<select id="selectList" parameterType="Map" resultMap="bongBoardMap">
+		SELECT *
+		FROM(
+			SELECT
+				ROWNUM as rnum, B_ID, B_DATE, B_READCOUNT, B_WRITER, B_PASSWORD, B_TITLE, B_CONTENT,
+				B_REF, B_RESTEP, B_RELEVEL
+			FROM
+				(SELECT
+					*
+				FROM BONG_BOARD
+				ORDER BY B_REF DESC, B_RESTEP ASC))
+		WHERE
+			rnum between ${startRow} and ${endRow}
+	</select>
+
+	<select id="selectCurrentArticle" parameterType="int" resultMap="bongBoardMap">
+		SELECT *
+		FROM(
+			SELECT
+				ROWNUM as rnum, B_ID, B_DATE, B_READCOUNT, B_WRITER, B_PASSWORD, B_TITLE, B_CONTENT,
+				B_REF, B_RESTEP, B_RELEVEL
+			FROM
+				(SELECT
+					*
+				FROM BONG_BOARD
+				ORDER BY B_REF DESC, B_RESTEP ASC))
+		WHERE
+			rnum BETWEEN 1 AND ${value}
+	</select>
+	<resultMap type="BongBoardVO" id="bongBoardMap">
+		<result column="B_ID" property="bId"/>
+		<result column="B_DATE" property="bDate"/>
+		<result column="B_READCOUNT" property="bReadCount"/>
+		<result column="B_WRITER" property="bWriter"/>
+		<result column="B_PASSWORD" property="bPassword"/>
+		<result column="B_TITLE" property="bTitle"/>
+		<result column="B_CONTENT" property="bContent"/>
+		<result column="B_REF" property="bRef"/>
+		<result column="B_RESTEP" property="bReStep"/>
+		<result column="B_RELEVEL" property="bReLevel"/>
+	</resultMap>
+</mapper>

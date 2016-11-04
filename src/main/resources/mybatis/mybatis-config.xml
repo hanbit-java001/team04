@@ -14,5 +14,10 @@
 		<typeAlias type="com.hanbit.team04.core.vo.IdeaBoardVO" alias="IdeaBoardVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.FileVO" alias="FileVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.RankBoardVO" alias="RankBoardVO" />
+		<typeAlias type="com.hanbit.team04.core.vo.BongCommentVO" alias="BongCommentVO" />
+		<typeAlias type="com.hanbit.team04.core.vo.BongBoardPage" alias="BongBoardPage" />
+		<typeAlias type="com.hanbit.team04.core.vo.BongBoardVO" alias="BongBoardVO" />
+		<typeAlias type="com.hanbit.team04.core.vo.BongFileVO" alias="BongFileVO" />
+		<typeAlias type="com.hanbit.team04.core.vo.MamVO" alias="MamVO" />
 	</typeAliases>
 </configuration>

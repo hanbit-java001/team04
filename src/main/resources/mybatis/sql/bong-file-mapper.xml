@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hanbit.team04.core.mapper.BongFileMapper">
+	<insert id="insert" parameterType="BongFileVO">
+		INSERT INTO BONG_FILE(BF_ID, B_ID,BF_ORIGINAL_NAME,BF_SAVED_PATH)
+		VALUES(SEQ_BONG_FILE_BF_ID.NEXTVAL, #{bId}, #{bfOriginalName}, #{bfSavedPath})
+		<selectKey keyProperty="bfId" resultType="Integer" order="AFTER">
+        	SELECT SEQ_BONG_FILE_BF_ID.CURRVAL FROM dual
+    	</selectKey>
+	</insert>
+
+	<select id="select" resultMap="bongFileMap">
+		SELECT * FROM BONG_FILE
+		WHERE BF_ID=#{bfId}
+	</select>
+
+	<select id="selectList" resultMap="bongFileMap">
+		SELECT * FROM BONG_FILE
+		WHERE B_ID=#{bId}
+	</select>
+
+	<resultMap type="BongFileVO" id="bongFileMap">
+		<result property="bfId" column="BF_ID"/>
+		<result property="bId" column="B_ID"/>
+		<result property="bfOriginalName" column="BF_ORIGINAL_NAME"/>
+		<result property="bfSavedPath" column="BF_SAVED_PATH"/>
+	</resultMap>
+</mapper>
