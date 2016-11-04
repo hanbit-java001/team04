@@ -6,7 +6,7 @@
 	<insert id="insertTweet" parameterType="IdeaTweetVO">
 		INSERT INTO IDEA_TWEET
 			(IDEA_IDX, TWEET_ID, RETWEET, FAVORITE, FILE_ID)
-		VALUES ()
+		VALUES
 			(#{ideaIDX}, #{tweetId}, #{reTweet}, #{favorite}, #{fileId})
 	</insert>
 
