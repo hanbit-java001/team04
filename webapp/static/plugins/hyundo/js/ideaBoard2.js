@@ -165,7 +165,7 @@ $(function() {
 								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(/static/plugins/hyundo/images/photo-"+(i+1)+".jpg)}");
 							}else{
 								console.log(not_default[i]);
-								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(http://localhost:8081/file/"+result.list[not_default[i]].fileId+")}");
+								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(http://localhost:"+location.port+"/file/"+result.list[not_default[i]].fileId+")}");
 							}
 						}
 
@@ -515,8 +515,13 @@ function confirmClick(thisConfirm){
 				IdxNum : IdxNum
 			}
 		}).done(function(result){
-			console.log("컨펌 됨");
-			thisConfirm.fadeOut();
+			if(result==1){
+				console.log("컨펌 됨");
+				thisConfirm.fadeOut();
+			}else{
+				console.log("서버에 문제가 있습니다.");
+			}
+
 //			refresh();
 		})
 	}
@@ -620,6 +625,9 @@ function dropUpload(event) {
 
 $(".moveBtn").on("click", function(){
 	location.href="/";
+})
+$(".logOutBtn").on("click",function(){
+	location.href="/board/logout";
 })
 
 //////////////////////////////

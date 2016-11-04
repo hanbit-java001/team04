@@ -12,6 +12,7 @@
 		<typeAlias type="com.hanbit.team04.core.vo.IdeaMemberVO" alias="IdeaMemberVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.IdeaCusBoardVO" alias="IdeaCusBoardVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.IdeaBoardVO" alias="IdeaBoardVO" />
+		<typeAlias type="com.hanbit.team04.core.vo.IdeaTweetVO" alias="IdeaTweetVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.FileVO" alias="FileVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.RankBoardVO" alias="RankBoardVO" />
 		<typeAlias type="com.hanbit.team04.core.vo.BongCommentVO" alias="BongCommentVO" />

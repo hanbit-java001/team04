@@ -89,7 +89,7 @@ public class IdeaBoardDAO {
 		return sqlSession.selectOne("ideaBoard.ideaOne", idxNum);
 	}
 
-	public int selectDailyCount(String DailyTime) {
+	public int selectDailyCount() {
 		return sqlSession.selectOne("ideaBoard.selectDailyCount");
 	}
 

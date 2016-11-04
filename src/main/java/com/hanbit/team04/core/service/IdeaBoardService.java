@@ -72,9 +72,9 @@ public class IdeaBoardService {
 		return ideaBoardDAO.selectIdea(idxNum);
 	}
 
-	public int getDailyCount(String DailyTime) {
+	public int getDailyCount() {
 
-		return ideaBoardDAO.selectDailyCount(DailyTime);
+		return ideaBoardDAO.selectDailyCount();
 	}
 
 }

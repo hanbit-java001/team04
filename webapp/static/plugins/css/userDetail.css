@@ -168,3 +168,12 @@ figure{
 	height: 250px;
 }
 
+.fa-file-o{
+	cursor: pointer;
+}
+
+.hideContents{
+	display: none;
+}
+
+

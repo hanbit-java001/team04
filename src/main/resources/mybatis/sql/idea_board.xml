@@ -82,8 +82,8 @@
  	SELECT FILE_ID FROM IDEA_BOARD WHERE USER_ID=#{userId}
  	</select>
 
-	<select id="selectDailyCount" resultType="int" parameterType="string">
-	SELECT COUNT(CONTENTS) FROM IDEA_BOARD WHERE REGDATE=#{DailyTime}
+	<select id="selectDailyCount" resultType="int">
+	SELECT COUNT(CONTENTS) FROM IDEA_BOARD WHERE REGDATE>(SELECT TO_CHAR(SYSDATE-1,'YY/MM/DD-hh:mm') FROM DUAL)
 	</select>
 
 </mapper>
