@@ -291,11 +291,13 @@
 			alert('fail');
 		});
 
+
 		$.ajax({
 			url:"/api/board/ideaBoardInfo",
 			method:"POST"
 		}).done(function(result){
-//			alert(result.Time);
+			var Today = result.Time;
+			$("#huge1").text(Today+"개");
 		}).fail(function (){
 			alert('망');
 		})

@@ -86,7 +86,7 @@
 	  <div class="col-lg-12">
 		  <table class="table table-hover">
 		    <thead class="write-container-head">
-		      <tr>
+		      <tr class="menu">
 		        <th>IdxNumber</th>
 		        <th>Title</th>
 		        <th>Contents</th>
