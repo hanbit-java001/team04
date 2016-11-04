@@ -291,6 +291,15 @@
 			alert('fail');
 		});
 
+		$.ajax({
+			url:"/api/board/ideaBoardInfo",
+			method:"POST"
+		}).done(function(result){
+//			alert(result.Time);
+		}).fail(function (){
+			alert('망');
+		})
+
 				var lastPage;
 				var firstPage;
 				var totalPages;

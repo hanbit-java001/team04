@@ -29,13 +29,14 @@ public class TwitterController {
 	        twitter.setOAuthAccessToken(accesstoken);
 	        User user = twitter.verifyCredentials();
 
-	        Status status1 = twitter.updateStatus("ㅇㅅㅇ");
+//	        Status status1 = twitter.updateStatus("ㅇㅅㅇ22");
 
 	        List<Status> list = twitter.getUserTimeline();
 	        System.out.println("타임라인 계정:"+user.getScreenName());
 	        for(Status status : list) {
 	            System.out.println("작성자:"+status.getUser().getScreenName());
 	            System.out.println("타임라인내용:"+status.getText());
+	            System.out.println("페이보릿:"+status.getFavoriteCount());
 	        }
 
 //	        Twitter twitter1 = TwitterFactory.getSingleton();

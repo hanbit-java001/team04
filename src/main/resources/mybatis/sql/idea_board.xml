@@ -43,7 +43,7 @@
 
   	<insert id="insertData" parameterType="IdeaBoardVO">
   		INSERT INTO IDEA_BOARD (BOARD_IDX, USER_ID, TITLE, CONTENTS, REGDATE, MOD_DATE, FILE_ID)
- 		 VALUES (SEQ_IDX.NEXTVAL,#{userId}, #{title}, #{contents}, SYSDATE, SYSDATE, #{fileId})
+ 		 VALUES (SEQ_IDX.NEXTVAL,#{userId}, #{title}, #{contents}, (SELECT TO_CHAR(SYSDATE,'YY/MM/DD-hh:mm') REGDATE FROM DUAL), (SELECT TO_CHAR(SYSDATE,'YY/MM/DD-hh:mm') MOD_DATE FROM DUAL), #{fileId})
   	</insert>
 
 
@@ -78,5 +78,12 @@
 	UPDATE IDEA_BOARD SET CONFIRM='Y' WHERE BOARD_IDX = #{IdxNum}
 	</update>
 
+	<select id="selectFileId">
+ 	SELECT FILE_ID FROM IDEA_BOARD WHERE USER_ID=#{userId}
+ 	</select>
+
+	<select id="selectDailyCount" resultType="int" parameterType="string">
+	SELECT COUNT(CONTENTS) FROM IDEA_BOARD WHERE REGDATE=#{DailyTime}
+	</select>
 
 </mapper>

@@ -162,11 +162,10 @@ $(function() {
 						for(var i=0;i<not_default.length;i++){
 							if(not_default[i]=="default"){
 								console.log(not_default[i]);
-								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(http://203.236.209.187:8180/static/plugins/hyundo/images/photo-"+(i+1)+".jpg)}");
+								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(/static/plugins/hyundo/images/photo-"+(i+1)+".jpg)}");
 							}else{
 								console.log(not_default[i]);
-								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(http://203.236.209.187:8180/file/"+result.list[not_default[i]].fileId+")}");
-//								$(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before").css("background-image","url(http://203.236.209.187:8180/file/"+result.list[not_default[i]].fileId+")");
+								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(http://localhost:8081/file/"+result.list[not_default[i]].fileId+")}");
 							}
 						}
 
@@ -551,7 +550,7 @@ function confirmClick(thisConfirm){
 
 	$(".IdeaInsertBtn").on("click", function(){
 
-		var userId = $("#userId").val();
+		var userId = CrntuserId;
 		var title = $("#title").val();
 		var contents = $("#contents").val();
 		var fileId = $("#fileId").get(0);
