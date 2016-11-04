@@ -6,9 +6,12 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hanbit.team04.core.dao.TweetDAO;
 import com.hanbit.team04.core.vo.IdeaBoardVO;
+import com.hanbit.team04.core.vo.IdeaTweetVO;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -20,6 +23,8 @@ import twitter4j.auth.RequestToken;
 @Service
 public class TweetService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TweetService.class);
+	@Autowired
+	private TweetDAO tweetDAO;
 	private Twitter twitter;
 	private void init() throws TwitterException {
 		twitter = new TwitterFactory().getInstance();
@@ -65,7 +70,10 @@ public class TweetService {
 
 		return map;
 	}
-	public boolean insertTweet(){
-		return false;
+	public int insertTweet(IdeaBoardVO boardVO, Status status){
+		Long innerstatus= status.getId();
+		IdeaTweetVO ideaTweet = new IdeaTweetVO(boardVO.getBoardIdx(),innerstatus.toString(),status.getRetweetCount(),status.getFavoriteCount(),"null");
+		LOGGER.debug("insert tweet : "+ideaTweet);
+		return tweetDAO.insertTweet(ideaTweet);
 	}
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ideaTweet">
+
+	<insert id="insertTweet" parameterType="IdeaTweetVO">
+		INSERT INTO IDEA_TWEET
+			(IDEA_IDX, TWEET_ID, RETWEET, FAVORITE, FILE_ID)
+		VALUES ()
+			(#{ideaIDX}, #{tweetID}, #{reTweet}, #{favorite}, #{fileId})
+	</insert>
+
+
+
+</mapper>
