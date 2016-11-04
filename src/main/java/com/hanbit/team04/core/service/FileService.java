@@ -26,7 +26,7 @@ public class FileService {
 
 	public String storeFile(FileVO fileVO) {
 		String fileId = generateFileId();
-		String filePath = "http://203.236.209.187/files/" + fileId;
+		String filePath = "/files/" + fileId;
 
 		try {
 			FileUtils.writeByteArrayToFile(new File(filePath), fileVO.getFileData());
@@ -57,7 +57,7 @@ public class FileService {
 
 	public FileVO getFile(String fileId) throws Exception {
 		FileVO fileVO = fileDAO.selectFile(fileId);
-
+		LOGGER.debug("file vo : "+fileVO);
 		String filePath = fileVO.getFilePath();
 		byte[] fileData = FileUtils.readFileToByteArray(new File(filePath));
 

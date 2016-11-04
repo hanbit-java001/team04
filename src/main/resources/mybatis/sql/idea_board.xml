@@ -11,6 +11,9 @@
 	<select id="selectBoards" resultType="IdeaBoardVO">
 		SELECT USER_ID, CONTENTS, TITLE FROM IDEA_BOARD
 	</select>
+	<select id="ideaOne" resultType="IdeaBoardVO" parameterType="int">
+		SELECT * FROM IDEA_BOARD WHERE BOARD_IDX= #{idxNum}
+	</select>
 
 	<select id="selectTotCnt" resultType="int">
 		SELECT COUNT(*) FROM IDEA_BOARD
@@ -37,7 +40,7 @@
   		(#{boardIdx}, #{title}, #{regDate}, #{contents}, #{userId},
   		#{modDate}, #{confirm}, #{hitCnt}, #{fileId})
   	</insert>
-  	
+
   	<insert id="insertData" parameterType="IdeaBoardVO">
   		INSERT INTO IDEA_BOARD (BOARD_IDX, USER_ID, TITLE, CONTENTS, REGDATE, MOD_DATE, FILE_ID)
  		 VALUES (SEQ_IDX.NEXTVAL,#{userId}, #{title}, #{contents}, SYSDATE, SYSDATE, #{fileId})
@@ -66,7 +69,7 @@
  	<delete id="deleteBoardData" parameterType="map">
  	DELETE FROM IDEA_BOARD WHERE BOARD_IDX =#{boardNum} AND USER_ID=#{userId}
  	</delete>
- 	
+
  	<update id="addHitCnt" parameterType="int">
  	UPDATE IDEA_BOARD SET HITCNT=HITCNT+1 WHERE BOARD_IDX = #{IdxNum}
  	</update>
@@ -74,6 +77,6 @@
 	<update id="confirmClick" parameterType="int">
 	UPDATE IDEA_BOARD SET CONFIRM='Y' WHERE BOARD_IDX = #{IdxNum}
 	</update>
-	
-	
+
+
 </mapper>

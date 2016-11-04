@@ -2,6 +2,7 @@ package com.hanbit.team04.web.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -281,6 +282,27 @@ public class BoardController {
 		 LOGGER.debug("success : "+success);
 
 		 result.put("success", success);
+
+		 return result;
+	 }
+
+	 @RequestMapping("/api/board/ideaBoardInfo")
+	 @ResponseBody
+	 public Map getBoardInfo(){
+
+
+		 Map result = new HashMap<>();
+
+
+		String DailyTime = replyService.giveTime().get("SYSDATE").toString();
+
+//		 int boardCount = ideaBoardService.getDailyCount(DailyTime);
+
+//		 System.out.println(boardCount);
+
+//		result.put("Time", DailyTime);
+
+//		 result.put("Time", boardCount);
 
 		 return result;
 	 }

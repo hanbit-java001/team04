@@ -84,4 +84,9 @@ public class IdeaBoardDAO {
 		return sqlSession.update("ideaBoard.confirmClick", IdxNum);
 	}
 
+	public IdeaBoardVO selectIdea(int idxNum) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ideaBoard.ideaOne", idxNum);
+	}
+
 }
