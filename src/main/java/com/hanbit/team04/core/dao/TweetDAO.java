@@ -1,5 +1,8 @@
 package com.hanbit.team04.core.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +21,20 @@ public class TweetDAO {
 		LOGGER.debug("tweet DAO : "+ideaTweet);
 
 		return sqlSession.insert("ideaTweet.insertTweet",ideaTweet);
+	}
+
+	public int updateTweet(List<Map> selectUpdateList) {
+		int result =0;
+		for (Map map : selectUpdateList) {
+			result =sqlSession.update("ideaTweet.updateTweet", map);
+		}
+		return result;
+	}
+
+	public List selectTweet() {
+		List<IdeaTweetVO> list =sqlSession.selectList("ideaTweet.selectTweet");
+		LOGGER.debug("tweet list : "+list );
+		return list;
 	}
 
 }

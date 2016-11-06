@@ -2,12 +2,12 @@ package com.hanbit.team04.core.vo;
 
 public class IdeaTweetVO {
 	private int ideaIDX;
-	private String tweetId;
+	private long tweetId;
 	private int reTweet;
 	private int favorite;
 	private String fileId;
 
-	public IdeaTweetVO(int ideaIDX, String tweetId, int reTweet, int favorite, String fileId) {
+	public IdeaTweetVO(int ideaIDX, long tweetId, int reTweet, int favorite, String fileId) {
 		super();
 		this.ideaIDX = ideaIDX;
 		this.tweetId = tweetId;
@@ -24,7 +24,7 @@ public class IdeaTweetVO {
 		return ideaIDX;
 	}
 
-	public String getTweetId() {
+	public long getTweetId() {
 		return tweetId;
 	}
 
@@ -44,7 +44,7 @@ public class IdeaTweetVO {
 		this.ideaIDX = ideaIDX;
 	}
 
-	public void setTweetId(String tweetId) {
+	public void setTweetId(long tweetId) {
 		this.tweetId = tweetId;
 	}
 

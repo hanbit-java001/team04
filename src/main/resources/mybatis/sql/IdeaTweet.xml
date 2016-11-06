@@ -5,11 +5,20 @@
 
 	<insert id="insertTweet" parameterType="IdeaTweetVO">
 		INSERT INTO IDEA_TWEET
-			(IDEA_IDX, TWEET_ID, RETWEET, FAVORITE, FILE_ID)
+		(IDEA_IDX, TWEET_ID, RETWEET, FAVORITE, FILE_ID)
 		VALUES
-			(#{ideaIDX}, #{tweetId}, #{reTweet}, #{favorite}, #{fileId})
+		(#{ideaIDX},
+		#{tweetId}, #{reTweet}, #{favorite}, #{fileId})
 	</insert>
-
+	<update id="updateTweet" parameterType="map">
+		UPDATE IDEA_TWEET SET
+		FAVORITE = #{Favorite},RETWEET= #{Retweet} WHERE
+		TWEET_ID=#{tweetId}
+	</update>
+	<select id="selectTweet" resultType="IdeaTweetVO">
+		SELECT IDEA_IDX, FAVORITE,
+		FILE_ID, RETWEET, TWEET_ID FROM IDEA_TWEET ORDER BY TWEET_ID DESC
+	</select>
 
 
 </mapper>

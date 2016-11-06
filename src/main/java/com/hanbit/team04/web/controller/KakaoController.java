@@ -33,6 +33,7 @@ import com.hanbit.team04.core.vo.FileVO;
 import com.hanbit.team04.core.vo.IdeaBoardVO;
 import com.hanbit.team04.core.vo.IdeaCusBoardVO;
 import com.hanbit.team04.core.vo.IdeaMemberVO;
+import com.hanbit.team04.twitter.UpdateTweet;
 
 @Controller
 public class KakaoController {
@@ -74,7 +75,7 @@ public class KakaoController {
 		LOGGER.info("testController - test");
 		return "board_first";
 	}
-
+	@UpdateTweet
 	@RequestMapping("/Home")
 	public String mainPage() {
 		LOGGER.info("testController - test");
