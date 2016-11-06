@@ -176,4 +176,10 @@ figure{
 	display: none;
 }
 
+.modal{
+	display: none;
+}
 
+.portal{
+	cursor: pointer;
+}

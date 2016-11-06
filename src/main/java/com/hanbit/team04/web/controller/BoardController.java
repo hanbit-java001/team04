@@ -300,4 +300,25 @@ public class BoardController {
 
 		 return result;
 	 }
+	 
+	 @RequestMapping("/api/userDetail/modify")
+	 @ResponseBody
+	 public Map modifyBoard(@RequestParam("contents")String contents , @RequestParam int boardNum){
+		 
+		 int modify = ideaBoardService.modifyBoard(contents , boardNum);
+		 
+		 Map result = new HashMap<>();
+		
+		 result.put("modify", modify);
+		 
+		 return result;
+	 }
+	 
+//	 @RequestMapping("/api/userDetail/detailView")
+//	 @ResponseBody
+//	 public Map makeDetailView(@RequestParam int boardNum){
+//		 
+//		 
+//		 return null;
+//	 }
 }

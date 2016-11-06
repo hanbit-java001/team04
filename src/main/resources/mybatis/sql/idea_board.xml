@@ -85,5 +85,9 @@
 	<select id="selectDailyCount" resultType="int">
 	SELECT COUNT(CONTENTS) FROM IDEA_BOARD WHERE REGDATE>(SELECT TO_CHAR(SYSDATE-1,'YY/MM/DD-hh:mm') FROM DUAL)
 	</select>
+	
+	<update id="updateBoard" parameterType="map">
+		UPDATE IDEA_BOARD SET CONTENTS=#{contents} where BOARD_IDX=${boardNum}
+	</update>
 
 </mapper>

@@ -93,5 +93,13 @@ public class IdeaBoardDAO {
 		return sqlSession.selectOne("ideaBoard.selectDailyCount");
 	}
 
+	public int updateBoard(String contents, int boardNum) {
+		Map param = new HashMap<>();
+		param.put("contents", contents);
+		param.put("boardNum", boardNum);
+		
+		return sqlSession.update("ideaBoard.updateBoard",param);
+	}
+
 
 }
