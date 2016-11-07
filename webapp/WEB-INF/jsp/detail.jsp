@@ -26,6 +26,7 @@
 	rel="stylesheet" />
 <link href="/static/css/animate.min.css" rel="stylesheet" />
 <link href="/static/css/style.min.css" rel="stylesheet" />
+<link href="/static/css/bong.css" rel="stylesheet" />
 <link href="/static/css/style-responsive.min.css" rel="stylesheet" />
 <link href="/static/css/theme/default.css" id="theme" rel="stylesheet" />
 <!-- ================== END BASE CSS STYLE ================== -->
@@ -120,6 +121,8 @@
 								<div class="post-content">${article.bContent}</div>
 
 								<div class="post-time">${article.bDate.getTime()}</div>
+								<div class="delete-btn">Delete</div>
+							
 							</div> <!-- end info-container -->
 						</li>
 						<hr />
@@ -262,13 +265,13 @@
 <!-- 		src="/static/plugins/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script> -->
 <!-- 	<script -->
 <!-- 		src="/static/plugins/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script> -->
-	<script src="/static/js/forum-details-page.min.js"></script>
+<!-- 	<script src="/static/js/forum-details-page.min.js"></script> -->
 	<!-- ================== END PAGE LEVEL JS ================== -->
 
 	<script>
 		$(document).ready(function() {
 // 			App.init();
-			ForumDetailsPage.init();
+// 			ForumDetailsPage.init();
 		});
 	</script>
 </body>

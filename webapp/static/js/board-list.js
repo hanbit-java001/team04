@@ -2,16 +2,41 @@
 
 $(document).ready(function() {
 	var countAdd=0;
-	$('#btnAdd').click(function(){
-		if(countAdd%2==0){
-			$('#writeForContent').load('/static/html/write2.html');	
-			$(this).html("Close");
+	$.ajax({
+		url : "/api/loginCheck",
+		method : "GET"
+	}).done(function(result) {
+		console.log("check login -bong : "+result.isloggedIn);
+		console.log("check name -bong : "+result.userName);
+		if(result.isloggedIn){
+			
+			$('#btnAdd').click(function(){
+				if(countAdd%2==0){
+					$('#writeForContent').load('/static/html/test.html',function(){
+//						$('#writeForContent').load('/static/html/write2.html',function(){
+						$("input[name='bWriter']").val(result.userName);
+						$("input[name='fake']").val(result.userName).attr("disabled",true);
+						})
+						$(this).html("Close");
+				}else{
+					$('#writeForContent').empty();
+					$(this).html("Add");
+				}
+				countAdd++;
+			});
 		}else{
-			$('#writeForContent').empty();
-			$(this).html("Add");
+			$("#btnAdd a").text("login");
+			$("#btnAdd").on("click",function(){
+				location.href="/login";
+			});
+//			$("#btnAdd a").text("login").attr("href","/login");
 		}
-		countAdd++;
-	});
+	})
+	
+	
+	
+	
+	
 	
 	$('.date-replies .time').each(function(){
 		//Thu Nov 03 17:01:53 KST 2016

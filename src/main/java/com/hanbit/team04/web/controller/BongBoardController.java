@@ -1,12 +1,14 @@
 package com.hanbit.team04.web.controller;
 
-
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import com.hanbit.team04.core.service.BoardService;
+import com.hanbit.team04.core.session.Session;
+import com.hanbit.team04.core.session.SessionHelpler;
 import com.hanbit.team04.core.vo.BongBoardPage;
 import com.hanbit.team04.core.vo.BongBoardVO;
 import com.hanbit.team04.core.vo.BongCommentVO;
@@ -30,51 +36,61 @@ public class BongBoardController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(BongBoardController.class);
 	@Autowired
 	private BoardService service;
+
 	public void setService(BoardService service) {
 		this.service = service;
 	}
+
 	@RequestMapping("/boardMain.do")
-	public ModelAndView boardMain(@RequestParam(defaultValue="1")int page){
-		System.out.println("page:"+page);
+	public ModelAndView boardMain(@RequestParam(defaultValue = "1") int page) {
+		System.out.println("page:" + page);
 		BongBoardPage articlePage = service.makePage(page);
 		List<BongBoardVO> currentArticleList = service.makeCurrentArticleList();
 
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("articlePage", articlePage);
 		mv.addObject("currentArticleList", currentArticleList);
+		Session session = SessionHelpler.getSession();
+		if (session.isLoggedIn()) {
+			mv.addObject("userName", "test-name");
+//			mv.addObject("userName", session.getName());
+		}
+		mv.addObject("userName", "test-name");
 		mv.setViewName("board_list");
 
 		return mv;
 	}
+
 	@RequestMapping("/writeForm.do")
-	public String writeForm(){
+	public String writeForm() {
 		return "write";
 	}
 
 	@RequestMapping("/write.do")
-	public ModelAndView write(BongBoardVO article){
+	public ModelAndView write(BongBoardVO article) {
 		ModelAndView mv = new ModelAndView();
-		int result=service.writeArticle(article);
-		if(result>0){
+		LOGGER.debug("check bong article : "+article );
+		int result = service.writeArticle(article);
+		if (result > 0) {
 			mv.addObject("bId", article.getbId());
 			mv.setViewName("write_success");
-		}else{
+		} else {
 			mv.setViewName("write_fail");
 		}
 		return mv;
 	}
 
 	@RequestMapping("/read.do")
-	public ModelAndView read(int bId, @RequestParam(defaultValue="false")boolean rc){
+	public ModelAndView read(int bId, @RequestParam(defaultValue = "false") boolean rc) {
 		ModelAndView mv = new ModelAndView();
-LOGGER.debug("check init :"+bId+" , "+rc);
+		LOGGER.debug("check init :" + bId + " , " + rc);
 		BongBoardVO article = service.readArticle(bId, rc);
 		List<BongBoardVO> currentArticleList = service.makeCurrentArticleList();
 
 		mv.addObject("currentArticleList", currentArticleList);
 		mv.addObject("article", article);
 		mv.setViewName("detail");
-		LOGGER.debug("check Bong read : "+mv.getModel().get("article"));
+		LOGGER.debug("check Bong read : " + mv.getModel().get("article"));
 		return mv;
 	}
 
@@ -89,20 +105,20 @@ LOGGER.debug("check init :"+bId+" , "+rc);
 	}
 
 	@RequestMapping("/reply.do")
-	public ModelAndView reply(BongBoardVO article,int parentId){
+	public ModelAndView reply(BongBoardVO article, int parentId) {
 		ModelAndView mv = new ModelAndView();
-		int result=service.writeReply(article, parentId);
-		if(result>0){
+		int result = service.writeReply(article, parentId);
+		if (result > 0) {
 			mv.addObject("bId", article.getbId());
 			mv.setViewName("write_success");
-		}else{
+		} else {
 			mv.setViewName("write_fail");
 		}
 		return mv;
 	}
 
 	@RequestMapping("/updateForm.do")
-	public ModelAndView updateForm(int articleId){
+	public ModelAndView updateForm(int articleId) {
 		BongBoardVO origin = service.readArticle(articleId, false);
 
 		ModelAndView mv = new ModelAndView();
@@ -112,20 +128,20 @@ LOGGER.debug("check init :"+bId+" , "+rc);
 	}
 
 	@RequestMapping("/update.do")
-	public ModelAndView update(BongBoardVO article){
+	public ModelAndView update(BongBoardVO article) {
 		ModelAndView mv = new ModelAndView();
 		int result = service.modify(article);
-		if(result>0){
+		if (result > 0) {
 			mv.addObject("articleId", article.getbId());
 			mv.setViewName("update_success");
-		}else{
+		} else {
 			mv.setViewName("update_fail");
 		}
 		return mv;
 	}
 
 	@RequestMapping("/deleteForm.do")
-	public ModelAndView deleteForm(int articleId){
+	public ModelAndView deleteForm(int articleId) {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("articleId", articleId);
 		mv.setViewName("deleteForm");
@@ -133,11 +149,11 @@ LOGGER.debug("check init :"+bId+" , "+rc);
 	}
 
 	@RequestMapping("/delete.do")
-	public String delete(int articleId, String password){
+	public String delete(int articleId, String password) {
 		int result = service.delete(articleId, password);
-		if(result>0){
+		if (result > 0) {
 			return "delete_success";
-		}else{
+		} else {
 			return "delete_fail";
 		}
 	}
@@ -150,18 +166,33 @@ LOGGER.debug("check init :"+bId+" , "+rc);
 		BongBoardVO article = service.readArticle(comment.getbId(), false);
 
 		try {
-			response.sendRedirect("read.do?bId="+comment.getbId());
+			response.sendRedirect("read.do?bId=" + comment.getbId());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	@RequestMapping("/api/loginCheck")
+	@ResponseBody
+	public Map loginCheck() {
+		boolean result = false;
+		Session session = SessionHelpler.getSession();
+		if (session.isLoggedIn()) {
+			result = true;
+		}
+		Map map = new HashMap();
+		map.put("isloggedIn", true);
+		map.put("userName", "test-test-name");
+		//// 연습중입니다.
+		return map;
+	}
+
 	@RequestMapping("/download.do")
-	public void download(HttpServletResponse response,int bfId) {
+	public void download(HttpServletResponse response, int bfId) {
 		BongFileVO fileInfo = service.readFileInfo(bfId);
 
 		response.setContentType("application/octet-stream; charset=UTF-8");
-		response.setHeader("Content-Disposition", "attachment; filename=\""+fileInfo.getBfOriginalName()+"\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileInfo.getBfOriginalName() + "\"");
 
 		try {
 			FileInputStream is = new FileInputStream(fileInfo.getBfSavedPath());
