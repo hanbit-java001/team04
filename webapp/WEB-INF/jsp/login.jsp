@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Material Login Form</title>
 
 
@@ -22,7 +23,8 @@ body {
 
 .profile {
 	width: 20vw;
-	height: 20vw; top : 50%;
+	height: 20vw;
+	top: 50%;
 	left: 15%;
 	transform: translate(-50%, -50%);
 	z-index: -1;
@@ -76,7 +78,6 @@ body {
 /* 	position: absolute; */
 /* 	width: 0; */
 /* } */
-
 .add-tooltip {
 	background: #1496bb;
 	bottom: 100%;
@@ -201,7 +202,7 @@ body {
 				</div>
 				<div class="button-container backend">
 					<!-- 				<div class="backend"> -->
-					<button >
+					<button>
 						<span>Next</span>
 					</button>
 				</div>
@@ -216,6 +217,45 @@ body {
 	<script src='/static/plugins/jquery/jquery-3.1.0.min.js'></script>
 
 	<script type="text/javascript">
+		function init() {
+			console.log("check navigator.userAgent"+navigator.userAgent);
+			console.log("check jquery"+$.browser);
+			if ($(window).width() <= 500) {
+				$("body").css({
+					"background-color": "red",
+					"overflow": "hidden"	
+				});
+				$(".alt").css({
+					"right" : "15px",
+				})
+				$(".rerun").css({
+					"position" : "fixed",
+					"top" : "63%",
+					"right" : "33%",
+					"text-align" : "center",
+					"z-index" : "1"
+				})
+				$(".close").css({
+					"right" : "28px"
+				})
+				$(".add-profile").css({
+					"right" : "74px",
+					"font-size" : "72%"
+				})
+				$(".title").css({
+				    "transform": "translateY(-50%)"
+				});
+				$(".backend-form").css({
+				    "transform": "translateY(-10%)"
+				});
+				$("#CreateUserId").next().css({
+					"width":"100%"
+				})
+			} else {
+				$("body").css("background-color", "#FFFFFF");
+			}
+		}
+		init();
 		var imgfile = null;
 		var userTextMsg = [ "아이디는 이메일 형태로 작성해주세요", "비밀번호는 숫자 1개 + 7글자 이상",
 				"이름은 한글또는 영어만", "나이는 숫자로" ];
@@ -276,9 +316,9 @@ body {
 							processData : false
 						}).done(function(result) {
 
-							console.log(result+"님 환영합니다.");
+							console.log(result + "님 환영합니다.");
 							$("#dropbox").html("Complete");
-							setTimeout(function(){
+							setTimeout(function() {
 								$(".close").click();
 							}, 1000);
 
@@ -286,23 +326,25 @@ body {
 					}
 				})
 
-		$("#ex_file").change(function(event) {
-			imgfile = event.target.files;
-			console.log("click event check");
-			var file = imgfile[0];
-			var reader = new FileReader();
-			reader.onloadend = function() {
-				$('.profile-img').css('background-image',
-						'url("' + reader.result + '")');
-			}
-			if (file) {
-				reader.readAsDataURL(file);
-			} else {
-			}
-			$(".profile-img-text").text(
-					"Uploading " + imgfile[0].name);
-			$(".profile").fadeIn();
-		});
+		$("#ex_file")
+				.change(
+						function(event) {
+							imgfile = event.target.files;
+							console.log("click event check");
+							var file = imgfile[0];
+							var reader = new FileReader();
+							reader.onloadend = function() {
+								$('.profile-img').css('background-image',
+										'url("' + reader.result + '")');
+							}
+							if (file) {
+								reader.readAsDataURL(file);
+							} else {
+							}
+							$(".profile-img-text").text(
+									"Uploading " + imgfile[0].name);
+							$(".profile").fadeIn();
+						});
 		function changeText(that, font_size) {
 			$(that).next("label").fadeOut().text(
 					userTextMsg[$(".backend-form .input-container").index(
@@ -349,14 +391,20 @@ body {
 			if ($(this).attr("id") == "CreatePassword") {
 				changeText(this, "17px");
 			} else {
-				changeText(this, "20px");
+				if ($(window).width() <= 500&&$(this).attr("id")=="CreateUserId") {
+					changeText(this, "15px");
+				}else{
+					changeText(this, "20px");	
+				}
+				
 			}
 
 		}).on(
 				"focusout",
 				function() {
 					if ($(this).attr("id") == "CreateUserId"
-							&& validateEmail($(this).val())&&createState[0]=="fail") {
+							&& validateEmail($(this).val())
+							&& createState[0] == "fail") {
 						seccesOrfail(this, "success", "#ffffff");
 						$.ajax({
 							url : "/api/CheckId",
@@ -376,13 +424,16 @@ body {
 							}
 						});
 					} else if ($(this).attr("id") == "CreatePassword"
-							&& validatePassword($(this).val())&&createState[1]=="fail") {
+							&& validatePassword($(this).val())
+							&& createState[1] == "fail") {
 						seccesOrfail(this, "success", "#ffffff");
 					} else if ($(this).attr("id") == "CreateUserName"
-							&& validateName($(this).val())&&createState[2]=="fail") {
+							&& validateName($(this).val())
+							&& createState[2] == "fail") {
 						seccesOrfail(this, "success", "#ffffff");
 					} else if ($(this).attr("id") == "CreateAge"
-							&& validateAge($(this).val())&&createState[3]=="fail") {
+							&& validateAge($(this).val())
+							&& createState[3] == "fail") {
 						seccesOrfail(this, "success", "#ffffff");
 					} else {
 						seccesOrfail(this, "fail", "#660066");
@@ -391,16 +442,16 @@ body {
 					console.log(createState);
 
 				})
-// 		$("#CreateAge").bind("keypress", function(e) {
-// 			if (e.keyCode == 13) {
-// 				$(".backend button").click();
-// 				console.log("check but click");
-// 			}
-// 			if(createState[0]=="success"&&createState[1]=="success"&&createState[2]=="success"&&validateAge($(this).val())){
-// 				$(".backend button").attr("type", "button");
-// 				console.log("check createAge");
-// 			}
-// 		});
+		// 		$("#CreateAge").bind("keypress", function(e) {
+		// 			if (e.keyCode == 13) {
+		// 				$(".backend button").click();
+		// 				console.log("check but click");
+		// 			}
+		// 			if(createState[0]=="success"&&createState[1]=="success"&&createState[2]=="success"&&validateAge($(this).val())){
+		// 				$(".backend button").attr("type", "button");
+		// 				console.log("check createAge");
+		// 			}
+		// 		});
 
 		$(".backend-form div input").bind(
 				'keypress',
@@ -422,15 +473,18 @@ body {
 								.log("check html"
 										+ $(this).next("label").text());
 					}
-					if(createState[0]=="success"&&createState[1]=="success"&&createState[2]=="success"&&validateAge($(this).val())){
+					if (createState[0] == "success"
+							&& createState[1] == "success"
+							&& createState[2] == "success"
+							&& validateAge($(this).val())) {
 						$(".backend button").attr("type", "button");
 						console.log("check createAge");
 					}
-					if($(this).attr("id")=="CreateAge"){
-					if (e.keyCode == 13) {
-		 				$(".backend >button").click();
-		 				console.log("check but click");
-		 			}
+					if ($(this).attr("id") == "CreateAge") {
+						if (e.keyCode == 13) {
+							$(".backend >button").click();
+							console.log("check but click");
+						}
 					}
 				})
 
@@ -488,12 +542,10 @@ body {
 				reader.readAsDataURL(file);
 			} else {
 			}
-			$(".profile-img-text").text(
-					"Uploading " + imgfile[0].name);
+			$(".profile-img-text").text("Uploading " + imgfile[0].name);
 			$(".profile").fadeIn();
 
 		}
-
 
 		function uploadProgress(event) {
 			// Note: doesn't work with async=false.

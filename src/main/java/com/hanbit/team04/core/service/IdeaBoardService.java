@@ -77,4 +77,8 @@ public class IdeaBoardService {
 		return ideaBoardDAO.selectDailyCount();
 	}
 
+	public int modifyBoard(String contents, int boardNum) {
+		return ideaBoardDAO.updateBoard(contents,boardNum);
+	}
+
 }

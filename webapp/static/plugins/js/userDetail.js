@@ -6,14 +6,16 @@ var age;
 var confirmCount;
 var writeCount;
 var boardNum;
-
-
-//console.log("작성해 보자:"+$(".col-xs-12 p").html());
+var modalTrigger = $('.cd-modal-trigger'),
+transitionLayer = $('.cd-transition-layer'),
+transitionBackground = transitionLayer.children(),
+modalWindow = $('.cd-modal');
+		
 
 $(".btn-home").on("click",function(){
 	location.href="/Home";
 });
-firstDetail();
+
 
 //첫페이지 만드는 메소드
 function firstDetail(){
@@ -45,7 +47,7 @@ $.ajax({
 }
 
 
-// 작성한 글 메소드
+/////////////////// 작성한 글 메소드 // 이새끼 개 중요.
 function writeViewMenu(){
 
 	var boardIdx="";
@@ -65,20 +67,44 @@ function writeViewMenu(){
 
 		$(".write-container-body td:nth-child(1)").text(boardIdx);
 		for(var i = 0 ; i< result.board_idx.length; i++){
-			innerHtml+="<tr><td>"+result.board_idx[i].boardIdx+"</td><td><a href='/hyundo/board'>"
-			+result.board_idx[i].title+"</a></td><td class='hideContents'><input type='text' class='form-control'></td><td class='contents'>"+result.board_idx[i].contents+"</td><td>"
+			innerHtml+="<tr class='"+i+"'><td data-num='"+result.board_idx[i].boardIdx+"'>"+result.board_idx[i].boardIdx+"</td><td><div class='portal'>"
+			+result.board_idx[i].title+"</td></div><td class='hideContents'><input type='text' class='form-control'></td><td class='contents'>"+result.board_idx[i].contents+"</td><td>"
 			+result.board_idx[i].regDate+"</td><td><i class='fa fa-file-o fa-2x' aria-hidden='true' data-num='"+i+
 					"'></i>  " +
 					"<i class='fa fa-trash fa-2x' data-num='"+result.board_idx[i].boardIdx+
 					"' aria-hidden='true'></i></td></tr>";
-				if(i%10==0){
-
-				}
+			
 		}
-//		console.log(result.board_idx.length%10==0);
 
 		$(".write-container-body").html(innerHtml);
+		
+		// 수정하기 아이콘
+		$(".fa-file-o").on("click", function(){
+			boardNum = Number($(this).attr("data-num"));
+			console.log(boardNum);
+			var michin = $(this).parent().parent("tr").html();
+			console.log(michin);
 
+			$(".write-container-body").html("");
+			$(".write-container-body").html(michin);
+
+			$(".contents").hide();
+			$("i").parent("td").html("");
+
+			$(".hideContents").show();
+
+			var Html ="<button class='btn btn-primary btn-modify'>수정하기</button>     <button class='btn btn-default btn-exit'>나가기</button>"
+
+			$(".write-container-body td:nth-child(6)").html(Html);
+			$(".form-control").val(result.board_idx[boardNum].contents);
+			$(".form-control").focus();
+			$(".form-control").select();
+			
+			exitbtn();
+			modifybtn();
+		});
+		
+		// 쓰레기통 아이콘
 		$(".fa-trash").on("click",function(){
 
 			 boardNum = Number($(this).attr("data-num"));
@@ -103,54 +129,130 @@ function writeViewMenu(){
 
 			});
 
-		$(".fa-file-o").on("click", function(){
+			//
+			// 포탈 버튼잼
+				$(".portal").on('click', function(event){
+					boardNum = $(this).parent().prev().text();
+					dbtitle = $(this).parent().text();
+					dbcontents = $(this).parent().next().next().text();
+					
+					console.log("click :"+dbtitle);
+					console.log("click :"+dbcontents);
+					console.log("click :"+boardNum);
+					
+					
+					
+					//open modal window
+					console.log("아 뭐");
+					
+					$(".cd-main-content h1").text(dbtitle);
+					$(".pclass").text(dbcontents);
+					$(".modal").show();
+					
+					event.preventDefault();
+					
+					transitionLayer.addClass('visible opening');
+					var delay = ( $('.no-cssanimations').length > 0 ) ? 0 : 600;
+					setTimeout(function(){
+						modalWindow.addClass('visible');
+					}, delay);
 
-			boardNum = Number($(this).attr("data-num"));
+				//close modal window
+				modalWindow.on('click', '.modal-close', function(event){
+					event.preventDefault();
+					transitionLayer.addClass('closing');
+					modalWindow.removeClass('visible');
+					transitionBackground.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(){
+						transitionLayer.removeClass('closing opening visible');
+						transitionBackground.off('webkitAnimationEnd oanimationend msAnimationEnd animationend');
+						location.href="/board/userDetail";
+					});
+				});
 
-//			console.log($(this).parent().parent("i").html(""));
-			var michin = $(this).parent().parent("tr").html();
-			console.log(michin);
-
-			$(".write-container-body").html("");
-			$(".write-container-body").html(michin);
-
-//			$(".fa-file-o").toggle();
-
-			$(".contents").hide();
-			$("i").parent("td").html("");
-
-			$(".hideContents").show();
-
-			var Html ="<button class='btn btn-primary'>수정하기</button>     <button class='btn btn-default'>나가기</button>"
-
-//			input[type:text]
-
-			$(".write-container-body td:nth-child(6)").html(Html);
-
-			$(".form-control").val(result.board_idx[1].contents);
-			$(".form-control").focus();
-			$(".form-control").select();
-
-
-
-
-
-//			$.ajax({
-//				url:"api/userDetail/modify",
-//
-//			})
-		})
-
+				});
+				
+			//포탈 끝남잼
+			
 	});
+}
+//////////////////////////////////
+
+// 모달 모달
+
+
+
+
+
+
+
+
+//////////////////나가기 버튼 누를시 액션
+function exitbtn(){
+	$(".btn-exit").click(function(){
+		$(".write-container-body").html("");
+		writeViewMenu();
+//		$(".write-container-body").focus();
+	})
 }
 
 
-$(".btn-writeList").on("click", function(){
-
-	$(".write-container").toggle();
-
-	writeViewMenu();
-
+////////////////////수정버튼 누를시액션
+function modifybtn(){
+$(".btn-modify").click(function(){
+	var modifycontents = $(".form-control").val();
+	boardNum =Number($(".write-container-body td:nth-child(1)").text());
+//	console.log(boardNum);
+	$.ajax({
+		url:"/api/userDetail/modify",
+		data:{
+			contents:modifycontents,
+			boardNum:boardNum
+		},
+		method:"POST"
+	}).done(function(result){
+		if(result.modify==1){
+			alert('수정완료');
+			writeViewMenu();
+			$(".container").height();
+			$(".container").scrollTop();
+		}
+	}).fail(function(){
+		alert('망망');
 	});
-});
+})
+}
 
+/////////////////////////
+$(".btn-writeList").on("click", function(){
+	$(".write-container").toggle();
+	writeViewMenu();
+	});
+///////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+firstDetail();
+
+});

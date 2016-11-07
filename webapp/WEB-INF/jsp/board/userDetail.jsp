@@ -7,6 +7,11 @@
 <link href="/static/plugins/startbootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/static/plugins/css/userDetail.css" rel="stylesheet">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+<!-- <link rel="stylesheet" type="text/css" href="/static/plugins/hyundo/hyundo_rank/css/demo.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="/static/plugins/hyundo/hyundo_rank/css/style.css" /> -->
+<!-- <link href='http://fonts.googleapis.com/css?family=Kelly+Slab' rel='stylesheet' type='text/css' /> -->
+<!-- <script type="text/javascript" src="/static/plugins/hyundo/hyundo_rank/js/modernizr.js"></script> -->
+<!-- <script type="text/javascript" src="/static/plugins/hyundo/hyundo_rank/js/modernizr.custom.11333.js"></script> -->
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -119,13 +124,32 @@
 </div>
 </div>
 
+	<div class="modal">
+					<div class="cd-modal">
+						<main class="cd-main-content">
+						<div class="center">
+							<h1>Ink Transition Effect</h1>
+							<a href="#0" class="cd-btn cd-modal-trigger"></a>
+						</div>
+						</main>
+<!-- 						<div class="modal-content"> -->
+							<div class="contents-image"></div>
+							<div class="pclass">con1</div>
+<!-- 						</div> -->
+						<a href="#0" class="modal-close">Close</a>
+					</div>
+					<div class="cd-transition-layer">
+						<div class="bg-layer"></div>
+					</div>
+		</div>
 
 
-
-
-
-<script src="/static/plugins/startbootstrap/vendor/jquery/jquery.min.js"></script>
-		<script src="/static/plugins/startbootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="/static/plugins/js/userDetail.js"></script>
+		<script type="text/javascript" src="/static/plugins/hyundo/hyundo_rank/js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="/static/plugins/startbootstrap/vendor/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="/static/plugins/startbootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/static/plugins/js/modernizr2.js"></script>
+		<script type="text/javascript" src="/static/plugins/js/userDetail.js"></script>
+		<script type="text/javascript" src="/static/plugins/hyundo/hyundo_rank/js/jquery.easing.1.3.js"></script>
+		
 </body>
 </html>
