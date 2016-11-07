@@ -12,7 +12,9 @@
 <link href="/static/plugins/startbootstrap/vendor/bootstrap/css/bootstrap.min.css" 	rel="stylesheet">
 <link href="/static/plugins/startbootstrap/vendor/metisMenu/metisMenu.min.css" 	rel="stylesheet">
 <link href="/static/plugins/startbootstrap/dist/css/sb-admin-2.css" 	rel="stylesheet">
-<link href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" rel="stylesheet">
+<link href="/static/plugins/startbootstrap/vendor/morrisjs/morris.css" 	rel="stylesheet">
+<!-- <link href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" rel="stylesheet"> -->
+
 
 <link href="/static/plugins/startbootstrap/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="/static/plugins/css/board.css" rel="stylesheet">
