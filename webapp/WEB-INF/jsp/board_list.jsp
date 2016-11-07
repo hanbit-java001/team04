@@ -242,14 +242,17 @@
 		<script src="/static/crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
 	<script src="/static/plugins/jquery-cookie/jquery.cookie.js"></script>
-	<script src="/static/js/apps.min.js"></script>
+<!-- 	<script src="/static/js/apps.min.js"></script> -->
 	<script src="/static/js/mam.js"></script>
 
 	<!-- ================== END BASE JS ================== -->
 
 	<script>
 		$(document).ready(function() {
-			App.init();
+			console.log("check name 2: "+"${userName}");
+// 			console.log("check session : "+"${sessionScope.isLoggedIn}");
+// 			console.log("check session user id: "+"${sessionScope.getUserId}");
+// 			App.init();
 		});
 	</script>
 </body>
