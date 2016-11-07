@@ -232,7 +232,7 @@ body {
 			// 			console.log("back check : "+window.history.back());
 			if ($(window).width() <= 500) {
 				$("body").css({
-					"background-color" : "red",
+// 					"background-color" : "red",
 					"overflow" : "hidden"
 				});
 				$(".alt").css({

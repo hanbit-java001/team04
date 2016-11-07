@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Shuffle Text Effect with jQuery | Tutorialzine Demo</title>
 
 <!-- Our CSS stylesheet file -->
@@ -58,7 +59,7 @@
 	left: 73%;
 	transform: translate(-50%, -50%);
 	position: fixed;
- 	display: none; 
+ 	display: none;
 }
 
 .profile-img {
