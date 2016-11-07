@@ -28,7 +28,7 @@
 
 			</div>
             </div>
-            <h1>여기에 제목을 쓰면 되겠찌 제목제목</h1>
+            <h1>가장 많은 추천을 받은 게시물</h1>
             <h2 class="ss-subtitle">Issues Ranking</h2>
 			<div id="ss-links" class="ss-links">
 				<a href="#btns1">1~5</a>

@@ -376,6 +376,11 @@ Portfolio Navigation
   width: 100%;
   vertical-align: middle;
 }
+/* .cd-3d-portfolio-navigation .cd-wrapper ul{ */
+/* 	width: 100%; */
+/* } */
+
+
 .cd-3d-portfolio-navigation h1 {
   font-size: 2rem;
   margin-bottom: .6em;
@@ -390,6 +395,7 @@ Portfolio Navigation
   display: inline-block;
   color: #edeade;
   border: 2px solid #391b28;
+/*   padding: .6em; */
   padding: .6em;
   -webkit-transition: all .2s;
   transition: all .2s;
@@ -423,6 +429,10 @@ Portfolio Navigation
 @media only screen and (min-width: 768px) {
   .cd-3d-portfolio-navigation h1 {
     font-size: 3.2rem;
+  }
+  .cd-3d-portfolio-navigation .cd-wrapper ul {
+  	width : 100%;
+  	display: inline-block;
   }
 }
 

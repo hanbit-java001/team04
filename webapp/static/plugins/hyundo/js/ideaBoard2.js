@@ -1,4 +1,14 @@
 $(function() {
+	function changeView(){
+	if ($(window).width() <= 500) {
+		$(".ex div").css({
+			"padding": ".2em"
+		})
+		$(".ex li a").css({
+			"padding": ".2em"
+		})
+	}
+	}
 	$(document).click(function(event) {
 	    var text = $(event.target).text();
 	    if($(event.target).hasClass("confirm")){
@@ -175,6 +185,7 @@ $(function() {
 						console.log(not_default);
 						Btnmovement();
 						mainjs();
+						changeView();
 						if(CrntuserId=="admin"){
 							$(".confirm").css({"display":"inline-block"});
 							$(".confirmed").css({"display":"none"});

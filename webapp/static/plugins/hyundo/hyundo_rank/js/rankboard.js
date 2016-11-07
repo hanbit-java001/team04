@@ -263,7 +263,6 @@ $(function() {
 				$sidescroll.init();
 		    }
 		    
-			var msg = ["축하한다 이것들아", "개새끼야", "슈발"]
 			// //////////////////////////////////////////////////////////////////////////////////////////
           
           $.ajax({
@@ -293,7 +292,7 @@ $(function() {
     	    			rankBoardHTMLbar +=                "<h2 id='btns"+(i+1)+"'>"+(i+1)+"위부터 "+(i+5)+"위까지</h2>"
     	    			rankBoardHTMLbar +=            "</div>"
     	    			rankBoardHTMLbar +=            "<div class='ss-right'>"
-    	    			rankBoardHTMLbar +=                "<h2>축하한다 이것들아</h2>"
+    	    			rankBoardHTMLbar +=                "<h2>축하합니다!!</h2>"
     	    			rankBoardHTMLbar +=            "</div>"
     	    			rankBoardHTMLbar +=        "</div>"
     	    			$(".ss-container").append(rankBoardHTMLbar);
