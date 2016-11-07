@@ -8,9 +8,9 @@ $(function() {
 //			$("body").css("background-color", "red");
 			$(".photos").css({
 				"width" : "130%",
-				"top" : "30%",
-				"height" : "30%",
-				"left" : "58%",
+				"top" : "20%",
+				"height" : "50%",
+				"left" : "53%",
 				"transform" : "translateX(-50%)"
 			});
 			$(".reflected").css({
@@ -33,7 +33,7 @@ $(function() {
 			$("#photos-name").css({
 				"font-size":"300%"
 			})
-			initCoverFlow(200, 180);
+			initCoverFlow(160, 120);
 		} else {
 			$("body").css("background-color", "#FFFFFF");
 			initCoverFlow(320, 240);
@@ -81,7 +81,8 @@ $(function() {
 									location.href = $(cover).children()
 											.children('img').data('url');
 								})
-					}
+					},
+
 
 				});
 	}

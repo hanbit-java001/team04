@@ -55,6 +55,14 @@
 			console.log("check html : "+innerhtml);
 			console.log($(".page-number").html());
 				$(innerhtml).insertBefore(".fa-arrow-right");
+				if ($(window).width() <= 500) {
+					$(".page-number div").css({
+						"height" : "150%"
+					})
+					$(".page-number div:first-of-type").css({
+						"margin-left": "16%"
+					})
+				}
 			}
 			function listLord(pageNum) {
 				currentPage=pageNum;
@@ -92,6 +100,12 @@
 					}
 // 					console.log(appendhtml);
 						$(appendhtml).insertBefore(".cd-nav");
+						if ($(window).width() <= 500) {
+							$(".table-container").css({
+								"width": "105%"
+							})
+
+						}
 						$('section').hide();
 						pageNumCreate(currentPage-1);
 						clickbtn();

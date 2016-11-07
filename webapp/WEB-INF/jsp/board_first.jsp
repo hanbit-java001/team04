@@ -192,11 +192,13 @@ select {
 	padding: 5%;
 	z-index: 100;
 }
-.detail-view-left{
-left: 0%;
+
+.detail-view-left {
+	left: 0%;
 }
-.detail-view-right{
-right:0%;
+
+.detail-view-right {
+	right: 0%;
 }
 
 .detail-view form {
@@ -321,24 +323,23 @@ right:0%;
 	text-align: center;
 	line-height: 200px;
 }
-.tooltiptext {
-    visibility: hidden;
-    width: 30%;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
 
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
+.tooltiptext {
+	visibility: hidden;
+	width: 30%;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
 }
 
 .detail-view:hover .tooltiptext {
-    visibility: visible;
+	visibility: visible;
 }
-
 </style>
 <title>Rounded Animated Navigation | CodyHouse</title>
 </head>
@@ -414,7 +415,7 @@ right:0%;
 		<input type="button" value="글쓰기" class="createContent">
 	</div>
 	<div class="detail-view detail-view-left">
-	<div class="tooltiptext">한번더 누르면 사라집니다.</div>
+		<div class="tooltiptext">한번더 누르면 사라집니다.</div>
 		<form>
 
 			<div class="detail-title">Title</div>
@@ -430,7 +431,7 @@ right:0%;
 				<img alt="test" src="">
 				<div class="img-text"></div>
 			</div>
-<!-- 			<button type="submit" class="mui-btn mui-btn--raised">Submit</button> -->
+			<!-- 			<button type="submit" class="mui-btn mui-btn--raised">Submit</button> -->
 		</form>
 		<div class="detail-round">
 			<div class="detail-ageGroup">ageGroup</div>
@@ -446,6 +447,40 @@ right:0%;
 	<!-- Resource jQuery -->
 	<script src="/static/plugins/3d-curtain-template/js/main.js"></script>
 	<script type="text/javascript">
+		if ($(window).width() <= 500) {
+			$(".addContent").css({
+				"right" : "21%"
+			})
+			$(".page-number").css({
+				"width" : "80%",
+				"margin-left" : "10%",
+				"margin-right" : "10%"
+			})
+			$(".detail-view").css({
+				"width" : "100%"
+			})
+			$(".table-container").css({
+				"width" : "105%"
+			})
+			$(".detail-round").css({
+				"width" : "20vw",
+				"height" : "13vw",
+				"top" : "8%",
+				"left" : "77%"
+			})
+			$(".detail-round div").css({
+				"font-size" : "120%",
+				"padding-top" : "8%"
+			})
+			$(".tooltiptext").css({
+				"left" : "50%",
+				"transform" : "translateX(-50%)",
+				"top" : "1%",
+				"visibility" : "visible",
+				"width" : "45%"
+			})
+
+		}
 		var imgfile = null;
 		$(".addContent").on("click", function() {
 			$.ajax({

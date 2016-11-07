@@ -30,7 +30,6 @@ body {
 	z-index: -1;
 	position: fixed;
 	display: none;
-	top: 50%;
 }
 
 .profile-img {
@@ -135,13 +134,22 @@ body {
 	clip: rect(0, 0, 0, 0);
 	border: 0;
 }
+
+.return-home {
+	display: inline-block;
+}
 </style>
 </head>
 
 <body>
 	<div class="rerun">
 		<a href="">Rerun Pen</a>
+		<!-- 		<div class="return-home" onclick="window.history.back()"}><a >Home</a></div> -->
+		<div class="return-home">
+			<a href="/Home">Home</a>
+		</div>
 	</div>
+
 	<div class="container">
 		<div class="card"></div>
 		<div class="card">
@@ -216,17 +224,19 @@ body {
 
 	<script src='/static/plugins/jquery/jquery-3.1.0.min.js'></script>
 
+
 	<script type="text/javascript">
 		function init() {
-			console.log("check navigator.userAgent"+navigator.userAgent);
-			console.log("check jquery"+$.browser);
+			console.log("check navigator.userAgent" + navigator.userAgent);
+			console.log("check jquery" + $.browser);
+			// 			console.log("back check : "+window.history.back());
 			if ($(window).width() <= 500) {
 				$("body").css({
-					"background-color": "red",
-					"overflow": "hidden"	
+					"background-color" : "red",
+					"overflow" : "hidden"
 				});
 				$(".alt").css({
-					"right" : "15px",
+					"right" : "15px"
 				})
 				$(".rerun").css({
 					"position" : "fixed",
@@ -243,14 +253,46 @@ body {
 					"font-size" : "72%"
 				})
 				$(".title").css({
-				    "transform": "translateY(-50%)"
+					"transform" : "translateY(-50%)",
+					"margin": "0 0 5px"
 				});
 				$(".backend-form").css({
-				    "transform": "translateY(-10%)"
+					"transform" : "translateY(-10%)"
 				});
 				$("#CreateUserId").next().css({
-					"width":"100%"
+					"width" : "100%"
 				})
+				$(".backend-form .input-container").css({
+					"margin" : "0px 25px 15px 40px"
+				})
+				$(".front-form .input-container").css({
+					"margin" : "0 45px 40px"
+				})
+				$(".backend-form .title").css({
+					"padding" : "10px 0 10px 40px"
+				})
+				$(".add-profile").text("UP");
+				$(".profile").css({
+					"left" : "84%",
+					"top" : "4%"
+				})
+				$(".profile-img-text").css({
+					"font-size" : "10px",
+					"position" : "absolute",
+					"width" : "200%",
+					"left" : "50%",
+					"transform" : "translateX(-50%)"
+				})
+				$(".footer").css({
+					"margin" : "20px 0 0"
+				})
+				$(".card.alt .toggle").css({
+					"width" : "100px",
+					"height" : "100px",
+					"left" : "15%",
+					"line-height" : "100px"
+				})
+
 			} else {
 				$("body").css("background-color", "#FFFFFF");
 			}
@@ -326,25 +368,28 @@ body {
 					}
 				})
 
-		$("#ex_file")
-				.change(
-						function(event) {
-							imgfile = event.target.files;
-							console.log("click event check");
-							var file = imgfile[0];
-							var reader = new FileReader();
-							reader.onloadend = function() {
-								$('.profile-img').css('background-image',
-										'url("' + reader.result + '")');
-							}
-							if (file) {
-								reader.readAsDataURL(file);
-							} else {
-							}
-							$(".profile-img-text").text(
-									"Uploading " + imgfile[0].name);
-							$(".profile").fadeIn();
-						});
+		$("#ex_file").change(
+				function(event) {
+					imgfile = event.target.files;
+					console.log("click event check");
+					var file = imgfile[0];
+					var reader = new FileReader();
+					reader.onloadend = function() {
+						$('.profile-img').css('background-image',
+								'url("' + reader.result + '")');
+					}
+					if (file) {
+						reader.readAsDataURL(file);
+					} else {
+					}
+					if ($(window).width() <= 500) {
+						$(".profile-img-text").text(imgfile[0].name);
+					} else {
+						$(".profile-img-text").text(
+								"Uploading " + imgfile[0].name);
+					}
+					$(".profile").fadeIn();
+				});
 		function changeText(that, font_size) {
 			$(that).next("label").fadeOut().text(
 					userTextMsg[$(".backend-form .input-container").index(
@@ -387,19 +432,22 @@ body {
 			}
 			return true;
 		}
-		$(".backend-form div input").one("mousedown", function() {
-			if ($(this).attr("id") == "CreatePassword") {
-				changeText(this, "17px");
-			} else {
-				if ($(window).width() <= 500&&$(this).attr("id")=="CreateUserId") {
-					changeText(this, "15px");
-				}else{
-					changeText(this, "20px");	
-				}
-				
-			}
+		$(".backend-form div input").one(
+				"mousedown",
+				function() {
+					if ($(this).attr("id") == "CreatePassword") {
+						changeText(this, "17px");
+					} else {
+						if ($(window).width() <= 500
+								&& $(this).attr("id") == "CreateUserId") {
+							changeText(this, "15px");
+						} else {
+							changeText(this, "20px");
+						}
 
-		}).on(
+					}
+
+				}).on(
 				"focusout",
 				function() {
 					if ($(this).attr("id") == "CreateUserId"
@@ -542,7 +590,11 @@ body {
 				reader.readAsDataURL(file);
 			} else {
 			}
-			$(".profile-img-text").text("Uploading " + imgfile[0].name);
+			if ($(window).width() <= 500) {
+				$(".profile-img-text").text(imgfile[0].name);
+			} else {
+				$(".profile-img-text").text("Uploading " + imgfile[0].name);
+			}
 			$(".profile").fadeIn();
 
 		}

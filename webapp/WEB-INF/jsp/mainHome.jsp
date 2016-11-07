@@ -4,7 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>jQuery Coverflow</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0,maximum-scale=1" />
 <!-- jQuery/jQueryUI (hosted) -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
@@ -29,13 +30,11 @@
 	transform: translate(-50%, -50%);
 	font-size: 300%;
 }
-
-
 </style>
 
 </head>
 <body>
-	<div class="photos" tabindex="-1">
+	<div class="photos" id="photos" tabindex="-1">
 		<div class="cover">
 			<img class="reflected select-img" data-name="게시판 입니다"
 				data-url="/board/list_oh"
@@ -46,7 +45,7 @@
 				data-url="/list2"
 				src="/static/image/business-intelligence-dashboard-icon_75274.png">
 		</div>
-		
+
 		<div class="cover">
 			<img class="reflected select-img" data-name="Idea board입니다."
 				data-url="/hyundo/board" src="/static/image/PurpleCircle.png">
@@ -73,7 +72,31 @@
 		<div id="photos-name"></div>
 	</div>
 	<div class="dream">당신의 꿈을 평가해주겠어!!!</div>
+	<script src='/static/plugins/js/hammer.js'></script>
 	<script src="/static/plugins/js/mainHome.js"></script>
+	<script type="text/javascript">
+		var myElement = document.getElementById('photos');
+		var hammer = new Hammer.Manager(myElement);
+		var swipe = new Hammer.Swipe();
+		hammer.add(swipe);
+		var st = $(myElement).scrollTop();
+		hammer.on('swipeleft', function() {
+			if ($(".current").index() < $(".cover").last().index()) {
+				$('.photos').coverflow('index', $(".current").index() + 1);
+			} else {
+				$('.photos').coverflow('index', $(".cover").last().index());
+			}
+		});
 
+		hammer.on('swiperight', function() {
+			if ($(".current").index() != 0) {
+				$('.photos').coverflow('index', $(".current").index() - 1);
+			}else{
+				$('.photos').coverflow('index', 0);
+			}
+			console.log($(this).coverflow('index'));
+			잠깐만
+		});
+	</script>
 </body>
 </html>
