@@ -11,6 +11,20 @@
 <title>API Demo: Post photo to KakaoStory - Kakao JavaScript SDK</title>
 
 </head>
+<style type="text/css">
+#canvas {
+	-webkit-transform: rotate(45);
+	-moz-transform: rotate(45); -ms-transform : rotate( 45); -o-transform :
+	rotate( 45);
+	transform: rotate(45);
+	-moz-transform: rotate(45);
+	-ms-transform: rotate(45);
+	-o-transform: rotate(45);
+	-ms-transform: rotate(45);
+	-o-transform: rotate(45);
+}
+}
+</style>
 <body>
 	<input id="file" type="file" accept="image/*">
 	<canvas id="myCanvas" width="200" height="100"></canvas>
@@ -47,8 +61,8 @@
 			reader.readAsDataURL(file);
 		}
 		function processFile(dataURL, fileType) {
-			var maxWidth = 800;
-			var maxHeight = 800;
+			var maxWidth = 200;
+			var maxHeight = 200;
 
 			var image = new Image();
 			image.src = dataURL;
@@ -58,10 +72,10 @@
 				var height = image.height;
 				var shouldResize = (width > maxWidth) || (height > maxHeight);
 
-// 				if (!shouldResize) {
-// 					sendFile(dataURL);
-// 					return;
-// 				}
+				// 				if (!shouldResize) {
+				// 					sendFile(dataURL);
+				// 					return;
+				// 				}
 
 				var newWidth;
 				var newHeight;
@@ -80,18 +94,45 @@
 				canvas.height = newHeight;
 
 				var context = canvas.getContext('2d');
-
+// 				drawRotatedImage(this, 0, 0, 90,newWidth,newHeight,context);
+context.translate(200, 0);
+				context.rotate(Math.PI / 2); 
 				context.drawImage(this, 0, 0, newWidth, newHeight);
 
 				dataURL = canvas.toDataURL(fileType);
 
-// 				sendFile(dataURL);
+				// 				sendFile(dataURL);
 			};
 
 			image.onerror = function() {
 				alert('There was an error processing your file!');
 			};
 		}
+		////
+		var TO_RADIANS = Math.PI/180; 
+function drawRotatedImage(image, x, y, angle,width,height,context) { 
+ 
+	// save the current co-ordinate system 
+	// before we screw with it
+	context.save(); 
+ 
+	// move to the middle of where we want to draw our image
+	context.translate(x, y);
+ 
+	// rotate around that point, converting our 
+	// angle from degrees to radians 
+	context.rotate(angle * TO_RADIANS);
+ 
+	// draw it up and to the left by half the width
+	// and height of the image 
+	context.drawImage(image, -(image.width/2), -(image.height/2),width,height);
+ 
+	// and restore the co-ords to how they were when we began
+	context.restore(); 
+}
+
+		///
+
 		function sendFile(fileData) {
 			var formData = new FormData();
 
