@@ -369,7 +369,7 @@ h2.ss-subtitle:after{
   /* 'X' icon */
   position: absolute;
   z-index: 1;
-  top: 20px;
+  top: 10%;
   right: 5%;
   height: 45px;
   width: 45px;

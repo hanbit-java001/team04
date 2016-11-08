@@ -7,6 +7,11 @@ $(function() {
 		$(".ex li a").css({
 			"padding": ".2em"
 		})
+		$("#page-wrap").css({"margin-left":"5%", "padding":"0%" , "width":"100%", "margin-left" : "0%"})
+		$("#contact-area").css({"width":"100%"})
+		
+		
+		
 	}
 	}
 	$(document).click(function(event) {
