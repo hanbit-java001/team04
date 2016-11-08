@@ -37,7 +37,7 @@ import com.hanbit.team04.twitter.UpdateTweet;
 
 @Controller
 public class KakaoController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(WelcomeController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(KakaoController.class);
 	@Autowired
 	private IdeaService ideaService;
 	@Autowired

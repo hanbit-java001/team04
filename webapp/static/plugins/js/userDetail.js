@@ -10,7 +10,7 @@ var modalTrigger = $('.cd-modal-trigger'),
 transitionLayer = $('.cd-transition-layer'),
 transitionBackground = transitionLayer.children(),
 modalWindow = $('.cd-modal');
-		
+
 
 $(".btn-home").on("click",function(){
 	location.href="/Home";
@@ -32,7 +32,7 @@ $.ajax({
 	fileId= result.fileId;
 
 	if(fileId.toUpperCase()!='NULL'){
-		$(".img-responsive").attr("src","http://localhost:8081/file/"+fileId);
+		$(".img-responsive").attr("src","http://203.236.209.179:"+location.port+"/file/"+fileId);
 	}
 
 	$(".name-top div:nth-child(2)").text(name).css("font-size", 20);
@@ -73,11 +73,11 @@ function writeViewMenu(){
 					"'></i>  " +
 					"<i class='fa fa-trash fa-2x' data-num='"+result.board_idx[i].boardIdx+
 					"' aria-hidden='true'></i></td></tr>";
-			
+
 		}
 
 		$(".write-container-body").html(innerHtml);
-		
+
 		// 수정하기 아이콘
 		$(".fa-file-o").on("click", function(){
 			boardNum = Number($(this).attr("data-num"));
@@ -99,11 +99,11 @@ function writeViewMenu(){
 			$(".form-control").val(result.board_idx[boardNum].contents);
 			$(".form-control").focus();
 			$(".form-control").select();
-			
+
 			exitbtn();
 			modifybtn();
 		});
-		
+
 		// 쓰레기통 아이콘
 		$(".fa-trash").on("click",function(){
 
@@ -135,22 +135,22 @@ function writeViewMenu(){
 					boardNum = $(this).parent().prev().text();
 					dbtitle = $(this).parent().text();
 					dbcontents = $(this).parent().next().next().text();
-					
+
 					console.log("click :"+dbtitle);
 					console.log("click :"+dbcontents);
 					console.log("click :"+boardNum);
-					
-					
-					
+
+
+
 					//open modal window
 					console.log("아 뭐");
-					
+
 					$(".cd-main-content h1").text(dbtitle);
 					$(".pclass").text(dbcontents);
 					$(".modal").show();
-					
+
 					event.preventDefault();
-					
+
 					transitionLayer.addClass('visible opening');
 					var delay = ( $('.no-cssanimations').length > 0 ) ? 0 : 600;
 					setTimeout(function(){
@@ -170,9 +170,9 @@ function writeViewMenu(){
 				});
 
 				});
-				
+
 			//포탈 끝남잼
-			
+
 	});
 }
 //////////////////////////////////
