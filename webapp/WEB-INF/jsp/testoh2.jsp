@@ -95,7 +95,7 @@
 
 				var context = canvas.getContext('2d');
 // 				drawRotatedImage(this, 0, 0, 90,newWidth,newHeight,context);
-context.translate(200, 0);
+				context.translate(200, 0);
 				context.rotate(Math.PI / 2); 
 				context.drawImage(this, 0, 0, newWidth, newHeight);
 

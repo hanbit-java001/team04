@@ -584,13 +584,119 @@ function confirmClick(thisConfirm){
 		data.append("title",title)
 		data.append("contents",contents)
 
+		//////////////////////////////////////////////////////////
+		
+		if (window.File && window.FileReader && window.FormData) {
+			var $inputField = $('#file');
+
+			$inputField.on('change', function(e) {
+				var file = e.target.files[0];
+
+				if (file) {
+					if (/^image\//i.test(file.type)) {
+						readFile(file);
+					} else {
+						alert('Not a valid image!');
+					}
+				}
+			});
+		} else {
+			alert("File upload is not supported!");
+		}
+		function readFile(file) {
+			var reader = new FileReader();
+
+			reader.onloadend = function() {
+				processFile(reader.result, file.type);
+			}
+
+			reader.onerror = function() {
+				alert('There was an error reading the file!');
+			}
+
+			reader.readAsDataURL(file);
+		}
+		function processFile(dataURL, fileType) {
+			var maxWidth = 200;
+			var maxHeight = 200;
+
+			var image = new Image();
+			image.src = dataURL;
+
+			image.onload = function() {
+				var width = image.width;
+				var height = image.height;
+				var shouldResize = (width > maxWidth) || (height > maxHeight);
+
+				// 				if (!shouldResize) {
+				// 					sendFile(dataURL);
+				// 					return;
+				// 				}
+
+				var newWidth;
+				var newHeight;
+
+				if (width > height) {
+					newHeight = height * (maxWidth / width);
+					newWidth = maxWidth;
+				} else {
+					newWidth = width * (maxHeight / height);
+					newHeight = maxHeight;
+				}
+
+				var canvas = document.getElementById("myCanvas");
+
+				canvas.width = newWidth;
+				canvas.height = newHeight;
+
+				var context = canvas.getContext('2d');
+// 				drawRotatedImage(this, 0, 0, 90,newWidth,newHeight,context);
+				context.translate(200, 0);
+				context.rotate(Math.PI / 2); 
+				context.drawImage(this, 0, 0, newWidth, newHeight);
+
+				dataURL = canvas.toDataURL(fileType);
+
+				// 				sendFile(dataURL);
+			};
+
+			image.onerror = function() {
+				alert('There was an error processing your file!');
+			};
+		}
+		////
+		var TO_RADIANS = Math.PI/180; 
+function drawRotatedImage(image, x, y, angle,width,height,context) { 
+ 
+	// save the current co-ordinate system 
+	// before we screw with it
+	context.save(); 
+ 
+	// move to the middle of where we want to draw our image
+	context.translate(x, y);
+ 
+	// rotate around that point, converting our 
+	// angle from degrees to radians 
+	context.rotate(angle * TO_RADIANS);
+ 
+	// draw it up and to the left by half the width
+	// and height of the image 
+	context.drawImage(image, -(image.width/2), -(image.height/2),width,height);
+ 
+	// and restore the co-ords to how they were when we began
+	context.restore(); 
+}		
+		
+		
+		
+		
+		///////////////////////////////////////////////////////////////////
+		
 		for (var i=0;i<fileId.files.length;i++) {
 			var fileName= fileId.files[0].name;
 			var file = fileId.files[i];
 			data.append(fileName, file);
-
 		}
-		console.log("뇨내 :");
 		$.ajax({
 			url : "/api/IdeaBoard/insert2",
 			method : "POST",
