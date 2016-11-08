@@ -131,10 +131,10 @@ public class BoardService {
 		return result;
 	}
 
-	public int delete(int articleId, String password){
+	public int delete(int articleId, String loginId){
 		BongBoardVO origin = dao.select(articleId);
 		int result=0;
-		if(origin.getbPassword().equals(password)){
+		if(origin.getbWriter().equals(loginId)){
 			result = dao.delete(articleId);
 		}
 		return result;

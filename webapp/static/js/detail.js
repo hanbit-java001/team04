@@ -1,4 +1,54 @@
 $(document).ready(function() {
+	var countAdd=0;
+	$.ajax({
+		url : "/api/loginCheck",
+		method : "GET"
+	}).done(function(result) {
+		console.log("check login -bong : "+result.isloggedIn);
+		console.log("check name -bong : "+result.userName);
+		console.log("test");
+		if(result.isloggedIn){
+			
+			
+		}else{
+			$("#btnModify a").text("login");
+			$("#btnModify").on("click",function(){
+				location.href="/login";
+			});
+//			$("#btnAdd a").text("login").attr("href","/login");
+		}
+	})
+	
+	$('#btnModify').click(function(){
+				alert("modify 2");
+				if(countAdd%2==0){
+//					alert("test");
+					$.ajax({
+						url:"updateForm.do",
+						method : "GET",
+						data : "bId="+$("input[name='bId]").val(),
+						success : function(data){
+							alert("modify test");
+//							$('#modifyForContent').load('/static/html/modify_form.html',function(){
+////								$('#writeForContent').load('/static/html/write2.html',function(){
+//								$("input[name='bTitle']").val(origin.bTitle);
+//								$("input[name='bContent']").val(origin.bContent);
+//								$("input[name='bWriter']").val(result.userName);
+//								$("input[name='fake']").val(result.userName).attr("disabled",true);
+//								})
+//								$(this).html("Close");
+							},
+						error : function(){
+							alert("modify form ajax error")
+						}
+					})
+				}else{
+					$('#writeForContent').empty();
+					$(this).html("Modify");
+				}
+				countAdd++;
+			});
+	
 	$('.info-container .post-time').each(function() {
 		// Thu Nov 03 17:01:53 KST 2016
 		var t = time_ago($(this).html() * 1);

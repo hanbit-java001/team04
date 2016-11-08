@@ -8,6 +8,7 @@ $(document).ready(function() {
 	}).done(function(result) {
 		console.log("check login -bong : "+result.isloggedIn);
 		console.log("check name -bong : "+result.userName);
+		console.log("test");
 		if(result.isloggedIn){
 			
 			$('#btnAdd').click(function(){

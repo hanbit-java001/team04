@@ -52,10 +52,10 @@ public class BongBoardController {
 		mv.addObject("currentArticleList", currentArticleList);
 		Session session = SessionHelpler.getSession();
 		if (session.isLoggedIn()) {
-			mv.addObject("userName", "test-name");
+			mv.addObject("userName", session.getUserId());
 //			mv.addObject("userName", session.getName());
 		}
-		mv.addObject("userName", "test-name");
+		mv.addObject("userName", session.getUserId());
 		mv.setViewName("board_list");
 
 		return mv;
@@ -118,13 +118,17 @@ public class BongBoardController {
 	}
 
 	@RequestMapping("/updateForm.do")
-	public ModelAndView updateForm(int articleId) {
-		BongBoardVO origin = service.readArticle(articleId, false);
+	@ResponseBody
+	public BongBoardVO updateForm(int bId) {
+		BongBoardVO origin = service.readArticle(bId, false);
 
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("origin", origin);
-		mv.setViewName("update_form");
-		return mv;
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("origin", origin);
+//		mv.setViewName("update_form");
+		Map map = new HashMap<>();
+		map.put("bTitle", origin.getbTitle());
+		map.put("bContent", origin.getbContent());
+		return origin;
 	}
 
 	@RequestMapping("/update.do")
@@ -149,8 +153,9 @@ public class BongBoardController {
 	}
 
 	@RequestMapping("/delete.do")
-	public String delete(int articleId, String password) {
-		int result = service.delete(articleId, password);
+	public String delete(int bId) {
+		Session session = SessionHelpler.getSession();
+		int result = service.delete(bId, session.getUserId());
 		if (result > 0) {
 			return "delete_success";
 		} else {
@@ -182,7 +187,8 @@ public class BongBoardController {
 		}
 		Map map = new HashMap();
 		map.put("isloggedIn", true);
-		map.put("userName", "test-test-name");
+		map.put("userName", session.getUserId());
+		System.out.println("yang:"+session.getUserId());
 		//// 연습중입니다.
 		return map;
 	}

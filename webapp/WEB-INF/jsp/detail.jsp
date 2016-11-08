@@ -1,3 +1,5 @@
+<%@page import="com.hanbit.team04.core.session.SessionHelpler"%>
+<%@page import="com.hanbit.team04.core.session.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -121,7 +123,13 @@
 								<div class="post-content">${article.bContent}</div>
 
 								<div class="post-time">${article.bDate.getTime()}</div>
-								<div class="delete-btn">Delete</div>
+								<%Session se = SessionHelpler.getSession();%>
+								<c:set var="se" value="<%=se%>"/>
+								<c:if test="${not empty se.userId && se.userId==article.bWriter }">
+									<a href="delete.do?bId=${article.bId}"><div class="delete-btn">Delete</div></a>
+									<a href="updateForm.do?bId=${article.bId}" ><div class="delete-btn" id="btnModify">Modify</div></a>
+									<div id="modifyForContent"></div>
+								</c:if>
 							
 							</div> <!-- end info-container -->
 						</li>
