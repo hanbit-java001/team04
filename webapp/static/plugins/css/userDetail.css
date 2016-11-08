@@ -201,7 +201,7 @@ figure{
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background: #402f44 url(../img/modal-bg.jpg) no-repeat center center;
+  background: #19213f url(../img/modal-bg-blue.jpg) no-repeat center center; 
   background-size: cover;
   opacity: 0;
   visibility: hidden;
@@ -338,7 +338,7 @@ Transition Layer
   height: 100%;
   /* our sprite is composed of 25 frames */
   width: 2500%;
-  background: url(../img/ink.png) no-repeat 0 0;
+  background: url(../img/ink-blue.png) no-repeat 0 0;
   background-size: 100% 100%;
 }
 .cd-transition-layer.visible {
