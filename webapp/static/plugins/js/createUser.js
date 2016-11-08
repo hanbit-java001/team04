@@ -11,6 +11,29 @@ $(function() {
 		$("body").css({
 			"position" : "relative"
 		})
+		$(".textMsg").css({
+			"width" : "70%",
+			"font-size" : "100%"
+		})
+		$("#container").css({
+			"width" : "90%"
+		})
+		$(".profile").css({
+			"width" : "50vw",
+			"height" : "50vw"
+		})
+		$(".profile-img-text").css({
+			"width" : "250%",
+			"font-size" : "100%",
+			"left" : "50%",
+			"transform" : "translateX(-50%)",
+			"position" : "absolute"
+		})
+		$(".barstate").css({
+			"width" : "22%",
+			"padding" : "3%"
+		})
+		$("#file").attr("accept","image/*");
 	}
 
 	// container is the DOM element;
@@ -104,6 +127,9 @@ $(function() {
 				});
 				$(".barstate").focus();
 				$("#userText").attr("disabled", "true");
+				$(".textMsg").fadeOut().text("이미지를 추가해주세요").fadeIn("slow");
+				$("#container").fadeTo( "slow" , 0.1);
+
 				$(".profile").fadeIn();
 				dropBoxMaker();
 			} else if (innerPer >= endPer) {
@@ -179,6 +205,10 @@ $(function() {
 
 	$(".profile-img-text").on("click", function() {
 		console.log("check text0000");
+		$(".input-file").click();
+	})
+	$(".profile-img").on("click", function() {
+		console.log("click img");
 		$(".input-file").click();
 	})
 	// Shuffle the contents of container

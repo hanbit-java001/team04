@@ -69,6 +69,9 @@
 	border: 2px solid;
 	border-radius: 50%;
 	padding: 1vw;
+	position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .profile-img-text {
@@ -120,7 +123,7 @@
 		<div class="profile-img-text">
 			<i class="fa fa-plus" aria-hidden="true"></i>profile image
 		</div>
-		<input type="file"class="input-file">
+		<input id ="file" type="file"class="input-file">
 	</div>
 	<!-- JavaScript includes -->
 
