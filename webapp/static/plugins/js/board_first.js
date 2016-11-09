@@ -159,7 +159,7 @@
 								$(".img-text").text("no-picture");
 							}else{
 								console.log(result_list[$( ".table-container" ).index( this )].FILE_ID);
-								$(".detail-gallery img").attr("src","http://localhost:8180/file/"+result_list[$( '.table-container' ).index( this )].FILE_ID);
+								$(".detail-gallery img").attr("src","http://203.236.209.179:8180/file/"+result_list[$( '.table-container' ).index( this )].FILE_ID);
 								$(".detail-gallery img").show();
 							}
 							$(".detail-title").text("Title / "+result_list[$( ".table-container" ).index( this )].TITLE);
