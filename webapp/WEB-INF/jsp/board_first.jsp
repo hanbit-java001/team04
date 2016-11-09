@@ -355,7 +355,7 @@ select {
 			<li><a href="/hyundo_rank">Rank Board</a></li>
 			<li><a href="/hyundo/board">Idea Board</a></li>
 			<li><a href="/list2">Dash Board</a></li>
-			<li><a href="#0">뭐라고 할까</a></li>
+			<li><a href="/boardMain.do">Q&A</a></li>
 			<li><a href="/user/create">Create an account</a></li>
 			<li><a href="/board/logout">LogOut</a></li>
 		</ul>

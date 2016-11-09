@@ -68,7 +68,7 @@ public class KakaoController {
 		LOGGER.info("testController - test");
 		return "testoh2";
 	}
-//	@LoginRequired
+	@LoginRequired
 //	aop 입니다.
 	@RequestMapping("/board/list_oh")
 	public String listOh() {
