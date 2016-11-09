@@ -223,8 +223,8 @@
 	<!-- begin #footer-copyright -->
 	<div id="footer-copyright" class="footer-copyright">
 		<div class="container">
-			&copy; 2014 - 2015 SeanTheme All Right Reserved <a href="#">Contact
-				Us</a> <a href="#">Knowledge Base</a>
+			&copy; 신현도 안흥섭 오의섭 강봉문 Project
+				
 		</div>
 	</div>
 	<!-- end #footer-copyright -->
@@ -243,7 +243,7 @@
 	<![endif]-->
 	<script src="/static/plugins/jquery-cookie/jquery.cookie.js"></script>
 <!-- 	<script src="/static/js/apps.min.js"></script> -->
-	<script src="/static/js/mam.js"></script>
+<!-- 	<script src="/static/js/mam.js"></script> -->
 
 	<!-- ================== END BASE JS ================== -->
 

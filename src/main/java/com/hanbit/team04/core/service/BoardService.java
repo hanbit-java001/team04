@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hanbit.team04.core.dao.BongBoardDao;
+import com.hanbit.team04.core.session.Session;
 import com.hanbit.team04.core.vo.BongBoardPage;
 import com.hanbit.team04.core.vo.BongBoardVO;
 import com.hanbit.team04.core.vo.BongCommentVO;
@@ -122,14 +123,16 @@ public class BoardService {
 	}
 
 	public int modify(BongBoardVO n_article){
-		BongBoardVO origin = dao.select(n_article.getbId());
-		int result=0;
-
-		if(origin!=null && origin.getbPassword().equals(n_article.getbPassword())){
-			result=dao.update(n_article);
-		}
-		return result;
-	}
+	      BongBoardVO origin = dao.select(n_article.getbId());
+	      System.out.println("new id:"+n_article.getbId()+"/"+n_article.getbWriter()+"/"+n_article.getbTitle());
+	      System.out.println("origin id:"+origin.getbId()+"/"+origin.getbWriter()+"/"+origin.getbTitle());
+	      int result=0;
+	      
+	      if(origin!=null && origin.getbWriter().equals(n_article.getbWriter())){
+	         result=dao.update(n_article);
+	      }
+	      return result;
+	   }
 
 	public int delete(int articleId, String loginId){
 		BongBoardVO origin = dao.select(articleId);

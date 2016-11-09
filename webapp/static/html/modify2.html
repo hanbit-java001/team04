@@ -82,7 +82,7 @@ body{
 </style>
 </head>
 <body>
-<form class="form-style-9" action="write.do" method="post">
+<form class="form-style-9" action="update.do" method="post">
 <ul>
 <li>
     <input type="text" name="fake" class="field-style field-split align-left" placeholder="이름"/>
@@ -101,6 +101,7 @@ body{
 <textarea name="bContent" class="field-style" placeholder="내용"></textarea>
 </li>
 <li>
+<input type="hidden" name="bId" id="bId">
 <input type="submit" value="확인" />
 </li>
 </ul>

@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import com.hanbit.team04.core.service.BoardService;
+import com.hanbit.team04.core.session.LoginRequired;
 import com.hanbit.team04.core.session.Session;
 import com.hanbit.team04.core.session.SessionHelpler;
 import com.hanbit.team04.core.vo.BongBoardPage;
@@ -53,7 +54,7 @@ public class BongBoardController {
 		Session session = SessionHelpler.getSession();
 		if (session.isLoggedIn()) {
 			mv.addObject("userName", session.getUserId());
-//			mv.addObject("userName", session.getName());
+			// mv.addObject("userName", session.getName());
 		}
 		mv.addObject("userName", session.getUserId());
 		mv.setViewName("board_list");
@@ -69,7 +70,7 @@ public class BongBoardController {
 	@RequestMapping("/write.do")
 	public ModelAndView write(BongBoardVO article) {
 		ModelAndView mv = new ModelAndView();
-		LOGGER.debug("check bong article : "+article );
+		LOGGER.debug("check bong article : " + article);
 		int result = service.writeArticle(article);
 		if (result > 0) {
 			mv.addObject("bId", article.getbId());
@@ -122,27 +123,46 @@ public class BongBoardController {
 	public BongBoardVO updateForm(int bId) {
 		BongBoardVO origin = service.readArticle(bId, false);
 
-//		ModelAndView mv = new ModelAndView();
-//		mv.addObject("origin", origin);
-//		mv.setViewName("update_form");
+		// ModelAndView mv = new ModelAndView();
+		// mv.addObject("origin", origin);
+		// mv.setViewName("update_form");
 		Map map = new HashMap<>();
 		map.put("bTitle", origin.getbTitle());
 		map.put("bContent", origin.getbContent());
+		map.put("bId", origin.getbId());
+		Session session = SessionHelpler.getSession();
+		LOGGER.debug("check session info : " + session);
+		map.put("userName", session.getName());
 		return origin;
 	}
 
-	@RequestMapping("/update.do")
-	public ModelAndView update(BongBoardVO article) {
-		ModelAndView mv = new ModelAndView();
-		int result = service.modify(article);
-		if (result > 0) {
-			mv.addObject("articleId", article.getbId());
-			mv.setViewName("update_success");
-		} else {
-			mv.setViewName("update_fail");
-		}
-		return mv;
+	@RequestMapping("/modify/info")
+	@ResponseBody
+	public Map modifyInfo(int bId) {
+		BongBoardVO origin = service.readArticle(bId, false);
+
+		Map map = new HashMap<>();
+		map.put("bTitle", origin.getbTitle());
+		map.put("bContent", origin.getbContent());
+		Session session = SessionHelpler.getSession();
+		LOGGER.debug("check session info : " + session);
+		map.put("bId", origin.getbId());
+		map.put("userName", session.getName());
+		return map;
 	}
+
+	@RequestMapping("/update.do")
+	   public ModelAndView update(BongBoardVO article){
+	      ModelAndView mv = new ModelAndView();
+	      int result = service.modify(article);
+	      if(result == 1){
+	         mv.addObject("articleId", article.getbId());
+	         mv.setViewName("update_success");
+	      }else{
+	         mv.setViewName("update_fail");
+	      }      
+	      return mv;
+	   }
 
 	@RequestMapping("/deleteForm.do")
 	public ModelAndView deleteForm(int articleId) {
@@ -181,14 +201,14 @@ public class BongBoardController {
 	@ResponseBody
 	public Map loginCheck() {
 		boolean result = false;
+		Map map = new HashMap();
 		Session session = SessionHelpler.getSession();
 		if (session.isLoggedIn()) {
 			result = true;
+			map.put("userName", session.getUserId());
+			System.out.println("yang:" + session.getUserId());
 		}
-		Map map = new HashMap();
-		map.put("isloggedIn", true);
-		map.put("userName", session.getUserId());
-		System.out.println("yang:"+session.getUserId());
+		map.put("isloggedIn", result);
 		//// 연습중입니다.
 		return map;
 	}

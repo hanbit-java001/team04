@@ -1,61 +1,88 @@
-$(document).ready(function() {
-	var countAdd=0;
-	$.ajax({
-		url : "/api/loginCheck",
-		method : "GET"
-	}).done(function(result) {
-		console.log("check login -bong : "+result.isloggedIn);
-		console.log("check name -bong : "+result.userName);
-		console.log("test");
-		if(result.isloggedIn){
-			
-			
-		}else{
-			$("#btnModify a").text("login");
-			$("#btnModify").on("click",function(){
-				location.href="/login";
-			});
-//			$("#btnAdd a").text("login").attr("href","/login");
-		}
-	})
-	
-	$('#btnModify').click(function(){
-				alert("modify 2");
-				if(countAdd%2==0){
-//					alert("test");
-					$.ajax({
-						url:"updateForm.do",
-						method : "GET",
-						data : "bId="+$("input[name='bId]").val(),
-						success : function(data){
-							alert("modify test");
-//							$('#modifyForContent').load('/static/html/modify_form.html',function(){
-////								$('#writeForContent').load('/static/html/write2.html',function(){
-//								$("input[name='bTitle']").val(origin.bTitle);
-//								$("input[name='bContent']").val(origin.bContent);
-//								$("input[name='bWriter']").val(result.userName);
-//								$("input[name='fake']").val(result.userName).attr("disabled",true);
-//								})
-//								$(this).html("Close");
-							},
-						error : function(){
-							alert("modify form ajax error")
-						}
-					})
-				}else{
-					$('#writeForContent').empty();
-					$(this).html("Modify");
-				}
-				countAdd++;
-			});
-	
-	$('.info-container .post-time').each(function() {
-		// Thu Nov 03 17:01:53 KST 2016
-		var t = time_ago($(this).html() * 1);
-		$(this).html(t);
-	})
-});
+$(document).ready(
+		
+		function() {
+			var countAdd = 0;
+			var userName = "";
+			$.ajax({
+				url : "/api/loginCheck",
+				method : "GET"
+			}).done(function(result) {
+				console.log("check login -bong : " + result.isloggedIn);
+				console.log("check name -bong : " + result.userName);
+				userName = result.userName;
+				console.log("test");
+				if (result.isloggedIn) {
 
+				} else {
+					$("#btnModify a").text("login");
+					$("#btnModify").on("click", function() {
+						location.href = "/login";
+					});
+					// $("#btnAdd a").text("login").attr("href","/login");
+				}
+			})
+
+			$('#btnModify').click(
+					function() {
+						if (countAdd % 2 == 0) {
+							$.ajax({
+								url : "modify/info",
+								method : "GET",
+								data : "bId=" + $("input[name='bId']").val(),
+								success : function(origin) {
+									console.log("check result : " + origin);
+									console.log("네임이" + userName);
+									console.log("check result : "
+											+ origin.userName);
+									$('#modifyForContent').load(
+											'/static/html/modify2.html',
+											function() {
+												alert(origin.bId);
+												$("input[name='bTitle']").val(
+														origin.bTitle);
+												$("input[name='bContent']")
+														.val(origin.bContent);
+												$("input[name='fake']").val(
+														userName).attr(
+																"disabled", true);
+												$("input[name='bWriter']").val(
+														userName);
+												$("#bId").val(origin.bId);
+											})
+									$(this).html("Close");
+								},
+								error : function() {
+									alert("modify form ajax error")
+								}
+							})
+						} else {
+							$('#writeForContent').empty();
+							$(this).html("Modify");
+						}
+						countAdd++;
+					});
+
+			// $('#btnModify').on("click",function(){
+			// var bId;
+			// $.ajax({
+			// url : "updateForm.do",
+			// method : "GET",
+			// data :{
+			// bId : "bId="+$("input[name='bId]").val()
+			// }
+			// }).done(function(origin){
+			// alert("1818");
+			// console.log(origin);
+			// })
+			//		
+			// })
+
+			$('.info-container .post-time').each(function() {
+				// Thu Nov 03 17:01:53 KST 2016
+				var t = time_ago($(this).html() * 1);
+				$(this).html(t);
+			})
+		});
 
 function time_ago(time) {
 
@@ -87,7 +114,7 @@ function time_ago(time) {
 	[ 2903040000, 'years', 29030400 ], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
 	[ 5806080000, 'Last century', 'Next century' ], // 60*60*24*7*4*12*100*2
 	[ 58060800000, 'centuries', 2903040000 ] // 60*60*24*7*4*12*100*20,
-												// 60*60*24*7*4*12*100
+	// 60*60*24*7*4*12*100
 	];
 	var seconds = (+new Date() - time) / 1000, token = 'ago', list_choice = 1;
 

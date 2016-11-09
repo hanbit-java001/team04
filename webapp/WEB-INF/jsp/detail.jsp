@@ -127,7 +127,8 @@
 								<c:set var="se" value="<%=se%>"/>
 								<c:if test="${not empty se.userId && se.userId==article.bWriter }">
 									<a href="delete.do?bId=${article.bId}"><div class="delete-btn">Delete</div></a>
-									<a href="updateForm.do?bId=${article.bId}" ><div class="delete-btn" id="btnModify">Modify</div></a>
+<%-- 									<a href="updateForm.do?bId=${article.bId}" ><div class="delete-btn" id="btnModify">Modify</div></a> --%>
+									<div class="delete-btn" id="btnModify">Modify</div>
 									<div id="modifyForContent"></div>
 								</c:if>
 							
@@ -218,20 +219,7 @@
 				<!-- begin col-4 -->
 				<div class="col-md-4">
 					<!-- begin section-container -->
-					<div class="section-container">
-						<h4>새로운 가입자</h4>
-						<ul class="new-user">
-							<li><a href="#"><img src="/static/img/user-1.jpg" alt="" /></a></li>
-							<li><a href="#"><img src="/static/img/user-2.jpg" alt="" /></a></li>
-							<li><a href="#"><img src="/static/img/user-3.jpg" alt="" /></a></li>
-							<li><a href="#"><img src="/static/img/user-4.jpg" alt="" /></a></li>
-							<li><a href="#"><img src="/static/img/user-5.jpg" alt="" /></a></li>
-							<li><a href="#"><img src="/static/img/user-6.jpg" alt="" /></a></li>
-							<li><a href="#"><img src="/static/img/user-7.jpg" alt="" /></a></li>
-							<li><a href="#"><img src="/static/img/user-8.jpg" alt="" /></a></li>
-							<li><a href="#"><img src="/static/img/user-9.jpg" alt="" /></a></li>
-						</ul>
-					</div>
+					
 					<!-- end section-container -->
 				</div>
 				<!-- end col-4 -->
