@@ -68,7 +68,7 @@ $(function() {
 		return checkAge.test(Age);
 	}
 	function validateName(Name) {
-		var checkName = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z]{3,7}$/;
+		var checkName = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z]{2,}$/;
 		return checkName.test(Name);
 	}
 	function successCommit() {
