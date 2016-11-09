@@ -27,3 +27,10 @@ img {
 	font-size: 200%;
 	font-weight: bold;
 }
+.dream {
+	position: fixed;
+	bottom: 13%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 300%;
+}

@@ -1,5 +1,7 @@
 package com.hanbit.team04.core.vo;
 
+import java.util.Arrays;
+
 public class FileVO {
 
 	private String fileId;
@@ -55,6 +57,12 @@ public class FileVO {
 
 	public void setFileData(byte[] fileData) {
 		this.fileData = fileData;
+	}
+
+	@Override
+	public String toString() {
+		return "FileVO [fileId=" + fileId + ", filePath=" + filePath + ", contentType=" + contentType + ", fileSize="
+				+ fileSize + ", fileName=" + fileName + ", fileData=" + Arrays.toString(fileData) + "]";
 	}
 
 }

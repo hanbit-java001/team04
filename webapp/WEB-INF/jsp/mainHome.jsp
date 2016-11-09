@@ -4,17 +4,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>jQuery Coverflow</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0,maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1" />
 <!-- jQuery/jQueryUI (hosted) -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>
 
 <!-- Optional: Reflection -->
-<script type="text/javascript"
-	src="/static/plugins/coverflow/reflection.js"></script>
+<script type="text/javascript" src="/static/plugins/coverflow/reflection.js"></script>
 
 <!-- interpolate, depends on jQ 1.8.0+ -->
 <script src="/static/plugins/coverflow/jquery.interpolate.min.js"></script>
@@ -22,16 +18,6 @@
 <!-- Coverflow -->
 <script src="/static/plugins/coverflow/jquery.coverflow.js"></script>
 <link rel="stylesheet" href="/static/plugins/css/mainHome.css">
-<style type="text/css">
-.dream {
-	position: fixed;
-	bottom: 13%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-size: 300%;
-}
-</style>
-
 </head>
 <body>
 	<div class="photos" id="photos" tabindex="-1">
@@ -74,29 +60,7 @@
 	<div class="dream">당신의 꿈을 평가해주겠어!!!</div>
 	<script src='/static/plugins/js/hammer.js'></script>
 	<script src="/static/plugins/js/mainHome.js"></script>
-	<script type="text/javascript">
-		var myElement = document.getElementById('photos');
-		var hammer = new Hammer.Manager(myElement);
-		var swipe = new Hammer.Swipe();
-		hammer.add(swipe);
-		var st = $(myElement).scrollTop();
-		hammer.on('swipeleft', function() {
-			if ($(".current").index() < $(".cover").last().index()) {
-				$('.photos').coverflow('index', $(".current").index() + 1);
-			} else {
-				$('.photos').coverflow('index', $(".cover").last().index());
-			}
-		});
+	<script src="/static/plugins/js/swipInit.js"></script>
 
-		hammer.on('swiperight', function() {
-			if ($(".current").index() != 0) {
-				$('.photos').coverflow('index', $(".current").index() - 1);
-			}else{
-				$('.photos').coverflow('index', 0);
-			}
-			console.log($(this).coverflow('index'));
-			잠깐만
-		});
-	</script>
 </body>
 </html>

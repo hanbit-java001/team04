@@ -18,22 +18,23 @@ public class TweetDAO {
 	private SqlSession sqlSession;
 
 	public int insertTweet(IdeaTweetVO ideaTweet) {
-		LOGGER.debug("tweet DAO : "+ideaTweet);
-
-		return sqlSession.insert("ideaTweet.insertTweet",ideaTweet);
+		LOGGER.debug("tweet DAO : " + ideaTweet);
+		int result = sqlSession.insert("ideaTweet.insertTweet", ideaTweet);
+		LOGGER.debug("tweet DAO result : " + result);
+		return result;
 	}
 
 	public int updateTweet(List<Map> selectUpdateList) {
-		int result =0;
+		int result = 0;
 		for (Map map : selectUpdateList) {
-			result =sqlSession.update("ideaTweet.updateTweet", map);
+			result = sqlSession.update("ideaTweet.updateTweet", map);
 		}
 		return result;
 	}
 
 	public List selectTweet() {
-		List<IdeaTweetVO> list =sqlSession.selectList("ideaTweet.selectTweet");
-		LOGGER.debug("tweet list : "+list );
+		List<IdeaTweetVO> list = sqlSession.selectList("ideaTweet.selectTweet");
+		LOGGER.debug("tweet list : " + list);
 		return list;
 	}
 

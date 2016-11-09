@@ -9,9 +9,9 @@ $(function() {
 		})
 		$("#page-wrap").css({"margin-left":"5%", "padding":"0%" , "width":"100%", "margin-left" : "0%"})
 		$("#contact-area").css({"width":"100%"})
-		
-		
-		
+
+
+
 	}
 	}
 	$(document).click(function(event) {
@@ -180,7 +180,7 @@ $(function() {
 								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(/static/plugins/hyundo/images/photo-"+(i+1)+".jpg)}");
 							}else{
 								console.log(not_default[i]);
-								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(http://localhost:"+location.port+"/file/"+result.list[not_default[i]].fileId+")}");
+								$(".myStyle").append(".cd-3d-portfolio .projects .row > li.project-"+(i+1)+" .project-image::before {  background-image: url(http://203.236.209.179:"+location.port+"/file/"+result.list[not_default[i]].fileId+")}");
 							}
 						}
 
@@ -585,7 +585,7 @@ function confirmClick(thisConfirm){
 		data.append("contents",contents)
 
 		//////////////////////////////////////////////////////////
-		
+
 		if (window.File && window.FileReader && window.FormData) {
 			var $inputField = $('#file');
 
@@ -652,7 +652,7 @@ function confirmClick(thisConfirm){
 				var context = canvas.getContext('2d');
 // 				drawRotatedImage(this, 0, 0, 90,newWidth,newHeight,context);
 				context.translate(200, 0);
-				context.rotate(Math.PI / 2); 
+				context.rotate(Math.PI / 2);
 				context.drawImage(this, 0, 0, newWidth, newHeight);
 
 				dataURL = canvas.toDataURL(fileType);
@@ -665,33 +665,33 @@ function confirmClick(thisConfirm){
 			};
 		}
 		////
-		var TO_RADIANS = Math.PI/180; 
-function drawRotatedImage(image, x, y, angle,width,height,context) { 
- 
-	// save the current co-ordinate system 
+		var TO_RADIANS = Math.PI/180;
+function drawRotatedImage(image, x, y, angle,width,height,context) {
+
+	// save the current co-ordinate system
 	// before we screw with it
-	context.save(); 
- 
+	context.save();
+
 	// move to the middle of where we want to draw our image
 	context.translate(x, y);
- 
-	// rotate around that point, converting our 
-	// angle from degrees to radians 
+
+	// rotate around that point, converting our
+	// angle from degrees to radians
 	context.rotate(angle * TO_RADIANS);
- 
+
 	// draw it up and to the left by half the width
-	// and height of the image 
+	// and height of the image
 	context.drawImage(image, -(image.width/2), -(image.height/2),width,height);
- 
+
 	// and restore the co-ords to how they were when we began
-	context.restore(); 
-}		
-		
-		
-		
-		
+	context.restore();
+}
+
+
+
+
 		///////////////////////////////////////////////////////////////////
-		
+
 		for (var i=0;i<fileId.files.length;i++) {
 			var fileName= fileId.files[0].name;
 			var file = fileId.files[i];

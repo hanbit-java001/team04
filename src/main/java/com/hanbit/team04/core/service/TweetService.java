@@ -63,7 +63,10 @@ public class TweetService {
 			}
 			insertString += "\n -내가씀-";
 			LOGGER.debug("tweet String Length : " + insertString.length());
-			FileVO fileVO = fileDAO.selectFile(boardVO.getFileId());
+			FileVO fileVO = null;
+			if (boardVO.getFileId() != null) {
+				fileVO = fileDAO.selectFile(boardVO.getFileId());
+			}
 			if (fileVO != null) {
 				LOGGER.debug("tweet file vo : " + fileVO);
 				String filePath = fileVO.getFilePath();
@@ -87,7 +90,9 @@ public class TweetService {
 				status = twitter.updateStatus(statusUpdate);
 				LOGGER.debug("tweet update image ");
 			} else {
+				LOGGER.debug("tweet only string start");
 				status = twitter.updateStatus(insertString);
+				LOGGER.debug("tweet only string end");
 			}
 			result = true;
 			LOGGER.debug("TWEET add result and ID : " + result + " , " + status.getId());
@@ -137,7 +142,8 @@ public class TweetService {
 					if (status.getId() > tweetVO.getTweetId()) {
 						break;
 					} else {
-						if (status.getId() == tweetVO.getTweetId()&&(status.getRetweetCount()!=tweetVO.getReTweet()||status.getFavoriteCount()!=tweetVO.getFavorite())) {
+						if (status.getId() == tweetVO.getTweetId() && (status.getRetweetCount() != tweetVO.getReTweet()
+								|| status.getFavoriteCount() != tweetVO.getFavorite())) {
 							Map map = new HashMap<>();
 							map.put("Retweet", status.getRetweetCount());
 							map.put("Favorite", status.getFavoriteCount());
