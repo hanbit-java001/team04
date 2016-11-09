@@ -88,8 +88,6 @@
 									<div id="dropbox">
 										<input type="file" id="fileId" />
 									</div>
-									<canvas id="myCanvas" width="200" height="100">
-									</canvas>
 									<ul>
 										<!-- The file uploads will be shown here -->
 									</ul>

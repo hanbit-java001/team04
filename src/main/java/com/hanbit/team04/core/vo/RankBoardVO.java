@@ -11,13 +11,26 @@ public class RankBoardVO {
 	private String confirm;
 	private int hitCnt;
 	private String fileId;
-
+	private int reTweet;
+	private int favorite;
 
 	@Override
 	public String toString() {
-		return "IdeaBoardVO [boardIdx=" + boardIdx + ", title=" + title + ", regDate=" + regDate + ", contents="
+		return "RankBoardVO [boardIdx=" + boardIdx + ", title=" + title + ", regDate=" + regDate + ", contents="
 				+ contents + ", userId=" + userId + ", modDate=" + modDate + ", confirm=" + confirm + ", hitCnt="
-				+ hitCnt + ", fileId=" + fileId + "]";
+				+ hitCnt + ", fileId=" + fileId + ", retweet=" + reTweet + ", favorite=" + favorite + "]";
+	}
+	public int getRetweet() {
+		return reTweet;
+	}
+	public void setRetweet(int reTweet) {
+		this.reTweet = reTweet;
+	}
+	public int getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(int favorite) {
+		this.favorite = favorite;
 	}
 	public int getBoardIdx() {
 		return boardIdx;

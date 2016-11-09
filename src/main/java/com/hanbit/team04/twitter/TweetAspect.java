@@ -22,7 +22,7 @@ public class TweetAspect extends Thread {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TweetAspect.class);
 	@Autowired
 	private TweetService tweetservice;
-	
+
 	private TweetAspect tweetAspect;
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -52,17 +52,19 @@ public class TweetAspect extends Thread {
 //		if(!tweetAspect.isAlive()){
 //			tweetAspect.start();
 //		}
-//		
+//
 //		return pjp.proceed();
-//		
+//
 //	}
 
 	@Override
 	public void run() {
 		int result;
 		try {
+			//
 			LOGGER.debug("start thread ----");
 			tweetservice=applicationContext.getBean(TweetService.class);
+			//
 			result = tweetservice.updateRetweetAndFavorit();
 			LOGGER.debug("Aop - tweet update result : " + result);
 		} catch (TwitterException e) {
