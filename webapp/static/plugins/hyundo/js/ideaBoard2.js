@@ -546,6 +546,10 @@ function confirmClick(thisConfirm){
 // WRITE 버튼잼
 	$(".insertBtn").on("click", function(){
 		$(".insertPanel").css("display","inherit");
+		$("#title").val("");
+		$("#dropbox").val("");
+		$("#fileId").val("");
+		$("#contents").val("");
 		event.preventDefault();
 		transitionLayer.addClass('visible opening');
 		var delay = ( $('.no-cssanimations').length > 0 ) ? 0 : 600;
@@ -706,8 +710,8 @@ function drawRotatedImage(image, x, y, angle,width,height,context) {
 		}).done(function(result){
 			if(result > 0){
 				alert("success");
-				refresh();
 				$(".modal-close").click();
+				refresh();
 			}else{
 				alert("fail");
 			}
